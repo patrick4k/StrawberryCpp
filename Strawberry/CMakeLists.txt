@@ -3,7 +3,7 @@ if(NOT UNIX)
   message(WARNING "Unsupported operating system")
 endif()
 
-set(antlr4-demo-GENERATED_SRC
+set(strawberry-GENERATED_SRC
         ${PROJECT_SOURCE_DIR}/Strawberry/generated/StrawberryLexer.cpp
         ${PROJECT_SOURCE_DIR}/Strawberry/generated/StrawberryParser.cpp
         ${PROJECT_SOURCE_DIR}/Strawberry/generated/StrawberryParserBaseListener.cpp
@@ -12,16 +12,16 @@ set(antlr4-demo-GENERATED_SRC
         ${PROJECT_SOURCE_DIR}/Strawberry/generated/StrawberryParserVisitor.cpp
         )
 
-foreach(src_file ${antlr4-demo-GENERATED_SRC})
+foreach(src_file ${strawberry-GENERATED_SRC})
       set_source_files_properties(
           ${src_file}
           PROPERTIES
           GENERATED TRUE
           )
-endforeach(src_file ${antlr4-demo-GENERATED_SRC})
+endforeach(src_file ${strawberry-GENERATED_SRC})
 
-add_custom_target(GenerateParser DEPENDS ${antlr4-demo-GENERATED_SRC})
-add_custom_command(OUTPUT ${antlr4-demo-GENERATED_SRC}
+add_custom_target(GenerateParser DEPENDS ${strawberry-GENERATED_SRC})
+add_custom_command(OUTPUT ${strawberry-GENERATED_SRC}
    COMMAND
    ${CMAKE_COMMAND} -E make_directory ${PROJECT_SOURCE_DIR}/Strawberry/generated/
    COMMAND
@@ -40,10 +40,10 @@ include_directories(
         ${PROJECT_SOURCE_DIR}/Strawberry/generated
   )
 
-#file(GLOB antlr4-demo_SRC "${PROJECT_SOURCE_DIR}/Strawberry/generated/*")
-set(antlr4-demo_SRC
+#file(GLOB strawberry_SRC "${PROJECT_SOURCE_DIR}/Strawberry/generated/*")
+set(strawberry_SRC
         ${PROJECT_SOURCE_DIR}/Strawberry/Cpp/main.cpp
-  ${antlr4-demo-GENERATED_SRC} Cpp/StrawberryInterpreter.cpp Cpp/StrawberryInterpreter.h)
+  ${strawberry-GENERATED_SRC} Cpp/StrawberryInterpreter.cpp Cpp/StrawberryInterpreter.h)
 
 if(NOT CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
   set (flags_1 "-Wno-overloaded-virtual")
@@ -51,28 +51,28 @@ else()
   set (flags_1 "-MP /wd4251")
 endif()
 
-foreach(src_file ${antlr4-demo_SRC})
+foreach(src_file ${strawberry_SRC})
       set_source_files_properties(
           ${src_file}
           PROPERTIES
           COMPILE_FLAGS "${COMPILE_FLAGS} ${flags_1}"
           )
-endforeach(src_file ${antlr4-demo_SRC})
+endforeach(src_file ${strawberry_SRC})
 
-add_executable(antlr4-demo
-  ${antlr4-demo_SRC}
+add_executable(strawberry
+  ${strawberry_SRC}
   )
 #add_precompiled_header(antlr4-Strawberry ${PROJECT_SOURCE_DIR}/runtime/src/antlrcpp-Prefix.h)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
-  target_compile_options(antlr4-demo PRIVATE "/MT$<$<CONFIG:Debug>:d>")
+  target_compile_options(strawberry PRIVATE "/MT$<$<CONFIG:Debug>:d>")
 endif()
 
-add_dependencies(antlr4-demo GenerateParser)
+add_dependencies(strawberry GenerateParser)
 
-target_link_libraries(antlr4-demo antlr4_static)
+target_link_libraries(strawberry antlr4_static)
 
-install(TARGETS antlr4-demo
+install(TARGETS strawberry
         DESTINATION "share" 
         COMPONENT dev 
         )

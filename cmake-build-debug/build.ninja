@@ -2836,138 +2836,89 @@ build _deps/googletest-build/googletest/install/strip: phony _deps/googletest-bu
 #############################################
 # Utility command for GenerateParser
 
-build Strawberry/GenerateParser: phony Strawberry/CMakeFiles/GenerateParser /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TLexer.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParser.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserBaseListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserBaseVisitor.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserVisitor.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryLexer.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParser.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseVisitor.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserVisitor.cpp
+build Strawberry/GenerateParser: phony Strawberry/CMakeFiles/GenerateParser /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryLexer.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParser.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseVisitor.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserVisitor.cpp
 
 # =============================================================================
-# Object build statements for EXECUTABLE target antlr4-demo
+# Object build statements for EXECUTABLE target strawberry
 
 
 #############################################
-# Order-only phony target for antlr4-demo
+# Order-only phony target for strawberry
 
-build cmake_object_order_depends_target_antlr4-demo: phony || /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryLexer.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParser.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseVisitor.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserVisitor.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TLexer.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParser.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserBaseListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserBaseVisitor.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserVisitor.cpp Strawberry/GenerateParser cmake_object_order_depends_target_antlr4_static
+build cmake_object_order_depends_target_strawberry: phony || /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryLexer.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParser.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseVisitor.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserVisitor.cpp Strawberry/GenerateParser cmake_object_order_depends_target_antlr4_static
 
-build Strawberry/CMakeFiles/antlr4-demo.dir/Cpp/main.cpp.o: CXX_COMPILER__antlr4-demo_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/Cpp/main.cpp || cmake_object_order_depends_target_antlr4-demo
-  DEP_FILE = Strawberry/CMakeFiles/antlr4-demo.dir/Cpp/main.cpp.o.d
+build Strawberry/CMakeFiles/strawberry.dir/Cpp/main.cpp.o: CXX_COMPILER__strawberry_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/Cpp/main.cpp || cmake_object_order_depends_target_strawberry
+  DEP_FILE = Strawberry/CMakeFiles/strawberry.dir/Cpp/main.cpp.o.d
   FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W -fdiagnostics-color=always -std=c++17  -Wno-overloaded-virtual
   INCLUDES = -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/misc -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/atn -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/dfa -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/support -I/home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated
-  OBJECT_DIR = Strawberry/CMakeFiles/antlr4-demo.dir
-  OBJECT_FILE_DIR = Strawberry/CMakeFiles/antlr4-demo.dir/Cpp
+  OBJECT_DIR = Strawberry/CMakeFiles/strawberry.dir
+  OBJECT_FILE_DIR = Strawberry/CMakeFiles/strawberry.dir/Cpp
 
-build Strawberry/CMakeFiles/antlr4-demo.dir/generated/TLexer.cpp.o: CXX_COMPILER__antlr4-demo_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TLexer.cpp || cmake_object_order_depends_target_antlr4-demo
-  DEP_FILE = Strawberry/CMakeFiles/antlr4-demo.dir/generated/TLexer.cpp.o.d
+build Strawberry/CMakeFiles/strawberry.dir/generated/StrawberryLexer.cpp.o: CXX_COMPILER__strawberry_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryLexer.cpp || cmake_object_order_depends_target_strawberry
+  DEP_FILE = Strawberry/CMakeFiles/strawberry.dir/generated/StrawberryLexer.cpp.o.d
   FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W -fdiagnostics-color=always -std=c++17  -Wno-overloaded-virtual
   INCLUDES = -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/misc -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/atn -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/dfa -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/support -I/home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated
-  OBJECT_DIR = Strawberry/CMakeFiles/antlr4-demo.dir
-  OBJECT_FILE_DIR = Strawberry/CMakeFiles/antlr4-demo.dir/generated
+  OBJECT_DIR = Strawberry/CMakeFiles/strawberry.dir
+  OBJECT_FILE_DIR = Strawberry/CMakeFiles/strawberry.dir/generated
 
-build Strawberry/CMakeFiles/antlr4-demo.dir/generated/TParser.cpp.o: CXX_COMPILER__antlr4-demo_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParser.cpp || cmake_object_order_depends_target_antlr4-demo
-  DEP_FILE = Strawberry/CMakeFiles/antlr4-demo.dir/generated/TParser.cpp.o.d
+build Strawberry/CMakeFiles/strawberry.dir/generated/StrawberryParser.cpp.o: CXX_COMPILER__strawberry_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParser.cpp || cmake_object_order_depends_target_strawberry
+  DEP_FILE = Strawberry/CMakeFiles/strawberry.dir/generated/StrawberryParser.cpp.o.d
   FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W -fdiagnostics-color=always -std=c++17  -Wno-overloaded-virtual
   INCLUDES = -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/misc -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/atn -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/dfa -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/support -I/home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated
-  OBJECT_DIR = Strawberry/CMakeFiles/antlr4-demo.dir
-  OBJECT_FILE_DIR = Strawberry/CMakeFiles/antlr4-demo.dir/generated
+  OBJECT_DIR = Strawberry/CMakeFiles/strawberry.dir
+  OBJECT_FILE_DIR = Strawberry/CMakeFiles/strawberry.dir/generated
 
-build Strawberry/CMakeFiles/antlr4-demo.dir/generated/TParserBaseListener.cpp.o: CXX_COMPILER__antlr4-demo_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserBaseListener.cpp || cmake_object_order_depends_target_antlr4-demo
-  DEP_FILE = Strawberry/CMakeFiles/antlr4-demo.dir/generated/TParserBaseListener.cpp.o.d
+build Strawberry/CMakeFiles/strawberry.dir/generated/StrawberryParserBaseListener.cpp.o: CXX_COMPILER__strawberry_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseListener.cpp || cmake_object_order_depends_target_strawberry
+  DEP_FILE = Strawberry/CMakeFiles/strawberry.dir/generated/StrawberryParserBaseListener.cpp.o.d
   FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W -fdiagnostics-color=always -std=c++17  -Wno-overloaded-virtual
   INCLUDES = -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/misc -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/atn -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/dfa -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/support -I/home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated
-  OBJECT_DIR = Strawberry/CMakeFiles/antlr4-demo.dir
-  OBJECT_FILE_DIR = Strawberry/CMakeFiles/antlr4-demo.dir/generated
+  OBJECT_DIR = Strawberry/CMakeFiles/strawberry.dir
+  OBJECT_FILE_DIR = Strawberry/CMakeFiles/strawberry.dir/generated
 
-build Strawberry/CMakeFiles/antlr4-demo.dir/generated/TParserBaseVisitor.cpp.o: CXX_COMPILER__antlr4-demo_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserBaseVisitor.cpp || cmake_object_order_depends_target_antlr4-demo
-  DEP_FILE = Strawberry/CMakeFiles/antlr4-demo.dir/generated/TParserBaseVisitor.cpp.o.d
+build Strawberry/CMakeFiles/strawberry.dir/generated/StrawberryParserBaseVisitor.cpp.o: CXX_COMPILER__strawberry_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseVisitor.cpp || cmake_object_order_depends_target_strawberry
+  DEP_FILE = Strawberry/CMakeFiles/strawberry.dir/generated/StrawberryParserBaseVisitor.cpp.o.d
   FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W -fdiagnostics-color=always -std=c++17  -Wno-overloaded-virtual
   INCLUDES = -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/misc -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/atn -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/dfa -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/support -I/home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated
-  OBJECT_DIR = Strawberry/CMakeFiles/antlr4-demo.dir
-  OBJECT_FILE_DIR = Strawberry/CMakeFiles/antlr4-demo.dir/generated
+  OBJECT_DIR = Strawberry/CMakeFiles/strawberry.dir
+  OBJECT_FILE_DIR = Strawberry/CMakeFiles/strawberry.dir/generated
 
-build Strawberry/CMakeFiles/antlr4-demo.dir/generated/TParserListener.cpp.o: CXX_COMPILER__antlr4-demo_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserListener.cpp || cmake_object_order_depends_target_antlr4-demo
-  DEP_FILE = Strawberry/CMakeFiles/antlr4-demo.dir/generated/TParserListener.cpp.o.d
+build Strawberry/CMakeFiles/strawberry.dir/generated/StrawberryParserListener.cpp.o: CXX_COMPILER__strawberry_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserListener.cpp || cmake_object_order_depends_target_strawberry
+  DEP_FILE = Strawberry/CMakeFiles/strawberry.dir/generated/StrawberryParserListener.cpp.o.d
   FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W -fdiagnostics-color=always -std=c++17  -Wno-overloaded-virtual
   INCLUDES = -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/misc -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/atn -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/dfa -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/support -I/home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated
-  OBJECT_DIR = Strawberry/CMakeFiles/antlr4-demo.dir
-  OBJECT_FILE_DIR = Strawberry/CMakeFiles/antlr4-demo.dir/generated
+  OBJECT_DIR = Strawberry/CMakeFiles/strawberry.dir
+  OBJECT_FILE_DIR = Strawberry/CMakeFiles/strawberry.dir/generated
 
-build Strawberry/CMakeFiles/antlr4-demo.dir/generated/TParserVisitor.cpp.o: CXX_COMPILER__antlr4-demo_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserVisitor.cpp || cmake_object_order_depends_target_antlr4-demo
-  DEP_FILE = Strawberry/CMakeFiles/antlr4-demo.dir/generated/TParserVisitor.cpp.o.d
+build Strawberry/CMakeFiles/strawberry.dir/generated/StrawberryParserVisitor.cpp.o: CXX_COMPILER__strawberry_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserVisitor.cpp || cmake_object_order_depends_target_strawberry
+  DEP_FILE = Strawberry/CMakeFiles/strawberry.dir/generated/StrawberryParserVisitor.cpp.o.d
   FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W -fdiagnostics-color=always -std=c++17  -Wno-overloaded-virtual
   INCLUDES = -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/misc -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/atn -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/dfa -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/support -I/home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated
-  OBJECT_DIR = Strawberry/CMakeFiles/antlr4-demo.dir
-  OBJECT_FILE_DIR = Strawberry/CMakeFiles/antlr4-demo.dir/generated
+  OBJECT_DIR = Strawberry/CMakeFiles/strawberry.dir
+  OBJECT_FILE_DIR = Strawberry/CMakeFiles/strawberry.dir/generated
 
-build Strawberry/CMakeFiles/antlr4-demo.dir/generated/StrawberryLexer.cpp.o: CXX_COMPILER__antlr4-demo_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryLexer.cpp || cmake_object_order_depends_target_antlr4-demo
-  DEP_FILE = Strawberry/CMakeFiles/antlr4-demo.dir/generated/StrawberryLexer.cpp.o.d
+build Strawberry/CMakeFiles/strawberry.dir/Cpp/StrawberryInterpreter.cpp.o: CXX_COMPILER__strawberry_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/Cpp/StrawberryInterpreter.cpp || cmake_object_order_depends_target_strawberry
+  DEP_FILE = Strawberry/CMakeFiles/strawberry.dir/Cpp/StrawberryInterpreter.cpp.o.d
   FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W -fdiagnostics-color=always -std=c++17  -Wno-overloaded-virtual
   INCLUDES = -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/misc -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/atn -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/dfa -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/support -I/home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated
-  OBJECT_DIR = Strawberry/CMakeFiles/antlr4-demo.dir
-  OBJECT_FILE_DIR = Strawberry/CMakeFiles/antlr4-demo.dir/generated
-
-build Strawberry/CMakeFiles/antlr4-demo.dir/generated/StrawberryParser.cpp.o: CXX_COMPILER__antlr4-demo_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParser.cpp || cmake_object_order_depends_target_antlr4-demo
-  DEP_FILE = Strawberry/CMakeFiles/antlr4-demo.dir/generated/StrawberryParser.cpp.o.d
-  FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W -fdiagnostics-color=always -std=c++17  -Wno-overloaded-virtual
-  INCLUDES = -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/misc -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/atn -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/dfa -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/support -I/home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated
-  OBJECT_DIR = Strawberry/CMakeFiles/antlr4-demo.dir
-  OBJECT_FILE_DIR = Strawberry/CMakeFiles/antlr4-demo.dir/generated
-
-build Strawberry/CMakeFiles/antlr4-demo.dir/generated/StrawberryParserBaseListener.cpp.o: CXX_COMPILER__antlr4-demo_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseListener.cpp || cmake_object_order_depends_target_antlr4-demo
-  DEP_FILE = Strawberry/CMakeFiles/antlr4-demo.dir/generated/StrawberryParserBaseListener.cpp.o.d
-  FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W -fdiagnostics-color=always -std=c++17  -Wno-overloaded-virtual
-  INCLUDES = -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/misc -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/atn -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/dfa -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/support -I/home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated
-  OBJECT_DIR = Strawberry/CMakeFiles/antlr4-demo.dir
-  OBJECT_FILE_DIR = Strawberry/CMakeFiles/antlr4-demo.dir/generated
-
-build Strawberry/CMakeFiles/antlr4-demo.dir/generated/StrawberryParserBaseVisitor.cpp.o: CXX_COMPILER__antlr4-demo_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseVisitor.cpp || cmake_object_order_depends_target_antlr4-demo
-  DEP_FILE = Strawberry/CMakeFiles/antlr4-demo.dir/generated/StrawberryParserBaseVisitor.cpp.o.d
-  FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W -fdiagnostics-color=always -std=c++17  -Wno-overloaded-virtual
-  INCLUDES = -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/misc -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/atn -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/dfa -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/support -I/home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated
-  OBJECT_DIR = Strawberry/CMakeFiles/antlr4-demo.dir
-  OBJECT_FILE_DIR = Strawberry/CMakeFiles/antlr4-demo.dir/generated
-
-build Strawberry/CMakeFiles/antlr4-demo.dir/generated/StrawberryParserListener.cpp.o: CXX_COMPILER__antlr4-demo_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserListener.cpp || cmake_object_order_depends_target_antlr4-demo
-  DEP_FILE = Strawberry/CMakeFiles/antlr4-demo.dir/generated/StrawberryParserListener.cpp.o.d
-  FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W -fdiagnostics-color=always -std=c++17  -Wno-overloaded-virtual
-  INCLUDES = -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/misc -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/atn -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/dfa -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/support -I/home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated
-  OBJECT_DIR = Strawberry/CMakeFiles/antlr4-demo.dir
-  OBJECT_FILE_DIR = Strawberry/CMakeFiles/antlr4-demo.dir/generated
-
-build Strawberry/CMakeFiles/antlr4-demo.dir/generated/StrawberryParserVisitor.cpp.o: CXX_COMPILER__antlr4-demo_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserVisitor.cpp || cmake_object_order_depends_target_antlr4-demo
-  DEP_FILE = Strawberry/CMakeFiles/antlr4-demo.dir/generated/StrawberryParserVisitor.cpp.o.d
-  FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W -fdiagnostics-color=always -std=c++17  -Wno-overloaded-virtual
-  INCLUDES = -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/misc -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/atn -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/dfa -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/support -I/home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated
-  OBJECT_DIR = Strawberry/CMakeFiles/antlr4-demo.dir
-  OBJECT_FILE_DIR = Strawberry/CMakeFiles/antlr4-demo.dir/generated
-
-build Strawberry/CMakeFiles/antlr4-demo.dir/Cpp/StrawberryVisitor.cpp.o: CXX_COMPILER__antlr4-demo_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/Cpp/StrawberryVisitor.cpp || cmake_object_order_depends_target_antlr4-demo
-  DEP_FILE = Strawberry/CMakeFiles/antlr4-demo.dir/Cpp/StrawberryVisitor.cpp.o.d
-  FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W -fdiagnostics-color=always -std=c++17  -Wno-overloaded-virtual
-  INCLUDES = -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/misc -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/atn -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/dfa -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/support -I/home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated
-  OBJECT_DIR = Strawberry/CMakeFiles/antlr4-demo.dir
-  OBJECT_FILE_DIR = Strawberry/CMakeFiles/antlr4-demo.dir/Cpp
-
-build Strawberry/CMakeFiles/antlr4-demo.dir/Cpp/StrawberryInterpreter.cpp.o: CXX_COMPILER__antlr4-demo_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/Cpp/StrawberryInterpreter.cpp || cmake_object_order_depends_target_antlr4-demo
-  DEP_FILE = Strawberry/CMakeFiles/antlr4-demo.dir/Cpp/StrawberryInterpreter.cpp.o.d
-  FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W -fdiagnostics-color=always -std=c++17  -Wno-overloaded-virtual
-  INCLUDES = -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/misc -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/atn -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/dfa -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/support -I/home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated
-  OBJECT_DIR = Strawberry/CMakeFiles/antlr4-demo.dir
-  OBJECT_FILE_DIR = Strawberry/CMakeFiles/antlr4-demo.dir/Cpp
+  OBJECT_DIR = Strawberry/CMakeFiles/strawberry.dir
+  OBJECT_FILE_DIR = Strawberry/CMakeFiles/strawberry.dir/Cpp
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target antlr4-demo
+# Link build statements for EXECUTABLE target strawberry
 
 
 #############################################
-# Link the executable Strawberry/antlr4-demo
+# Link the executable Strawberry/strawberry
 
-build Strawberry/antlr4-demo: CXX_EXECUTABLE_LINKER__antlr4-demo_Debug Strawberry/CMakeFiles/antlr4-demo.dir/Cpp/main.cpp.o Strawberry/CMakeFiles/antlr4-demo.dir/generated/TLexer.cpp.o Strawberry/CMakeFiles/antlr4-demo.dir/generated/TParser.cpp.o Strawberry/CMakeFiles/antlr4-demo.dir/generated/TParserBaseListener.cpp.o Strawberry/CMakeFiles/antlr4-demo.dir/generated/TParserBaseVisitor.cpp.o Strawberry/CMakeFiles/antlr4-demo.dir/generated/TParserListener.cpp.o Strawberry/CMakeFiles/antlr4-demo.dir/generated/TParserVisitor.cpp.o Strawberry/CMakeFiles/antlr4-demo.dir/generated/StrawberryLexer.cpp.o Strawberry/CMakeFiles/antlr4-demo.dir/generated/StrawberryParser.cpp.o Strawberry/CMakeFiles/antlr4-demo.dir/generated/StrawberryParserBaseListener.cpp.o Strawberry/CMakeFiles/antlr4-demo.dir/generated/StrawberryParserBaseVisitor.cpp.o Strawberry/CMakeFiles/antlr4-demo.dir/generated/StrawberryParserListener.cpp.o Strawberry/CMakeFiles/antlr4-demo.dir/generated/StrawberryParserVisitor.cpp.o Strawberry/CMakeFiles/antlr4-demo.dir/Cpp/StrawberryVisitor.cpp.o Strawberry/CMakeFiles/antlr4-demo.dir/Cpp/StrawberryInterpreter.cpp.o | runtime/libantlr4-runtime.a || Strawberry/GenerateParser runtime/libantlr4-runtime.a
+build Strawberry/strawberry: CXX_EXECUTABLE_LINKER__strawberry_Debug Strawberry/CMakeFiles/strawberry.dir/Cpp/main.cpp.o Strawberry/CMakeFiles/strawberry.dir/generated/StrawberryLexer.cpp.o Strawberry/CMakeFiles/strawberry.dir/generated/StrawberryParser.cpp.o Strawberry/CMakeFiles/strawberry.dir/generated/StrawberryParserBaseListener.cpp.o Strawberry/CMakeFiles/strawberry.dir/generated/StrawberryParserBaseVisitor.cpp.o Strawberry/CMakeFiles/strawberry.dir/generated/StrawberryParserListener.cpp.o Strawberry/CMakeFiles/strawberry.dir/generated/StrawberryParserVisitor.cpp.o Strawberry/CMakeFiles/strawberry.dir/Cpp/StrawberryInterpreter.cpp.o | runtime/libantlr4-runtime.a || Strawberry/GenerateParser runtime/libantlr4-runtime.a
   FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W
   LINK_LIBRARIES = runtime/libantlr4-runtime.a
-  OBJECT_DIR = Strawberry/CMakeFiles/antlr4-demo.dir
+  OBJECT_DIR = Strawberry/CMakeFiles/strawberry.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = Strawberry/antlr4-demo
-  TARGET_PDB = antlr4-demo.dbg
+  TARGET_FILE = Strawberry/strawberry
+  TARGET_PDB = strawberry.dbg
 
 
 #############################################
@@ -3074,23 +3025,21 @@ build Strawberry/install/strip: phony Strawberry/CMakeFiles/install/strip.util
 #############################################
 # Phony custom command for Strawberry/CMakeFiles/GenerateParser
 
-build Strawberry/CMakeFiles/GenerateParser | ${cmake_ninja_workdir}Strawberry/CMakeFiles/GenerateParser: phony /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TLexer.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParser.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserBaseListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserBaseVisitor.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserVisitor.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryLexer.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParser.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseVisitor.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserVisitor.cpp
+build Strawberry/CMakeFiles/GenerateParser | ${cmake_ninja_workdir}Strawberry/CMakeFiles/GenerateParser: phony /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryLexer.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParser.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseVisitor.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserVisitor.cpp
 
 
 #############################################
-# Custom command for /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TLexer.cpp
+# Custom command for /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryLexer.cpp
 
-build /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TLexer.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParser.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserBaseListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserBaseVisitor.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserVisitor.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryLexer.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParser.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseVisitor.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserVisitor.cpp: CUSTOM_COMMAND /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/StrawberryLexer.g4 /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/StrawberryParser.g4
+build /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryLexer.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParser.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseVisitor.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserVisitor.cpp: CUSTOM_COMMAND /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/StrawberryLexer.g4 /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/StrawberryParser.g4
   COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake -E make_directory /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/ && /usr/bin/java -jar /home/patrick/antlr4/antlr-4.12.0-complete.jar -Werror -Dlanguage=Cpp -listener -visitor -o /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/ -package antlrcpptest /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/StrawberryLexer.g4 /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/StrawberryParser.g4
-  DESC = Generating /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TLexer.cpp, /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParser.cpp, /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserBaseListener.cpp, /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserBaseVisitor.cpp, /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserListener.cpp, /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/TParserVisitor.cpp, /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryLexer.cpp, /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParser.cpp, /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseListener.cpp, /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseVisitor.cpp, /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserListener.cpp, /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserVisitor.cpp
+  DESC = Generating /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryLexer.cpp, /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParser.cpp, /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseListener.cpp, /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseVisitor.cpp, /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserListener.cpp, /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserVisitor.cpp
   restat = 1
 
 # =============================================================================
 # Target aliases.
 
 build GenerateParser: phony Strawberry/GenerateParser
-
-build antlr4-demo: phony Strawberry/antlr4-demo
 
 build antlr4_shared: phony runtime/libantlr4-runtime.so
 
@@ -3118,6 +3067,8 @@ build libgtest_maind.a: phony lib/libgtest_maind.a
 
 build libgtestd.a: phony lib/libgtestd.a
 
+build strawberry: phony Strawberry/strawberry
+
 # =============================================================================
 # Folder targets.
 
@@ -3133,7 +3084,7 @@ build all: phony runtime/all Strawberry/all
 #############################################
 # Folder: /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/Strawberry
 
-build Strawberry/all: phony Strawberry/antlr4-demo
+build Strawberry/all: phony Strawberry/strawberry
 
 # =============================================================================
 

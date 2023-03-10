@@ -8,7 +8,7 @@
 using namespace antlrcpptest;
 using namespace antlr4;
 
-int main(int argc, const char* argv[]) {
+int main(const int argc, const char* argv[]) {
 
     /* Print Argument of Program */
     std::cout << "Args" << std::endl;
@@ -16,7 +16,7 @@ int main(int argc, const char* argv[]) {
         std::cout << "\t" << i << ": " << argv[i] << std::endl;
     std::cout << std::endl;
 
-    /* Create Token Stream */
+    /* Read File and Create Token Stream */
     auto input = ANTLRFileStream();
     input.loadFromFile(argv[1]);
     StrawberryLexer lexer(&input);

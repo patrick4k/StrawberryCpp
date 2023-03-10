@@ -11,7 +11,7 @@ namespace antlrcpptest {
 
     std::any StrawberryInterpreter::visitNumberList(StrawberryParser::NumberListContext *ctx) {
         for (auto n: ctx->Number()) {
-            std::cout << n->getText() << std::endl;
+            std::cout << "Found  " << n->getText() << "!" << std::endl;
         }
         return StrawberryParserBaseVisitor::visitNumberList(ctx);
     }

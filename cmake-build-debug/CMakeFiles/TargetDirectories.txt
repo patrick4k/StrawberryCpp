@@ -51,7 +51,7 @@
 /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-build/googletest/CMakeFiles/install/local.dir
 /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-build/googletest/CMakeFiles/install/strip.dir
 /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/Strawberry/CMakeFiles/GenerateParser.dir
-/home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/Strawberry/CMakeFiles/antlr4-demo.dir
+/home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/Strawberry/CMakeFiles/strawberry.dir
 /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/Strawberry/CMakeFiles/package.dir
 /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/Strawberry/CMakeFiles/package_source.dir
 /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/Strawberry/CMakeFiles/test.dir
