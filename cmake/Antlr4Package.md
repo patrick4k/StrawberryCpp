@@ -44,7 +44,7 @@ Output variable  | Meaning
  # put the classes in C++ namespace 'antlrcpptest::'
  antlr4_generate(
    antlrcpptest_parser
-   ${CMAKE_CURRENT_SOURCE_DIR}/TLexer.g4
+   ${CMAKE_CURRENT_SOURCE_DIR}/StrawberryLexer.g4
    LEXER
    FALSE
    TRUE
@@ -101,7 +101,7 @@ target_link_libraries( Parsertest PRIVATE
  # generate lexer
  antlr4_generate(
    antlrcpptest_lexer
-   ${CMAKE_CURRENT_SOURCE_DIR}/TLexer.g4
+   ${CMAKE_CURRENT_SOURCE_DIR}/StrawberryLexer.g4
    LEXER
    FALSE
    FALSE
@@ -111,7 +111,7 @@ target_link_libraries( Parsertest PRIVATE
  # generate parser
  antlr4_generate(
    antlrcpptest_parser
-   ${CMAKE_CURRENT_SOURCE_DIR}/TParser.g4
+   ${CMAKE_CURRENT_SOURCE_DIR}/StrawberryParser.g4
    PARSER
    FALSE
    TRUE

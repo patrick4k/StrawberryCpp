@@ -44,9 +44,9 @@ set(ANTLR_EXECUTABLE /home/user/antlr-4.12.0-complete.jar)
 find_package(ANTLR REQUIRED)
 
 # Call macro to add lexer and grammar to your build dependencies.
-antlr_target(SampleGrammarLexer TLexer.g4 LEXER
+antlr_target(SampleGrammarLexer StrawberryLexer.g4 LEXER
              PACKAGE antlrcpptest)
-antlr_target(SampleGrammarParser TParser.g4 PARSER
+antlr_target(SampleGrammarParser StrawberryParser.g4 PARSER
              PACKAGE antlrcpptest
              DEPENDS_ANTLR SampleGrammarLexer
              COMPILE_FLAGS -lib ${ANTLR_SampleGrammarLexer_OUTPUT_DIR})

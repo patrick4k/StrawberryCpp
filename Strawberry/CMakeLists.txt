@@ -10,6 +10,12 @@ set(antlr4-demo-GENERATED_SRC
         ${PROJECT_SOURCE_DIR}/Strawberry/generated/TParserBaseVisitor.cpp
         ${PROJECT_SOURCE_DIR}/Strawberry/generated/TParserListener.cpp
         ${PROJECT_SOURCE_DIR}/Strawberry/generated/TParserVisitor.cpp
+        ${PROJECT_SOURCE_DIR}/Strawberry/generated/StrawberryLexer.cpp
+        ${PROJECT_SOURCE_DIR}/Strawberry/generated/StrawberryParser.cpp
+        ${PROJECT_SOURCE_DIR}/Strawberry/generated/StrawberryParserBaseListener.cpp
+        ${PROJECT_SOURCE_DIR}/Strawberry/generated/StrawberryParserBaseVisitor.cpp
+        ${PROJECT_SOURCE_DIR}/Strawberry/generated/StrawberryParserListener.cpp
+        ${PROJECT_SOURCE_DIR}/Strawberry/generated/StrawberryParserVisitor.cpp
         )
 
 foreach(src_file ${antlr4-demo-GENERATED_SRC})
@@ -22,12 +28,12 @@ endforeach(src_file ${antlr4-demo-GENERATED_SRC})
 
 add_custom_target(GenerateParser DEPENDS ${antlr4-demo-GENERATED_SRC})
 add_custom_command(OUTPUT ${antlr4-demo-GENERATED_SRC}
-   COMMAND 
+   COMMAND
    ${CMAKE_COMMAND} -E make_directory ${PROJECT_SOURCE_DIR}/Strawberry/generated/
    COMMAND
-   "${Java_JAVA_EXECUTABLE}" -jar ${ANTLR_JAR_LOCATION} -Werror -Dlanguage=Cpp -listener -visitor -o ${PROJECT_SOURCE_DIR}/Strawberry/generated/ -package antlrcpptest ${PROJECT_SOURCE_DIR}/Strawberry/TLexer.g4 ${PROJECT_SOURCE_DIR}/Strawberry/TParser.g4
+   "${Java_JAVA_EXECUTABLE}" -jar ${ANTLR_JAR_LOCATION} -Werror -Dlanguage=Cpp -listener -visitor -o ${PROJECT_SOURCE_DIR}/Strawberry/generated/ -package antlrcpptest ${PROJECT_SOURCE_DIR}/Strawberry/StrawberryLexer.g4 ${PROJECT_SOURCE_DIR}/Strawberry/StrawberryParser.g4
    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
-   DEPENDS ${PROJECT_SOURCE_DIR}/Strawberry/TLexer.g4 ${PROJECT_SOURCE_DIR}/Strawberry/TParser.g4
+   DEPENDS ${PROJECT_SOURCE_DIR}/Strawberry/StrawberryLexer.g4 ${PROJECT_SOURCE_DIR}/Strawberry/StrawberryParser.g4
    )
 
 include_directories(
@@ -43,7 +49,7 @@ include_directories(
 #file(GLOB antlr4-demo_SRC "${PROJECT_SOURCE_DIR}/Strawberry/generated/*")
 set(antlr4-demo_SRC
         ${PROJECT_SOURCE_DIR}/Strawberry/Cpp/main.cpp
-  ${antlr4-demo-GENERATED_SRC} Cpp/StrawberryVisitor.cpp Cpp/StrawberryVisitor.h)
+  ${antlr4-demo-GENERATED_SRC} Cpp/StrawberryInterpreter.cpp Cpp/StrawberryInterpreter.h)
 
 if(NOT CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
   set (flags_1 "-Wno-overloaded-virtual")
@@ -72,7 +78,7 @@ add_dependencies(antlr4-demo GenerateParser)
 
 target_link_libraries(antlr4-demo antlr4_static)
 
-install(TARGETS antlr4-demo 
+install(TARGETS antlr4-demo
         DESTINATION "share" 
         COMPONENT dev 
         )

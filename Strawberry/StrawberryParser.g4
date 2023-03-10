@@ -1,7 +1,7 @@
-parser grammar TParser;
+parser grammar StrawberryParser;
 
 options {
-	tokenVocab = TLexer;
+	tokenVocab = StrawberryLexer;
 }
 
 script:

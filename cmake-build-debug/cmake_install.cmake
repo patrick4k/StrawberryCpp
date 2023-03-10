@@ -54,7 +54,7 @@ endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/doc/libantlr4" TYPE FILE FILES
-    "/home/patrick/Documents/Interpreters/StrawberryCpp/README.md"
+    "/home/patrick/Documents/Interpreters/StrawberryCpp/antlr4cpp_credits.md"
     "/home/patrick/Documents/Interpreters/StrawberryCpp/VERSION"
     )
 endif()

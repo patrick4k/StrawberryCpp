@@ -7,7 +7,7 @@
 		],
 		"files" : 
 		[
-			"Strawberry/CMakeLists.txt"
+			"CMakeLists.txt"
 		],
 		"nodes" : 
 		[
@@ -17,7 +17,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 75,
+				"line" : 237,
 				"parent" : 0
 			}
 		]
@@ -26,20 +26,19 @@
 	[
 		{
 			"backtrace" : 1,
-			"component" : "dev",
-			"destination" : "share",
+			"component" : "Unspecified",
+			"destination" : "share/doc/libantlr4",
 			"paths" : 
 			[
-				"Strawberry/antlr4-demo"
+				"antlr4cpp_credits.md",
+				"VERSION"
 			],
-			"targetId" : "antlr4-demo::@9c83220949eaf7b04520",
-			"targetIndex" : 1,
-			"type" : "target"
+			"type" : "file"
 		}
 	],
 	"paths" : 
 	{
-		"build" : "Strawberry",
-		"source" : "Strawberry"
+		"build" : ".",
+		"source" : "."
 	}
 }

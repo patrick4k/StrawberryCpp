@@ -1,5 +1,5 @@
 
-// Generated from /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/TParser.g4 by ANTLR 4.12.0
+// Generated from /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/StrawberryParser.g4 by ANTLR 4.12.0
 
 
 #include "TParserListener.h"
@@ -106,7 +106,7 @@ const atn::ATN& TParser::getATN() const {
 }
 
 std::string TParser::getGrammarFileName() const {
-  return "TParser.g4";
+  return "StrawberryParser.g4";
 }
 
 const std::vector<std::string>& TParser::getRuleNames() const {

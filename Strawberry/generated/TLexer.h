@@ -1,5 +1,5 @@
 
-// Generated from /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/TLexer.g4 by ANTLR 4.12.0
+// Generated from /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/StrawberryLexer.g4 by ANTLR 4.12.0
 
 #pragma once
 

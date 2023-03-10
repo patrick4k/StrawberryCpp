@@ -1,5 +1,5 @@
 
-// Generated from /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/TLexer.g4 by ANTLR 4.12.0
+// Generated from /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/StrawberryLexer.g4 by ANTLR 4.12.0
 
 
 #include "TLexer.h"
@@ -220,7 +220,7 @@ TLexer::~TLexer() {
 }
 
 std::string TLexer::getGrammarFileName() const {
-  return "TLexer.g4";
+  return "StrawberryLexer.g4";
 }
 
 const std::vector<std::string>& TLexer::getRuleNames() const {

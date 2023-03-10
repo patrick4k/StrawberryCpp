@@ -1,4 +1,4 @@
-lexer grammar TLexer;
+lexer grammar StrawberryLexer;
 
 /* Util */
 Id: Word (Word | Digit | Uscore)*;
