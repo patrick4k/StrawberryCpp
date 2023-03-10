@@ -10,4 +10,4 @@ A few steps are necessary to get this to work:
 - Open the project in the folder that matches your system.
 - Compile and run.
 
-Compilation is done as described in the [runtime/cpp/readme.md](../README.md) file.
+Compilation is done as described in the [runtime/cpp/readme.md](../antlr4cpp_credits.md) file.

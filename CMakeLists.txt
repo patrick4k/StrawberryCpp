@@ -234,7 +234,7 @@ install(FILES ../../LICENSE.txt
     DESTINATION "share/doc/libantlr4")
 endif()
 
-install(FILES README.md VERSION
+install(FILES antlr4cpp_credits.md VERSION
     DESTINATION "share/doc/libantlr4")
 
 set(CPACK_PACKAGE_CONTACT "antlr-discussion@googlegroups.com")
