@@ -2,35 +2,37 @@
 cmake_minimum_required (VERSION 3.15)
 # 3.14 needed because of FetchContent
 # 3.15 needed to avid spew of warnings related to overriding cl command line flags
+project(LIBANTLR4)
 
-set(WITH_DEMO true)
-set(ANTLR_JAR_LOCATION /home/patrick/antlr4/antlr-4.12.0-complete.jar)
+#[[ ATTRIBUTES ]]
+set(WITH_DEMO true) # TODO: remove flag
+set(ANTLR_JAR_LOCATION ${PROJECT_SOURCE_DIR}/Strawberry/antlr-4.12.0-complete.jar)
+set(COMPILE4WIN false)
 
-#[[
+if (COMPILE4WIN)
+    set(CMAKE_SYSTEM_NAME Windows)
+    set(WIN32 true)
+    set(CMAKE_BUILD_TYPE Debug)
 
-# the name of the target operating system
-set(CMAKE_SYSTEM_NAME Windows)
+    # which compilers to use for C and C++
+    set(CMAKE_C_COMPILER   /bin/i686-w64-mingw32-gcc-win32)
+    set(CMAKE_CXX_COMPILER /bin/i686-w64-mingw32-g++-win32)
 
-# which compilers to use for C and C++
-set(CMAKE_C_COMPILER   /bin/i686-w64-mingw32-gcc-win32)
-set(CMAKE_CXX_COMPILER /bin/i686-w64-mingw32-g++-win32)
+    # where is the target environment located
+    set(CMAKE_FIND_ROOT_PATH  /usr/i686-w64-mingw32
+            /home/patrick/mingw-install)
 
-# where is the target environment located
-set(CMAKE_FIND_ROOT_PATH  /usr/i686-w64-mingw32
-        /home/patrick/mingw-install)
+    # adjust the default behavior of the FIND_XXX() commands:
+    # search programs in the host environment
+    set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 
-# adjust the default behavior of the FIND_XXX() commands:
-# search programs in the host environment
-set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+    # search headers and libraries in the target environment
+    set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+    set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+endif(COMPILE4WIN)
 
-# search headers and libraries in the target environment
-set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
-set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
-
-#]]
 
 set(CMAKE_MACOSX_RPATH OFF)
-
 enable_testing()
 
 # Detect build type, fallback to release and throw a warning if use didn't specify any
@@ -62,7 +64,6 @@ else()
   set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
 endif(WITH_STATIC_CRT)
 
-project(LIBANTLR4)
 
 if(APPLE)
   find_library(COREFOUNDATION_LIBRARY CoreFoundation)

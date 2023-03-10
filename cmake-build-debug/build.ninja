@@ -1266,7 +1266,7 @@ build runtime/libantlr4-runtime.so.4.12.0: CXX_SHARED_LIBRARY_LINKER__antlr4_sha
 # Create library symlink runtime/libantlr4-runtime.so
 
 build runtime/libantlr4-runtime.so: CMAKE_SYMLINK_LIBRARY runtime/libantlr4-runtime.so.4.12.0
-  POST_BUILD = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/runtime && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake -E make_directory /home/patrick/Documents/Interpreters/StrawberryCpp/dist && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake -E copy_if_different /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/runtime/libantlr4-runtime.so.4.12.0 /home/patrick/Documents/Interpreters/StrawberryCpp/dist && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake -E copy_if_different /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/runtime/libantlr4-runtime.so /home/patrick/Documents/Interpreters/StrawberryCpp/dist
+  POST_BUILD = :
   SONAME = runtime/libantlr4-runtime.so.4.12.0
 
 # =============================================================================
@@ -2241,44 +2241,10 @@ build runtime/CMakeFiles/antlr4_static.dir/src/tree/xpath/XPathWildcardElement.c
 build runtime/libantlr4-runtime.a: CXX_STATIC_LIBRARY_LINKER__antlr4_static_Debug runtime/CMakeFiles/antlr4_static.dir/src/ANTLRErrorListener.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/ANTLRErrorStrategy.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/ANTLRFileStream.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/ANTLRInputStream.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/BailErrorStrategy.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/BaseErrorListener.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/BufferedTokenStream.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/CharStream.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/CommonToken.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/CommonTokenFactory.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/CommonTokenStream.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/ConsoleErrorListener.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/DefaultErrorStrategy.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/DiagnosticErrorListener.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/Exceptions.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/FailedPredicateException.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/InputMismatchException.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/IntStream.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/InterpreterRuleContext.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/Lexer.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/LexerInterpreter.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/LexerNoViableAltException.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/ListTokenSource.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/NoViableAltException.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/Parser.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/ParserInterpreter.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/ParserRuleContext.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/ProxyErrorListener.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/RecognitionException.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/Recognizer.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/RuleContext.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/RuleContextWithAltNum.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/RuntimeMetaData.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/Token.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/TokenSource.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/TokenStream.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/TokenStreamRewriter.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/UnbufferedCharStream.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/UnbufferedTokenStream.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/Vocabulary.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/WritableToken.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/ATN.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/ATNConfig.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/ATNConfigSet.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/ATNDeserializationOptions.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/ATNDeserializer.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/ATNSimulator.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/ATNState.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/ATNStateType.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/ActionTransition.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/AmbiguityInfo.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/ArrayPredictionContext.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/AtomTransition.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/ContextSensitivityInfo.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/DecisionEventInfo.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/DecisionInfo.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/DecisionState.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/EpsilonTransition.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/ErrorInfo.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/LL1Analyzer.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/LexerATNConfig.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/LexerATNSimulator.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/LexerAction.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/LexerActionExecutor.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/LexerChannelAction.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/LexerCustomAction.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/LexerIndexedCustomAction.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/LexerModeAction.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/LexerMoreAction.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/LexerPopModeAction.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/LexerPushModeAction.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/LexerSkipAction.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/LexerTypeAction.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/LookaheadEventInfo.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/NotSetTransition.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/OrderedATNConfigSet.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/ParseInfo.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/ParserATNSimulator.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/PrecedencePredicateTransition.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/PredicateEvalInfo.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/PredicateTransition.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/PredictionContext.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/PredictionContextCache.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/PredictionContextMergeCache.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/PredictionMode.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/ProfilingATNSimulator.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/RangeTransition.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/RuleTransition.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/SemanticContext.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/SetTransition.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/SingletonPredictionContext.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/StarLoopbackState.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/Transition.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/TransitionType.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/atn/WildcardTransition.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/dfa/DFA.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/dfa/DFASerializer.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/dfa/DFAState.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/dfa/LexerDFASerializer.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/internal/Synchronization.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/misc/InterpreterDataReader.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/misc/Interval.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/misc/IntervalSet.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/misc/MurmurHash.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/misc/Predicate.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/support/Any.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/support/Arrays.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/support/CPPUtils.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/support/StringUtils.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/support/Utf8.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/ErrorNodeImpl.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/IterativeParseTreeWalker.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/ParseTree.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/ParseTreeListener.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/ParseTreeVisitor.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/ParseTreeWalker.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/TerminalNodeImpl.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/Trees.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/pattern/Chunk.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/pattern/ParseTreeMatch.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/pattern/ParseTreePattern.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/pattern/ParseTreePatternMatcher.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/pattern/RuleTagToken.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/pattern/TagChunk.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/pattern/TextChunk.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/pattern/TokenTagToken.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/xpath/XPath.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/xpath/XPathElement.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/xpath/XPathLexer.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/xpath/XPathLexerErrorListener.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/xpath/XPathRuleAnywhereElement.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/xpath/XPathRuleElement.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/xpath/XPathTokenAnywhereElement.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/xpath/XPathTokenElement.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/xpath/XPathWildcardAnywhereElement.cpp.o runtime/CMakeFiles/antlr4_static.dir/src/tree/xpath/XPathWildcardElement.cpp.o
   LANGUAGE_COMPILE_FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W
   OBJECT_DIR = runtime/CMakeFiles/antlr4_static.dir
-  POST_BUILD = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/runtime && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake -E make_directory /home/patrick/Documents/Interpreters/StrawberryCpp/dist && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake -E copy_if_different /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/runtime/libantlr4-runtime.a /home/patrick/Documents/Interpreters/StrawberryCpp/dist
+  POST_BUILD = :
   PRE_LINK = :
   TARGET_FILE = runtime/libantlr4-runtime.a
   TARGET_PDB = antlr4-runtime.a.dbg
-
-# =============================================================================
-# Object build statements for EXECUTABLE target antlr4_tests
-
-
-#############################################
-# Order-only phony target for antlr4_tests
-
-build cmake_object_order_depends_target_antlr4_tests: phony || cmake_object_order_depends_target_antlr4_static cmake_object_order_depends_target_gtest cmake_object_order_depends_target_gtest_main
-
-build runtime/CMakeFiles/antlr4_tests.dir/tests/Utf8Test.cpp.o: CXX_COMPILER__antlr4_tests_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/runtime/tests/Utf8Test.cpp || cmake_object_order_depends_target_antlr4_tests
-  DEP_FILE = runtime/CMakeFiles/antlr4_tests.dir/tests/Utf8Test.cpp.o.d
-  FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W -fdiagnostics-color=always -std=c++17
-  INCLUDES = -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/atn -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/dfa -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/internal -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/misc -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/support -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree/pattern -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree/xpath -isystem /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-src/googletest/include -isystem /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-src/googletest
-  OBJECT_DIR = runtime/CMakeFiles/antlr4_tests.dir
-  OBJECT_FILE_DIR = runtime/CMakeFiles/antlr4_tests.dir/tests
-
-
-# =============================================================================
-# Link build statements for EXECUTABLE target antlr4_tests
-
-
-#############################################
-# Link the executable runtime/antlr4_tests
-
-build runtime/antlr4_tests runtime/antlr4_tests[1]_tests.cmake | ${cmake_ninja_workdir}runtime/antlr4_tests[1]_tests.cmake: CXX_EXECUTABLE_LINKER__antlr4_tests_Debug runtime/CMakeFiles/antlr4_tests.dir/tests/Utf8Test.cpp.o | runtime/libantlr4-runtime.a lib/libgtest_maind.a lib/libgtestd.a || lib/libgtest_maind.a lib/libgtestd.a runtime/libantlr4-runtime.a
-  FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W
-  LINK_LIBRARIES = runtime/libantlr4-runtime.a  lib/libgtest_maind.a  lib/libgtestd.a
-  OBJECT_DIR = runtime/CMakeFiles/antlr4_tests.dir
-  POST_BUILD = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/runtime && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake -D TEST_TARGET=antlr4_tests -D TEST_EXECUTABLE=/home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/runtime/antlr4_tests -D TEST_EXECUTOR= -D TEST_WORKING_DIR=/home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/runtime -D TEST_EXTRA_ARGS= -D TEST_PROPERTIES= -D TEST_PREFIX= -D TEST_SUFFIX= -D TEST_FILTER= -D NO_PRETTY_TYPES=FALSE -D NO_PRETTY_VALUES=FALSE -D TEST_LIST=antlr4_tests_TESTS -D CTEST_FILE=/home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/runtime/antlr4_tests[1]_tests.cmake -D TEST_DISCOVERY_TIMEOUT=5 -D TEST_XML_OUTPUT_DIR= -P /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/GoogleTestAddTests.cmake
-  PRE_LINK = :
-  RESTAT = 1
-  TARGET_FILE = runtime/antlr4_tests
-  TARGET_PDB = antlr4_tests.dbg
 
 
 #############################################
@@ -2380,452 +2346,6 @@ build runtime/CMakeFiles/install/strip.util: CUSTOM_COMMAND runtime/all
   restat = 1
 
 build runtime/install/strip: phony runtime/CMakeFiles/install/strip.util
-
-# =============================================================================
-# Write statements declared in CMakeLists.txt:
-# /home/patrick/Documents/Interpreters/StrawberryCpp/runtime/CMakeLists.txt
-# =============================================================================
-
-
-#############################################
-# Utility command for package
-
-build _deps/googletest-build/CMakeFiles/package.util: CUSTOM_COMMAND _deps/googletest-build/all
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cpack --config ./CPackConfig.cmake
-  DESC = Run CPack packaging tool...
-  pool = console
-  restat = 1
-
-build _deps/googletest-build/package: phony _deps/googletest-build/CMakeFiles/package.util
-
-
-#############################################
-# Utility command for package_source
-
-build _deps/googletest-build/CMakeFiles/package_source.util: CUSTOM_COMMAND
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cpack --config ./CPackSourceConfig.cmake /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/CPackSourceConfig.cmake
-  DESC = Run CPack packaging tool for source...
-  pool = console
-  restat = 1
-
-build _deps/googletest-build/package_source: phony _deps/googletest-build/CMakeFiles/package_source.util
-
-
-#############################################
-# Utility command for test
-
-build _deps/googletest-build/CMakeFiles/test.util: CUSTOM_COMMAND
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-build && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/ctest --force-new-ctest-process
-  DESC = Running tests...
-  pool = console
-  restat = 1
-
-build _deps/googletest-build/test: phony _deps/googletest-build/CMakeFiles/test.util
-
-
-#############################################
-# Utility command for edit_cache
-
-build _deps/googletest-build/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-build && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-  DESC = No interactive CMake dialog available...
-  restat = 1
-
-build _deps/googletest-build/edit_cache: phony _deps/googletest-build/CMakeFiles/edit_cache.util
-
-
-#############################################
-# Utility command for rebuild_cache
-
-build _deps/googletest-build/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-build && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/patrick/Documents/Interpreters/StrawberryCpp -B/home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug
-  DESC = Running CMake to regenerate build system...
-  pool = console
-  restat = 1
-
-build _deps/googletest-build/rebuild_cache: phony _deps/googletest-build/CMakeFiles/rebuild_cache.util
-
-
-#############################################
-# Utility command for list_install_components
-
-build _deps/googletest-build/list_install_components: phony
-
-
-#############################################
-# Utility command for install
-
-build _deps/googletest-build/CMakeFiles/install.util: CUSTOM_COMMAND _deps/googletest-build/all
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-build && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake -P cmake_install.cmake
-  DESC = Install the project...
-  pool = console
-  restat = 1
-
-build _deps/googletest-build/install: phony _deps/googletest-build/CMakeFiles/install.util
-
-
-#############################################
-# Utility command for install/local
-
-build _deps/googletest-build/CMakeFiles/install/local.util: CUSTOM_COMMAND _deps/googletest-build/all
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-build && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-  DESC = Installing only the local directory...
-  pool = console
-  restat = 1
-
-build _deps/googletest-build/install/local: phony _deps/googletest-build/CMakeFiles/install/local.util
-
-
-#############################################
-# Utility command for install/strip
-
-build _deps/googletest-build/CMakeFiles/install/strip.util: CUSTOM_COMMAND _deps/googletest-build/all
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-build && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-  DESC = Installing the project stripped...
-  pool = console
-  restat = 1
-
-build _deps/googletest-build/install/strip: phony _deps/googletest-build/CMakeFiles/install/strip.util
-
-# =============================================================================
-# Write statements declared in CMakeLists.txt:
-# /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-src/CMakeLists.txt
-# =============================================================================
-
-# =============================================================================
-# Object build statements for STATIC_LIBRARY target gmock
-
-
-#############################################
-# Order-only phony target for gmock
-
-build cmake_object_order_depends_target_gmock: phony || cmake_object_order_depends_target_gtest
-
-build _deps/googletest-build/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.o: CXX_COMPILER__gmock_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-src/googlemock/src/gmock-all.cc || cmake_object_order_depends_target_gmock
-  DEP_FILE = _deps/googletest-build/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.o.d
-  FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W -fdiagnostics-color=always -Wall -Wshadow -Werror -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++17
-  INCLUDES = -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/atn -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/dfa -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/internal -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/misc -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/support -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree/pattern -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree/xpath -I/home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-src/googlemock/include -I/home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-src/googlemock -isystem /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-src/googletest/include -isystem /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-src/googletest
-  OBJECT_DIR = _deps/googletest-build/googlemock/CMakeFiles/gmock.dir
-  OBJECT_FILE_DIR = _deps/googletest-build/googlemock/CMakeFiles/gmock.dir/src
-
-
-# =============================================================================
-# Link build statements for STATIC_LIBRARY target gmock
-
-
-#############################################
-# Link the static library lib/libgmockd.a
-
-build lib/libgmockd.a: CXX_STATIC_LIBRARY_LINKER__gmock_Debug _deps/googletest-build/googlemock/CMakeFiles/gmock.dir/src/gmock-all.cc.o || lib/libgtestd.a
-  LANGUAGE_COMPILE_FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W
-  OBJECT_DIR = _deps/googletest-build/googlemock/CMakeFiles/gmock.dir
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = lib/libgmockd.a
-  TARGET_PDB = gmockd.a.dbg
-
-# =============================================================================
-# Object build statements for STATIC_LIBRARY target gmock_main
-
-
-#############################################
-# Order-only phony target for gmock_main
-
-build cmake_object_order_depends_target_gmock_main: phony || cmake_object_order_depends_target_gmock cmake_object_order_depends_target_gtest
-
-build _deps/googletest-build/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o: CXX_COMPILER__gmock_main_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-src/googlemock/src/gmock_main.cc || cmake_object_order_depends_target_gmock_main
-  DEP_FILE = _deps/googletest-build/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o.d
-  FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W -fdiagnostics-color=always -Wall -Wshadow -Werror -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++17
-  INCLUDES = -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/atn -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/dfa -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/internal -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/misc -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/support -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree/pattern -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree/xpath -isystem /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-src/googlemock/include -isystem /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-src/googlemock -isystem /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-src/googletest/include -isystem /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-src/googletest
-  OBJECT_DIR = _deps/googletest-build/googlemock/CMakeFiles/gmock_main.dir
-  OBJECT_FILE_DIR = _deps/googletest-build/googlemock/CMakeFiles/gmock_main.dir/src
-
-
-# =============================================================================
-# Link build statements for STATIC_LIBRARY target gmock_main
-
-
-#############################################
-# Link the static library lib/libgmock_maind.a
-
-build lib/libgmock_maind.a: CXX_STATIC_LIBRARY_LINKER__gmock_main_Debug _deps/googletest-build/googlemock/CMakeFiles/gmock_main.dir/src/gmock_main.cc.o || lib/libgmockd.a lib/libgtestd.a
-  LANGUAGE_COMPILE_FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W
-  OBJECT_DIR = _deps/googletest-build/googlemock/CMakeFiles/gmock_main.dir
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = lib/libgmock_maind.a
-  TARGET_PDB = gmock_maind.a.dbg
-
-
-#############################################
-# Utility command for package
-
-build _deps/googletest-build/googlemock/CMakeFiles/package.util: CUSTOM_COMMAND _deps/googletest-build/googlemock/all
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cpack --config ./CPackConfig.cmake
-  DESC = Run CPack packaging tool...
-  pool = console
-  restat = 1
-
-build _deps/googletest-build/googlemock/package: phony _deps/googletest-build/googlemock/CMakeFiles/package.util
-
-
-#############################################
-# Utility command for package_source
-
-build _deps/googletest-build/googlemock/CMakeFiles/package_source.util: CUSTOM_COMMAND
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cpack --config ./CPackSourceConfig.cmake /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/CPackSourceConfig.cmake
-  DESC = Run CPack packaging tool for source...
-  pool = console
-  restat = 1
-
-build _deps/googletest-build/googlemock/package_source: phony _deps/googletest-build/googlemock/CMakeFiles/package_source.util
-
-
-#############################################
-# Utility command for test
-
-build _deps/googletest-build/googlemock/CMakeFiles/test.util: CUSTOM_COMMAND
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-build/googlemock && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/ctest --force-new-ctest-process
-  DESC = Running tests...
-  pool = console
-  restat = 1
-
-build _deps/googletest-build/googlemock/test: phony _deps/googletest-build/googlemock/CMakeFiles/test.util
-
-
-#############################################
-# Utility command for edit_cache
-
-build _deps/googletest-build/googlemock/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-build/googlemock && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-  DESC = No interactive CMake dialog available...
-  restat = 1
-
-build _deps/googletest-build/googlemock/edit_cache: phony _deps/googletest-build/googlemock/CMakeFiles/edit_cache.util
-
-
-#############################################
-# Utility command for rebuild_cache
-
-build _deps/googletest-build/googlemock/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-build/googlemock && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/patrick/Documents/Interpreters/StrawberryCpp -B/home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug
-  DESC = Running CMake to regenerate build system...
-  pool = console
-  restat = 1
-
-build _deps/googletest-build/googlemock/rebuild_cache: phony _deps/googletest-build/googlemock/CMakeFiles/rebuild_cache.util
-
-
-#############################################
-# Utility command for list_install_components
-
-build _deps/googletest-build/googlemock/list_install_components: phony
-
-
-#############################################
-# Utility command for install
-
-build _deps/googletest-build/googlemock/CMakeFiles/install.util: CUSTOM_COMMAND _deps/googletest-build/googlemock/all
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-build/googlemock && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake -P cmake_install.cmake
-  DESC = Install the project...
-  pool = console
-  restat = 1
-
-build _deps/googletest-build/googlemock/install: phony _deps/googletest-build/googlemock/CMakeFiles/install.util
-
-
-#############################################
-# Utility command for install/local
-
-build _deps/googletest-build/googlemock/CMakeFiles/install/local.util: CUSTOM_COMMAND _deps/googletest-build/googlemock/all
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-build/googlemock && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-  DESC = Installing only the local directory...
-  pool = console
-  restat = 1
-
-build _deps/googletest-build/googlemock/install/local: phony _deps/googletest-build/googlemock/CMakeFiles/install/local.util
-
-
-#############################################
-# Utility command for install/strip
-
-build _deps/googletest-build/googlemock/CMakeFiles/install/strip.util: CUSTOM_COMMAND _deps/googletest-build/googlemock/all
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-build/googlemock && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-  DESC = Installing the project stripped...
-  pool = console
-  restat = 1
-
-build _deps/googletest-build/googlemock/install/strip: phony _deps/googletest-build/googlemock/CMakeFiles/install/strip.util
-
-# =============================================================================
-# Write statements declared in CMakeLists.txt:
-# /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-src/googlemock/CMakeLists.txt
-# =============================================================================
-
-# =============================================================================
-# Object build statements for STATIC_LIBRARY target gtest
-
-
-#############################################
-# Order-only phony target for gtest
-
-build cmake_object_order_depends_target_gtest: phony || _deps/googletest-build/googletest/CMakeFiles/gtest.dir
-
-build _deps/googletest-build/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o: CXX_COMPILER__gtest_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-src/googletest/src/gtest-all.cc || cmake_object_order_depends_target_gtest
-  DEP_FILE = _deps/googletest-build/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o.d
-  FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W -fdiagnostics-color=always -Wall -Wshadow -Werror -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++17
-  INCLUDES = -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/atn -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/dfa -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/internal -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/misc -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/support -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree/pattern -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree/xpath -I/home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-src/googletest/include -I/home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-src/googletest
-  OBJECT_DIR = _deps/googletest-build/googletest/CMakeFiles/gtest.dir
-  OBJECT_FILE_DIR = _deps/googletest-build/googletest/CMakeFiles/gtest.dir/src
-
-
-# =============================================================================
-# Link build statements for STATIC_LIBRARY target gtest
-
-
-#############################################
-# Link the static library lib/libgtestd.a
-
-build lib/libgtestd.a: CXX_STATIC_LIBRARY_LINKER__gtest_Debug _deps/googletest-build/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o
-  LANGUAGE_COMPILE_FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W
-  OBJECT_DIR = _deps/googletest-build/googletest/CMakeFiles/gtest.dir
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = lib/libgtestd.a
-  TARGET_PDB = gtestd.a.dbg
-
-# =============================================================================
-# Object build statements for STATIC_LIBRARY target gtest_main
-
-
-#############################################
-# Order-only phony target for gtest_main
-
-build cmake_object_order_depends_target_gtest_main: phony || cmake_object_order_depends_target_gtest
-
-build _deps/googletest-build/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o: CXX_COMPILER__gtest_main_Debug /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-src/googletest/src/gtest_main.cc || cmake_object_order_depends_target_gtest_main
-  DEP_FILE = _deps/googletest-build/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o.d
-  FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W -fdiagnostics-color=always -Wall -Wshadow -Werror -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++17
-  INCLUDES = -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/atn -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/dfa -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/internal -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/misc -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/support -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree/pattern -I/home/patrick/Documents/Interpreters/StrawberryCpp/runtime/src/tree/xpath -isystem /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-src/googletest/include -isystem /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-src/googletest
-  OBJECT_DIR = _deps/googletest-build/googletest/CMakeFiles/gtest_main.dir
-  OBJECT_FILE_DIR = _deps/googletest-build/googletest/CMakeFiles/gtest_main.dir/src
-
-
-# =============================================================================
-# Link build statements for STATIC_LIBRARY target gtest_main
-
-
-#############################################
-# Link the static library lib/libgtest_maind.a
-
-build lib/libgtest_maind.a: CXX_STATIC_LIBRARY_LINKER__gtest_main_Debug _deps/googletest-build/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o || lib/libgtestd.a
-  LANGUAGE_COMPILE_FLAGS = -Wall -pedantic -W -g -O0 -g   -Wall -pedantic -W
-  OBJECT_DIR = _deps/googletest-build/googletest/CMakeFiles/gtest_main.dir
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = lib/libgtest_maind.a
-  TARGET_PDB = gtest_maind.a.dbg
-
-
-#############################################
-# Utility command for package
-
-build _deps/googletest-build/googletest/CMakeFiles/package.util: CUSTOM_COMMAND _deps/googletest-build/googletest/all
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cpack --config ./CPackConfig.cmake
-  DESC = Run CPack packaging tool...
-  pool = console
-  restat = 1
-
-build _deps/googletest-build/googletest/package: phony _deps/googletest-build/googletest/CMakeFiles/package.util
-
-
-#############################################
-# Utility command for package_source
-
-build _deps/googletest-build/googletest/CMakeFiles/package_source.util: CUSTOM_COMMAND
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cpack --config ./CPackSourceConfig.cmake /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/CPackSourceConfig.cmake
-  DESC = Run CPack packaging tool for source...
-  pool = console
-  restat = 1
-
-build _deps/googletest-build/googletest/package_source: phony _deps/googletest-build/googletest/CMakeFiles/package_source.util
-
-
-#############################################
-# Utility command for test
-
-build _deps/googletest-build/googletest/CMakeFiles/test.util: CUSTOM_COMMAND
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-build/googletest && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/ctest --force-new-ctest-process
-  DESC = Running tests...
-  pool = console
-  restat = 1
-
-build _deps/googletest-build/googletest/test: phony _deps/googletest-build/googletest/CMakeFiles/test.util
-
-
-#############################################
-# Utility command for edit_cache
-
-build _deps/googletest-build/googletest/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-build/googletest && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-  DESC = No interactive CMake dialog available...
-  restat = 1
-
-build _deps/googletest-build/googletest/edit_cache: phony _deps/googletest-build/googletest/CMakeFiles/edit_cache.util
-
-
-#############################################
-# Utility command for rebuild_cache
-
-build _deps/googletest-build/googletest/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-build/googletest && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake --regenerate-during-build -S/home/patrick/Documents/Interpreters/StrawberryCpp -B/home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug
-  DESC = Running CMake to regenerate build system...
-  pool = console
-  restat = 1
-
-build _deps/googletest-build/googletest/rebuild_cache: phony _deps/googletest-build/googletest/CMakeFiles/rebuild_cache.util
-
-
-#############################################
-# Utility command for list_install_components
-
-build _deps/googletest-build/googletest/list_install_components: phony
-
-
-#############################################
-# Utility command for install
-
-build _deps/googletest-build/googletest/CMakeFiles/install.util: CUSTOM_COMMAND _deps/googletest-build/googletest/all
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-build/googletest && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake -P cmake_install.cmake
-  DESC = Install the project...
-  pool = console
-  restat = 1
-
-build _deps/googletest-build/googletest/install: phony _deps/googletest-build/googletest/CMakeFiles/install.util
-
-
-#############################################
-# Utility command for install/local
-
-build _deps/googletest-build/googletest/CMakeFiles/install/local.util: CUSTOM_COMMAND _deps/googletest-build/googletest/all
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-build/googletest && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
-  DESC = Installing only the local directory...
-  pool = console
-  restat = 1
-
-build _deps/googletest-build/googletest/install/local: phony _deps/googletest-build/googletest/CMakeFiles/install/local.util
-
-
-#############################################
-# Utility command for install/strip
-
-build _deps/googletest-build/googletest/CMakeFiles/install/strip.util: CUSTOM_COMMAND _deps/googletest-build/googletest/all
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-build/googletest && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
-  DESC = Installing the project stripped...
-  pool = console
-  restat = 1
-
-build _deps/googletest-build/googletest/install/strip: phony _deps/googletest-build/googletest/CMakeFiles/install/strip.util
 
 # =============================================================================
 # Write statements declared in CMakeLists.txt:
@@ -3032,7 +2552,7 @@ build Strawberry/CMakeFiles/GenerateParser | ${cmake_ninja_workdir}Strawberry/CM
 # Custom command for /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryLexer.cpp
 
 build /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryLexer.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParser.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseVisitor.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserListener.cpp /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserVisitor.cpp: CUSTOM_COMMAND /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/StrawberryLexer.g4 /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/StrawberryParser.g4
-  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake -E make_directory /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/ && /usr/bin/java -jar /home/patrick/antlr4/antlr-4.12.0-complete.jar -Werror -Dlanguage=Cpp -listener -visitor -o /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/ -package antlrcpptest /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/StrawberryLexer.g4 /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/StrawberryParser.g4
+  COMMAND = cd /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug && /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/bin/cmake -E make_directory /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/ && /usr/bin/java -jar /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/antlr-4.12.0-complete.jar -Werror -Dlanguage=Cpp -listener -visitor -o /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/ -package antlrcpptest /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/StrawberryLexer.g4 /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/StrawberryParser.g4
   DESC = Generating /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryLexer.cpp, /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParser.cpp, /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseListener.cpp, /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserBaseVisitor.cpp, /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserListener.cpp, /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/generated/StrawberryParserVisitor.cpp
   restat = 1
 
@@ -3045,27 +2565,9 @@ build antlr4_shared: phony runtime/libantlr4-runtime.so
 
 build antlr4_static: phony runtime/libantlr4-runtime.a
 
-build antlr4_tests: phony runtime/antlr4_tests
-
-build gmock: phony lib/libgmockd.a
-
-build gmock_main: phony lib/libgmock_maind.a
-
-build gtest: phony lib/libgtestd.a
-
-build gtest_main: phony lib/libgtest_maind.a
-
 build libantlr4-runtime.a: phony runtime/libantlr4-runtime.a
 
 build libantlr4-runtime.so: phony runtime/libantlr4-runtime.so
-
-build libgmock_maind.a: phony lib/libgmock_maind.a
-
-build libgmockd.a: phony lib/libgmockd.a
-
-build libgtest_maind.a: phony lib/libgtest_maind.a
-
-build libgtestd.a: phony lib/libgtestd.a
 
 build strawberry: phony Strawberry/strawberry
 
@@ -3089,30 +2591,9 @@ build Strawberry/all: phony Strawberry/strawberry
 # =============================================================================
 
 #############################################
-# Folder: /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-build
-
-build _deps/googletest-build/all: phony _deps/googletest-build/googlemock/all
-
-# =============================================================================
-
-#############################################
-# Folder: /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-build/googlemock
-
-build _deps/googletest-build/googlemock/all: phony lib/libgmockd.a lib/libgmock_maind.a _deps/googletest-build/googletest/all
-
-# =============================================================================
-
-#############################################
-# Folder: /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/_deps/googletest-build/googletest
-
-build _deps/googletest-build/googletest/all: phony lib/libgtestd.a lib/libgtest_maind.a
-
-# =============================================================================
-
-#############################################
 # Folder: /home/patrick/Documents/Interpreters/StrawberryCpp/cmake-build-debug/runtime
 
-build runtime/all: phony runtime/libantlr4-runtime.so runtime/libantlr4-runtime.a runtime/antlr4_tests _deps/googletest-build/all
+build runtime/all: phony runtime/libantlr4-runtime.so runtime/libantlr4-runtime.a
 
 # =============================================================================
 # Built-in targets
@@ -3121,14 +2602,14 @@ build runtime/all: phony runtime/libantlr4-runtime.so runtime/libantlr4-runtime.
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | /home/patrick/Documents/Interpreters/StrawberryCpp/CMakeLists.txt /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/CMakeLists.txt /home/patrick/Documents/Interpreters/StrawberryCpp/runtime/CMakeLists.txt /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/BasicConfigVersion-AnyNewerVersion.cmake.in /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCInformation.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCXXInformation.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeDependentOption.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeFindJavaCommon.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeGenericSystem.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakePackageConfigHelpers.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CPack.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CPackComponent.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CheckCSourceCompiles.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CheckIncludeFile.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CheckLibraryExists.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU-C.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU-CXX.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FetchContent.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FetchContent/CMakeLists.cmake.in /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FindJava.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FindPackageHandleStandardArgs.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FindPackageMessage.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FindPython.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FindPython/Support.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FindThreads.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/GNUInstallDirs.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/GoogleTest.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Internal/CheckSourceCompiles.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux-GNU-C.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux-GNU-CXX.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux-GNU.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/UnixPaths.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/WriteBasicConfigVersionFile.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Templates/CPackConfig.cmake.in CMakeCache.txt CMakeFiles/3.24.2/CMakeCCompiler.cmake CMakeFiles/3.24.2/CMakeCXXCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake _deps/googletest-src/CMakeLists.txt _deps/googletest-src/googlemock/CMakeLists.txt _deps/googletest-src/googlemock/cmake/gmock.pc.in _deps/googletest-src/googlemock/cmake/gmock_main.pc.in _deps/googletest-src/googletest/CMakeLists.txt _deps/googletest-src/googletest/cmake/Config.cmake.in _deps/googletest-src/googletest/cmake/gtest.pc.in _deps/googletest-src/googletest/cmake/gtest_main.pc.in _deps/googletest-src/googletest/cmake/internal_utils.cmake
+build build.ninja: RERUN_CMAKE | /home/patrick/Documents/Interpreters/StrawberryCpp/CMakeLists.txt /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/CMakeLists.txt /home/patrick/Documents/Interpreters/StrawberryCpp/runtime/CMakeLists.txt /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCInformation.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCXXInformation.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeFindJavaCommon.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeGenericSystem.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CPack.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CPackComponent.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CheckCSourceCompiles.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CheckIncludeFile.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CheckLibraryExists.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU-C.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU-CXX.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FindJava.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FindPackageHandleStandardArgs.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FindPackageMessage.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FindThreads.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Internal/CheckSourceCompiles.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux-GNU-C.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux-GNU-CXX.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux-GNU.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/UnixPaths.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Templates/CPackConfig.cmake.in CMakeCache.txt CMakeFiles/3.24.2/CMakeCCompiler.cmake CMakeFiles/3.24.2/CMakeCXXCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build /home/patrick/Documents/Interpreters/StrawberryCpp/CMakeLists.txt /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/CMakeLists.txt /home/patrick/Documents/Interpreters/StrawberryCpp/runtime/CMakeLists.txt /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/BasicConfigVersion-AnyNewerVersion.cmake.in /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCInformation.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCXXInformation.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeDependentOption.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeFindJavaCommon.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeGenericSystem.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakePackageConfigHelpers.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CPack.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CPackComponent.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CheckCSourceCompiles.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CheckIncludeFile.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CheckLibraryExists.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU-C.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU-CXX.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FetchContent.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FetchContent/CMakeLists.cmake.in /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FindJava.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FindPackageHandleStandardArgs.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FindPackageMessage.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FindPython.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FindPython/Support.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FindThreads.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/GNUInstallDirs.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/GoogleTest.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Internal/CheckSourceCompiles.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux-GNU-C.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux-GNU-CXX.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux-GNU.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/UnixPaths.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/WriteBasicConfigVersionFile.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Templates/CPackConfig.cmake.in CMakeCache.txt CMakeFiles/3.24.2/CMakeCCompiler.cmake CMakeFiles/3.24.2/CMakeCXXCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake _deps/googletest-src/CMakeLists.txt _deps/googletest-src/googlemock/CMakeLists.txt _deps/googletest-src/googlemock/cmake/gmock.pc.in _deps/googletest-src/googlemock/cmake/gmock_main.pc.in _deps/googletest-src/googletest/CMakeLists.txt _deps/googletest-src/googletest/cmake/Config.cmake.in _deps/googletest-src/googletest/cmake/gtest.pc.in _deps/googletest-src/googletest/cmake/gtest_main.pc.in _deps/googletest-src/googletest/cmake/internal_utils.cmake: phony
+build /home/patrick/Documents/Interpreters/StrawberryCpp/CMakeLists.txt /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/CMakeLists.txt /home/patrick/Documents/Interpreters/StrawberryCpp/runtime/CMakeLists.txt /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCInformation.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCXXInformation.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeFindJavaCommon.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeGenericSystem.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CPack.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CPackComponent.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CheckCSourceCompiles.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CheckIncludeFile.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/CheckLibraryExists.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU-C.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU-CXX.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Compiler/GNU.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FindJava.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FindPackageHandleStandardArgs.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FindPackageMessage.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/FindThreads.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Internal/CheckSourceCompiles.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux-GNU-C.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux-GNU-CXX.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux-GNU.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/Linux.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Modules/Platform/UnixPaths.cmake /home/patrick/Programs/clion-2022.3.2/bin/cmake/linux/x64/share/cmake-3.24/Templates/CPackConfig.cmake.in CMakeCache.txt CMakeFiles/3.24.2/CMakeCCompiler.cmake CMakeFiles/3.24.2/CMakeCXXCompiler.cmake CMakeFiles/3.24.2/CMakeSystem.cmake: phony
 
 
 #############################################

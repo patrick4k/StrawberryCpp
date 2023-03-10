@@ -40,7 +40,6 @@ include_directories(
         ${PROJECT_SOURCE_DIR}/Strawberry/generated
   )
 
-#file(GLOB strawberry_SRC "${PROJECT_SOURCE_DIR}/Strawberry/generated/*")
 set(strawberry_SRC
         ${PROJECT_SOURCE_DIR}/Strawberry/Cpp/main.cpp
   ${strawberry-GENERATED_SRC} Cpp/StrawberryInterpreter.cpp Cpp/StrawberryInterpreter.h)
@@ -62,7 +61,6 @@ endforeach(src_file ${strawberry_SRC})
 add_executable(strawberry
   ${strawberry_SRC}
   )
-#add_precompiled_header(antlr4-Strawberry ${PROJECT_SOURCE_DIR}/runtime/src/antlrcpp-Prefix.h)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
   target_compile_options(strawberry PRIVATE "/MT$<$<CONFIG:Debug>:d>")
