@@ -4,12 +4,6 @@ if(NOT UNIX)
 endif()
 
 set(antlr4-demo-GENERATED_SRC
-        ${PROJECT_SOURCE_DIR}/Strawberry/generated/TLexer.cpp
-        ${PROJECT_SOURCE_DIR}/Strawberry/generated/TParser.cpp
-        ${PROJECT_SOURCE_DIR}/Strawberry/generated/TParserBaseListener.cpp
-        ${PROJECT_SOURCE_DIR}/Strawberry/generated/TParserBaseVisitor.cpp
-        ${PROJECT_SOURCE_DIR}/Strawberry/generated/TParserListener.cpp
-        ${PROJECT_SOURCE_DIR}/Strawberry/generated/TParserVisitor.cpp
         ${PROJECT_SOURCE_DIR}/Strawberry/generated/StrawberryLexer.cpp
         ${PROJECT_SOURCE_DIR}/Strawberry/generated/StrawberryParser.cpp
         ${PROJECT_SOURCE_DIR}/Strawberry/generated/StrawberryParserBaseListener.cpp

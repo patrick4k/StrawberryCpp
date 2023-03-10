@@ -3,8 +3,6 @@
 #include "antlr4-runtime.h"
 #include "StrawberryLexer.h"
 #include "StrawberryParser.h"
-#include "StrawberryVisitor.h"
-#include "TLexer.h"
 #include "StrawberryInterpreter.h"
 
 using namespace antlrcpptest;
