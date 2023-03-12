@@ -45,7 +45,7 @@ void strawberryparserParserInitialize() {
   assert(strawberryparserParserStaticData == nullptr);
   auto staticData = std::make_unique<StrawberryParserStaticData>(
     std::vector<std::string>{
-      "script", "statement"
+      "script", "numberList"
     },
     std::vector<std::string>{
       "", "", "", "", "", "", "", "", "", "'->'", "'=>'", "'>>'", "'<<'", 
@@ -67,10 +67,13 @@ void strawberryparserParserInitialize() {
     }
   );
   static const int32_t serializedATNSegment[] = {
-  	4,1,60,16,2,0,7,0,2,1,7,1,1,0,4,0,6,8,0,11,0,12,0,7,1,0,1,0,1,1,1,1,1,
-  	1,1,1,1,1,0,0,2,0,2,0,0,14,0,5,1,0,0,0,2,11,1,0,0,0,4,6,3,2,1,0,5,4,1,
-  	0,0,0,6,7,1,0,0,0,7,5,1,0,0,0,7,8,1,0,0,0,8,9,1,0,0,0,9,10,5,0,0,1,10,
-  	1,1,0,0,0,11,12,5,1,0,0,12,13,5,40,0,0,13,14,5,2,0,0,14,3,1,0,0,0,1,7
+  	4,1,60,22,2,0,7,0,2,1,7,1,1,0,1,0,3,0,7,8,0,4,0,9,8,0,11,0,12,0,10,1,
+  	0,1,0,1,1,1,1,1,1,4,1,18,8,1,11,1,12,1,19,1,1,0,0,2,0,2,0,0,22,0,8,1,
+  	0,0,0,2,14,1,0,0,0,4,6,3,2,1,0,5,7,5,16,0,0,6,5,1,0,0,0,6,7,1,0,0,0,7,
+  	9,1,0,0,0,8,4,1,0,0,0,9,10,1,0,0,0,10,8,1,0,0,0,10,11,1,0,0,0,11,12,1,
+  	0,0,0,12,13,5,0,0,1,13,1,1,0,0,0,14,17,5,2,0,0,15,16,5,9,0,0,16,18,5,
+  	2,0,0,17,15,1,0,0,0,18,19,1,0,0,0,19,17,1,0,0,0,19,20,1,0,0,0,20,3,1,
+  	0,0,0,3,6,10,19
   };
   staticData->serializedATN = antlr4::atn::SerializedATNView(serializedATNSegment, sizeof(serializedATNSegment) / sizeof(serializedATNSegment[0]));
 
@@ -129,12 +132,20 @@ tree::TerminalNode* StrawberryParser::ScriptContext::EOF() {
   return getToken(StrawberryParser::EOF, 0);
 }
 
-std::vector<StrawberryParser::StatementContext *> StrawberryParser::ScriptContext::statement() {
-  return getRuleContexts<StrawberryParser::StatementContext>();
+std::vector<StrawberryParser::NumberListContext *> StrawberryParser::ScriptContext::numberList() {
+  return getRuleContexts<StrawberryParser::NumberListContext>();
 }
 
-StrawberryParser::StatementContext* StrawberryParser::ScriptContext::statement(size_t i) {
-  return getRuleContext<StrawberryParser::StatementContext>(i);
+StrawberryParser::NumberListContext* StrawberryParser::ScriptContext::numberList(size_t i) {
+  return getRuleContext<StrawberryParser::NumberListContext>(i);
+}
+
+std::vector<tree::TerminalNode *> StrawberryParser::ScriptContext::Nl() {
+  return getTokens(StrawberryParser::Nl);
+}
+
+tree::TerminalNode* StrawberryParser::ScriptContext::Nl(size_t i) {
+  return getToken(StrawberryParser::Nl, i);
 }
 
 
@@ -176,17 +187,25 @@ StrawberryParser::ScriptContext* StrawberryParser::script() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(5); 
+    setState(8); 
     _errHandler->sync(this);
     _la = _input->LA(1);
     do {
       setState(4);
-      statement();
-      setState(7); 
+      numberList();
+      setState(6);
+      _errHandler->sync(this);
+
+      _la = _input->LA(1);
+      if (_la == StrawberryParser::Nl) {
+        setState(5);
+        match(StrawberryParser::Nl);
+      }
+      setState(10); 
       _errHandler->sync(this);
       _la = _input->LA(1);
-    } while (_la == StrawberryParser::Id);
-    setState(9);
+    } while (_la == StrawberryParser::Number);
+    setState(12);
     match(StrawberryParser::EOF);
    
   }
@@ -199,52 +218,57 @@ StrawberryParser::ScriptContext* StrawberryParser::script() {
   return _localctx;
 }
 
-//----------------- StatementContext ------------------------------------------------------------------
+//----------------- NumberListContext ------------------------------------------------------------------
 
-StrawberryParser::StatementContext::StatementContext(ParserRuleContext *parent, size_t invokingState)
+StrawberryParser::NumberListContext::NumberListContext(ParserRuleContext *parent, size_t invokingState)
   : ParserRuleContext(parent, invokingState) {
 }
 
-tree::TerminalNode* StrawberryParser::StatementContext::Id() {
-  return getToken(StrawberryParser::Id, 0);
+std::vector<tree::TerminalNode *> StrawberryParser::NumberListContext::Number() {
+  return getTokens(StrawberryParser::Number);
 }
 
-tree::TerminalNode* StrawberryParser::StatementContext::Eq() {
-  return getToken(StrawberryParser::Eq, 0);
+tree::TerminalNode* StrawberryParser::NumberListContext::Number(size_t i) {
+  return getToken(StrawberryParser::Number, i);
 }
 
-tree::TerminalNode* StrawberryParser::StatementContext::Number() {
-  return getToken(StrawberryParser::Number, 0);
+std::vector<tree::TerminalNode *> StrawberryParser::NumberListContext::Sarrow() {
+  return getTokens(StrawberryParser::Sarrow);
+}
+
+tree::TerminalNode* StrawberryParser::NumberListContext::Sarrow(size_t i) {
+  return getToken(StrawberryParser::Sarrow, i);
 }
 
 
-size_t StrawberryParser::StatementContext::getRuleIndex() const {
-  return StrawberryParser::RuleStatement;
+size_t StrawberryParser::NumberListContext::getRuleIndex() const {
+  return StrawberryParser::RuleNumberList;
 }
 
-void StrawberryParser::StatementContext::enterRule(tree::ParseTreeListener *listener) {
+void StrawberryParser::NumberListContext::enterRule(tree::ParseTreeListener *listener) {
   auto parserListener = dynamic_cast<StrawberryParserListener *>(listener);
   if (parserListener != nullptr)
-    parserListener->enterStatement(this);
+    parserListener->enterNumberList(this);
 }
 
-void StrawberryParser::StatementContext::exitRule(tree::ParseTreeListener *listener) {
+void StrawberryParser::NumberListContext::exitRule(tree::ParseTreeListener *listener) {
   auto parserListener = dynamic_cast<StrawberryParserListener *>(listener);
   if (parserListener != nullptr)
-    parserListener->exitStatement(this);
+    parserListener->exitNumberList(this);
 }
 
 
-std::any StrawberryParser::StatementContext::accept(tree::ParseTreeVisitor *visitor) {
+std::any StrawberryParser::NumberListContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<StrawberryParserVisitor*>(visitor))
-    return parserVisitor->visitStatement(this);
+    return parserVisitor->visitNumberList(this);
   else
     return visitor->visitChildren(this);
 }
 
-StrawberryParser::StatementContext* StrawberryParser::statement() {
-  StatementContext *_localctx = _tracker.createInstance<StatementContext>(_ctx, getState());
-  enterRule(_localctx, 2, StrawberryParser::RuleStatement);
+StrawberryParser::NumberListContext* StrawberryParser::numberList() {
+  NumberListContext *_localctx = _tracker.createInstance<NumberListContext>(_ctx, getState());
+  enterRule(_localctx, 2, StrawberryParser::RuleNumberList);
+  size_t _la = 0;
 
 #if __cplusplus > 201703L
   auto onExit = finally([=, this] {
@@ -255,12 +279,20 @@ StrawberryParser::StatementContext* StrawberryParser::statement() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(11);
-    match(StrawberryParser::Id);
-    setState(12);
-    match(StrawberryParser::Eq);
-    setState(13);
+    setState(14);
     match(StrawberryParser::Number);
+    setState(17); 
+    _errHandler->sync(this);
+    _la = _input->LA(1);
+    do {
+      setState(15);
+      match(StrawberryParser::Sarrow);
+      setState(16);
+      match(StrawberryParser::Number);
+      setState(19); 
+      _errHandler->sync(this);
+      _la = _input->LA(1);
+    } while (_la == StrawberryParser::Sarrow);
    
   }
   catch (RecognitionException &e) {

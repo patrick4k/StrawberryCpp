@@ -26,7 +26,7 @@ public:
   };
 
   enum {
-    RuleScript = 0, RuleStatement = 1
+    RuleScript = 0, RuleNumberList = 1
   };
 
   explicit StrawberryParser(antlr4::TokenStream *input);
@@ -47,15 +47,17 @@ public:
 
 
   class ScriptContext;
-  class StatementContext; 
+  class NumberListContext; 
 
   class  ScriptContext : public antlr4::ParserRuleContext {
   public:
     ScriptContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *EOF();
-    std::vector<StatementContext *> statement();
-    StatementContext* statement(size_t i);
+    std::vector<NumberListContext *> numberList();
+    NumberListContext* numberList(size_t i);
+    std::vector<antlr4::tree::TerminalNode *> Nl();
+    antlr4::tree::TerminalNode* Nl(size_t i);
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -66,13 +68,14 @@ public:
 
   ScriptContext* script();
 
-  class  StatementContext : public antlr4::ParserRuleContext {
+  class  NumberListContext : public antlr4::ParserRuleContext {
   public:
-    StatementContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    NumberListContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *Id();
-    antlr4::tree::TerminalNode *Eq();
-    antlr4::tree::TerminalNode *Number();
+    std::vector<antlr4::tree::TerminalNode *> Number();
+    antlr4::tree::TerminalNode* Number(size_t i);
+    std::vector<antlr4::tree::TerminalNode *> Sarrow();
+    antlr4::tree::TerminalNode* Sarrow(size_t i);
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -81,7 +84,7 @@ public:
    
   };
 
-  StatementContext* statement();
+  NumberListContext* numberList();
 
 
   // By default the static state used to implement the parser is lazily initialized during the first
