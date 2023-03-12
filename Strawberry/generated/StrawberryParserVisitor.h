@@ -1,10 +1,12 @@
 
-// Generated from /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/StrawberryParser.g4 by ANTLR 4.12.0
+// Generated from /Users/patrickkennedy/Desktop/antlr4/StrawberryCpp/Strawberry/StrawberryParser.g4 by ANTLR 4.12.0
 
 #pragma once
 
 
 #include "antlr4-runtime.h"
+#include "../Cpp/Value.h"
+#include "../Cpp/StrawberryTree.h"
 #include "StrawberryParser.h"
 
 
@@ -20,9 +22,9 @@ public:
   /**
    * Visit parse trees produced by StrawberryParser.
    */
-    virtual std::any visitScript(StrawberryParser::ScriptContext *context) = 0;
+    virtual Value visitScript(StrawberryParser::ScriptContext *context) = 0;
 
-    virtual std::any visitNumberList(StrawberryParser::NumberListContext *context) = 0;
+    virtual Value visitNumberList(StrawberryParser::NumberListContext *context) = 0;
 
 
 };

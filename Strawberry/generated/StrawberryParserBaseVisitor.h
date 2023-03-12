@@ -1,10 +1,12 @@
 
-// Generated from /home/patrick/Documents/Interpreters/StrawberryCpp/Strawberry/StrawberryParser.g4 by ANTLR 4.12.0
+// Generated from /Users/patrickkennedy/Desktop/antlr4/StrawberryCpp/Strawberry/StrawberryParser.g4 by ANTLR 4.12.0
 
 #pragma once
 
 
 #include "antlr4-runtime.h"
+#include "../Cpp/Value.h"
+#include "../Cpp/StrawberryTree.h"
 #include "StrawberryParserVisitor.h"
 
 
@@ -17,12 +19,12 @@ namespace antlrcpptest {
 class  StrawberryParserBaseVisitor : public StrawberryParserVisitor {
 public:
 
-  virtual std::any visitScript(StrawberryParser::ScriptContext *ctx) override {
-    return visitChildren(ctx);
+  virtual Value visitScript(StrawberryParser::ScriptContext *ctx) override {
+    return StrawberryTree::visitChildrenValue(ctx);
   }
 
-  virtual std::any visitNumberList(StrawberryParser::NumberListContext *ctx) override {
-    return visitChildren(ctx);
+  virtual Value visitNumberList(StrawberryParser::NumberListContext *ctx) override {
+    return StrawberryTree::visitChildrenValue(ctx);
   }
 
 
