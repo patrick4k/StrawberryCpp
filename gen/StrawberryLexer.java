@@ -21,7 +21,7 @@ public class StrawberryLexer extends Lexer {
 		Nl=16, Uscore=17, AndSign=18, Doll=19, Hash=20, At=21, ExPoint=22, Qmark=23, 
 		Colon=24, Semi=25, Fslash=26, Bar=27, Dquote=28, Squote=29, Com=30, Dot=31, 
 		Squig=32, Btick=33, Pow=34, Star=35, Bslash=36, Mod=37, Plus=38, Min=39, 
-		SEq=40, DEq=41, Gt=42, GtEq=43, Lt=44, LtEq=45, And=46, Or=47, PlusEq=48, 
+		Eq=40, BoolEq=41, Gt=42, GtEq=43, Lt=44, LtEq=45, And=46, Or=47, PlusEq=48, 
 		MinEq=49, MultEq=50, DivEq=51, ModEq=52, PowEq=53, Lbrack=54, Rbrack=55, 
 		Lbrace=56, Rbrace=57, Lpar=58, Rpar=59, Ignore=60;
 	public static String[] channelNames = {
@@ -38,10 +38,10 @@ public class StrawberryLexer extends Lexer {
 			"Sarrow", "Darrpw", "LRarrow", "RLarrow", "Dot2", "Dot3", "As", "Nl", 
 			"Uscore", "AndSign", "Doll", "Hash", "At", "ExPoint", "Qmark", "Colon", 
 			"Semi", "Fslash", "Bar", "Dquote", "Squote", "Com", "Dot", "Squig", "Btick", 
-			"Pow", "Star", "Bslash", "Mod", "Plus", "Min", "SEq", "DEq", "Gt", "GtEq", 
-			"Lt", "LtEq", "And", "Or", "PlusEq", "MinEq", "MultEq", "DivEq", "ModEq", 
-			"PowEq", "Lbrack", "Rbrack", "Lbrace", "Rbrace", "Lpar", "Rpar", "Ignore", 
-			"WS", "Comment"
+			"Pow", "Star", "Bslash", "Mod", "Plus", "Min", "Eq", "BoolEq", "Gt", 
+			"GtEq", "Lt", "LtEq", "And", "Or", "PlusEq", "MinEq", "MultEq", "DivEq", 
+			"ModEq", "PowEq", "Lbrack", "Rbrack", "Lbrace", "Rbrace", "Lpar", "Rpar", 
+			"Ignore", "WS", "Comment"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -63,7 +63,7 @@ public class StrawberryLexer extends Lexer {
 			"LcLetter", "Sarrow", "Darrpw", "LRarrow", "RLarrow", "Dot2", "Dot3", 
 			"As", "Nl", "Uscore", "AndSign", "Doll", "Hash", "At", "ExPoint", "Qmark", 
 			"Colon", "Semi", "Fslash", "Bar", "Dquote", "Squote", "Com", "Dot", "Squig", 
-			"Btick", "Pow", "Star", "Bslash", "Mod", "Plus", "Min", "SEq", "DEq", 
+			"Btick", "Pow", "Star", "Bslash", "Mod", "Plus", "Min", "Eq", "BoolEq", 
 			"Gt", "GtEq", "Lt", "LtEq", "And", "Or", "PlusEq", "MinEq", "MultEq", 
 			"DivEq", "ModEq", "PowEq", "Lbrack", "Rbrack", "Lbrace", "Rbrace", "Lpar", 
 			"Rpar", "Ignore"

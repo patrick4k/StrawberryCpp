@@ -24,7 +24,7 @@ public:
    */
     virtual Value visitScript(StrawberryParser::ScriptContext *context) = 0;
 
-    virtual Value visitNumberList(StrawberryParser::NumberListContext *context) = 0;
+    virtual Value visitStatement(StrawberryParser::StatementContext *context) = 0;
 
 
 };

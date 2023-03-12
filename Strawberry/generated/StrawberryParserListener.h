@@ -19,8 +19,8 @@ public:
   virtual void enterScript(StrawberryParser::ScriptContext *ctx) = 0;
   virtual void exitScript(StrawberryParser::ScriptContext *ctx) = 0;
 
-  virtual void enterNumberList(StrawberryParser::NumberListContext *ctx) = 0;
-  virtual void exitNumberList(StrawberryParser::NumberListContext *ctx) = 0;
+  virtual void enterStatement(StrawberryParser::StatementContext *ctx) = 0;
+  virtual void exitStatement(StrawberryParser::StatementContext *ctx) = 0;
 
 
 };

@@ -19,14 +19,14 @@ public:
     Hash = 20, At = 21, ExPoint = 22, Qmark = 23, Colon = 24, Semi = 25, 
     Fslash = 26, Bar = 27, Dquote = 28, Squote = 29, Com = 30, Dot = 31, 
     Squig = 32, Btick = 33, Pow = 34, Star = 35, Bslash = 36, Mod = 37, 
-    Plus = 38, Min = 39, SEq = 40, DEq = 41, Gt = 42, GtEq = 43, Lt = 44, 
+    Plus = 38, Min = 39, Eq = 40, BoolEq = 41, Gt = 42, GtEq = 43, Lt = 44, 
     LtEq = 45, And = 46, Or = 47, PlusEq = 48, MinEq = 49, MultEq = 50, 
     DivEq = 51, ModEq = 52, PowEq = 53, Lbrack = 54, Rbrack = 55, Lbrace = 56, 
     Rbrace = 57, Lpar = 58, Rpar = 59, Ignore = 60
   };
 
   enum {
-    RuleScript = 0, RuleNumberList = 1
+    RuleScript = 0, RuleStatement = 1
   };
 
   explicit StrawberryParser(antlr4::TokenStream *input);
@@ -47,17 +47,15 @@ public:
 
 
   class ScriptContext;
-  class NumberListContext; 
+  class StatementContext; 
 
   class  ScriptContext : public antlr4::ParserRuleContext {
   public:
     ScriptContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *EOF();
-    std::vector<NumberListContext *> numberList();
-    NumberListContext* numberList(size_t i);
-    std::vector<antlr4::tree::TerminalNode *> Nl();
-    antlr4::tree::TerminalNode* Nl(size_t i);
+    std::vector<StatementContext *> statement();
+    StatementContext* statement(size_t i);
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -68,14 +66,13 @@ public:
 
   ScriptContext* script();
 
-  class  NumberListContext : public antlr4::ParserRuleContext {
+  class  StatementContext : public antlr4::ParserRuleContext {
   public:
-    NumberListContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    StatementContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    std::vector<antlr4::tree::TerminalNode *> Number();
-    antlr4::tree::TerminalNode* Number(size_t i);
-    std::vector<antlr4::tree::TerminalNode *> Sarrow();
-    antlr4::tree::TerminalNode* Sarrow(size_t i);
+    antlr4::tree::TerminalNode *Id();
+    antlr4::tree::TerminalNode *Eq();
+    antlr4::tree::TerminalNode *Number();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -84,7 +81,7 @@ public:
    
   };
 
-  NumberListContext* numberList();
+  StatementContext* statement();
 
 
   // By default the static state used to implement the parser is lazily initialized during the first

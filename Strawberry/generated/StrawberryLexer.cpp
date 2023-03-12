@@ -54,9 +54,9 @@ void strawberrylexerLexerInitialize() {
       "As", "Nl", "Uscore", "AndSign", "Doll", "Hash", "At", "ExPoint", 
       "Qmark", "Colon", "Semi", "Fslash", "Bar", "Dquote", "Squote", "Com", 
       "Dot", "Squig", "Btick", "Pow", "Star", "Bslash", "Mod", "Plus", "Min", 
-      "SEq", "DEq", "Gt", "GtEq", "Lt", "LtEq", "And", "Or", "PlusEq", "MinEq", 
-      "MultEq", "DivEq", "ModEq", "PowEq", "Lbrack", "Rbrack", "Lbrace", 
-      "Rbrace", "Lpar", "Rpar", "Ignore", "WS", "Comment"
+      "Eq", "BoolEq", "Gt", "GtEq", "Lt", "LtEq", "And", "Or", "PlusEq", 
+      "MinEq", "MultEq", "DivEq", "ModEq", "PowEq", "Lbrack", "Rbrack", 
+      "Lbrace", "Rbrace", "Lpar", "Rpar", "Ignore", "WS", "Comment"
     },
     std::vector<std::string>{
       "DEFAULT_TOKEN_CHANNEL", "HIDDEN"
@@ -78,9 +78,9 @@ void strawberrylexerLexerInitialize() {
       "As", "Nl", "Uscore", "AndSign", "Doll", "Hash", "At", "ExPoint", 
       "Qmark", "Colon", "Semi", "Fslash", "Bar", "Dquote", "Squote", "Com", 
       "Dot", "Squig", "Btick", "Pow", "Star", "Bslash", "Mod", "Plus", "Min", 
-      "SEq", "DEq", "Gt", "GtEq", "Lt", "LtEq", "And", "Or", "PlusEq", "MinEq", 
-      "MultEq", "DivEq", "ModEq", "PowEq", "Lbrack", "Rbrack", "Lbrace", 
-      "Rbrace", "Lpar", "Rpar", "Ignore"
+      "Eq", "BoolEq", "Gt", "GtEq", "Lt", "LtEq", "And", "Or", "PlusEq", 
+      "MinEq", "MultEq", "DivEq", "ModEq", "PowEq", "Lbrack", "Rbrack", 
+      "Lbrace", "Rbrace", "Lpar", "Rpar", "Ignore"
     }
   );
   static const int32_t serializedATNSegment[] = {

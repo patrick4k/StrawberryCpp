@@ -23,7 +23,7 @@ public:
     return StrawberryTree::visitChildrenValue(ctx);
   }
 
-  virtual Value visitNumberList(StrawberryParser::NumberListContext *ctx) override {
+  virtual Value visitStatement(StrawberryParser::StatementContext *ctx) override {
     return StrawberryTree::visitChildrenValue(ctx);
   }
 

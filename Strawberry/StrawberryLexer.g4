@@ -47,10 +47,10 @@ Bslash: '/' ;
 Mod: '%' ;
 Plus: '+' ;
 Min: '-';
-SEq: '=' ;
+Eq: '=' ;
 
 /* Bool Compare */
-DEq: '==' ;
+BoolEq: '==' ;
 Gt: '>' ;
 GtEq: '>=' ;
 Lt: '<' ;

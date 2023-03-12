@@ -19,7 +19,7 @@ public:
     Hash = 20, At = 21, ExPoint = 22, Qmark = 23, Colon = 24, Semi = 25, 
     Fslash = 26, Bar = 27, Dquote = 28, Squote = 29, Com = 30, Dot = 31, 
     Squig = 32, Btick = 33, Pow = 34, Star = 35, Bslash = 36, Mod = 37, 
-    Plus = 38, Min = 39, SEq = 40, DEq = 41, Gt = 42, GtEq = 43, Lt = 44, 
+    Plus = 38, Min = 39, Eq = 40, BoolEq = 41, Gt = 42, GtEq = 43, Lt = 44, 
     LtEq = 45, And = 46, Or = 47, PlusEq = 48, MinEq = 49, MultEq = 50, 
     DivEq = 51, ModEq = 52, PowEq = 53, Lbrack = 54, Rbrack = 55, Lbrace = 56, 
     Rbrace = 57, Lpar = 58, Rpar = 59, Ignore = 60

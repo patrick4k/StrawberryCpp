@@ -102,8 +102,8 @@ Bslash
 Mod
 Plus
 Min
-SEq
-DEq
+Eq
+BoolEq
 Gt
 GtEq
 Lt
@@ -164,8 +164,8 @@ Bslash
 Mod
 Plus
 Min
-SEq
-DEq
+Eq
+BoolEq
 Gt
 GtEq
 Lt

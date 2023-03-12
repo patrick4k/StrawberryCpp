@@ -1,7 +1,8 @@
 use strict;
 use warnings;
 
-# This script opens generated ANTLR visitor files and modifies them to include a custom return type and default methods
+# This script opens generated ANTLR visitor files and modifies
+# them to include a custom return type and default methods
 
 sub main {
 
@@ -16,7 +17,8 @@ sub main {
     open OUT, '>', $filename or die $!;
 
     my $haveAddedH = 0;
-    $haveAddedH = 1 if join('',@lines) =~ /#include "..\/Cpp\/$replacement.h"\n#include "..\/Cpp\/StrawberryTree.h"/;
+    $haveAddedH = 1 if join('',@lines) =~
+        /#include "..\/Cpp\/$replacement.h"\n#include "..\/Cpp\/StrawberryTree.h"/;
 
     for (@lines) {
 
