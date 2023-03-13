@@ -13,20 +13,22 @@ namespace antlrcpptest {
 class  StrawberryParser : public antlr4::Parser {
 public:
   enum {
-    Id = 1, Number = 2, String = 3, LitString = 4, Digit = 5, Word = 6, 
-    UcLetter = 7, LcLetter = 8, Sarrow = 9, Darrpw = 10, LRarrow = 11, RLarrow = 12, 
-    Dot2 = 13, Dot3 = 14, As = 15, Nl = 16, Uscore = 17, AndSign = 18, Doll = 19, 
-    Hash = 20, At = 21, ExPoint = 22, Qmark = 23, Colon = 24, Semi = 25, 
-    Fslash = 26, Bar = 27, Dquote = 28, Squote = 29, Com = 30, Dot = 31, 
-    Squig = 32, Btick = 33, Pow = 34, Star = 35, Bslash = 36, Mod = 37, 
-    Plus = 38, Min = 39, Eq = 40, BoolEq = 41, Gt = 42, GtEq = 43, Lt = 44, 
-    LtEq = 45, And = 46, Or = 47, PlusEq = 48, MinEq = 49, MultEq = 50, 
-    DivEq = 51, ModEq = 52, PowEq = 53, Lbrack = 54, Rbrack = 55, Lbrace = 56, 
-    Rbrace = 57, Lpar = 58, Rpar = 59, Ignore = 60
+    Eof = 1, Fn = 2, Decl = 3, If = 4, Unless = 5, Else = 6, While = 7, 
+    Until = 8, For = 9, Break = 10, Next = 11, Last = 12, Once = 13, Id = 14, 
+    Number = 15, String = 16, LitString = 17, Digit = 18, Word = 19, UcLetter = 20, 
+    LcLetter = 21, True = 22, False = 23, Null = 24, Sarrow = 25, Darrpw = 26, 
+    LRarrow = 27, RLarrow = 28, Dot2 = 29, Dot3 = 30, As = 31, Nl = 32, 
+    Uscore = 33, AndSign = 34, Doll = 35, Hash = 36, At = 37, ExPoint = 38, 
+    Qmark = 39, Colon = 40, Semi = 41, Fslash = 42, Bar = 43, Dquote = 44, 
+    Squote = 45, Com = 46, Dot = 47, Squig = 48, Btick = 49, Pow = 50, Star = 51, 
+    Bslash = 52, Mod = 53, Plus = 54, Min = 55, Eq = 56, BoolEq = 57, Gt = 58, 
+    GtEq = 59, Lt = 60, LtEq = 61, And = 62, Or = 63, PlusEq = 64, MinEq = 65, 
+    MultEq = 66, DivEq = 67, ModEq = 68, PowEq = 69, Lbrack = 70, Rbrack = 71, 
+    Lbrace = 72, Rbrace = 73, Lpar = 74, Rpar = 75, Ignore = 76
   };
 
   enum {
-    RuleScript = 0, RuleNumberList = 1
+    RuleScript = 0, RuleStatement = 1, RuleExpression = 2, RuleFnDecl = 3
   };
 
   explicit StrawberryParser(antlr4::TokenStream *input);
@@ -47,15 +49,17 @@ public:
 
 
   class ScriptContext;
-  class NumberListContext; 
+  class StatementContext;
+  class ExpressionContext;
+  class FnDeclContext; 
 
   class  ScriptContext : public antlr4::ParserRuleContext {
   public:
     ScriptContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *EOF();
-    std::vector<NumberListContext *> numberList();
-    NumberListContext* numberList(size_t i);
+    antlr4::tree::TerminalNode *Eof();
+    std::vector<StatementContext *> statement();
+    StatementContext* statement(size_t i);
     std::vector<antlr4::tree::TerminalNode *> Nl();
     antlr4::tree::TerminalNode* Nl(size_t i);
 
@@ -68,14 +72,11 @@ public:
 
   ScriptContext* script();
 
-  class  NumberListContext : public antlr4::ParserRuleContext {
+  class  StatementContext : public antlr4::ParserRuleContext {
   public:
-    NumberListContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    StatementContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    std::vector<antlr4::tree::TerminalNode *> Number();
-    antlr4::tree::TerminalNode* Number(size_t i);
-    std::vector<antlr4::tree::TerminalNode *> Sarrow();
-    antlr4::tree::TerminalNode* Sarrow(size_t i);
+    ExpressionContext *expression();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -84,7 +85,38 @@ public:
    
   };
 
-  NumberListContext* numberList();
+  StatementContext* statement();
+
+  class  ExpressionContext : public antlr4::ParserRuleContext {
+  public:
+    ExpressionContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *Number();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual std::any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  ExpressionContext* expression();
+
+  class  FnDeclContext : public antlr4::ParserRuleContext {
+  public:
+    FnDeclContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *Fn();
+    antlr4::tree::TerminalNode *Id();
+
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual std::any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  FnDeclContext* fnDecl();
 
 
   // By default the static state used to implement the parser is lazily initialized during the first

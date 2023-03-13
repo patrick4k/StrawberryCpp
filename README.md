@@ -4,3 +4,5 @@
 **Date Created**: _3/10/23_
 
 TODO: Add Project Structure Here
+
+TODO: Add order of operations for operators

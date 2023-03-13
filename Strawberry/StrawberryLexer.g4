@@ -1,5 +1,19 @@
 lexer grammar StrawberryLexer;
 
+/* Program Specific */
+Fn: 'fn' ;
+Decl: 'let' ;
+If: 'if' ;
+Unless: 'unless' ;
+Else: 'else' ;
+While: 'while' ;
+Until: 'until' ;
+For: 'for' ;
+Break: 'break' ;
+Next: 'next' ;
+Last: 'last' ;
+Once: 'once' ;
+
 /* Util */
 Id: Word (Word | Digit | Uscore)*;
 Number: Digit+ ('.' Digit+)?;
@@ -11,7 +25,13 @@ Word: (UcLetter | LcLetter)+;
 UcLetter: [A-Z];
 LcLetter: [a-z];
 
+/* Literals */
+True: 'true' ;
+False: 'false' ;
+Null: 'null' ;
+
 /* Special */
+DefOr: '\\\\' ;
 Sarrow: '->' ;
 Darrpw: '=>' ;
 LRarrow: '>>' ;
@@ -51,12 +71,13 @@ Eq: '=' ;
 
 /* Bool Compare */
 BoolEq: '==' ;
+BoolNeq: '!=' ;
 Gt: '>' ;
 GtEq: '>=' ;
 Lt: '<' ;
 LtEq: '<=' ;
-And: 'and' ;
-Or: 'or' ;
+And: '&&' ;
+Or: '||' ;
 
 /* Assignments */
 PlusEq: '+=' ;

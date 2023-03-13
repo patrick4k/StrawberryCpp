@@ -18,17 +18,17 @@ sub main {
 
     my $haveAddedH = 0;
     $haveAddedH = 1 if join('',@lines) =~
-        /#include "..\/Cpp\/$replacement.h"\n#include "..\/Cpp\/StrawberryTree.h"/;
+        /#include "..\/Cpp\/types\/$replacement.h"/;
 
     for (@lines) {
 
         if (/(#include .+)/ && !$haveAddedH) {
             $haveAddedH = 1;
-            $_ = "$1\n#include \"..\/Cpp\/$replacement.h\"\n#include \"..\/Cpp\/StrawberryTree.h\"\n"
+            $_ = "$1\n#include \"..\/Cpp\/types\/$replacement.h\"\n"
         }
 
-        s/std::any/Value/;
-        s/return visitChildren\(ctx\)/return StrawberryTree::visitChildrenValue\(ctx\)/;
+        s/std::any/$replacement/;
+        s/return visitChildren\(ctx\)/return std::any_cast<$replacement>\(visitChildren\(ctx\)\)/;
 
         print OUT;
     }

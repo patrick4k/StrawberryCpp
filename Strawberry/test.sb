@@ -1,1 +1,29 @@
-this = 123.2
+
+let a = 10;
+
+fn b() {
+    return "2";
+}
+
+let c  = fn(x, y, z) print x+y+z;
+
+let d  = (x, y, z) => {
+    = x+y+z;
+    return a^2;
+};
+
+d = 0..4;
+d -> c;
+d = &c;
+
+c(a, b(), d(...0..2));
+
+fn e(l...) {
+    for l {
+        ++; // default for increm
+        print if > 1 else print 'nope'; // default for bool compare
+
+    }
+}
+
+

@@ -21,8 +21,14 @@ public:
   virtual void enterScript(StrawberryParser::ScriptContext * /*ctx*/) override { }
   virtual void exitScript(StrawberryParser::ScriptContext * /*ctx*/) override { }
 
-  virtual void enterNumberList(StrawberryParser::NumberListContext * /*ctx*/) override { }
-  virtual void exitNumberList(StrawberryParser::NumberListContext * /*ctx*/) override { }
+  virtual void enterStatement(StrawberryParser::StatementContext * /*ctx*/) override { }
+  virtual void exitStatement(StrawberryParser::StatementContext * /*ctx*/) override { }
+
+  virtual void enterExpression(StrawberryParser::ExpressionContext * /*ctx*/) override { }
+  virtual void exitExpression(StrawberryParser::ExpressionContext * /*ctx*/) override { }
+
+  virtual void enterFnDecl(StrawberryParser::FnDeclContext * /*ctx*/) override { }
+  virtual void exitFnDecl(StrawberryParser::FnDeclContext * /*ctx*/) override { }
 
 
   virtual void enterEveryRule(antlr4::ParserRuleContext * /*ctx*/) override { }

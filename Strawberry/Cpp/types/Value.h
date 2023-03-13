@@ -9,7 +9,14 @@
 
 class Value {
 public:
+    Value();
 
+    const std::string &getText() const;
+
+    void setText(const std::string &text);
+
+private:
+    std::string text;
 
 };
 

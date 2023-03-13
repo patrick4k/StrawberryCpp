@@ -4,8 +4,18 @@ options {
 	tokenVocab = StrawberryLexer;
 }
 
-script:
-(numberList Nl?)+ EOF
+script
+: (statement Nl?)+ EOF
 ;
 
-numberList: Number (Sarrow Number)+ ;
+statement
+: expression
+;
+
+expression
+: Number
+;
+
+fnDecl
+: Fn Id
+;

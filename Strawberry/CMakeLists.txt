@@ -48,7 +48,7 @@ include_directories(
 
 set(strawberry_SRC Cpp/main.cpp
         ${strawberry-GENERATED_SRC}
-        Cpp/Value.cpp Cpp/Value.h
+        Cpp/types/Value.cpp Cpp/types/Value.h
         Cpp/StrawberryTree.cpp Cpp/StrawberryTree.h
         Cpp/StrawberryInterpreter.cpp Cpp/StrawberryInterpreter.h)
 

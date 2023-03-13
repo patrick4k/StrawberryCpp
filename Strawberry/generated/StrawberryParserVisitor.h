@@ -5,8 +5,7 @@
 
 
 #include "antlr4-runtime.h"
-#include "../Cpp/Value.h"
-#include "../Cpp/StrawberryTree.h"
+#include "../Cpp/types/Value.h"
 #include "StrawberryParser.h"
 
 
@@ -24,7 +23,11 @@ public:
    */
     virtual Value visitScript(StrawberryParser::ScriptContext *context) = 0;
 
-    virtual Value visitNumberList(StrawberryParser::NumberListContext *context) = 0;
+    virtual Value visitStatement(StrawberryParser::StatementContext *context) = 0;
+
+    virtual Value visitExpression(StrawberryParser::ExpressionContext *context) = 0;
+
+    virtual Value visitFnDecl(StrawberryParser::FnDeclContext *context) = 0;
 
 
 };

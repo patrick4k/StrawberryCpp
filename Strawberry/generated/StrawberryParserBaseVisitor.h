@@ -5,8 +5,7 @@
 
 
 #include "antlr4-runtime.h"
-#include "../Cpp/Value.h"
-#include "../Cpp/StrawberryTree.h"
+#include "../Cpp/types/Value.h"
 #include "StrawberryParserVisitor.h"
 
 
@@ -20,11 +19,19 @@ class  StrawberryParserBaseVisitor : public StrawberryParserVisitor {
 public:
 
   virtual Value visitScript(StrawberryParser::ScriptContext *ctx) override {
-    return StrawberryTree::visitChildrenValue(ctx);
+    return std::any_cast<Value>(visitChildren(ctx));
   }
 
-  virtual Value visitNumberList(StrawberryParser::NumberListContext *ctx) override {
-    return StrawberryTree::visitChildrenValue(ctx);
+  virtual Value visitStatement(StrawberryParser::StatementContext *ctx) override {
+    return std::any_cast<Value>(visitChildren(ctx));
+  }
+
+  virtual Value visitExpression(StrawberryParser::ExpressionContext *ctx) override {
+    return std::any_cast<Value>(visitChildren(ctx));
+  }
+
+  virtual Value visitFnDecl(StrawberryParser::FnDeclContext *ctx) override {
+    return std::any_cast<Value>(visitChildren(ctx));
   }
 
 
