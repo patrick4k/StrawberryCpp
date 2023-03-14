@@ -31,7 +31,7 @@ statement
 keywordStatement
 : Return value #returnStat
 | Once statement #onceStat
-| Next expression #nextStat
+| Next expression? #nextStat
 | Last #lastStat
 | Break #breakStat
 ;
