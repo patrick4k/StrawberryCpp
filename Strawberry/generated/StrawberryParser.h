@@ -35,8 +35,9 @@ public:
     RuleControlFlow = 12, RuleLoop = 13, RuleCompoundStatement = 14, RuleCompoundAction = 15, 
     RuleIfStatement = 16, RuleConditionalKeywords = 17, RuleLoopKeywords = 18, 
     RuleValue = 19, RuleExpression = 20, RuleLiteral = 21, RuleAssign = 22, 
-    RuleIdentifyer = 23, RuleLooseFnCall = 24, RulePrefix = 25, RuleOp1 = 26, 
-    RuleOp2 = 27, RuleOp3 = 28, RuleOp4 = 29, RuleOp5 = 30, RuleOp6 = 31
+    RuleIdentifyer = 23, RuleLooseFnCall = 24, RuleOp1 = 25, RuleOp2 = 26, 
+    RuleOp3 = 27, RuleOp4 = 28, RulePrefix = 29, RuleOp5 = 30, RuleOp6 = 31, 
+    RuleSuffix = 32
   };
 
   explicit StrawberryParser(antlr4::TokenStream *input);
@@ -81,13 +82,14 @@ public:
   class AssignContext;
   class IdentifyerContext;
   class LooseFnCallContext;
-  class PrefixContext;
   class Op1Context;
   class Op2Context;
   class Op3Context;
   class Op4Context;
+  class PrefixContext;
   class Op5Context;
-  class Op6Context; 
+  class Op6Context;
+  class SuffixContext; 
 
   class  ScriptContext : public antlr4::ParserRuleContext {
   public:
@@ -705,6 +707,18 @@ public:
     virtual std::any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
   };
 
+  class  SuffixExprContext : public ExpressionContext {
+  public:
+    SuffixExprContext(ExpressionContext *ctx);
+
+    ExpressionContext *expression();
+    SuffixContext *suffix();
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual std::any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+  };
+
   class  AssignExprContext : public ExpressionContext {
   public:
     AssignExprContext(ExpressionContext *ctx);
@@ -1057,65 +1071,6 @@ public:
 
   LooseFnCallContext* looseFnCall();
 
-  class  PrefixContext : public antlr4::ParserRuleContext {
-  public:
-    PrefixContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-   
-    PrefixContext() = default;
-    void copyFrom(PrefixContext *context);
-    using antlr4::ParserRuleContext::copyFrom;
-
-    virtual size_t getRuleIndex() const override;
-
-   
-  };
-
-  class  RefPrefixContext : public PrefixContext {
-  public:
-    RefPrefixContext(PrefixContext *ctx);
-
-    antlr4::tree::TerminalNode *Fslash();
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-
-    virtual std::any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-  };
-
-  class  NegatePrefixContext : public PrefixContext {
-  public:
-    NegatePrefixContext(PrefixContext *ctx);
-
-    antlr4::tree::TerminalNode *ExPoint();
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-
-    virtual std::any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-  };
-
-  class  NegativePrefixContext : public PrefixContext {
-  public:
-    NegativePrefixContext(PrefixContext *ctx);
-
-    antlr4::tree::TerminalNode *Min();
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-
-    virtual std::any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-  };
-
-  class  ReversePrefixContext : public PrefixContext {
-  public:
-    ReversePrefixContext(PrefixContext *ctx);
-
-    antlr4::tree::TerminalNode *Squig();
-    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
-    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
-
-    virtual std::any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-  };
-
-  PrefixContext* prefix();
-
   class  Op1Context : public antlr4::ParserRuleContext {
   public:
     Op1Context(antlr4::ParserRuleContext *parent, size_t invokingState);
@@ -1264,6 +1219,65 @@ public:
 
   Op4Context* op4();
 
+  class  PrefixContext : public antlr4::ParserRuleContext {
+  public:
+    PrefixContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+   
+    PrefixContext() = default;
+    void copyFrom(PrefixContext *context);
+    using antlr4::ParserRuleContext::copyFrom;
+
+    virtual size_t getRuleIndex() const override;
+
+   
+  };
+
+  class  RefPrefixContext : public PrefixContext {
+  public:
+    RefPrefixContext(PrefixContext *ctx);
+
+    antlr4::tree::TerminalNode *Fslash();
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual std::any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+  };
+
+  class  NegatePrefixContext : public PrefixContext {
+  public:
+    NegatePrefixContext(PrefixContext *ctx);
+
+    antlr4::tree::TerminalNode *ExPoint();
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual std::any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+  };
+
+  class  NegativePrefixContext : public PrefixContext {
+  public:
+    NegativePrefixContext(PrefixContext *ctx);
+
+    antlr4::tree::TerminalNode *Min();
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual std::any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+  };
+
+  class  ReversePrefixContext : public PrefixContext {
+  public:
+    ReversePrefixContext(PrefixContext *ctx);
+
+    antlr4::tree::TerminalNode *Squig();
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual std::any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+  };
+
+  PrefixContext* prefix();
+
   class  Op5Context : public antlr4::ParserRuleContext {
   public:
     Op5Context(antlr4::ParserRuleContext *parent, size_t invokingState);
@@ -1381,6 +1395,43 @@ public:
   };
 
   Op6Context* op6();
+
+  class  SuffixContext : public antlr4::ParserRuleContext {
+  public:
+    SuffixContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+   
+    SuffixContext() = default;
+    void copyFrom(SuffixContext *context);
+    using antlr4::ParserRuleContext::copyFrom;
+
+    virtual size_t getRuleIndex() const override;
+
+   
+  };
+
+  class  OrDefaultContext : public SuffixContext {
+  public:
+    OrDefaultContext(SuffixContext *ctx);
+
+    antlr4::tree::TerminalNode *DefOr();
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual std::any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+  };
+
+  class  ExcitedSuffContext : public SuffixContext {
+  public:
+    ExcitedSuffContext(SuffixContext *ctx);
+
+    antlr4::tree::TerminalNode *ExPoint();
+    virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
+    virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
+
+    virtual std::any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+  };
+
+  SuffixContext* suffix();
 
 
   bool sempred(antlr4::RuleContext *_localctx, size_t ruleIndex, size_t predicateIndex) override;

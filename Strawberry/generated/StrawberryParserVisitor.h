@@ -89,6 +89,8 @@ public:
 
     virtual Value visitOpExpr(StrawberryParser::OpExprContext *context) = 0;
 
+    virtual Value visitSuffixExpr(StrawberryParser::SuffixExprContext *context) = 0;
+
     virtual Value visitAssignExpr(StrawberryParser::AssignExprContext *context) = 0;
 
     virtual Value visitLitExpr(StrawberryParser::LitExprContext *context) = 0;
@@ -137,14 +139,6 @@ public:
 
     virtual Value visitLooseFnCall(StrawberryParser::LooseFnCallContext *context) = 0;
 
-    virtual Value visitNegatePrefix(StrawberryParser::NegatePrefixContext *context) = 0;
-
-    virtual Value visitRefPrefix(StrawberryParser::RefPrefixContext *context) = 0;
-
-    virtual Value visitNegativePrefix(StrawberryParser::NegativePrefixContext *context) = 0;
-
-    virtual Value visitReversePrefix(StrawberryParser::ReversePrefixContext *context) = 0;
-
     virtual Value visitPow(StrawberryParser::PowContext *context) = 0;
 
     virtual Value visitMult(StrawberryParser::MultContext *context) = 0;
@@ -161,6 +155,14 @@ public:
 
     virtual Value visitRangeOp(StrawberryParser::RangeOpContext *context) = 0;
 
+    virtual Value visitNegatePrefix(StrawberryParser::NegatePrefixContext *context) = 0;
+
+    virtual Value visitRefPrefix(StrawberryParser::RefPrefixContext *context) = 0;
+
+    virtual Value visitNegativePrefix(StrawberryParser::NegativePrefixContext *context) = 0;
+
+    virtual Value visitReversePrefix(StrawberryParser::ReversePrefixContext *context) = 0;
+
     virtual Value visitBoolEq(StrawberryParser::BoolEqContext *context) = 0;
 
     virtual Value visitBoolNeq(StrawberryParser::BoolNeqContext *context) = 0;
@@ -176,6 +178,10 @@ public:
     virtual Value visitOr(StrawberryParser::OrContext *context) = 0;
 
     virtual Value visitAnd(StrawberryParser::AndContext *context) = 0;
+
+    virtual Value visitOrDefault(StrawberryParser::OrDefaultContext *context) = 0;
+
+    virtual Value visitExcitedSuff(StrawberryParser::ExcitedSuffContext *context) = 0;
 
 
 };

@@ -154,6 +154,10 @@ public:
     return std::any_cast<Value>(visitChildren(ctx));
   }
 
+  virtual Value visitSuffixExpr(StrawberryParser::SuffixExprContext *ctx) override {
+    return std::any_cast<Value>(visitChildren(ctx));
+  }
+
   virtual Value visitAssignExpr(StrawberryParser::AssignExprContext *ctx) override {
     return std::any_cast<Value>(visitChildren(ctx));
   }
@@ -250,22 +254,6 @@ public:
     return std::any_cast<Value>(visitChildren(ctx));
   }
 
-  virtual Value visitNegatePrefix(StrawberryParser::NegatePrefixContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
-  }
-
-  virtual Value visitRefPrefix(StrawberryParser::RefPrefixContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
-  }
-
-  virtual Value visitNegativePrefix(StrawberryParser::NegativePrefixContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
-  }
-
-  virtual Value visitReversePrefix(StrawberryParser::ReversePrefixContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
-  }
-
   virtual Value visitPow(StrawberryParser::PowContext *ctx) override {
     return std::any_cast<Value>(visitChildren(ctx));
   }
@@ -298,6 +286,22 @@ public:
     return std::any_cast<Value>(visitChildren(ctx));
   }
 
+  virtual Value visitNegatePrefix(StrawberryParser::NegatePrefixContext *ctx) override {
+    return std::any_cast<Value>(visitChildren(ctx));
+  }
+
+  virtual Value visitRefPrefix(StrawberryParser::RefPrefixContext *ctx) override {
+    return std::any_cast<Value>(visitChildren(ctx));
+  }
+
+  virtual Value visitNegativePrefix(StrawberryParser::NegativePrefixContext *ctx) override {
+    return std::any_cast<Value>(visitChildren(ctx));
+  }
+
+  virtual Value visitReversePrefix(StrawberryParser::ReversePrefixContext *ctx) override {
+    return std::any_cast<Value>(visitChildren(ctx));
+  }
+
   virtual Value visitBoolEq(StrawberryParser::BoolEqContext *ctx) override {
     return std::any_cast<Value>(visitChildren(ctx));
   }
@@ -327,6 +331,14 @@ public:
   }
 
   virtual Value visitAnd(StrawberryParser::AndContext *ctx) override {
+    return std::any_cast<Value>(visitChildren(ctx));
+  }
+
+  virtual Value visitOrDefault(StrawberryParser::OrDefaultContext *ctx) override {
+    return std::any_cast<Value>(visitChildren(ctx));
+  }
+
+  virtual Value visitExcitedSuff(StrawberryParser::ExcitedSuffContext *ctx) override {
     return std::any_cast<Value>(visitChildren(ctx));
   }
 

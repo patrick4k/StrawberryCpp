@@ -116,6 +116,7 @@ expression
 | prefix expression #prefixExpr
 | expression op5 expression #opExpr
 | expression op6 expression #opExpr
+| expression suffix #suffixExpr
 | identifyer #accessExpr
 | literal #litExpr
 | looseFnCall #looseFnCallExpr
@@ -195,4 +196,9 @@ op5
 op6
 : Or #or
 | And #and
+;
+
+suffix
+: DefOr #orDefault
+| ExPoint #excitedSuff // TODO: Find purpose for !
 ;

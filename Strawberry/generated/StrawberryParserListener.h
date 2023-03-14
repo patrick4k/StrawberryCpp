@@ -118,6 +118,9 @@ public:
   virtual void enterOpExpr(StrawberryParser::OpExprContext *ctx) = 0;
   virtual void exitOpExpr(StrawberryParser::OpExprContext *ctx) = 0;
 
+  virtual void enterSuffixExpr(StrawberryParser::SuffixExprContext *ctx) = 0;
+  virtual void exitSuffixExpr(StrawberryParser::SuffixExprContext *ctx) = 0;
+
   virtual void enterAssignExpr(StrawberryParser::AssignExprContext *ctx) = 0;
   virtual void exitAssignExpr(StrawberryParser::AssignExprContext *ctx) = 0;
 
@@ -190,18 +193,6 @@ public:
   virtual void enterLooseFnCall(StrawberryParser::LooseFnCallContext *ctx) = 0;
   virtual void exitLooseFnCall(StrawberryParser::LooseFnCallContext *ctx) = 0;
 
-  virtual void enterNegatePrefix(StrawberryParser::NegatePrefixContext *ctx) = 0;
-  virtual void exitNegatePrefix(StrawberryParser::NegatePrefixContext *ctx) = 0;
-
-  virtual void enterRefPrefix(StrawberryParser::RefPrefixContext *ctx) = 0;
-  virtual void exitRefPrefix(StrawberryParser::RefPrefixContext *ctx) = 0;
-
-  virtual void enterNegativePrefix(StrawberryParser::NegativePrefixContext *ctx) = 0;
-  virtual void exitNegativePrefix(StrawberryParser::NegativePrefixContext *ctx) = 0;
-
-  virtual void enterReversePrefix(StrawberryParser::ReversePrefixContext *ctx) = 0;
-  virtual void exitReversePrefix(StrawberryParser::ReversePrefixContext *ctx) = 0;
-
   virtual void enterPow(StrawberryParser::PowContext *ctx) = 0;
   virtual void exitPow(StrawberryParser::PowContext *ctx) = 0;
 
@@ -226,6 +217,18 @@ public:
   virtual void enterRangeOp(StrawberryParser::RangeOpContext *ctx) = 0;
   virtual void exitRangeOp(StrawberryParser::RangeOpContext *ctx) = 0;
 
+  virtual void enterNegatePrefix(StrawberryParser::NegatePrefixContext *ctx) = 0;
+  virtual void exitNegatePrefix(StrawberryParser::NegatePrefixContext *ctx) = 0;
+
+  virtual void enterRefPrefix(StrawberryParser::RefPrefixContext *ctx) = 0;
+  virtual void exitRefPrefix(StrawberryParser::RefPrefixContext *ctx) = 0;
+
+  virtual void enterNegativePrefix(StrawberryParser::NegativePrefixContext *ctx) = 0;
+  virtual void exitNegativePrefix(StrawberryParser::NegativePrefixContext *ctx) = 0;
+
+  virtual void enterReversePrefix(StrawberryParser::ReversePrefixContext *ctx) = 0;
+  virtual void exitReversePrefix(StrawberryParser::ReversePrefixContext *ctx) = 0;
+
   virtual void enterBoolEq(StrawberryParser::BoolEqContext *ctx) = 0;
   virtual void exitBoolEq(StrawberryParser::BoolEqContext *ctx) = 0;
 
@@ -249,6 +252,12 @@ public:
 
   virtual void enterAnd(StrawberryParser::AndContext *ctx) = 0;
   virtual void exitAnd(StrawberryParser::AndContext *ctx) = 0;
+
+  virtual void enterOrDefault(StrawberryParser::OrDefaultContext *ctx) = 0;
+  virtual void exitOrDefault(StrawberryParser::OrDefaultContext *ctx) = 0;
+
+  virtual void enterExcitedSuff(StrawberryParser::ExcitedSuffContext *ctx) = 0;
+  virtual void exitExcitedSuff(StrawberryParser::ExcitedSuffContext *ctx) = 0;
 
 
 };
