@@ -39,7 +39,6 @@ RLarrow: '<<' ;
 Dot2: '..' ;
 Dot3: '...' ;
 As: 'as' ;
-Nl: ('\n' | '\r')+ ;
 
 /* Symbols */
 Uscore: '_' ;
@@ -86,6 +85,8 @@ MultEq: '*=' ;
 DivEq: '/=' ;
 ModEq: '%=' ;
 PowEq: '^=' ;
+Increm: '++' ;
+Decrem: '--' ;
 
 /* Containers */
 Lbrack: '[' ;
@@ -97,7 +98,7 @@ Rpar: ')' ;
 
 /* Ignore */
 Ignore: (Comment | WS) -> skip ;
-fragment WS: [ \t]+ ;
+fragment WS: [ \r\n\t]+ ;
 fragment Comment
 :'//' ~('\r' | '\n')*
 |'/*' .*? '*/'
