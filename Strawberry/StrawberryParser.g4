@@ -156,13 +156,6 @@ looseFnCall // TODO: revise 'foo() bar a'
 /* ================================================================================ */
 // OPERATORS
 
-prefix
-: ExPoint #negatePrefix
-| Fslash #refPrefix
-| Min #negativePrefix
-| Squig #reversePrefix
-;
-
 op1
 : Pow #pow
 ;
@@ -181,6 +174,13 @@ op3
 op4
 : DefOr #definedOr
 | Dot2 #rangeOp
+;
+
+prefix
+: ExPoint #negatePrefix
+| Fslash #refPrefix
+| Min #negativePrefix
+| Squig #reversePrefix
 ;
 
 op5
