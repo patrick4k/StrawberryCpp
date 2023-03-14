@@ -33,7 +33,6 @@ while (<IN>) {
         if ($line =~ s/\Q$lex\E/$id/) {
             print "$id\t$lex\n";
             print $line."\n\n";
-            last;
         }
     }
     print OUT $line;

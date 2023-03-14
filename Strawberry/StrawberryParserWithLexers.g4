@@ -5,10 +5,10 @@ options {
 }
 
 /* ================================================================================ */
-// SCRIPT STRUCTURE
+// STRUCTURE
 
 script
-: (action|controlFlow|declaration)+ EOF
+: (action | controlFlow | declaration)+ EOF
 ;
 
 declaration
@@ -20,17 +20,26 @@ action
 | scope
 ;
 
-controlFlow
-: compoundStatement ';'
-| forLoop
-;
-
 scope: '{' action* '}' ;
 
 statement
 : value
 | scope
+| keywordStatement
 ;
+
+keywordStatement
+: Return value #returnStat
+| Once statement #onceStat
+| Next expression #nextStat
+| Last #lastStat
+| Break #breakStat
+;
+
+body: (scope | statement ';') ;
+
+/* ================================================================================ */
+// FUNCTIONS ARGS PARAMETERS
 
 fnDeclaration: 'fn' Id '(' parameters ')' scope ;
 
@@ -54,36 +63,39 @@ argument
 /* ================================================================================ */
 // CONTROL FLOW
 
-loopBody
-: '{' (statement ';'| scope | loopActions)* '}'
+controlFlow
+: compoundStatement ';'
+| loop
+| ifStatement
 ;
 
-forLoop
-: 'for' expression loopBody
-| 'for' '(' expression ')' (loopBody | statement ';')
+loop
+: loopKeywords expression scope
+| loopKeywords '(' expression ')' body
 ;
 
-/* Compount Statements */
-compoundStatement
-: compoundAction (compoundKeyword (expression| '(' args ')'))*
-;
+compoundStatement: compoundAction (loopKeywords (expression | '(' args ')'))* ;
 
 compoundAction
 : compoundAction 'if' expression ('else' compoundAction)?
 | compoundAction 'unless' expression ('else' compoundAction)?
-| loopActions
-| value
+| statement
 ;
 
-compoundKeyword
+ifStatement
+: conditionalKeywords expression scope ('else' (body | ifStatement))? #ifScope
+| conditionalKeywords '(' expression ')' body ('else' (body | ifStatement))? #ifBody
+;
+
+conditionalKeywords
+: 'if' #ifKeyword
+| 'unless' #unlessKeyword
+;
+
+loopKeywords
 : 'for' #forCompound
 | 'while' #whileCompound
 | 'until' #untilCompound
-;
-
-loopActions
-: 'break' #breakAction
-| 'once' scope #onceAction
 ;
 
 /* ================================================================================ */
@@ -118,15 +130,15 @@ literal
 
 assign
 : 'let' Id '=' value #declareAssign
-| identifyer '=' value #eqAssign
-| identifyer '^=' expression #powAssign
-| identifyer '*=' expression #multAssign
-| identifyer '/=' expression #divAssign
-| identifyer '%=' expression #modAssign
-| identifyer '+=' expression #addAssign
-| identifyer '-=' expression #minAssign
-| identifyer '++' #increm
-| identifyer '--' #decrem
+| identifyer? '=' value #eqAssign
+| identifyer? '^=' expression #powAssign
+| identifyer? '*=' expression #multAssign
+| identifyer? '/=' expression #divAssign
+| identifyer? '%=' expression #modAssign
+| identifyer? '+=' expression #addAssign
+| identifyer? '-=' expression #minAssign
+| identifyer? '++' #increm
+| identifyer? '--' #decrem
 ;
 
 identifyer
@@ -137,7 +149,7 @@ identifyer
 | '_' #defaultAccess
 ;
 
-looseFnCall
+looseFnCall // TODO: revise 'foo() bar a'
 : identifyer argument (',' argument)*
 ;
 

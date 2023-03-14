@@ -9,6 +9,9 @@ Else: 'else' ;
 While: 'while' ;
 Until: 'until' ;
 For: 'for' ;
+
+/* Keywords */
+Return: 'return' ;
 Break: 'break' ;
 Next: 'next' ;
 Last: 'last' ;
