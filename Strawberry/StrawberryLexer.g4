@@ -17,14 +17,21 @@ Next: 'next' ;
 Last: 'last' ;
 Once: 'once' ;
 
+/* Regex */
+MatchArrow: '~>' ;
+RegWord: '\\w' ;
+RegDigit: '\\d' ;
+RegSpace: '\\s' ;
+RegNewline: '\\n' ;
+RegReturnAll: 'return all' ;
+
 /* Util */
 Id: Word (Word | Digit | Uscore)*;
 Number: Digit+ ('.' Digit+)?;
-String: Dquote .*? Dquote;
-LitString: Squote .*? Squote;
 
 Digit: [0-9];
-Word: (UcLetter | LcLetter)+;
+Word: (Letter)+;
+Letter: UcLetter | LcLetter ;
 UcLetter: [A-Z];
 LcLetter: [a-z];
 
@@ -47,6 +54,7 @@ As: 'as' ;
 Uscore: '_' ;
 AndSign: '&' ;
 Doll: '$' ;
+DollLit: '\\$' ;
 Hash: '#' ;
 At: '@' ;
 ExPoint: '!' ;
@@ -98,6 +106,10 @@ Lbrace: '{' ;
 Rbrace: '}' ;
 Lpar: '(' ;
 Rpar: ')' ;
+
+/* Letters */
+WL: 'w' ;
+WU: 'W' ;
 
 /* Ignore */
 Ignore: (Comment | WS) -> skip ;

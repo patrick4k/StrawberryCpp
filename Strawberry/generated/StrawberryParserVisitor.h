@@ -43,6 +43,46 @@ public:
 
     virtual Value visitBody(StrawberryParser::BodyContext *context) = 0;
 
+    virtual Value visitControlFlow(StrawberryParser::ControlFlowContext *context) = 0;
+
+    virtual Value visitLoop(StrawberryParser::LoopContext *context) = 0;
+
+    virtual Value visitLoopScope(StrawberryParser::LoopScopeContext *context) = 0;
+
+    virtual Value visitLoopBody(StrawberryParser::LoopBodyContext *context) = 0;
+
+    virtual Value visitCompoundStatement(StrawberryParser::CompoundStatementContext *context) = 0;
+
+    virtual Value visitStatementCompound(StrawberryParser::StatementCompoundContext *context) = 0;
+
+    virtual Value visitIfScopeCompound(StrawberryParser::IfScopeCompoundContext *context) = 0;
+
+    virtual Value visitLoopScopeCompound(StrawberryParser::LoopScopeCompoundContext *context) = 0;
+
+    virtual Value visitIfRegexCompound(StrawberryParser::IfRegexCompoundContext *context) = 0;
+
+    virtual Value visitIfCompound(StrawberryParser::IfCompoundContext *context) = 0;
+
+    virtual Value visitIfStatement(StrawberryParser::IfStatementContext *context) = 0;
+
+    virtual Value visitExprIfScope(StrawberryParser::ExprIfScopeContext *context) = 0;
+
+    virtual Value visitPatternIfScope(StrawberryParser::PatternIfScopeContext *context) = 0;
+
+    virtual Value visitExprIfBody(StrawberryParser::ExprIfBodyContext *context) = 0;
+
+    virtual Value visitPatternIfBody(StrawberryParser::PatternIfBodyContext *context) = 0;
+
+    virtual Value visitIfKeyword(StrawberryParser::IfKeywordContext *context) = 0;
+
+    virtual Value visitUnlessKeyword(StrawberryParser::UnlessKeywordContext *context) = 0;
+
+    virtual Value visitForLoop(StrawberryParser::ForLoopContext *context) = 0;
+
+    virtual Value visitWhileLoop(StrawberryParser::WhileLoopContext *context) = 0;
+
+    virtual Value visitUntilLoop(StrawberryParser::UntilLoopContext *context) = 0;
+
     virtual Value visitFnDeclaration(StrawberryParser::FnDeclarationContext *context) = 0;
 
     virtual Value visitLambda(StrawberryParser::LambdaContext *context) = 0;
@@ -59,27 +99,15 @@ public:
 
     virtual Value visitLooseFnCallArg(StrawberryParser::LooseFnCallArgContext *context) = 0;
 
-    virtual Value visitControlFlow(StrawberryParser::ControlFlowContext *context) = 0;
+    virtual Value visitDefaultPattern(StrawberryParser::DefaultPatternContext *context) = 0;
 
-    virtual Value visitLoop(StrawberryParser::LoopContext *context) = 0;
+    virtual Value visitExprPattern(StrawberryParser::ExprPatternContext *context) = 0;
 
-    virtual Value visitCompoundStatement(StrawberryParser::CompoundStatementContext *context) = 0;
+    virtual Value visitWord(StrawberryParser::WordContext *context) = 0;
 
-    virtual Value visitCompoundAction(StrawberryParser::CompoundActionContext *context) = 0;
+    virtual Value visitWildCard(StrawberryParser::WildCardContext *context) = 0;
 
-    virtual Value visitIfScope(StrawberryParser::IfScopeContext *context) = 0;
-
-    virtual Value visitIfBody(StrawberryParser::IfBodyContext *context) = 0;
-
-    virtual Value visitIfKeyword(StrawberryParser::IfKeywordContext *context) = 0;
-
-    virtual Value visitUnlessKeyword(StrawberryParser::UnlessKeywordContext *context) = 0;
-
-    virtual Value visitForCompound(StrawberryParser::ForCompoundContext *context) = 0;
-
-    virtual Value visitWhileCompound(StrawberryParser::WhileCompoundContext *context) = 0;
-
-    virtual Value visitUntilCompound(StrawberryParser::UntilCompoundContext *context) = 0;
+    virtual Value visitOther(StrawberryParser::OtherContext *context) = 0;
 
     virtual Value visitValue(StrawberryParser::ValueContext *context) = 0;
 
@@ -106,6 +134,12 @@ public:
     virtual Value visitArrayLit(StrawberryParser::ArrayLitContext *context) = 0;
 
     virtual Value visitNumLit(StrawberryParser::NumLitContext *context) = 0;
+
+    virtual Value visitIdentityString(StrawberryParser::IdentityStringContext *context) = 0;
+
+    virtual Value visitDollarSignString(StrawberryParser::DollarSignStringContext *context) = 0;
+
+    virtual Value visitOtherString(StrawberryParser::OtherStringContext *context) = 0;
 
     virtual Value visitDeclareAssign(StrawberryParser::DeclareAssignContext *context) = 0;
 
@@ -160,8 +194,6 @@ public:
     virtual Value visitRefPrefix(StrawberryParser::RefPrefixContext *context) = 0;
 
     virtual Value visitNegativePrefix(StrawberryParser::NegativePrefixContext *context) = 0;
-
-    virtual Value visitReversePrefix(StrawberryParser::ReversePrefixContext *context) = 0;
 
     virtual Value visitBoolEq(StrawberryParser::BoolEqContext *context) = 0;
 

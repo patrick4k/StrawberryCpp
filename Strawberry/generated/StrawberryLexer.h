@@ -14,18 +14,19 @@ class  StrawberryLexer : public antlr4::Lexer {
 public:
   enum {
     Fn = 1, Decl = 2, If = 3, Unless = 4, Else = 5, While = 6, Until = 7, 
-    For = 8, Return = 9, Break = 10, Next = 11, Last = 12, Once = 13, Id = 14, 
-    Number = 15, String = 16, LitString = 17, Digit = 18, Word = 19, UcLetter = 20, 
-    LcLetter = 21, True = 22, False = 23, Null = 24, DefOr = 25, Sarrow = 26, 
-    Darrpw = 27, LRarrow = 28, RLarrow = 29, Dot2 = 30, Dot3 = 31, As = 32, 
-    Uscore = 33, AndSign = 34, Doll = 35, Hash = 36, At = 37, ExPoint = 38, 
-    Qmark = 39, Colon = 40, Semi = 41, Fslash = 42, Bar = 43, Dquote = 44, 
-    Squote = 45, Com = 46, Dot = 47, Squig = 48, Btick = 49, Pow = 50, Star = 51, 
-    Bslash = 52, Mod = 53, Plus = 54, Min = 55, Eq = 56, BoolEq = 57, BoolNeq = 58, 
-    Gt = 59, GtEq = 60, Lt = 61, LtEq = 62, And = 63, Or = 64, PlusEq = 65, 
-    MinEq = 66, MultEq = 67, DivEq = 68, ModEq = 69, PowEq = 70, Increm = 71, 
-    Decrem = 72, Lbrack = 73, Rbrack = 74, Lbrace = 75, Rbrace = 76, Lpar = 77, 
-    Rpar = 78, Ignore = 79
+    For = 8, Return = 9, Break = 10, Next = 11, Last = 12, Once = 13, MatchArrow = 14, 
+    RegWord = 15, RegDigit = 16, RegSpace = 17, RegNewline = 18, RegReturnAll = 19, 
+    Id = 20, Number = 21, Digit = 22, Word = 23, Letter = 24, UcLetter = 25, 
+    LcLetter = 26, True = 27, False = 28, Null = 29, DefOr = 30, Sarrow = 31, 
+    Darrpw = 32, LRarrow = 33, RLarrow = 34, Dot2 = 35, Dot3 = 36, As = 37, 
+    Uscore = 38, AndSign = 39, Doll = 40, DollLit = 41, Hash = 42, At = 43, 
+    ExPoint = 44, Qmark = 45, Colon = 46, Semi = 47, Fslash = 48, Bar = 49, 
+    Dquote = 50, Squote = 51, Com = 52, Dot = 53, Squig = 54, Btick = 55, 
+    Pow = 56, Star = 57, Bslash = 58, Mod = 59, Plus = 60, Min = 61, Eq = 62, 
+    BoolEq = 63, BoolNeq = 64, Gt = 65, GtEq = 66, Lt = 67, LtEq = 68, And = 69, 
+    Or = 70, PlusEq = 71, MinEq = 72, MultEq = 73, DivEq = 74, ModEq = 75, 
+    PowEq = 76, Increm = 77, Decrem = 78, Lbrack = 79, Rbrack = 80, Lbrace = 81, 
+    Rbrace = 82, Lpar = 83, Rpar = 84, WL = 85, WU = 86, Ignore = 87
   };
 
   explicit StrawberryLexer(antlr4::CharStream *input);

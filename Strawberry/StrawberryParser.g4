@@ -8,7 +8,7 @@ options {
 // STRUCTURE
 
 script
-: (action | controlFlow | declaration)+ EOF
+: action+ EOF
 ;
 
 declaration
@@ -18,6 +18,8 @@ declaration
 action
 : statement Semi
 | scope
+| controlFlow
+| declaration
 ;
 
 scope: Lbrace action* Rbrace ;
@@ -29,7 +31,7 @@ statement
 ;
 
 keywordStatement
-: Return value #returnStat
+: Return value? #returnStat
 | Once statement #onceStat
 | Next expression? #nextStat
 | Last #lastStat
@@ -37,6 +39,60 @@ keywordStatement
 ;
 
 body: (scope | statement Semi) ;
+
+/* ================================================================================ */
+// CONTROL FLOW
+
+controlFlow
+: compoundStatement Semi
+| loop
+| ifStatement
+;
+
+loop
+: loopScope
+| loopBody
+;
+
+loopScope: loopKeywords expression scope ;
+
+loopBody: loopKeywords Lpar expression Rpar body ;
+
+compoundStatement: compoundAction (loopKeywords (expression | Lpar args Rpar))* ;
+
+compoundAction
+: compoundAction conditionalKeywords expression (Else compoundAction)? #ifCompound
+| compoundAction conditionalKeywords pattern (Else compoundAction)? #ifRegexCompound
+| ifScope #ifScopeCompound
+| loopScope #loopScopeCompound
+| statement #statementCompound
+;
+
+ifStatement
+: ifScope
+| ifBody
+;
+
+ifScope
+: conditionalKeywords expression scope (Else (body | ifStatement))? #exprIfScope
+| conditionalKeywords pattern scope (Else (body | ifStatement))? #patternIfScope
+;
+
+ifBody
+: conditionalKeywords Lpar expression Rpar body (Else (body | ifStatement))? #exprIfBody
+| conditionalKeywords Lpar pattern Rpar body (Else (body | ifStatement))? #patternIfBody
+;
+
+conditionalKeywords
+: If #ifKeyword
+| Unless #unlessKeyword
+;
+
+loopKeywords
+: For #forLoop
+| While #whileLoop
+| Until #untilLoop
+;
 
 /* ================================================================================ */
 // FUNCTIONS ARGS PARAMETERS
@@ -61,41 +117,19 @@ argument
 ;
 
 /* ================================================================================ */
-// CONTROL FLOW
+// PATTERNS / REGEX
 
-controlFlow
-: compoundStatement Semi
-| loop
-| ifStatement
+pattern
+: Letter* Lbrace patternContent* Rbrace #defaultPattern
+| Lbrace patternContent* Rbrace Letter* #defaultPattern
+| Letter* Lbrace patternContent* Rbrace Sarrow expression #exprPattern
+| expression Sarrow Lbrace patternContent* Rbrace Letter* #exprPattern
 ;
 
-loop
-: loopKeywords expression scope
-| loopKeywords Lpar expression Rpar body
-;
-
-compoundStatement: compoundAction (loopKeywords (expression | Lpar args Rpar))* ;
-
-compoundAction
-: compoundAction If expression (Else compoundAction)?
-| compoundAction Unless expression (Else compoundAction)?
-| statement
-;
-
-ifStatement
-: conditionalKeywords expression scope (Else (body | ifStatement))? #ifScope
-| conditionalKeywords Lpar expression Rpar body (Else (body | ifStatement))? #ifBody
-;
-
-conditionalKeywords
-: If #ifKeyword
-| Unless #unlessKeyword
-;
-
-loopKeywords
-: For #forCompound
-| While #whileCompound
-| Until #untilCompound
+patternContent
+: '\\w' #word
+| Dot #wildCard
+| . #other
 ;
 
 /* ================================================================================ */
@@ -123,10 +157,16 @@ expression
 ;
 
 literal
-: Dquote .*? Dquote #dStringLit // TODO: revise double quotes
+: Dquote stringContent* Dquote #dStringLit
 | Squote .*? Squote #sStringLit
 | Lbrack args Rbrack #arrayLit
 | Number #numLit
+;
+
+stringContent // TODO: Add escape characters
+: Doll identifyer #identityString
+| DollLit #dollarSignString
+| ~Dquote #otherString
 ;
 
 assign
@@ -151,7 +191,7 @@ identifyer
 ;
 
 looseFnCall // TODO: revise 'foo() bar a'
-: identifyer argument (Com argument)*
+: Id argument (Com argument)*
 ;
 
 /* ================================================================================ */
@@ -181,7 +221,6 @@ prefix
 : ExPoint #negatePrefix
 | Fslash #refPrefix
 | Min #negativePrefix
-| Squig #reversePrefix
 ;
 
 op5

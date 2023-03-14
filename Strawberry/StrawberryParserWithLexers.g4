@@ -8,7 +8,7 @@ options {
 // STRUCTURE
 
 script
-: (action | controlFlow | declaration)+ EOF
+: action+ EOF
 ;
 
 declaration
@@ -18,6 +18,8 @@ declaration
 action
 : statement ';'
 | scope
+| controlFlow
+| declaration
 ;
 
 scope: '{' action* '}' ;
@@ -29,7 +31,7 @@ statement
 ;
 
 keywordStatement
-: Return value #returnStat
+: Return value? #returnStat
 | Once statement #onceStat
 | Next expression? #nextStat
 | Last #lastStat
@@ -37,6 +39,60 @@ keywordStatement
 ;
 
 body: (scope | statement ';') ;
+
+/* ================================================================================ */
+// CONTROL FLOW
+
+controlFlow
+: compoundStatement ';'
+| loop
+| ifStatement
+;
+
+loop
+: loopScope
+| loopBody
+;
+
+loopScope: loopKeywords expression scope ;
+
+loopBody: loopKeywords '(' expression ')' body ;
+
+compoundStatement: compoundAction (loopKeywords (expression | '(' args ')'))* ;
+
+compoundAction
+: compoundAction conditionalKeywords expression ('else' compoundAction)? #ifCompound
+| compoundAction conditionalKeywords match ('else' compoundAction)? #ifRegexCompound
+| ifScope #ifScopeCompound
+| loopScope #loopScopeCompound
+| statement #statementCompound
+;
+
+ifStatement
+: ifScope
+| ifBody
+;
+
+ifScope
+: conditionalKeywords expression scope ('else' (body | ifStatement))? #exprIfScope
+| conditionalKeywords match scope ('else' (body | ifStatement))? #matchIfScope
+;
+
+ifBody
+: conditionalKeywords '(' expression ')' body ('else' (body | ifStatement))? #exprIfBody
+| conditionalKeywords '(' match ')' body ('else' (body | ifStatement))? #matchIfBody
+;
+
+conditionalKeywords
+: 'if' #ifKeyword
+| 'unless' #unlessKeyword
+;
+
+loopKeywords
+: 'for' #forLoop
+| 'while' #whileLoop
+| 'until' #untilLoop
+;
 
 /* ================================================================================ */
 // FUNCTIONS ARGS PARAMETERS
@@ -50,9 +106,7 @@ parameters
 | (Id ',')* Id '...' #paramsExpand
 ;
 
-args
-: (argument (',' argument)*)?
-;
+args: (argument (',' argument)*)? ;
 
 argument
 : value #arg
@@ -61,41 +115,30 @@ argument
 ;
 
 /* ================================================================================ */
-// CONTROL FLOW
+// MATCH
 
-controlFlow
-: compoundStatement ';'
-| loop
-| ifStatement
+match
+: '~' ('{'matchOptions*'}')? '/' matchContent* '/' #defaultmatch
+| expression '~>' ('{'matchOptions*'}')? '/' matchContent* '/'  #exprmatch // TODO: remove left recursion
 ;
 
-loop
-: loopKeywords expression scope
-| loopKeywords '(' expression ')' body
+matchOptions
+: 'return all'
 ;
 
-compoundStatement: compoundAction (loopKeywords (expression | '(' args ')'))* ;
-
-compoundAction
-: compoundAction 'if' expression ('else' compoundAction)?
-| compoundAction 'unless' expression ('else' compoundAction)?
-| statement
+matchContent
+: matchChars '+' #onOrMore
+| matchChars '*' #zeroOrMore
+| matchChars '?' #zeroOrOne
 ;
 
-ifStatement
-: conditionalKeywords expression scope ('else' (body | ifStatement))? #ifScope
-| conditionalKeywords '(' expression ')' body ('else' (body | ifStatement))? #ifBody
-;
-
-conditionalKeywords
-: 'if' #ifKeyword
-| 'unless' #unlessKeyword
-;
-
-loopKeywords
-: 'for' #forCompound
-| 'while' #whileCompound
-| 'until' #untilCompound
+matchChars
+: '\\w' #word
+| '\\n' #newline
+| '\\\\' #bslash
+| '.' #wildCard
+| . #other
+| '[' matchChars+ ']' #complexmatch
 ;
 
 /* ================================================================================ */
@@ -108,6 +151,7 @@ value
 
 expression
 : '(' expression ')' #parenExpr
+| match #matchExpr
 | assign #assignExpr
 | expression op1 expression #opExpr
 | expression op2 expression #opExpr
@@ -123,10 +167,16 @@ expression
 ;
 
 literal
-: Dquote .*? Dquote #dStringLit // TODO: revise double quotes
+: Dquote stringContent* Dquote #dStringLit
 | Squote .*? Squote #sStringLit
 | '[' args ']' #arrayLit
 | Number #numLit
+;
+
+stringContent // TODO: Add escape characters
+: '$' identifyer #identityString
+| '\\$' #dollarSignString
+| ~'"' #otherString
 ;
 
 assign
@@ -151,7 +201,7 @@ identifyer
 ;
 
 looseFnCall // TODO: revise 'foo() bar a'
-: identifyer argument (',' argument)*
+: Id argument (',' argument)*
 ;
 
 /* ================================================================================ */
@@ -181,7 +231,6 @@ prefix
 : '!' #negatePrefix
 | '\\' #refPrefix
 | '-' #negativePrefix
-| '~' #reversePrefix
 ;
 
 op5
