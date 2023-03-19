@@ -118,8 +118,8 @@ argument
 // MATCH
 
 match
-: '~' ('{'matchOptions*'}')? '/' matchContent* '/' #defaultmatch
-| expression '~>' ('{'matchOptions*'}')? '/' matchContent* '/'  #exprmatch // TODO: remove left recursion
+: '~' ('{'matchOptions*'}')? '/' matchContent+ '/' #defaultmatch
+//| expression '~>' ('{'matchOptions*'}')? '/' matchContent* '/'  #exprmatch // TODO: remove left recursion
 ;
 
 matchOptions
@@ -127,9 +127,12 @@ matchOptions
 ;
 
 matchContent
-: matchChars '+' #onOrMore
-| matchChars '*' #zeroOrMore
-| matchChars '?' #zeroOrOne
+: matchContent '+' #onOrMore
+| matchContent '*' #zeroOrMore
+| matchContent '?' #zeroOrOne
+| '[' option=(matchContent+) ('|' option=(matchContent+))*']' #complexMatch
+| '(' matchContent ')' #collectMatch
+| matchChars+ #chars
 ;
 
 matchChars
@@ -137,8 +140,7 @@ matchChars
 | '\\n' #newline
 | '\\\\' #bslash
 | '.' #wildCard
-| . #other
-| '[' matchChars+ ']' #complexmatch
+//| ~'\\' #other
 ;
 
 /* ================================================================================ */
@@ -151,7 +153,6 @@ value
 
 expression
 : '(' expression ')' #parenExpr
-| match #matchExpr
 | assign #assignExpr
 | expression op1 expression #opExpr
 | expression op2 expression #opExpr
@@ -176,6 +177,7 @@ literal
 stringContent // TODO: Add escape characters
 : '$' identifyer #identityString
 | '\\$' #dollarSignString
+| WS #whitespace // TODO: whitespace not working
 | ~'"' #otherString
 ;
 
@@ -248,6 +250,6 @@ op6
 ;
 
 suffix
-: '\\\\' #orDefault
-| '!' #excitedSuff // TODO: Find purpose for !
+: '!' #excitedSuff // TODO: Find purpose for !
+| match #matchSuff
 ;

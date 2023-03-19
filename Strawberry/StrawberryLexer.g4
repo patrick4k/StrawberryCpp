@@ -113,7 +113,7 @@ WU: 'W' ;
 
 /* Ignore */
 Ignore: (Comment | WS) -> skip ;
-fragment WS: [ \r\n\t]+ ;
+WS: [ \r\n\t]+ ;
 fragment Comment
 :'//' ~('\r' | '\n')*
 |'/*' .*? '*/'

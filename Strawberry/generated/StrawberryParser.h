@@ -26,7 +26,7 @@ public:
     BoolEq = 63, BoolNeq = 64, Gt = 65, GtEq = 66, Lt = 67, LtEq = 68, And = 69, 
     Or = 70, PlusEq = 71, MinEq = 72, MultEq = 73, DivEq = 74, ModEq = 75, 
     PowEq = 76, Increm = 77, Decrem = 78, Lbrack = 79, Rbrack = 80, Lbrace = 81, 
-    Rbrace = 82, Lpar = 83, Rpar = 84, WL = 85, WU = 86, Ignore = 87
+    Rbrace = 82, Lpar = 83, Rpar = 84, WL = 85, WU = 86, Ignore = 87, WS = 88
   };
 
   enum {

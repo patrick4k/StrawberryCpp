@@ -85,6 +85,7 @@ Rpar=84
 WL=85
 WU=86
 Ignore=87
+WS=88
 'fn'=1
 'let'=2
 'if'=3
