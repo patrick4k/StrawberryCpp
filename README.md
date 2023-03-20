@@ -1,4 +1,4 @@
-# Strawberry Interpreter / Antlr4Cpp
+# Strawberry Interpreter
 **Author**: _Patrick Kennedy_
 
 TODO: Add Project Structure Here
