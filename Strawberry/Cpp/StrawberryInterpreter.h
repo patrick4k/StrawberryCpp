@@ -13,15 +13,8 @@ namespace antlrcpptest {
     class StrawberryInterpreter: public StrawberryParserBaseVisitor {
     public:
 
-        virtual std::any visitChildren(antlr4::tree::ParseTree *node) override {
-            std::any result = defaultResult();
-            for (const auto &child: node->children) {
-                result = visit(child);
-            }
-            return result;
-        }
-
-        virtual std::any defaultResult() override {
+        std::any defaultResult() override {
+            // TODO: Return null
             return Value();
         }
 

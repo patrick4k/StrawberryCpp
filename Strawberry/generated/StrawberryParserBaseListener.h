@@ -75,9 +75,6 @@ public:
   virtual void enterLoopScopeCompound(StrawberryParser::LoopScopeCompoundContext * /*ctx*/) override { }
   virtual void exitLoopScopeCompound(StrawberryParser::LoopScopeCompoundContext * /*ctx*/) override { }
 
-  virtual void enterIfRegexCompound(StrawberryParser::IfRegexCompoundContext * /*ctx*/) override { }
-  virtual void exitIfRegexCompound(StrawberryParser::IfRegexCompoundContext * /*ctx*/) override { }
-
   virtual void enterIfCompound(StrawberryParser::IfCompoundContext * /*ctx*/) override { }
   virtual void exitIfCompound(StrawberryParser::IfCompoundContext * /*ctx*/) override { }
 
@@ -87,14 +84,8 @@ public:
   virtual void enterExprIfScope(StrawberryParser::ExprIfScopeContext * /*ctx*/) override { }
   virtual void exitExprIfScope(StrawberryParser::ExprIfScopeContext * /*ctx*/) override { }
 
-  virtual void enterPatternIfScope(StrawberryParser::PatternIfScopeContext * /*ctx*/) override { }
-  virtual void exitPatternIfScope(StrawberryParser::PatternIfScopeContext * /*ctx*/) override { }
-
   virtual void enterExprIfBody(StrawberryParser::ExprIfBodyContext * /*ctx*/) override { }
   virtual void exitExprIfBody(StrawberryParser::ExprIfBodyContext * /*ctx*/) override { }
-
-  virtual void enterPatternIfBody(StrawberryParser::PatternIfBodyContext * /*ctx*/) override { }
-  virtual void exitPatternIfBody(StrawberryParser::PatternIfBodyContext * /*ctx*/) override { }
 
   virtual void enterIfKeyword(StrawberryParser::IfKeywordContext * /*ctx*/) override { }
   virtual void exitIfKeyword(StrawberryParser::IfKeywordContext * /*ctx*/) override { }
@@ -135,14 +126,38 @@ public:
   virtual void enterLooseFnCallArg(StrawberryParser::LooseFnCallArgContext * /*ctx*/) override { }
   virtual void exitLooseFnCallArg(StrawberryParser::LooseFnCallArgContext * /*ctx*/) override { }
 
-  virtual void enterDefaultPattern(StrawberryParser::DefaultPatternContext * /*ctx*/) override { }
-  virtual void exitDefaultPattern(StrawberryParser::DefaultPatternContext * /*ctx*/) override { }
+  virtual void enterMatchRegex(StrawberryParser::MatchRegexContext * /*ctx*/) override { }
+  virtual void exitMatchRegex(StrawberryParser::MatchRegexContext * /*ctx*/) override { }
 
-  virtual void enterExprPattern(StrawberryParser::ExprPatternContext * /*ctx*/) override { }
-  virtual void exitExprPattern(StrawberryParser::ExprPatternContext * /*ctx*/) override { }
+  virtual void enterMatchOptions(StrawberryParser::MatchOptionsContext * /*ctx*/) override { }
+  virtual void exitMatchOptions(StrawberryParser::MatchOptionsContext * /*ctx*/) override { }
+
+  virtual void enterZeroOrMore(StrawberryParser::ZeroOrMoreContext * /*ctx*/) override { }
+  virtual void exitZeroOrMore(StrawberryParser::ZeroOrMoreContext * /*ctx*/) override { }
+
+  virtual void enterOrMatch(StrawberryParser::OrMatchContext * /*ctx*/) override { }
+  virtual void exitOrMatch(StrawberryParser::OrMatchContext * /*ctx*/) override { }
+
+  virtual void enterCollectMatch(StrawberryParser::CollectMatchContext * /*ctx*/) override { }
+  virtual void exitCollectMatch(StrawberryParser::CollectMatchContext * /*ctx*/) override { }
+
+  virtual void enterZeroOrOne(StrawberryParser::ZeroOrOneContext * /*ctx*/) override { }
+  virtual void exitZeroOrOne(StrawberryParser::ZeroOrOneContext * /*ctx*/) override { }
+
+  virtual void enterChars(StrawberryParser::CharsContext * /*ctx*/) override { }
+  virtual void exitChars(StrawberryParser::CharsContext * /*ctx*/) override { }
+
+  virtual void enterOnOrMore(StrawberryParser::OnOrMoreContext * /*ctx*/) override { }
+  virtual void exitOnOrMore(StrawberryParser::OnOrMoreContext * /*ctx*/) override { }
 
   virtual void enterWord(StrawberryParser::WordContext * /*ctx*/) override { }
   virtual void exitWord(StrawberryParser::WordContext * /*ctx*/) override { }
+
+  virtual void enterNewline(StrawberryParser::NewlineContext * /*ctx*/) override { }
+  virtual void exitNewline(StrawberryParser::NewlineContext * /*ctx*/) override { }
+
+  virtual void enterBslash(StrawberryParser::BslashContext * /*ctx*/) override { }
+  virtual void exitBslash(StrawberryParser::BslashContext * /*ctx*/) override { }
 
   virtual void enterWildCard(StrawberryParser::WildCardContext * /*ctx*/) override { }
   virtual void exitWildCard(StrawberryParser::WildCardContext * /*ctx*/) override { }
@@ -159,6 +174,9 @@ public:
   virtual void enterPrefixExpr(StrawberryParser::PrefixExprContext * /*ctx*/) override { }
   virtual void exitPrefixExpr(StrawberryParser::PrefixExprContext * /*ctx*/) override { }
 
+  virtual void enterDefaultSuffixExpr(StrawberryParser::DefaultSuffixExprContext * /*ctx*/) override { }
+  virtual void exitDefaultSuffixExpr(StrawberryParser::DefaultSuffixExprContext * /*ctx*/) override { }
+
   virtual void enterOpExpr(StrawberryParser::OpExprContext * /*ctx*/) override { }
   virtual void exitOpExpr(StrawberryParser::OpExprContext * /*ctx*/) override { }
 
@@ -167,6 +185,9 @@ public:
 
   virtual void enterAssignExpr(StrawberryParser::AssignExprContext * /*ctx*/) override { }
   virtual void exitAssignExpr(StrawberryParser::AssignExprContext * /*ctx*/) override { }
+
+  virtual void enterFnAccess(StrawberryParser::FnAccessContext * /*ctx*/) override { }
+  virtual void exitFnAccess(StrawberryParser::FnAccessContext * /*ctx*/) override { }
 
   virtual void enterLitExpr(StrawberryParser::LitExprContext * /*ctx*/) override { }
   virtual void exitLitExpr(StrawberryParser::LitExprContext * /*ctx*/) override { }
@@ -194,6 +215,9 @@ public:
 
   virtual void enterDollarSignString(StrawberryParser::DollarSignStringContext * /*ctx*/) override { }
   virtual void exitDollarSignString(StrawberryParser::DollarSignStringContext * /*ctx*/) override { }
+
+  virtual void enterWhitespace(StrawberryParser::WhitespaceContext * /*ctx*/) override { }
+  virtual void exitWhitespace(StrawberryParser::WhitespaceContext * /*ctx*/) override { }
 
   virtual void enterOtherString(StrawberryParser::OtherStringContext * /*ctx*/) override { }
   virtual void exitOtherString(StrawberryParser::OtherStringContext * /*ctx*/) override { }
@@ -240,35 +264,8 @@ public:
   virtual void enterDefaultAccess(StrawberryParser::DefaultAccessContext * /*ctx*/) override { }
   virtual void exitDefaultAccess(StrawberryParser::DefaultAccessContext * /*ctx*/) override { }
 
-  virtual void enterFnAccess(StrawberryParser::FnAccessContext * /*ctx*/) override { }
-  virtual void exitFnAccess(StrawberryParser::FnAccessContext * /*ctx*/) override { }
-
   virtual void enterLooseFnCall(StrawberryParser::LooseFnCallContext * /*ctx*/) override { }
   virtual void exitLooseFnCall(StrawberryParser::LooseFnCallContext * /*ctx*/) override { }
-
-  virtual void enterPow(StrawberryParser::PowContext * /*ctx*/) override { }
-  virtual void exitPow(StrawberryParser::PowContext * /*ctx*/) override { }
-
-  virtual void enterMult(StrawberryParser::MultContext * /*ctx*/) override { }
-  virtual void exitMult(StrawberryParser::MultContext * /*ctx*/) override { }
-
-  virtual void enterDiv(StrawberryParser::DivContext * /*ctx*/) override { }
-  virtual void exitDiv(StrawberryParser::DivContext * /*ctx*/) override { }
-
-  virtual void enterMod(StrawberryParser::ModContext * /*ctx*/) override { }
-  virtual void exitMod(StrawberryParser::ModContext * /*ctx*/) override { }
-
-  virtual void enterPlus(StrawberryParser::PlusContext * /*ctx*/) override { }
-  virtual void exitPlus(StrawberryParser::PlusContext * /*ctx*/) override { }
-
-  virtual void enterMin(StrawberryParser::MinContext * /*ctx*/) override { }
-  virtual void exitMin(StrawberryParser::MinContext * /*ctx*/) override { }
-
-  virtual void enterDefinedOr(StrawberryParser::DefinedOrContext * /*ctx*/) override { }
-  virtual void exitDefinedOr(StrawberryParser::DefinedOrContext * /*ctx*/) override { }
-
-  virtual void enterRangeOp(StrawberryParser::RangeOpContext * /*ctx*/) override { }
-  virtual void exitRangeOp(StrawberryParser::RangeOpContext * /*ctx*/) override { }
 
   virtual void enterNegatePrefix(StrawberryParser::NegatePrefixContext * /*ctx*/) override { }
   virtual void exitNegatePrefix(StrawberryParser::NegatePrefixContext * /*ctx*/) override { }
@@ -279,35 +276,59 @@ public:
   virtual void enterNegativePrefix(StrawberryParser::NegativePrefixContext * /*ctx*/) override { }
   virtual void exitNegativePrefix(StrawberryParser::NegativePrefixContext * /*ctx*/) override { }
 
-  virtual void enterBoolEq(StrawberryParser::BoolEqContext * /*ctx*/) override { }
-  virtual void exitBoolEq(StrawberryParser::BoolEqContext * /*ctx*/) override { }
-
-  virtual void enterBoolNeq(StrawberryParser::BoolNeqContext * /*ctx*/) override { }
-  virtual void exitBoolNeq(StrawberryParser::BoolNeqContext * /*ctx*/) override { }
-
-  virtual void enterBoolGt(StrawberryParser::BoolGtContext * /*ctx*/) override { }
-  virtual void exitBoolGt(StrawberryParser::BoolGtContext * /*ctx*/) override { }
-
-  virtual void enterBoolGtEq(StrawberryParser::BoolGtEqContext * /*ctx*/) override { }
-  virtual void exitBoolGtEq(StrawberryParser::BoolGtEqContext * /*ctx*/) override { }
-
-  virtual void enterBoolLt(StrawberryParser::BoolLtContext * /*ctx*/) override { }
-  virtual void exitBoolLt(StrawberryParser::BoolLtContext * /*ctx*/) override { }
-
-  virtual void enterBoolLtEq(StrawberryParser::BoolLtEqContext * /*ctx*/) override { }
-  virtual void exitBoolLtEq(StrawberryParser::BoolLtEqContext * /*ctx*/) override { }
-
-  virtual void enterOr(StrawberryParser::OrContext * /*ctx*/) override { }
-  virtual void exitOr(StrawberryParser::OrContext * /*ctx*/) override { }
-
-  virtual void enterAnd(StrawberryParser::AndContext * /*ctx*/) override { }
-  virtual void exitAnd(StrawberryParser::AndContext * /*ctx*/) override { }
-
-  virtual void enterOrDefault(StrawberryParser::OrDefaultContext * /*ctx*/) override { }
-  virtual void exitOrDefault(StrawberryParser::OrDefaultContext * /*ctx*/) override { }
-
   virtual void enterExcitedSuff(StrawberryParser::ExcitedSuffContext * /*ctx*/) override { }
   virtual void exitExcitedSuff(StrawberryParser::ExcitedSuffContext * /*ctx*/) override { }
+
+  virtual void enterPowOp(StrawberryParser::PowOpContext * /*ctx*/) override { }
+  virtual void exitPowOp(StrawberryParser::PowOpContext * /*ctx*/) override { }
+
+  virtual void enterMultOp(StrawberryParser::MultOpContext * /*ctx*/) override { }
+  virtual void exitMultOp(StrawberryParser::MultOpContext * /*ctx*/) override { }
+
+  virtual void enterDivOp(StrawberryParser::DivOpContext * /*ctx*/) override { }
+  virtual void exitDivOp(StrawberryParser::DivOpContext * /*ctx*/) override { }
+
+  virtual void enterModOp(StrawberryParser::ModOpContext * /*ctx*/) override { }
+  virtual void exitModOp(StrawberryParser::ModOpContext * /*ctx*/) override { }
+
+  virtual void enterPlusOp(StrawberryParser::PlusOpContext * /*ctx*/) override { }
+  virtual void exitPlusOp(StrawberryParser::PlusOpContext * /*ctx*/) override { }
+
+  virtual void enterMinOp(StrawberryParser::MinOpContext * /*ctx*/) override { }
+  virtual void exitMinOp(StrawberryParser::MinOpContext * /*ctx*/) override { }
+
+  virtual void enterDefinedOrOp(StrawberryParser::DefinedOrOpContext * /*ctx*/) override { }
+  virtual void exitDefinedOrOp(StrawberryParser::DefinedOrOpContext * /*ctx*/) override { }
+
+  virtual void enterRangeOp(StrawberryParser::RangeOpContext * /*ctx*/) override { }
+  virtual void exitRangeOp(StrawberryParser::RangeOpContext * /*ctx*/) override { }
+
+  virtual void enterBoolEqOp(StrawberryParser::BoolEqOpContext * /*ctx*/) override { }
+  virtual void exitBoolEqOp(StrawberryParser::BoolEqOpContext * /*ctx*/) override { }
+
+  virtual void enterBoolNeqOp(StrawberryParser::BoolNeqOpContext * /*ctx*/) override { }
+  virtual void exitBoolNeqOp(StrawberryParser::BoolNeqOpContext * /*ctx*/) override { }
+
+  virtual void enterBoolGtOp(StrawberryParser::BoolGtOpContext * /*ctx*/) override { }
+  virtual void exitBoolGtOp(StrawberryParser::BoolGtOpContext * /*ctx*/) override { }
+
+  virtual void enterBoolGtEqOp(StrawberryParser::BoolGtEqOpContext * /*ctx*/) override { }
+  virtual void exitBoolGtEqOp(StrawberryParser::BoolGtEqOpContext * /*ctx*/) override { }
+
+  virtual void enterBoolLtOp(StrawberryParser::BoolLtOpContext * /*ctx*/) override { }
+  virtual void exitBoolLtOp(StrawberryParser::BoolLtOpContext * /*ctx*/) override { }
+
+  virtual void enterBoolLtEqOp(StrawberryParser::BoolLtEqOpContext * /*ctx*/) override { }
+  virtual void exitBoolLtEqOp(StrawberryParser::BoolLtEqOpContext * /*ctx*/) override { }
+
+  virtual void enterOrOp(StrawberryParser::OrOpContext * /*ctx*/) override { }
+  virtual void exitOrOp(StrawberryParser::OrOpContext * /*ctx*/) override { }
+
+  virtual void enterAndOp(StrawberryParser::AndOpContext * /*ctx*/) override { }
+  virtual void exitAndOp(StrawberryParser::AndOpContext * /*ctx*/) override { }
+
+  virtual void enterMatchSuff(StrawberryParser::MatchSuffContext * /*ctx*/) override { }
+  virtual void exitMatchSuff(StrawberryParser::MatchSuffContext * /*ctx*/) override { }
 
 
   virtual void enterEveryRule(antlr4::ParserRuleContext * /*ctx*/) override { }

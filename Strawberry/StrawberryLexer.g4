@@ -23,10 +23,12 @@ RegWord: '\\w' ;
 RegDigit: '\\d' ;
 RegSpace: '\\s' ;
 RegNewline: '\\n' ;
+RegFSlash: '\\/' ;
 RegReturnAll: 'return all' ;
 
 /* Util */
 Id: Word (Word | Digit | Uscore)*;
+DefId: '_' Id?;
 Number: Digit+ ('.' Digit+)?;
 
 Digit: [0-9];
@@ -43,32 +45,31 @@ Null: 'null' ;
 /* Special */
 DefOr: '\\\\' ;
 Sarrow: '->' ;
-Darrpw: '=>' ;
+Darrow: '=>' ;
 LRarrow: '>>' ;
 RLarrow: '<<' ;
 Dot2: '..' ;
 Dot3: '...' ;
 As: 'as' ;
 
-/* Symbols */
-Uscore: '_' ;
-AndSign: '&' ;
-Doll: '$' ;
-DollLit: '\\$' ;
-Hash: '#' ;
-At: '@' ;
-ExPoint: '!' ;
-Qmark: '?' ;
-Colon: ':' ;
-Semi: ';' ;
-Fslash: '\\' ;
-Bar: '|' ;
-Dquote: '"' ;
-Squote: '\'' ;
-Com: ',' ;
-Dot: '.' ;
-Squig: '~' ;
-Btick: '`' ;
+
+/* Assignments */
+PlusEq: '+=' ;
+MinEq: '-=' ;
+MultEq: '*=' ;
+DivEq: '/=' ;
+ModEq: '%=' ;
+PowEq: '^=' ;
+Increm: '++' ;
+Decrem: '--' ;
+
+/* Containers */
+Lbrack: '[' ;
+Rbrack: ']' ;
+Lbrace: '{' ;
+Rbrace: '}' ;
+Lpar: '(' ;
+Rpar: ')' ;
 
 /* Math */
 Pow: '^' ;
@@ -89,27 +90,25 @@ LtEq: '<=' ;
 And: '&&' ;
 Or: '||' ;
 
-/* Assignments */
-PlusEq: '+=' ;
-MinEq: '-=' ;
-MultEq: '*=' ;
-DivEq: '/=' ;
-ModEq: '%=' ;
-PowEq: '^=' ;
-Increm: '++' ;
-Decrem: '--' ;
-
-/* Containers */
-Lbrack: '[' ;
-Rbrack: ']' ;
-Lbrace: '{' ;
-Rbrace: '}' ;
-Lpar: '(' ;
-Rpar: ')' ;
-
-/* Letters */
-WL: 'w' ;
-WU: 'W' ;
+/* Symbols */
+Uscore: '_' ;
+AndSign: '&' ;
+Doll: '$' ;
+DollLit: '\\$' ;
+Hash: '#' ;
+At: '@' ;
+ExPoint: '!' ;
+Qmark: '?' ;
+Colon: ':' ;
+Semi: ';' ;
+Fslash: '\\' ;
+Bar: '|' ;
+Dquote: '"' ;
+Squote: '\'' ;
+Com: ',' ;
+Dot: '.' ;
+Squig: '~' ;
+Btick: '`' ;
 
 /* Ignore */
 Ignore: (Comment | WS) -> skip ;

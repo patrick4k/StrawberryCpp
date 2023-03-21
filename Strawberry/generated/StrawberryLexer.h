@@ -15,18 +15,19 @@ public:
   enum {
     Fn = 1, Decl = 2, If = 3, Unless = 4, Else = 5, While = 6, Until = 7, 
     For = 8, Return = 9, Break = 10, Next = 11, Last = 12, Once = 13, MatchArrow = 14, 
-    RegWord = 15, RegDigit = 16, RegSpace = 17, RegNewline = 18, RegReturnAll = 19, 
-    Id = 20, Number = 21, Digit = 22, Word = 23, Letter = 24, UcLetter = 25, 
-    LcLetter = 26, True = 27, False = 28, Null = 29, DefOr = 30, Sarrow = 31, 
-    Darrpw = 32, LRarrow = 33, RLarrow = 34, Dot2 = 35, Dot3 = 36, As = 37, 
-    Uscore = 38, AndSign = 39, Doll = 40, DollLit = 41, Hash = 42, At = 43, 
-    ExPoint = 44, Qmark = 45, Colon = 46, Semi = 47, Fslash = 48, Bar = 49, 
-    Dquote = 50, Squote = 51, Com = 52, Dot = 53, Squig = 54, Btick = 55, 
-    Pow = 56, Star = 57, Bslash = 58, Mod = 59, Plus = 60, Min = 61, Eq = 62, 
-    BoolEq = 63, BoolNeq = 64, Gt = 65, GtEq = 66, Lt = 67, LtEq = 68, And = 69, 
-    Or = 70, PlusEq = 71, MinEq = 72, MultEq = 73, DivEq = 74, ModEq = 75, 
-    PowEq = 76, Increm = 77, Decrem = 78, Lbrack = 79, Rbrack = 80, Lbrace = 81, 
-    Rbrace = 82, Lpar = 83, Rpar = 84, WL = 85, WU = 86, Ignore = 87, WS = 88
+    RegWord = 15, RegDigit = 16, RegSpace = 17, RegNewline = 18, RegFSlash = 19, 
+    RegReturnAll = 20, Id = 21, DefId = 22, Number = 23, Digit = 24, Word = 25, 
+    Letter = 26, UcLetter = 27, LcLetter = 28, True = 29, False = 30, Null = 31, 
+    DefOr = 32, Sarrow = 33, Darrow = 34, LRarrow = 35, RLarrow = 36, Dot2 = 37, 
+    Dot3 = 38, As = 39, PlusEq = 40, MinEq = 41, MultEq = 42, DivEq = 43, 
+    ModEq = 44, PowEq = 45, Increm = 46, Decrem = 47, Lbrack = 48, Rbrack = 49, 
+    Lbrace = 50, Rbrace = 51, Lpar = 52, Rpar = 53, Pow = 54, Star = 55, 
+    Bslash = 56, Mod = 57, Plus = 58, Min = 59, Eq = 60, BoolEq = 61, BoolNeq = 62, 
+    Gt = 63, GtEq = 64, Lt = 65, LtEq = 66, And = 67, Or = 68, Uscore = 69, 
+    AndSign = 70, Doll = 71, DollLit = 72, Hash = 73, At = 74, ExPoint = 75, 
+    Qmark = 76, Colon = 77, Semi = 78, Fslash = 79, Bar = 80, Dquote = 81, 
+    Squote = 82, Com = 83, Dot = 84, Squig = 85, Btick = 86, Ignore = 87, 
+    WS = 88
   };
 
   explicit StrawberryLexer(antlr4::CharStream *input);

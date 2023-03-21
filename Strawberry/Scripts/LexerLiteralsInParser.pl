@@ -30,9 +30,15 @@ while (<IN>) {
         next unless defined @{$_}[0];
         next unless defined @{$_}[1];
         my ($id, $lex) = @{$_};
-        if ($line =~ s/\Q$lex\E/$id/) {
-            print "$id\t$lex\n";
-            print $line."\n\n";
+        my $match = 1;
+        while ($match) {
+            if ($line =~ s/\Q$lex\E/ $id /) {
+                print "$id\t$lex\n";
+                print $line . "\n\n";
+            }
+            else {
+                $match = 0;
+            }
         }
     }
     print OUT $line;

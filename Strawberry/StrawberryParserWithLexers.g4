@@ -62,7 +62,6 @@ compoundStatement: compoundAction (loopKeywords (expression | '(' args ')'))* ;
 
 compoundAction
 : compoundAction conditionalKeywords expression ('else' compoundAction)? #ifCompound
-| compoundAction conditionalKeywords match ('else' compoundAction)? #ifRegexCompound
 | ifScope #ifScopeCompound
 | loopScope #loopScopeCompound
 | statement #statementCompound
@@ -75,12 +74,10 @@ ifStatement
 
 ifScope
 : conditionalKeywords expression scope ('else' (body | ifStatement))? #exprIfScope
-| conditionalKeywords match scope ('else' (body | ifStatement))? #matchIfScope
 ;
 
 ifBody
 : conditionalKeywords '(' expression ')' body ('else' (body | ifStatement))? #exprIfBody
-| conditionalKeywords '(' match ')' body ('else' (body | ifStatement))? #matchIfBody
 ;
 
 conditionalKeywords
@@ -117,9 +114,8 @@ argument
 /* ================================================================================ */
 // MATCH
 
-match
-: '~' ('{'matchOptions*'}')? '/' matchContent+ '/' #defaultmatch
-//| expression '~>' ('{'matchOptions*'}')? '/' matchContent* '/'  #exprmatch // TODO: remove left recursion
+matchRegex
+: '~' ('{' matchOptions* '}')? '/' matchContent+ '/'
 ;
 
 matchOptions
@@ -130,7 +126,7 @@ matchContent
 : matchContent '+' #onOrMore
 | matchContent '*' #zeroOrMore
 | matchContent '?' #zeroOrOne
-| '[' option=(matchContent+) ('|' option=(matchContent+))*']' #complexMatch
+| '[' matchContent ('|' matchContent)*']' #orMatch
 | '(' matchContent ')' #collectMatch
 | matchChars+ #chars
 ;
@@ -140,7 +136,7 @@ matchChars
 | '\\n' #newline
 | '\\\\' #bslash
 | '.' #wildCard
-//| ~'\\' #other
+| ~('('|')'|'['|']'|'|') #other
 ;
 
 /* ================================================================================ */
@@ -154,15 +150,19 @@ value
 expression
 : '(' expression ')' #parenExpr
 | assign #assignExpr
+| prefix expression #prefixExpr
+| highPrioritySuffix #defaultSuffixExpr
+| expression highPrioritySuffix #suffixExpr
 | expression op1 expression #opExpr
 | expression op2 expression #opExpr
 | expression op3 expression #opExpr
 | expression op4 expression #opExpr
-| prefix expression #prefixExpr
 | expression op5 expression #opExpr
 | expression op6 expression #opExpr
-| expression suffix #suffixExpr
+| lowPrioritySuffix #defaultSuffixExpr
+| expression lowPrioritySuffix #suffixExpr
 | identifyer #accessExpr
+| identifyer '(' args ')' #fnAccess
 | literal #litExpr
 | looseFnCall #looseFnCallExpr
 ;
@@ -197,9 +197,8 @@ assign
 identifyer
 : identifyer '.' Id #dotAccess
 | identifyer '[' expression ']' #arrAccesss
-| identifyer '(' args ')' #fnAccess
 | Id #idAccess
-| '_' #defaultAccess
+| DefId #defaultAccess
 ;
 
 looseFnCall // TODO: revise 'foo() bar a'
@@ -209,47 +208,50 @@ looseFnCall // TODO: revise 'foo() bar a'
 /* ================================================================================ */
 // OPERATORS
 
-op1
-: '^' #pow
-;
-
-op2
-: '*' #mult
-| '/' #div
-| '%' #mod
-;
-
-op3
-: '+' #plus
-| '-' #min
-;
-
-op4
-: DefOr #definedOr
-| '..' #rangeOp
-;
-
 prefix
 : '!' #negatePrefix
 | '\\' #refPrefix
 | '-' #negativePrefix
 ;
 
+highPrioritySuffix
+: '!' #excitedSuff // TODO: Find purpose for !
+;
+
+op1
+: '^' #powOp
+;
+
+op2
+: '*' #multOp
+| '/' #divOp
+| '%' #modOp
+;
+
+op3
+: '+' #plusOp
+| '-' #minOp
+;
+
+op4
+: '\\\\' #definedOrOp
+| '..' #rangeOp
+;
+
 op5
-: '==' #boolEq
-| '!=' #boolNeq
-| Gt #boolGt
-| GtEq #boolGtEq
-| Lt #boolLt
-| LtEq #boolLtEq
+: '==' #boolEqOp
+| '!=' #boolNeqOp
+| Gt #boolGtOp
+| GtEq #boolGtEqOp
+| Lt #boolLtOp
+| LtEq #boolLtEqOp
 ;
 
 op6
-: '||' #or
-| '&&' #and
+: '||' #orOp
+| '&&' #andOp
 ;
 
-suffix
-: '!' #excitedSuff // TODO: Find purpose for !
-| match #matchSuff
+lowPrioritySuffix
+: matchRegex #matchSuff
 ;

@@ -5,7 +5,6 @@
 
 
 #include "antlr4-runtime.h"
-#include "../Cpp/types/Value.h"
 #include "StrawberryParserVisitor.h"
 
 
@@ -18,392 +17,420 @@ namespace antlrcpptest {
 class  StrawberryParserBaseVisitor : public StrawberryParserVisitor {
 public:
 
-  virtual Value visitScript(StrawberryParser::ScriptContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitScript(StrawberryParser::ScriptContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitDeclaration(StrawberryParser::DeclarationContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitDeclaration(StrawberryParser::DeclarationContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitAction(StrawberryParser::ActionContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitAction(StrawberryParser::ActionContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitScope(StrawberryParser::ScopeContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitScope(StrawberryParser::ScopeContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitStatement(StrawberryParser::StatementContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitStatement(StrawberryParser::StatementContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitReturnStat(StrawberryParser::ReturnStatContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitReturnStat(StrawberryParser::ReturnStatContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitOnceStat(StrawberryParser::OnceStatContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitOnceStat(StrawberryParser::OnceStatContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitNextStat(StrawberryParser::NextStatContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitNextStat(StrawberryParser::NextStatContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitLastStat(StrawberryParser::LastStatContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitLastStat(StrawberryParser::LastStatContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitBreakStat(StrawberryParser::BreakStatContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitBreakStat(StrawberryParser::BreakStatContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitBody(StrawberryParser::BodyContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitBody(StrawberryParser::BodyContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitControlFlow(StrawberryParser::ControlFlowContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitControlFlow(StrawberryParser::ControlFlowContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitLoop(StrawberryParser::LoopContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitLoop(StrawberryParser::LoopContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitLoopScope(StrawberryParser::LoopScopeContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitLoopScope(StrawberryParser::LoopScopeContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitLoopBody(StrawberryParser::LoopBodyContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitLoopBody(StrawberryParser::LoopBodyContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitCompoundStatement(StrawberryParser::CompoundStatementContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitCompoundStatement(StrawberryParser::CompoundStatementContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitStatementCompound(StrawberryParser::StatementCompoundContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitStatementCompound(StrawberryParser::StatementCompoundContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitIfScopeCompound(StrawberryParser::IfScopeCompoundContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitIfScopeCompound(StrawberryParser::IfScopeCompoundContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitLoopScopeCompound(StrawberryParser::LoopScopeCompoundContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitLoopScopeCompound(StrawberryParser::LoopScopeCompoundContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitIfRegexCompound(StrawberryParser::IfRegexCompoundContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitIfCompound(StrawberryParser::IfCompoundContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitIfCompound(StrawberryParser::IfCompoundContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitIfStatement(StrawberryParser::IfStatementContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitIfStatement(StrawberryParser::IfStatementContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitExprIfScope(StrawberryParser::ExprIfScopeContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitExprIfScope(StrawberryParser::ExprIfScopeContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitExprIfBody(StrawberryParser::ExprIfBodyContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitPatternIfScope(StrawberryParser::PatternIfScopeContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitIfKeyword(StrawberryParser::IfKeywordContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitExprIfBody(StrawberryParser::ExprIfBodyContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitUnlessKeyword(StrawberryParser::UnlessKeywordContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitPatternIfBody(StrawberryParser::PatternIfBodyContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitForLoop(StrawberryParser::ForLoopContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitIfKeyword(StrawberryParser::IfKeywordContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitWhileLoop(StrawberryParser::WhileLoopContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitUnlessKeyword(StrawberryParser::UnlessKeywordContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitUntilLoop(StrawberryParser::UntilLoopContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitForLoop(StrawberryParser::ForLoopContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitFnDeclaration(StrawberryParser::FnDeclarationContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitWhileLoop(StrawberryParser::WhileLoopContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitLambda(StrawberryParser::LambdaContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitUntilLoop(StrawberryParser::UntilLoopContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitParams(StrawberryParser::ParamsContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitFnDeclaration(StrawberryParser::FnDeclarationContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitParamsExpand(StrawberryParser::ParamsExpandContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitLambda(StrawberryParser::LambdaContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitArgs(StrawberryParser::ArgsContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitParams(StrawberryParser::ParamsContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitArg(StrawberryParser::ArgContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitParamsExpand(StrawberryParser::ParamsExpandContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitArgExpand(StrawberryParser::ArgExpandContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitArgs(StrawberryParser::ArgsContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitLooseFnCallArg(StrawberryParser::LooseFnCallArgContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitArg(StrawberryParser::ArgContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitMatchRegex(StrawberryParser::MatchRegexContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitArgExpand(StrawberryParser::ArgExpandContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitMatchOptions(StrawberryParser::MatchOptionsContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitLooseFnCallArg(StrawberryParser::LooseFnCallArgContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitZeroOrMore(StrawberryParser::ZeroOrMoreContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitDefaultPattern(StrawberryParser::DefaultPatternContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitOrMatch(StrawberryParser::OrMatchContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitExprPattern(StrawberryParser::ExprPatternContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitCollectMatch(StrawberryParser::CollectMatchContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitWord(StrawberryParser::WordContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitZeroOrOne(StrawberryParser::ZeroOrOneContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitWildCard(StrawberryParser::WildCardContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitChars(StrawberryParser::CharsContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitOther(StrawberryParser::OtherContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitOnOrMore(StrawberryParser::OnOrMoreContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitValue(StrawberryParser::ValueContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitWord(StrawberryParser::WordContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitLooseFnCallExpr(StrawberryParser::LooseFnCallExprContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitNewline(StrawberryParser::NewlineContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitPrefixExpr(StrawberryParser::PrefixExprContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitBslash(StrawberryParser::BslashContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitOpExpr(StrawberryParser::OpExprContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitWildCard(StrawberryParser::WildCardContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitSuffixExpr(StrawberryParser::SuffixExprContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitOther(StrawberryParser::OtherContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitAssignExpr(StrawberryParser::AssignExprContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitValue(StrawberryParser::ValueContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitLitExpr(StrawberryParser::LitExprContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitLooseFnCallExpr(StrawberryParser::LooseFnCallExprContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitParenExpr(StrawberryParser::ParenExprContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitPrefixExpr(StrawberryParser::PrefixExprContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitAccessExpr(StrawberryParser::AccessExprContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitDefaultSuffixExpr(StrawberryParser::DefaultSuffixExprContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitDStringLit(StrawberryParser::DStringLitContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitOpExpr(StrawberryParser::OpExprContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitSStringLit(StrawberryParser::SStringLitContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitSuffixExpr(StrawberryParser::SuffixExprContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitArrayLit(StrawberryParser::ArrayLitContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitAssignExpr(StrawberryParser::AssignExprContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitNumLit(StrawberryParser::NumLitContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitFnAccess(StrawberryParser::FnAccessContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitIdentityString(StrawberryParser::IdentityStringContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitLitExpr(StrawberryParser::LitExprContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitDollarSignString(StrawberryParser::DollarSignStringContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitParenExpr(StrawberryParser::ParenExprContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitOtherString(StrawberryParser::OtherStringContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitAccessExpr(StrawberryParser::AccessExprContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitDeclareAssign(StrawberryParser::DeclareAssignContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitDStringLit(StrawberryParser::DStringLitContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitEqAssign(StrawberryParser::EqAssignContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitSStringLit(StrawberryParser::SStringLitContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitPowAssign(StrawberryParser::PowAssignContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitArrayLit(StrawberryParser::ArrayLitContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitMultAssign(StrawberryParser::MultAssignContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitNumLit(StrawberryParser::NumLitContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitDivAssign(StrawberryParser::DivAssignContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitIdentityString(StrawberryParser::IdentityStringContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitModAssign(StrawberryParser::ModAssignContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitDollarSignString(StrawberryParser::DollarSignStringContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitAddAssign(StrawberryParser::AddAssignContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitWhitespace(StrawberryParser::WhitespaceContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitMinAssign(StrawberryParser::MinAssignContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitOtherString(StrawberryParser::OtherStringContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitIncrem(StrawberryParser::IncremContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitDeclareAssign(StrawberryParser::DeclareAssignContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitDecrem(StrawberryParser::DecremContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitEqAssign(StrawberryParser::EqAssignContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitDotAccess(StrawberryParser::DotAccessContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitPowAssign(StrawberryParser::PowAssignContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitArrAccesss(StrawberryParser::ArrAccesssContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitMultAssign(StrawberryParser::MultAssignContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitIdAccess(StrawberryParser::IdAccessContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitDivAssign(StrawberryParser::DivAssignContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitDefaultAccess(StrawberryParser::DefaultAccessContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitModAssign(StrawberryParser::ModAssignContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitFnAccess(StrawberryParser::FnAccessContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitAddAssign(StrawberryParser::AddAssignContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitLooseFnCall(StrawberryParser::LooseFnCallContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitMinAssign(StrawberryParser::MinAssignContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitPow(StrawberryParser::PowContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitIncrem(StrawberryParser::IncremContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitMult(StrawberryParser::MultContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitDecrem(StrawberryParser::DecremContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitDiv(StrawberryParser::DivContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitDotAccess(StrawberryParser::DotAccessContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitMod(StrawberryParser::ModContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitArrAccesss(StrawberryParser::ArrAccesssContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitPlus(StrawberryParser::PlusContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitIdAccess(StrawberryParser::IdAccessContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitMin(StrawberryParser::MinContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitDefaultAccess(StrawberryParser::DefaultAccessContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitDefinedOr(StrawberryParser::DefinedOrContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitLooseFnCall(StrawberryParser::LooseFnCallContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitRangeOp(StrawberryParser::RangeOpContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitNegatePrefix(StrawberryParser::NegatePrefixContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitNegatePrefix(StrawberryParser::NegatePrefixContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitRefPrefix(StrawberryParser::RefPrefixContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitRefPrefix(StrawberryParser::RefPrefixContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitNegativePrefix(StrawberryParser::NegativePrefixContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitNegativePrefix(StrawberryParser::NegativePrefixContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitExcitedSuff(StrawberryParser::ExcitedSuffContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitBoolEq(StrawberryParser::BoolEqContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitPowOp(StrawberryParser::PowOpContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitBoolNeq(StrawberryParser::BoolNeqContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitMultOp(StrawberryParser::MultOpContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitBoolGt(StrawberryParser::BoolGtContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitDivOp(StrawberryParser::DivOpContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitBoolGtEq(StrawberryParser::BoolGtEqContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitModOp(StrawberryParser::ModOpContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitBoolLt(StrawberryParser::BoolLtContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitPlusOp(StrawberryParser::PlusOpContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitBoolLtEq(StrawberryParser::BoolLtEqContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitMinOp(StrawberryParser::MinOpContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitOr(StrawberryParser::OrContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitDefinedOrOp(StrawberryParser::DefinedOrOpContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitAnd(StrawberryParser::AndContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitRangeOp(StrawberryParser::RangeOpContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitOrDefault(StrawberryParser::OrDefaultContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitBoolEqOp(StrawberryParser::BoolEqOpContext *ctx) override {
+    return visitChildren(ctx);
   }
 
-  virtual Value visitExcitedSuff(StrawberryParser::ExcitedSuffContext *ctx) override {
-    return std::any_cast<Value>(visitChildren(ctx));
+  virtual std::any visitBoolNeqOp(StrawberryParser::BoolNeqOpContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual std::any visitBoolGtOp(StrawberryParser::BoolGtOpContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual std::any visitBoolGtEqOp(StrawberryParser::BoolGtEqOpContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual std::any visitBoolLtOp(StrawberryParser::BoolLtOpContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual std::any visitBoolLtEqOp(StrawberryParser::BoolLtEqOpContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual std::any visitOrOp(StrawberryParser::OrOpContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual std::any visitAndOp(StrawberryParser::AndOpContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual std::any visitMatchSuff(StrawberryParser::MatchSuffContext *ctx) override {
+    return visitChildren(ctx);
   }
 
 

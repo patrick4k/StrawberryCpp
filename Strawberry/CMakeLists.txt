@@ -30,10 +30,13 @@ add_custom_command(OUTPUT ${strawberry-GENERATED_SRC}
    "${Java_JAVA_EXECUTABLE}" -jar ${ANTLR_JAR_LOCATION} -Werror -Dlanguage=Cpp -listener -visitor -o ${PROJECT_SOURCE_DIR}/Strawberry/generated/ -package antlrcpptest ${PROJECT_SOURCE_DIR}/Strawberry/StrawberryLexer.g4 ${PROJECT_SOURCE_DIR}/Strawberry/StrawberryParser.g4
    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
    DEPENDS ${PROJECT_SOURCE_DIR}/Strawberry/StrawberryLexer.g4 ${PROJECT_SOURCE_DIR}/Strawberry/StrawberryParser.g4
+
+    #[[
     COMMAND
     perl ${PROJECT_SOURCE_DIR}/Strawberry/Scripts/SetReturnType.pl ${PROJECT_SOURCE_DIR}/Strawberry/generated/StrawberryParserVisitor.h ${STDANYALT}
     COMMAND
     perl ${PROJECT_SOURCE_DIR}/Strawberry/Scripts/SetReturnType.pl ${PROJECT_SOURCE_DIR}/Strawberry/generated/StrawberryParserBaseVisitor.h ${STDANYALT}
+    ]]
         )
 
 include_directories(

@@ -73,9 +73,6 @@ public:
   virtual void enterLoopScopeCompound(StrawberryParser::LoopScopeCompoundContext *ctx) = 0;
   virtual void exitLoopScopeCompound(StrawberryParser::LoopScopeCompoundContext *ctx) = 0;
 
-  virtual void enterIfRegexCompound(StrawberryParser::IfRegexCompoundContext *ctx) = 0;
-  virtual void exitIfRegexCompound(StrawberryParser::IfRegexCompoundContext *ctx) = 0;
-
   virtual void enterIfCompound(StrawberryParser::IfCompoundContext *ctx) = 0;
   virtual void exitIfCompound(StrawberryParser::IfCompoundContext *ctx) = 0;
 
@@ -85,14 +82,8 @@ public:
   virtual void enterExprIfScope(StrawberryParser::ExprIfScopeContext *ctx) = 0;
   virtual void exitExprIfScope(StrawberryParser::ExprIfScopeContext *ctx) = 0;
 
-  virtual void enterPatternIfScope(StrawberryParser::PatternIfScopeContext *ctx) = 0;
-  virtual void exitPatternIfScope(StrawberryParser::PatternIfScopeContext *ctx) = 0;
-
   virtual void enterExprIfBody(StrawberryParser::ExprIfBodyContext *ctx) = 0;
   virtual void exitExprIfBody(StrawberryParser::ExprIfBodyContext *ctx) = 0;
-
-  virtual void enterPatternIfBody(StrawberryParser::PatternIfBodyContext *ctx) = 0;
-  virtual void exitPatternIfBody(StrawberryParser::PatternIfBodyContext *ctx) = 0;
 
   virtual void enterIfKeyword(StrawberryParser::IfKeywordContext *ctx) = 0;
   virtual void exitIfKeyword(StrawberryParser::IfKeywordContext *ctx) = 0;
@@ -133,14 +124,38 @@ public:
   virtual void enterLooseFnCallArg(StrawberryParser::LooseFnCallArgContext *ctx) = 0;
   virtual void exitLooseFnCallArg(StrawberryParser::LooseFnCallArgContext *ctx) = 0;
 
-  virtual void enterDefaultPattern(StrawberryParser::DefaultPatternContext *ctx) = 0;
-  virtual void exitDefaultPattern(StrawberryParser::DefaultPatternContext *ctx) = 0;
+  virtual void enterMatchRegex(StrawberryParser::MatchRegexContext *ctx) = 0;
+  virtual void exitMatchRegex(StrawberryParser::MatchRegexContext *ctx) = 0;
 
-  virtual void enterExprPattern(StrawberryParser::ExprPatternContext *ctx) = 0;
-  virtual void exitExprPattern(StrawberryParser::ExprPatternContext *ctx) = 0;
+  virtual void enterMatchOptions(StrawberryParser::MatchOptionsContext *ctx) = 0;
+  virtual void exitMatchOptions(StrawberryParser::MatchOptionsContext *ctx) = 0;
+
+  virtual void enterZeroOrMore(StrawberryParser::ZeroOrMoreContext *ctx) = 0;
+  virtual void exitZeroOrMore(StrawberryParser::ZeroOrMoreContext *ctx) = 0;
+
+  virtual void enterOrMatch(StrawberryParser::OrMatchContext *ctx) = 0;
+  virtual void exitOrMatch(StrawberryParser::OrMatchContext *ctx) = 0;
+
+  virtual void enterCollectMatch(StrawberryParser::CollectMatchContext *ctx) = 0;
+  virtual void exitCollectMatch(StrawberryParser::CollectMatchContext *ctx) = 0;
+
+  virtual void enterZeroOrOne(StrawberryParser::ZeroOrOneContext *ctx) = 0;
+  virtual void exitZeroOrOne(StrawberryParser::ZeroOrOneContext *ctx) = 0;
+
+  virtual void enterChars(StrawberryParser::CharsContext *ctx) = 0;
+  virtual void exitChars(StrawberryParser::CharsContext *ctx) = 0;
+
+  virtual void enterOnOrMore(StrawberryParser::OnOrMoreContext *ctx) = 0;
+  virtual void exitOnOrMore(StrawberryParser::OnOrMoreContext *ctx) = 0;
 
   virtual void enterWord(StrawberryParser::WordContext *ctx) = 0;
   virtual void exitWord(StrawberryParser::WordContext *ctx) = 0;
+
+  virtual void enterNewline(StrawberryParser::NewlineContext *ctx) = 0;
+  virtual void exitNewline(StrawberryParser::NewlineContext *ctx) = 0;
+
+  virtual void enterBslash(StrawberryParser::BslashContext *ctx) = 0;
+  virtual void exitBslash(StrawberryParser::BslashContext *ctx) = 0;
 
   virtual void enterWildCard(StrawberryParser::WildCardContext *ctx) = 0;
   virtual void exitWildCard(StrawberryParser::WildCardContext *ctx) = 0;
@@ -157,6 +172,9 @@ public:
   virtual void enterPrefixExpr(StrawberryParser::PrefixExprContext *ctx) = 0;
   virtual void exitPrefixExpr(StrawberryParser::PrefixExprContext *ctx) = 0;
 
+  virtual void enterDefaultSuffixExpr(StrawberryParser::DefaultSuffixExprContext *ctx) = 0;
+  virtual void exitDefaultSuffixExpr(StrawberryParser::DefaultSuffixExprContext *ctx) = 0;
+
   virtual void enterOpExpr(StrawberryParser::OpExprContext *ctx) = 0;
   virtual void exitOpExpr(StrawberryParser::OpExprContext *ctx) = 0;
 
@@ -165,6 +183,9 @@ public:
 
   virtual void enterAssignExpr(StrawberryParser::AssignExprContext *ctx) = 0;
   virtual void exitAssignExpr(StrawberryParser::AssignExprContext *ctx) = 0;
+
+  virtual void enterFnAccess(StrawberryParser::FnAccessContext *ctx) = 0;
+  virtual void exitFnAccess(StrawberryParser::FnAccessContext *ctx) = 0;
 
   virtual void enterLitExpr(StrawberryParser::LitExprContext *ctx) = 0;
   virtual void exitLitExpr(StrawberryParser::LitExprContext *ctx) = 0;
@@ -192,6 +213,9 @@ public:
 
   virtual void enterDollarSignString(StrawberryParser::DollarSignStringContext *ctx) = 0;
   virtual void exitDollarSignString(StrawberryParser::DollarSignStringContext *ctx) = 0;
+
+  virtual void enterWhitespace(StrawberryParser::WhitespaceContext *ctx) = 0;
+  virtual void exitWhitespace(StrawberryParser::WhitespaceContext *ctx) = 0;
 
   virtual void enterOtherString(StrawberryParser::OtherStringContext *ctx) = 0;
   virtual void exitOtherString(StrawberryParser::OtherStringContext *ctx) = 0;
@@ -238,35 +262,8 @@ public:
   virtual void enterDefaultAccess(StrawberryParser::DefaultAccessContext *ctx) = 0;
   virtual void exitDefaultAccess(StrawberryParser::DefaultAccessContext *ctx) = 0;
 
-  virtual void enterFnAccess(StrawberryParser::FnAccessContext *ctx) = 0;
-  virtual void exitFnAccess(StrawberryParser::FnAccessContext *ctx) = 0;
-
   virtual void enterLooseFnCall(StrawberryParser::LooseFnCallContext *ctx) = 0;
   virtual void exitLooseFnCall(StrawberryParser::LooseFnCallContext *ctx) = 0;
-
-  virtual void enterPow(StrawberryParser::PowContext *ctx) = 0;
-  virtual void exitPow(StrawberryParser::PowContext *ctx) = 0;
-
-  virtual void enterMult(StrawberryParser::MultContext *ctx) = 0;
-  virtual void exitMult(StrawberryParser::MultContext *ctx) = 0;
-
-  virtual void enterDiv(StrawberryParser::DivContext *ctx) = 0;
-  virtual void exitDiv(StrawberryParser::DivContext *ctx) = 0;
-
-  virtual void enterMod(StrawberryParser::ModContext *ctx) = 0;
-  virtual void exitMod(StrawberryParser::ModContext *ctx) = 0;
-
-  virtual void enterPlus(StrawberryParser::PlusContext *ctx) = 0;
-  virtual void exitPlus(StrawberryParser::PlusContext *ctx) = 0;
-
-  virtual void enterMin(StrawberryParser::MinContext *ctx) = 0;
-  virtual void exitMin(StrawberryParser::MinContext *ctx) = 0;
-
-  virtual void enterDefinedOr(StrawberryParser::DefinedOrContext *ctx) = 0;
-  virtual void exitDefinedOr(StrawberryParser::DefinedOrContext *ctx) = 0;
-
-  virtual void enterRangeOp(StrawberryParser::RangeOpContext *ctx) = 0;
-  virtual void exitRangeOp(StrawberryParser::RangeOpContext *ctx) = 0;
 
   virtual void enterNegatePrefix(StrawberryParser::NegatePrefixContext *ctx) = 0;
   virtual void exitNegatePrefix(StrawberryParser::NegatePrefixContext *ctx) = 0;
@@ -277,35 +274,59 @@ public:
   virtual void enterNegativePrefix(StrawberryParser::NegativePrefixContext *ctx) = 0;
   virtual void exitNegativePrefix(StrawberryParser::NegativePrefixContext *ctx) = 0;
 
-  virtual void enterBoolEq(StrawberryParser::BoolEqContext *ctx) = 0;
-  virtual void exitBoolEq(StrawberryParser::BoolEqContext *ctx) = 0;
-
-  virtual void enterBoolNeq(StrawberryParser::BoolNeqContext *ctx) = 0;
-  virtual void exitBoolNeq(StrawberryParser::BoolNeqContext *ctx) = 0;
-
-  virtual void enterBoolGt(StrawberryParser::BoolGtContext *ctx) = 0;
-  virtual void exitBoolGt(StrawberryParser::BoolGtContext *ctx) = 0;
-
-  virtual void enterBoolGtEq(StrawberryParser::BoolGtEqContext *ctx) = 0;
-  virtual void exitBoolGtEq(StrawberryParser::BoolGtEqContext *ctx) = 0;
-
-  virtual void enterBoolLt(StrawberryParser::BoolLtContext *ctx) = 0;
-  virtual void exitBoolLt(StrawberryParser::BoolLtContext *ctx) = 0;
-
-  virtual void enterBoolLtEq(StrawberryParser::BoolLtEqContext *ctx) = 0;
-  virtual void exitBoolLtEq(StrawberryParser::BoolLtEqContext *ctx) = 0;
-
-  virtual void enterOr(StrawberryParser::OrContext *ctx) = 0;
-  virtual void exitOr(StrawberryParser::OrContext *ctx) = 0;
-
-  virtual void enterAnd(StrawberryParser::AndContext *ctx) = 0;
-  virtual void exitAnd(StrawberryParser::AndContext *ctx) = 0;
-
-  virtual void enterOrDefault(StrawberryParser::OrDefaultContext *ctx) = 0;
-  virtual void exitOrDefault(StrawberryParser::OrDefaultContext *ctx) = 0;
-
   virtual void enterExcitedSuff(StrawberryParser::ExcitedSuffContext *ctx) = 0;
   virtual void exitExcitedSuff(StrawberryParser::ExcitedSuffContext *ctx) = 0;
+
+  virtual void enterPowOp(StrawberryParser::PowOpContext *ctx) = 0;
+  virtual void exitPowOp(StrawberryParser::PowOpContext *ctx) = 0;
+
+  virtual void enterMultOp(StrawberryParser::MultOpContext *ctx) = 0;
+  virtual void exitMultOp(StrawberryParser::MultOpContext *ctx) = 0;
+
+  virtual void enterDivOp(StrawberryParser::DivOpContext *ctx) = 0;
+  virtual void exitDivOp(StrawberryParser::DivOpContext *ctx) = 0;
+
+  virtual void enterModOp(StrawberryParser::ModOpContext *ctx) = 0;
+  virtual void exitModOp(StrawberryParser::ModOpContext *ctx) = 0;
+
+  virtual void enterPlusOp(StrawberryParser::PlusOpContext *ctx) = 0;
+  virtual void exitPlusOp(StrawberryParser::PlusOpContext *ctx) = 0;
+
+  virtual void enterMinOp(StrawberryParser::MinOpContext *ctx) = 0;
+  virtual void exitMinOp(StrawberryParser::MinOpContext *ctx) = 0;
+
+  virtual void enterDefinedOrOp(StrawberryParser::DefinedOrOpContext *ctx) = 0;
+  virtual void exitDefinedOrOp(StrawberryParser::DefinedOrOpContext *ctx) = 0;
+
+  virtual void enterRangeOp(StrawberryParser::RangeOpContext *ctx) = 0;
+  virtual void exitRangeOp(StrawberryParser::RangeOpContext *ctx) = 0;
+
+  virtual void enterBoolEqOp(StrawberryParser::BoolEqOpContext *ctx) = 0;
+  virtual void exitBoolEqOp(StrawberryParser::BoolEqOpContext *ctx) = 0;
+
+  virtual void enterBoolNeqOp(StrawberryParser::BoolNeqOpContext *ctx) = 0;
+  virtual void exitBoolNeqOp(StrawberryParser::BoolNeqOpContext *ctx) = 0;
+
+  virtual void enterBoolGtOp(StrawberryParser::BoolGtOpContext *ctx) = 0;
+  virtual void exitBoolGtOp(StrawberryParser::BoolGtOpContext *ctx) = 0;
+
+  virtual void enterBoolGtEqOp(StrawberryParser::BoolGtEqOpContext *ctx) = 0;
+  virtual void exitBoolGtEqOp(StrawberryParser::BoolGtEqOpContext *ctx) = 0;
+
+  virtual void enterBoolLtOp(StrawberryParser::BoolLtOpContext *ctx) = 0;
+  virtual void exitBoolLtOp(StrawberryParser::BoolLtOpContext *ctx) = 0;
+
+  virtual void enterBoolLtEqOp(StrawberryParser::BoolLtEqOpContext *ctx) = 0;
+  virtual void exitBoolLtEqOp(StrawberryParser::BoolLtEqOpContext *ctx) = 0;
+
+  virtual void enterOrOp(StrawberryParser::OrOpContext *ctx) = 0;
+  virtual void exitOrOp(StrawberryParser::OrOpContext *ctx) = 0;
+
+  virtual void enterAndOp(StrawberryParser::AndOpContext *ctx) = 0;
+  virtual void exitAndOp(StrawberryParser::AndOpContext *ctx) = 0;
+
+  virtual void enterMatchSuff(StrawberryParser::MatchSuffContext *ctx) = 0;
+  virtual void exitMatchSuff(StrawberryParser::MatchSuffContext *ctx) = 0;
 
 
 };
