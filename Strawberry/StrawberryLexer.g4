@@ -29,7 +29,9 @@ RegReturnAll: 'return all' ;
 /* Util */
 Id: Word (Word | Digit | Uscore)*;
 DefId: '_' Id?;
-Number: Digit+ ('.' Digit+)?;
+Number: Digit+ ('.' Digit+)? | '.' Digit+ ;
+String: '"' .*? '"' ;
+StringLit: '\'' .*? '\'' ;
 
 Digit: [0-9];
 Word: (Letter)+;
@@ -111,8 +113,9 @@ Squig: '~' ;
 Btick: '`' ;
 
 /* Ignore */
-Ignore: (Comment | WS) -> skip ;
-WS: [ \r\n\t]+ ;
+Ignore: (Comment | WS | RETURN) -> skip ;
+WS: [ \t]+ ;
+RETURN: [\r\n]+ ;
 fragment Comment
 :'//' ~('\r' | '\n')*
 |'/*' .*? '*/'

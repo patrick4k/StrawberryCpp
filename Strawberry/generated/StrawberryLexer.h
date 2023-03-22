@@ -16,18 +16,18 @@ public:
     Fn = 1, Decl = 2, If = 3, Unless = 4, Else = 5, While = 6, Until = 7, 
     For = 8, Return = 9, Break = 10, Next = 11, Last = 12, Once = 13, MatchArrow = 14, 
     RegWord = 15, RegDigit = 16, RegSpace = 17, RegNewline = 18, RegFSlash = 19, 
-    RegReturnAll = 20, Id = 21, DefId = 22, Number = 23, Digit = 24, Word = 25, 
-    Letter = 26, UcLetter = 27, LcLetter = 28, True = 29, False = 30, Null = 31, 
-    DefOr = 32, Sarrow = 33, Darrow = 34, LRarrow = 35, RLarrow = 36, Dot2 = 37, 
-    Dot3 = 38, As = 39, PlusEq = 40, MinEq = 41, MultEq = 42, DivEq = 43, 
-    ModEq = 44, PowEq = 45, Increm = 46, Decrem = 47, Lbrack = 48, Rbrack = 49, 
-    Lbrace = 50, Rbrace = 51, Lpar = 52, Rpar = 53, Pow = 54, Star = 55, 
-    Bslash = 56, Mod = 57, Plus = 58, Min = 59, Eq = 60, BoolEq = 61, BoolNeq = 62, 
-    Gt = 63, GtEq = 64, Lt = 65, LtEq = 66, And = 67, Or = 68, Uscore = 69, 
-    AndSign = 70, Doll = 71, DollLit = 72, Hash = 73, At = 74, ExPoint = 75, 
-    Qmark = 76, Colon = 77, Semi = 78, Fslash = 79, Bar = 80, Dquote = 81, 
-    Squote = 82, Com = 83, Dot = 84, Squig = 85, Btick = 86, Ignore = 87, 
-    WS = 88
+    RegReturnAll = 20, Id = 21, DefId = 22, Number = 23, String = 24, StringLit = 25, 
+    Digit = 26, Word = 27, Letter = 28, UcLetter = 29, LcLetter = 30, True = 31, 
+    False = 32, Null = 33, DefOr = 34, Sarrow = 35, Darrow = 36, LRarrow = 37, 
+    RLarrow = 38, Dot2 = 39, Dot3 = 40, As = 41, PlusEq = 42, MinEq = 43, 
+    MultEq = 44, DivEq = 45, ModEq = 46, PowEq = 47, Increm = 48, Decrem = 49, 
+    Lbrack = 50, Rbrack = 51, Lbrace = 52, Rbrace = 53, Lpar = 54, Rpar = 55, 
+    Pow = 56, Star = 57, Bslash = 58, Mod = 59, Plus = 60, Min = 61, Eq = 62, 
+    BoolEq = 63, BoolNeq = 64, Gt = 65, GtEq = 66, Lt = 67, LtEq = 68, And = 69, 
+    Or = 70, Uscore = 71, AndSign = 72, Doll = 73, DollLit = 74, Hash = 75, 
+    At = 76, ExPoint = 77, Qmark = 78, Colon = 79, Semi = 80, Fslash = 81, 
+    Bar = 82, Dquote = 83, Squote = 84, Com = 85, Dot = 86, Squig = 87, 
+    Btick = 88, Ignore = 89, WS = 90, RETURN = 91
   };
 
   explicit StrawberryLexer(antlr4::CharStream *input);

@@ -148,7 +148,8 @@ value
 ;
 
 expression
-: '(' expression ')' #parenExpr
+: literal #litExpr
+| '(' expression ')' #parenExpr
 | assign #assignExpr
 | prefix expression #prefixExpr
 | highPrioritySuffix #defaultSuffixExpr
@@ -163,23 +164,23 @@ expression
 | expression lowPrioritySuffix #suffixExpr
 | identifyer #accessExpr
 | identifyer '(' args ')' #fnAccess
-| literal #litExpr
 | looseFnCall #looseFnCallExpr
 ;
 
 literal
-: Dquote stringContent* Dquote #dStringLit
-| Squote .*? Squote #sStringLit
+: keywordLiteral #keywordLit // TODO: figure out why keywords arent matching
+| String #dStringLit // TODO: add escape characters
+| StringLit #sStringLit
 | '[' args ']' #arrayLit
 | Number #numLit
 ;
 
-stringContent // TODO: Add escape characters
-: '$' identifyer #identityString
-| '\\$' #dollarSignString
-| WS #whitespace // TODO: whitespace not working
-| ~'"' #otherString
+keywordLiteral
+: 'true' #trueLit
+| 'false' #falseLit
+| 'null' #nullLit
 ;
+
 
 assign
 : 'let' Id '=' value #declareAssign
@@ -201,8 +202,8 @@ identifyer
 | DefId #defaultAccess
 ;
 
-looseFnCall // TODO: revise 'foo() bar a'
-: Id argument (',' argument)*
+looseFnCall
+: identifyer argument (',' argument)*
 ;
 
 /* ================================================================================ */
@@ -249,7 +250,9 @@ op5
 
 op6
 : '||' #orOp
+| '|' #bitOrOp
 | '&&' #andOp
+| '&' #bitAndOp
 ;
 
 lowPrioritySuffix
