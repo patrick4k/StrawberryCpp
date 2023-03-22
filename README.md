@@ -1,6 +1,9 @@
 # Strawberry Interpreter
 **Author**: _Patrick Kennedy_
 
+# NOTE: DOCUMENTATION IS WORK IN PROGRESS
+# LIMITED FUNCTIONALITY IS EXPLAINED AS OF NOW
+
 Strawberry is a general purpose scripting language with Perl like inspirations.
 Strawberry is written in C++ using ANTLR4 parsing. Grammar definitions are in 
 Strawberry/StrawberryLexer.g4 and Strawberry/StrawberryParser.g4.
