@@ -72,7 +72,7 @@ unless x == 7 {
 /*      Compound statements execute from right to left and are designed for
         complecated but readable oneliners */
         
-print myArr[_] if > len(myArr) for 0..10;
+print myArr[_] if _ > len(myArr) for 0..10;
 
 // TODO: Explain default '_' prior to use
 
