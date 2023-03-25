@@ -1,5 +1,5 @@
 
-// Generated from /Users/patrickkennedy/Desktop/antlr4/StrawberryCpp/Strawberry/StrawberryParser.g4 by ANTLR 4.12.0
+// Generated from C:/Users/Patrick/Documents/Code/StrawberryParent/Strawberry/StrawberryParser.g4 by ANTLR 4.12.0
 
 
 #include "StrawberryParserBaseVisitor.h"
