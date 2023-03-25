@@ -16,6 +16,12 @@ int main(const int argc, const char* argv[]) {
         std::cout << "\t" << i << ": " << argv[i] << std::endl;
     std::cout << std::endl;
 
+    if (argv[1] == NULL)
+    {
+        argv[1] = "C:\\Users\\Patrick\\Documents\\Code\\StrawberryParent\\Strawberry\\test.sb";
+        std::cout << "Replacing argv[1] with: " << argv[1] << std::endl << std::endl;
+    }
+
     /* Read File and Create Token Stream */
     auto input = ANTLRFileStream();
     input.loadFromFile(argv[1]);
