@@ -25,9 +25,10 @@ action
 scope:  Lbrace  action*  Rbrace  ;
 
 statement
-: value
+: keywordStatement
+| assign
+| expression
 | scope
-| keywordStatement
 ;
 
 keywordStatement
@@ -96,7 +97,7 @@ loopKeywords
 
 fnDeclaration:  Fn  Id  Lpar  parameters  Rpar  scope ;
 
-lambda:  Lpar  parameters  Rpar   Darrow  statement ;
+lambda:  Lpar  parameters  Rpar   Sarrow  statement ;
 
 parameters
 : ((Id  Com )* Id)? #params
@@ -148,8 +149,9 @@ value
 ;
 
 expression
-:  Lpar  expression  Rpar  #parenExpr
-| assign #assignExpr
+: literal #litExpr
+|  Lpar  expression  Rpar  #parenExpr
+|  Lpar  assign  Rpar  #assignExpr
 | prefix expression #prefixExpr
 | highPrioritySuffix #defaultSuffixExpr
 | expression highPrioritySuffix #suffixExpr
@@ -163,27 +165,27 @@ expression
 | expression lowPrioritySuffix #suffixExpr
 | identifyer #accessExpr
 | identifyer  Lpar  args  Rpar  #fnAccess
-| literal #litExpr
 | looseFnCall #looseFnCallExpr
 ;
 
 literal
-: Dquote stringContent* Dquote #dStringLit
-| Squote .*? Squote #sStringLit
+: keywordLiteral #keywordLit // TODO: figure out why keywords arent matching
+| String #dStringLit // TODO: add escape characters
+| StringLit #sStringLit
 |  Lbrack  args  Rbrack  #arrayLit
 | Number #numLit
 ;
 
-stringContent // TODO: Add escape characters
-:  Doll  identifyer #identityString
-|  DollLit  #dollarSignString
-| WS #whitespace // TODO: whitespace not working
-| ~ Dquote  #otherString
+keywordLiteral
+:  True  #trueLit
+|  False  #falseLit
+|  Null  #nullLit
 ;
 
 assign
-:  Decl  Id  Eq  value #declareAssign
-| identifyer?  Eq  value #eqAssign
+:  Decl  varDeclare ( Com  varDeclare)* #declareAssign
+| (identifyer  Eq )+ value #eqAssign
+|  Eq  value #defaultEqAssign
 | identifyer?  PowEq  expression #powAssign
 | identifyer?  MultEq  expression #multAssign
 | identifyer?  DivEq  expression #divAssign
@@ -194,6 +196,11 @@ assign
 | identifyer?  Decrem  #decrem
 ;
 
+varDeclare
+: Id
+| Id  Eq  value
+;
+
 identifyer
 : identifyer  Dot  Id #dotAccess
 | identifyer  Lbrack  expression  Rbrack  #arrAccesss
@@ -201,8 +208,8 @@ identifyer
 | DefId #defaultAccess
 ;
 
-looseFnCall // TODO: revise 'foo() bar a'
-: Id argument ( Com  argument)*
+looseFnCall
+: identifyer argument ( Com  argument)*
 ;
 
 /* ================================================================================ */
@@ -249,7 +256,9 @@ op5
 
 op6
 :  Or  #orOp
+|  Bar  #bitOrOp
 |  And  #andOp
+|  AndSign  #bitAndOp
 ;
 
 lowPrioritySuffix

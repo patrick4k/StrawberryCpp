@@ -25,9 +25,10 @@ action
 scope: '{' action* '}' ;
 
 statement
-: value
+: keywordStatement
+| assign
+| expression
 | scope
-| keywordStatement
 ;
 
 keywordStatement
@@ -96,7 +97,7 @@ loopKeywords
 
 fnDeclaration: 'fn' Id '(' parameters ')' scope ;
 
-lambda: '(' parameters ')' '=>' statement ;
+lambda: '(' parameters ')' '->' statement ;
 
 parameters
 : ((Id ',')* Id)? #params
@@ -150,7 +151,7 @@ value
 expression
 : literal #litExpr
 | '(' expression ')' #parenExpr
-| assign #assignExpr
+| '(' assign ')' #assignExpr
 | prefix expression #prefixExpr
 | highPrioritySuffix #defaultSuffixExpr
 | expression highPrioritySuffix #suffixExpr
@@ -181,10 +182,10 @@ keywordLiteral
 | 'null' #nullLit
 ;
 
-
 assign
-: 'let' Id '=' value #declareAssign
-| identifyer? '=' value #eqAssign
+: 'let' varDeclare (',' varDeclare)* #declareAssign
+| (identifyer '=')+ value #eqAssign
+| '=' value #defaultEqAssign
 | identifyer? '^=' expression #powAssign
 | identifyer? '*=' expression #multAssign
 | identifyer? '/=' expression #divAssign
@@ -193,6 +194,11 @@ assign
 | identifyer? '-=' expression #minAssign
 | identifyer? '++' #increm
 | identifyer? '--' #decrem
+;
+
+varDeclare
+: Id
+| Id '=' value
 ;
 
 identifyer

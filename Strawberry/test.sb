@@ -1,4 +1,1 @@
-
-fn abc(x, y, z...) {
-    {once let sum = 0; sum += x*y - z;} for z;
-}
+1 + 2.5 ;
