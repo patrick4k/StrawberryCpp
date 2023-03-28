@@ -9,14 +9,15 @@
 
 class Value {
 public:
-    Value();
+    virtual bool isNull() const;
 
-    const std::string &getText() const;
+    virtual bool asBool() const;
 
-    void setText(const std::string &text);
+    virtual double asDouble() const;
+
+    virtual std::string asString() const;
 
 private:
-    std::string text;
 
 };
 

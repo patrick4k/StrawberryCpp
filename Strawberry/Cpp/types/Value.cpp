@@ -4,14 +4,18 @@
 
 #include "Value.h"
 
-Value::Value() {
-    setText("Null");
+bool Value::isNull() const {
+    return false;
 }
 
-const std::string &Value::getText() const {
-    return text;
+bool Value::asBool() const {
+    return false;
 }
 
-void Value::setText(const std::string &text) {
-    Value::text = text;
+double Value::asDouble() const {
+    return 0;
+}
+
+std::string Value::asString() const {
+    return "null";
 }
