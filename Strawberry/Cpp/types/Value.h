@@ -18,7 +18,12 @@ public:
     virtual std::string asString() const;
 
 private:
+    virtual std::shared_ptr<Value> clone() const {
+        return std::make_shared<Value>(*this);
+    }
 
+public:
+    virtual ~Value();
 };
 
 

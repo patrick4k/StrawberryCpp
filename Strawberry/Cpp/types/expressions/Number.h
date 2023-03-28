@@ -11,7 +11,7 @@ class Number: public Value {
 private:
     double value;
 public:
-    double getValue() const;
+    explicit Number(double value);
 
 private:
     bool isNull() const override;
@@ -22,8 +22,11 @@ private:
 
     std::string asString() const override;
 
-public:
-    void setValue(double value);
+private:
+    std::shared_ptr<Value> clone() const override {
+        return std::make_shared<Number>(*this);
+    }
+
 };
 
 

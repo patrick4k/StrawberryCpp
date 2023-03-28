@@ -12,15 +12,16 @@ namespace antlrcpptest {
     }
 
     void StrawberryInterpreter::TestScope() {
+        auto num1 = std::make_shared<Number>(1.5);
+        auto num2 = std::make_shared<Number>(200);
+
         enterScope();
-        auto num1 = std::make_shared<Number>();
-        num1->setValue(12.5);
         declare("a", num1);
-
-        std::shared_ptr<Value> val = retrieve("a");
-        std::shared_ptr<Value> val2 = retrieve("a");
-
-        std::cout << "a = " << val->asDouble() << std::endl << "val2 = " << val2->asDouble() << std::endl;
+        enterScope();
+        declare("a", num2);
+        std::cout << "a = " << get_from_memory("a")->asDouble() << std::endl;
+        exitScope();
+        std::cout << "a = " << get_from_memory("a")->asDouble() << std::endl;
     }
 
 } // antlrcpptest

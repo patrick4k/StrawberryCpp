@@ -19,3 +19,5 @@ double Value::asDouble() const {
 std::string Value::asString() const {
     return "null";
 }
+
+Value::~Value() = default;

@@ -4,14 +4,6 @@
 
 #include "Number.h"
 
-double Number::getValue() const {
-    return value;
-}
-
-void Number::setValue(double value) {
-    Number::value = value;
-}
-
 bool Number::isNull() const {
     return false;
 }
@@ -27,3 +19,5 @@ double Number::asDouble() const {
 std::string Number::asString() const {
     return std::to_string(value);
 }
+
+Number::Number(double value) : value(value) {}
