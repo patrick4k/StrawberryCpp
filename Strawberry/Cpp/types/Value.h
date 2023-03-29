@@ -9,12 +9,10 @@
 
 class Value {
 public:
+    /* Interpreter Util */
     virtual bool isNull() const;
-
     virtual bool asBool() const;
-
     virtual double asDouble() const;
-
     virtual std::string asString() const;
 
 private:

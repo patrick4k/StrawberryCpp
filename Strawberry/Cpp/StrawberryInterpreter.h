@@ -24,19 +24,19 @@ namespace antlrcpptest {
         class Scope {
         public:
             std::unordered_map<std::string, std::shared_ptr<Reference>> data;
-            std::shared_ptr<Scope> next;
-            explicit Scope(std::unordered_map<std::string, std::shared_ptr<Reference>> d,std::shared_ptr<Scope> n = nullptr):
-            data(std::move(d)), next(std::move(n)){}
+            std::shared_ptr<Scope> outerScope;
+            explicit Scope(std::unordered_map<std::string, std::shared_ptr<Reference>> d, std::shared_ptr<Scope> n = nullptr):
+                    data(std::move(d)), outerScope(std::move(n)){}
         };
 
         class Memory {
         public:
-            std::shared_ptr<Scope> head;
+            std::shared_ptr<Scope> innerScope;
             void insert_head(std::unordered_map<std::string, std::shared_ptr<Reference>> data) {
-                head = std::make_shared<Scope>(std::move(data), std::move(head));
+                innerScope = std::make_shared<Scope>(std::move(data), std::move(innerScope));
             }
             void remove_head() {
-                head = head->next;
+                innerScope = innerScope->outerScope;
             }
         };
 
@@ -53,10 +53,10 @@ namespace antlrcpptest {
         }
 
         void declare(const std::string& id, std::shared_ptr<Value> val) const {
-            if (memory.head->data.find(id) == memory.head->data.end()) {
+            if (memory.innerScope->data.find(id) == memory.innerScope->data.end()) {
                 auto ref = new Reference();
                 ref->set(std::move(val));
-                memory.head->data.insert_or_assign(id, std::shared_ptr<Reference>(ref));
+                memory.innerScope->data.insert_or_assign(id, std::shared_ptr<Reference>(ref));
             }
             else throw std::runtime_error("'" + id + "' is already declared in scope");
         }
@@ -66,12 +66,12 @@ namespace antlrcpptest {
         }
 
         std::shared_ptr<Reference> get_from_memory(const std::string& id) const {
-            auto scope = memory.head.get();
+            auto scope = memory.innerScope.get();
             auto value = scope->data.find(id);
             while (value == scope->data.end()) {
-                if (scope->next == nullptr)
+                if (scope->outerScope == nullptr)
                     throw std::runtime_error("No variable '" + id + "' in memory\n");
-                scope = scope->next.get();
+                scope = scope->outerScope.get();
                 value = scope->data.find(id);
             }
             return value->second;
@@ -81,7 +81,7 @@ namespace antlrcpptest {
     /* Visitor Overrides */
     public:
         std::any visitScript(StrawberryParser::ScriptContext *ctx) override;
-        void TestScope();
+        void testScope();
     };
 
 
