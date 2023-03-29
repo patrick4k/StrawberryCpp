@@ -9,14 +9,13 @@
 
 class Value {
 public:
-    /* Interpreter Util */
+    /* Interpreter Level Casting */
     virtual bool isNull() const;
     virtual bool asBool() const;
     virtual double asDouble() const;
     virtual std::string asString() const;
 
-private:
-    virtual std::shared_ptr<Value> clone() const {
+    [[nodiscard]] virtual std::shared_ptr<Value> clone() const {
         return std::make_shared<Value>(*this);
     }
 

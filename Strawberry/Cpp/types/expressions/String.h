@@ -23,7 +23,7 @@ public:
 
     ~String() override = default;
 
-private:
+public:
     std::shared_ptr<Value> clone() const override;
 
 };

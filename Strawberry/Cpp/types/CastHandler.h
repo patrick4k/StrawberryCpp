@@ -15,13 +15,13 @@ class CastHandler {
 
 public:
     /* String */
-    static String* string_from(const std::shared_ptr<Value>& val) {
-        return new String(val->asString());
+    static std::shared_ptr<String> string_from(const std::shared_ptr<Value>& val) {
+        return std::make_shared<String>(val->asString());
     }
 
     /* Number */
-    static Number* number_from(const std::shared_ptr<Value>& val) {
-        return new Number(val->asDouble());
+    static std::shared_ptr<Number> number_from(const std::shared_ptr<Value>& val) {
+        return std::make_shared<Number>(val->asDouble());
     }
 
 };

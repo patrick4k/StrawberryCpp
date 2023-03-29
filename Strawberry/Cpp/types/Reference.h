@@ -14,11 +14,13 @@ class Reference {
 private:
     std::shared_ptr<Value> value;
 public:
-    void set(std::shared_ptr<Value>(val)) {
+    explicit Reference(std::shared_ptr<Value> value) : value(std::move(value)) {}
+
+    void set(std::shared_ptr<Value> val) {
         value = std::move(val);
     }
 
-    std::shared_ptr<Value> getValue() {
+    [[nodiscard]] std::shared_ptr<Value> getValue() const {
         return value;
     }
 };

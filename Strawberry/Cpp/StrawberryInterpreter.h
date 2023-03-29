@@ -16,47 +16,36 @@
 namespace antlrcpptest {
 
     class StrawberryInterpreter: public StrawberryParserBaseVisitor {
+
 /* ==================================================================================================== */
     /* Memory Allocation */
     private:
     // ---------------------------------------------------------------------------------------------------- //
-        // Scope and Memory //
+        // Scope Linked List //
         class Scope {
         public:
-            std::unordered_map<std::string, std::shared_ptr<Reference>> data;
+            std::unordered_map<std::string, std::shared_ptr<Reference>> memory;
             std::shared_ptr<Scope> outerScope;
             explicit Scope(std::unordered_map<std::string, std::shared_ptr<Reference>> d, std::shared_ptr<Scope> n = nullptr):
-                    data(std::move(d)), outerScope(std::move(n)){}
-        };
-
-        class Memory {
-        public:
-            std::shared_ptr<Scope> innerScope;
-            void insert_head(std::unordered_map<std::string, std::shared_ptr<Reference>> data) {
-                innerScope = std::make_shared<Scope>(std::move(data), std::move(innerScope));
-            }
-            void remove_head() {
-                innerScope = innerScope->outerScope;
-            }
+                    memory(std::move(d)), outerScope(std::move(n)){}
         };
 
     // ---------------------------------------------------------------------------------------------------- //
         // Memory Management Methods //
-        Memory memory;
+        std::shared_ptr<Scope> innerScope;
 
         void scope_in() {
-            memory.insert_head(std::unordered_map<std::string, std::shared_ptr<Reference>>());
+            auto clean_memory = std::unordered_map<std::string,std::shared_ptr<Reference>>();
+            innerScope = std::make_shared<Scope>(clean_memory, std::move(innerScope));
         }
 
         void scope_out() {
-            memory.remove_head();
+            innerScope = innerScope->outerScope;
         }
 
-        void declare(const std::string& id, std::shared_ptr<Value> val) const {
-            if (memory.innerScope->data.find(id) == memory.innerScope->data.end()) {
-                auto ref = new Reference();
-                ref->set(std::move(val));
-                memory.innerScope->data.insert_or_assign(id, std::shared_ptr<Reference>(ref));
+        void declare(const std::string& id, const std::shared_ptr<Value>& val) const {
+            if (innerScope->memory.find(id) == innerScope->memory.end()) {
+                innerScope->memory.insert_or_assign(id, std::make_shared<Reference>(val));
             }
             else throw std::runtime_error("'" + id + "' is already declared in scope");
         }
@@ -65,14 +54,14 @@ namespace antlrcpptest {
             get_from_memory(id)->set(std::move(val));
         }
 
-        std::shared_ptr<Reference> get_from_memory(const std::string& id) const {
-            auto scope = memory.innerScope.get();
-            auto value = scope->data.find(id);
-            while (value == scope->data.end()) {
-                if (scope->outerScope == nullptr)
+        [[nodiscard]] std::shared_ptr<Reference> get_from_memory(const std::string& id) const {
+            auto scope = innerScope.get();
+            auto value = innerScope->memory.find(id);
+            while (value == scope->memory.end()) {
+                if (!scope->outerScope)
                     throw std::runtime_error("No variable '" + id + "' in memory\n");
                 scope = scope->outerScope.get();
-                value = scope->data.find(id);
+                value = scope->memory.find(id);
             }
             return value->second;
         }
@@ -81,7 +70,7 @@ namespace antlrcpptest {
     /* Visitor Overrides */
     public:
         std::any visitScript(StrawberryParser::ScriptContext *ctx) override;
-        void testScope();
+        void testRef();
     };
 
 

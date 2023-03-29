@@ -5,34 +5,24 @@
 #include "StrawberryInterpreter.h"
 #include "types/expressions/Number.h"
 #include "types/CastHandler.h"
+#include "types/nonexpressions/ValueRef.h"
 
 namespace antlrcpptest {
 
     std::any StrawberryInterpreter::visitScript(StrawberryParser::ScriptContext *ctx) {
         this->scope_in();
         StrawberryParserBaseVisitor::visitScript(ctx);
-        this->testScope();
+        this->testRef();
         this->scope_out();
         return 0;
     }
 
-    void StrawberryInterpreter::testScope() {
-
-        declare("b", std::shared_ptr<Value>(new Number("355")));
-        auto bptr = get_from_memory("b");
-
-        std::cout << "b = " << get_from_memory("b")->getValue()->asDouble() << std::endl;
-        std::cout << "b ptr = " << bptr->getValue()->asDouble() << std::endl << std::endl;
-
-        assign("b", std::shared_ptr<Value>(new Number(12)));
-        std::cout << "b ~> 12" << std::endl << std::endl;
-
-        std::cout << "b = " << get_from_memory("b")->getValue()->asDouble() << std::endl;
-        std::cout << "b ptr = " << bptr->getValue()->asDouble() << std::endl << std::endl;
-
-        auto str = CastHandler::string_from(bptr->getValue());
-
-        std::cout << "b as string = " << str->asString() << std::endl;
+    void StrawberryInterpreter::testRef() {
+        declare("x", std::make_shared<Number>(11));
+        auto ref1 = ValueRef(get_from_memory("x"));
+        assign("x", std::make_shared<Number>(22));
+        std::cout << get_from_memory("x")->getValue()->asDouble() << std::endl;
+        std::cout << ref1.asDouble() << std::endl;
     }
 
 } // antlrcpptest

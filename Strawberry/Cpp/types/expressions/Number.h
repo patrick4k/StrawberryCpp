@@ -25,7 +25,7 @@ public:
         this->value = d;
     }
 
-private:
+public:
     std::shared_ptr<Value> clone() const override {
         return std::make_shared<Number>(*this);
     }
