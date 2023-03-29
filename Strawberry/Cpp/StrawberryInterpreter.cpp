@@ -8,20 +8,33 @@
 namespace antlrcpptest {
 
     std::any StrawberryInterpreter::visitScript(StrawberryParser::ScriptContext *ctx) {
-        return StrawberryParserBaseVisitor::visitScript(ctx);
+        this->scope_in();
+        StrawberryParserBaseVisitor::visitScript(ctx);
+        TestScope();
+        this->scope_out();
+        return 0;
     }
 
     void StrawberryInterpreter::TestScope() {
-        auto num1 = std::make_shared<Number>(1.5);
-        auto num2 = std::make_shared<Number>(200);
+        auto n = new Number("355");
+        declare("b", std::shared_ptr<Value*>(std::shared_ptr<Value*>(new Value*(n))));
+        delete n;
+        auto bptr = get_from_memory("b");
+        auto n_new = new Number(12);
+        assign("b", std::shared_ptr<Value*>(std::shared_ptr<Value*>(new Value*(n_new))));
+        delete n_new;
+        std::cout << "b = " << get_from_memory("b")->asDouble() << std::endl;
+        std::cout << "b ptr = " << bptr->asDouble() << std::endl;
 
-        enterScope();
-        declare("a", num1);
-        enterScope();
-        declare("a", num2);
-        std::cout << "a = " << get_from_memory("a")->asDouble() << std::endl;
-        exitScope();
-        std::cout << "a = " << get_from_memory("a")->asDouble() << std::endl;
+//        auto n = new Number("355");
+//        declare("b", n->clone());
+//
+//        auto bptr = get_from_memory("b");
+//        auto n_new = new Number(12);
+//        assign("b",n_new->clone());
+//
+//        std::cout << "b = " << get_from_memory("b")->asDouble() << std::endl;
+//        std::cout << "b ptr = " << bptr->asDouble() << std::endl;
     }
 
 } // antlrcpptest

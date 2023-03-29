@@ -109,7 +109,6 @@ args: (argument (',' argument)*)? ;
 argument
 : value #arg
 | '...' value #argExpand
-| looseFnCall #looseFnCallArg
 ;
 
 /* ================================================================================ */
@@ -146,6 +145,7 @@ matchChars
 value
 : expression
 | lambda
+| idReference
 ;
 
 expression
@@ -208,6 +208,8 @@ identifyer
 | DefId #defaultAccess
 ;
 
+idReference: Fslash identifyer ;
+
 looseFnCall
 : identifyer argument (',' argument)*
 ;
@@ -217,7 +219,6 @@ looseFnCall
 
 prefix
 : '!' #negatePrefix
-| '\\' #refPrefix
 | '-' #negativePrefix
 ;
 

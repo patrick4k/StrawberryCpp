@@ -21,3 +21,5 @@ std::string Number::asString() const {
 }
 
 Number::Number(double value) : value(value) {}
+
+Number::Number(const std::string& value) : value(std::stod(value)) {}

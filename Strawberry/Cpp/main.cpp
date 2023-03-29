@@ -16,6 +16,7 @@ int main(const int argc, const char* argv[]) {
         std::cout << "\t" << i << ": " << argv[i] << std::endl;
     std::cout << std::endl;
 
+    /* DEBUG, if no target is given, default to test.sb */
     if (argv[1] == nullptr)
     {
         argv[1] = R"(C:\Users\Patrick\Documents\Code\ANTLR\StrawberryCpp\Strawberry\test.sb)";
@@ -33,9 +34,7 @@ int main(const int argc, const char* argv[]) {
     StrawberryParser parser(&tokens);
     auto tree = parser.script();
     auto visitor = antlrcpptest::StrawberryInterpreter();
-//    visitor.visitScript(tree);
-
-    visitor.TestScope();
+    visitor.visitScript(tree);
 
     return 0;
 }

@@ -108,8 +108,7 @@ args: (argument ( Com  argument)*)? ;
 
 argument
 : value #arg
-|  Dot3  value #argExpand
-| looseFnCall #looseFnCallArg
+|  Dot3  expression #argExpand
 ;
 
 /* ================================================================================ */
@@ -146,6 +145,7 @@ matchChars
 value
 : expression
 | lambda
+| idReference
 ;
 
 expression
@@ -208,6 +208,8 @@ identifyer
 | DefId #defaultAccess
 ;
 
+idReference: Fslash identifyer ;
+
 looseFnCall
 : identifyer argument ( Com  argument)*
 ;
@@ -217,7 +219,6 @@ looseFnCall
 
 prefix
 :  ExPoint  #negatePrefix
-|  Fslash  #refPrefix
 |  Min  #negativePrefix
 ;
 
