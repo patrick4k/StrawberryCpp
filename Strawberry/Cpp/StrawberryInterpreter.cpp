@@ -18,11 +18,20 @@ namespace antlrcpptest {
     }
 
     void StrawberryInterpreter::testRef() {
+        // int x = 11;
         declare("x", std::make_shared<Number>(11));
-        auto ref1 = ValueRef(get_from_memory("x"));
-        assign("x", std::make_shared<Number>(22));
+
+        // int* y = &x;
+        declare("y",std::make_shared<ValueRef>(get_from_memory("x")));
+
+        // x = 22;
+        assign("x",std::make_shared<Number>(22));
+
+        // print(x);
         std::cout << get_from_memory("x")->getValue()->asDouble() << std::endl;
-        std::cout << ref1.asDouble() << std::endl;
+        
+        // print(y);
+        std::cout << get_from_memory("y")->getValue()->asDouble() << std::endl;
     }
 
 } // antlrcpptest
