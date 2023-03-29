@@ -52,7 +52,7 @@ include_directories(
 set(strawberry_SRC Cpp/main.cpp
         ${strawberry-GENERATED_SRC}
         Cpp/types/Value.cpp Cpp/types/Value.h
-        Cpp/StrawberryInterpreter.cpp Cpp/StrawberryInterpreter.h Cpp/types/expressions/Bool.cpp Cpp/types/expressions/Bool.h Cpp/types/expressions/Number.cpp Cpp/types/expressions/Number.h Cpp/types/nonexpressions/Lambda.cpp Cpp/types/nonexpressions/Lambda.h)
+        Cpp/StrawberryInterpreter.cpp Cpp/StrawberryInterpreter.h Cpp/types/expressions/Bool.cpp Cpp/types/expressions/Bool.h Cpp/types/expressions/Number.cpp Cpp/types/expressions/Number.h Cpp/types/nonexpressions/Lambda.cpp Cpp/types/nonexpressions/Lambda.h Cpp/types/Reference.cpp Cpp/types/Reference.h)
 
 if(NOT CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
   set (flags_1 "-Wno-overloaded-virtual")
