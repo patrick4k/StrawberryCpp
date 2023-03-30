@@ -33,6 +33,7 @@ std::shared_ptr<Value> List::clone() const {
 
 std::shared_ptr<Reference> List::get(int i) {
     int size = this->refs.size();
+
     if (i >= size) {
         std::shared_ptr<Reference> ref;
         for (int j = size; j <= i; ++j) {
@@ -41,12 +42,14 @@ std::shared_ptr<Reference> List::get(int i) {
         }
         return ref;
     }
+
     if (i < 0) {
         while (abs(i) >= size) {
             i += size;
         }
         return this->refs[(size+i) % size];
     }
+
     return this->refs[i];
 }
 
@@ -54,14 +57,11 @@ std::shared_ptr<Reference> List::get(std::shared_ptr<Value> key) {
     return this->get(key->asDouble());
 }
 
-void List::append_reference(const std::shared_ptr<Reference>& ref) {
-    this->refs.push_back(ref);
-}
-
-void List::append_copy(const std::shared_ptr<Reference>& ref) {
-    this->refs.push_back(std::make_shared<Reference>(ref->as<Value>()->clone()));
-}
-
 void List::append(const std::shared_ptr<Value> &val) {
-    this->append_copy(std::make_shared<Reference>(val));
+    auto ref = std::dynamic_pointer_cast<Reference>(val);
+    if (ref) {
+        this->refs.push_back(std::make_shared<Reference>(ref));
+        return;
+    }
+    this->refs.push_back(std::make_shared<Reference>(val));
 }

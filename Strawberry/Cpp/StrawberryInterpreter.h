@@ -79,6 +79,7 @@ namespace antlrcpptest {
         void testRef();
         void testList();
         void moreListTesting();
+        void pairHashTesting();
     };
 
 

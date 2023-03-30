@@ -41,6 +41,22 @@ public:
         return std::make_shared<Reference>(*this);
     }
 
+    std::shared_ptr<Value> copy_value() const {
+        return this->referenceValue->clone();
+    }
+
+    std::shared_ptr<Reference> copy_to_reference() const {
+        return std::make_shared<Reference>(*this);
+    }
+
+    std::shared_ptr<Value> get_referenced_value() const {
+        auto ref = std::dynamic_pointer_cast<Reference>(this->referenceValue);
+        if (ref) {
+            return ref->get_referenced_value();
+        }
+        return this->referenceValue;
+    }
+
     ~Reference() override {
 
     }

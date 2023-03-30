@@ -23,11 +23,6 @@ public:
     std::shared_ptr<Reference> get(int i);
 
     void append(const std::shared_ptr<Value> &val) override;
-
-    void append_copy(const std::shared_ptr<Reference> &ref);
-
-    void append_reference(const std::shared_ptr<Reference> &ref);
-
 };
 
 #endif //LIBANTLR4_LIST_H
