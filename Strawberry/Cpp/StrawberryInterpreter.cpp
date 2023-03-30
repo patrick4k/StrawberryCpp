@@ -48,6 +48,7 @@ namespace antlrcpptest {
 
         std::cout << get_from_memory("l")->as<List>()->get(-1)->as<Value>()->asString() << std::endl;
         std::cout << get_from_memory("l")->as<List>()->get(-2)->as<Value>()->asString() << std::endl;
+        std::cout << get_from_memory("l")->as<List>()->get(3)->as<Value>()->asString() << std::endl;
     }
 
 } // antlrcpptest
