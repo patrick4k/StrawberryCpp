@@ -50,12 +50,17 @@ controlFlow
 | ifStatement
 ;
 
+// TODO: Add do-while and loop loops
+
 loop
 : loopScope
 | loopBody
+| doWhileLoop
 ;
 
-loopScope: loopKeywords expression scope ;
+loopScope
+: loopKeywords expression scope
+;
 
 loopBody: loopKeywords '(' expression ')' body ;
 
@@ -88,9 +93,16 @@ conditionalKeywords
 
 loopKeywords
 : 'for' #forLoop
-| 'while' #whileLoop
+| 'loop' #loopLoop
+| conditionalLoopKeywords #conditionalLoop
+;
+
+conditionalLoopKeywords
+: 'while' #whileLoop
 | 'until' #untilLoop
 ;
+
+doWhileLoop: 'do' scope conditionalLoopKeywords expression ';' ;
 
 /* ================================================================================ */
 // FUNCTIONS ARGS PARAMETERS

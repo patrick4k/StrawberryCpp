@@ -50,12 +50,17 @@ controlFlow
 | ifStatement
 ;
 
+// TODO: Add do-while and loop loops
+
 loop
 : loopScope
 | loopBody
+| doWhileLoop
 ;
 
-loopScope: loopKeywords expression scope ;
+loopScope
+: loopKeywords expression scope
+;
 
 loopBody: loopKeywords  Lpar  expression  Rpar  body ;
 
@@ -88,9 +93,16 @@ conditionalKeywords
 
 loopKeywords
 :  For  #forLoop
-|  While  #whileLoop
+|  Loop  #loopLoop
+| conditionalLoopKeywords #conditionalLoop
+;
+
+conditionalLoopKeywords
+:  While  #whileLoop
 |  Until  #untilLoop
 ;
+
+doWhileLoop:  Do  scope conditionalLoopKeywords expression  Semi  ;
 
 /* ================================================================================ */
 // FUNCTIONS ARGS PARAMETERS
@@ -108,7 +120,7 @@ args: (argument ( Com  argument)*)? ;
 
 argument
 : value #arg
-|  Dot3  expression #argExpand
+|  Dot3  value #argExpand
 ;
 
 /* ================================================================================ */
