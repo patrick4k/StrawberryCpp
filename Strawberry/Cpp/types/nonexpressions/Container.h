@@ -7,10 +7,13 @@
 
 
 #include "../Value.h"
+#include "../Reference.h"
 
 class Container: public Value {
 
+public:
+    virtual std::shared_ptr<Reference> get(std::shared_ptr<Value> key) = 0;
+    virtual void append(const std::shared_ptr<Value>& val) = 0;
 };
-
 
 #endif //LIBANTLR4_CONTAINER_H

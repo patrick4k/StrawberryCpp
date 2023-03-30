@@ -12,7 +12,7 @@ namespace antlrcpptest {
     std::any StrawberryInterpreter::visitScript(StrawberryParser::ScriptContext *ctx) {
         this->scope_in();
         StrawberryParserBaseVisitor::visitScript(ctx);
-        this->moreListTesting();
+        this->testList();
         this->scope_out();
         return 0;
     }
@@ -36,6 +36,9 @@ namespace antlrcpptest {
 
     void StrawberryInterpreter::testList() {
         auto lref = declare("l", std::make_shared<List>())->as<List>();
+        lref->append(std::make_shared<Number>(1));
+        lref->append(std::make_shared<Number>(2));
+        lref->append(std::make_shared<Number>(3));
 
         std::cout << get_from_memory("l")->as<List>()->get(0)->as<Value>()->asString() << std::endl;
         std::cout << get_from_memory("l")->as<List>()->get(1)->as<Value>()->asString() << std::endl;

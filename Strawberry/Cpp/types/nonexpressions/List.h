@@ -6,28 +6,28 @@
 #define LIBANTLR4_LIST_H
 
 #include "../Reference.h"
+#include "Container.h"
 
-class List: public Value {
+class List: public Container {
 private:
     std::vector<std::shared_ptr<Reference>> refs = std::vector<std::shared_ptr<Reference>>();
 
 public:
     bool isNull() const override;
-
     bool asBool() const override;
-
     double asDouble() const override;
-
     std::string asString() const override;
-
     std::shared_ptr<Value> clone() const override;
 
+    std::shared_ptr<Reference> get(std::shared_ptr<Value> key) override;
     std::shared_ptr<Reference> get(int i);
-    [[nodiscard]] const std::vector<std::shared_ptr<Reference>> &getValues() const;
 
-    void append(const std::shared_ptr<Value>& val);
+    void append(const std::shared_ptr<Value> &val) override;
+
     void append_copy(const std::shared_ptr<Reference> &ref);
+
     void append_reference(const std::shared_ptr<Reference> &ref);
+
 };
 
 #endif //LIBANTLR4_LIST_H

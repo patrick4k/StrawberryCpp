@@ -6,7 +6,10 @@
 #define LIBANTLR4_PAIR_H
 
 
-class Pair {
+#include "Container.h"
+
+class Pair: public Container {
+
 
 };
 
