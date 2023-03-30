@@ -16,18 +16,18 @@ bool String::asBool() const {
 
 double String::asDouble() const {
     try {
-        return std::stod(this->value);
+        return std::stod(this->text);
     } catch (std::exception& e) {
-        throw std::runtime_error("Cannot cast string: '" + value + "' to number");
+        throw std::runtime_error("Cannot cast string: '" + text + "' to number");
     }
 }
 
 std::string String::asString() const {
-    return this->value;
+    return this->text;
 }
 
 std::shared_ptr<Value> String::clone() const {
     return std::make_shared<String>(*this);
 }
 
-String::String(std::string value) : value(std::move(value)) {}
+String::String(std::string value) : text(std::move(value)) {}

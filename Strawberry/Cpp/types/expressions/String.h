@@ -11,7 +11,7 @@
 class String: public Value {
 
 private:
-    std::string value;
+    std::string text;
 public:
     explicit String(std::string value);
 

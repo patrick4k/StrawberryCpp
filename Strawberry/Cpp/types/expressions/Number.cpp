@@ -5,9 +5,9 @@
 #include <cmath>
 #include "Number.h"
 
-Number::Number(double value) : value(value) {}
+Number::Number(double value) : number(value) {}
 
-Number::Number(const std::string& value) : value(std::stod(value)) {}
+Number::Number(const std::string& value) : number(std::stod(value)) {}
 
 bool Number::isNull() const {
     return false;
@@ -18,12 +18,12 @@ bool Number::asBool() const {
 }
 
 double Number::asDouble() const {
-    return value;
+    return number;
 }
 
 std::string Number::asString() const {
-    int asInt = (int) this->value;
-    if (asInt == this->value)
+    int asInt = (int) this->number;
+    if (asInt == this->number)
         return std::to_string(asInt);
-    return std::to_string(value);
+    return std::to_string(number);
 }

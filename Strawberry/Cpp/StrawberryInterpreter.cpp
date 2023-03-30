@@ -38,18 +38,16 @@ namespace antlrcpptest {
     void StrawberryInterpreter::testList() {
         auto lref = declare("l", std::make_shared<List>())->as<List>();
         lref->append(std::make_shared<Number>(12));
-        lref->append(std::make_shared<Number>(21));
+        lref->append(std::make_shared<String>("this is a string"));
 
-        std::cout << get_from_memory("l")->as<List>()->get(0)->as<Value>()->asDouble() << std::endl;
-        std::cout << get_from_memory("l")->as<List>()->get(1)->as<Value>()->asDouble() << std::endl;
+        std::cout << get_from_memory("l")->as<List>()->get(0)->as<Value>()->asString() << std::endl;
+        std::cout << get_from_memory("l")->as<List>()->get(1)->as<Value>()->asString() << std::endl;
 
         get_from_memory("l")->as<List>()->get(0)->set(std::make_shared<Number>(1000));
         lref->get(1)->set(std::make_shared<Number>(2000));
 
-        auto ref0 = lref->get(0)->as<Number>();
-
-        std::cout << get_from_memory("l")->as<List>()->get(0)->as<Value>()->asDouble() << std::endl;
-        std::cout << get_from_memory("l")->as<List>()->get(1)->as<Value>()->asDouble() << std::endl;
+        std::cout << get_from_memory("l")->as<List>()->get(-1)->as<Value>()->asString() << std::endl;
+        std::cout << get_from_memory("l")->as<List>()->get(-2)->as<Value>()->asString() << std::endl;
     }
 
 } // antlrcpptest

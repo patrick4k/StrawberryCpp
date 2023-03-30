@@ -14,7 +14,6 @@ private:
 public:
     std::shared_ptr<Reference> get(int i);
     void append(const std::shared_ptr<Reference>& ref);
-
     void append(const std::shared_ptr<Value>& val);
     [[nodiscard]] const std::vector<std::shared_ptr<Reference>> &getValues() const;
 };

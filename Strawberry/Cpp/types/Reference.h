@@ -14,6 +14,7 @@ class Reference {
 private:
     std::shared_ptr<Value> value;
 public:
+    explicit Reference() : value(std::make_shared<Value>()) {}
     explicit Reference(std::shared_ptr<Value> value) : value(std::move(value)) {}
 
     void set(std::shared_ptr<Value> val) {
@@ -26,9 +27,7 @@ public:
 
     template<typename T>
     std::shared_ptr<T> as() {
-        std::shared_ptr<T> casted = std::dynamic_pointer_cast<T>(this->value);
-        if (casted != nullptr) return casted;
-        throw std::runtime_error("Error Casting hard casting");
+        return std::dynamic_pointer_cast<T>(this->value);
     }
 
 };

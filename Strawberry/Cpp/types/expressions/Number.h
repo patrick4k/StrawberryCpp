@@ -9,7 +9,7 @@
 
 class Number: public Value {
 private:
-    double value;
+    double number;
 public:
     explicit Number(double value);
     explicit Number(const std::string& value);
@@ -21,16 +21,11 @@ public:
 
     ~Number() override = default;
 
-    void set(double d) {
-        this->value = d;
-    }
-
 public:
     std::shared_ptr<Value> clone() const override {
         return std::make_shared<Number>(*this);
     }
 
 };
-
 
 #endif //LIBANTLR4_NUMBER_H
