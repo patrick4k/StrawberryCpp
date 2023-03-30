@@ -78,6 +78,7 @@ namespace antlrcpptest {
         std::any visitScript(StrawberryParser::ScriptContext *ctx) override;
         void testRef();
         void testList();
+        void moreListTesting();
     };
 
 

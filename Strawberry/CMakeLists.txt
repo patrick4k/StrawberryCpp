@@ -52,7 +52,7 @@ include_directories(
 set(strawberry_SRC Cpp/main.cpp
         ${strawberry-GENERATED_SRC}
         Cpp/types/Value.cpp Cpp/types/Value.h
-        Cpp/StrawberryInterpreter.cpp Cpp/StrawberryInterpreter.h Cpp/types/expressions/Bool.cpp Cpp/types/expressions/Bool.h Cpp/types/expressions/Number.cpp Cpp/types/expressions/Number.h Cpp/types/nonexpressions/Lambda.cpp Cpp/types/nonexpressions/Lambda.h Cpp/types/Reference.cpp Cpp/types/Reference.h Cpp/types/expressions/String.cpp Cpp/types/expressions/String.h Cpp/types/nonexpressions/List.cpp Cpp/types/nonexpressions/List.h Cpp/types/nonexpressions/ValueRef.cpp Cpp/types/nonexpressions/ValueRef.h)
+        Cpp/StrawberryInterpreter.cpp Cpp/StrawberryInterpreter.h Cpp/types/expressions/Bool.cpp Cpp/types/expressions/Bool.h Cpp/types/expressions/Number.cpp Cpp/types/expressions/Number.h Cpp/types/nonexpressions/Lambda.cpp Cpp/types/nonexpressions/Lambda.h Cpp/types/Reference.cpp Cpp/types/Reference.h Cpp/types/expressions/String.cpp Cpp/types/expressions/String.h Cpp/types/nonexpressions/List.cpp Cpp/types/nonexpressions/List.h Cpp/types/nonexpressions/Container.cpp Cpp/types/nonexpressions/Container.h Cpp/types/nonexpressions/Pair.cpp Cpp/types/nonexpressions/Pair.h)
 
 if(NOT CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
   set (flags_1 "-Wno-overloaded-virtual")

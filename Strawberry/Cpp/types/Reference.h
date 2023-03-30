@@ -10,24 +10,44 @@
 
 #include "Value.h"
 
-class Reference {
+class Reference: public Value {
 private:
-    std::shared_ptr<Value> value;
+    std::shared_ptr<Value> referenceValue;
 public:
-    explicit Reference() : value(std::make_shared<Value>()) {}
-    explicit Reference(std::shared_ptr<Value> value) : value(std::move(value)) {}
+    explicit Reference() : referenceValue(std::make_shared<Value>()) {}
+    explicit Reference(std::shared_ptr<Value> value) : referenceValue(std::move(value)) {}
 
     void set(std::shared_ptr<Value> val) {
-        value = std::move(val);
+        referenceValue = std::move(val);
     }
 
-    [[nodiscard]] std::shared_ptr<Value> getValue() const {
-        return value;
+    bool isNull() const override {
+        return this->referenceValue->isNull();
+    }
+
+    bool asBool() const override {
+        return this->referenceValue->asBool();
+    }
+
+    double asDouble() const override {
+        return this->referenceValue->asDouble();
+    }
+
+    std::string asString() const override {
+        return this->referenceValue->asString();;
+    }
+
+    std::shared_ptr<Value> clone() const override {
+        return std::make_shared<Reference>(*this);
+    }
+
+    ~Reference() override {
+
     }
 
     template<typename T>
     std::shared_ptr<T> as() {
-        return std::dynamic_pointer_cast<T>(this->value);
+        return std::dynamic_pointer_cast<T>(this->referenceValue);
     }
 
 };
