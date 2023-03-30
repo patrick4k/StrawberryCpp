@@ -23,6 +23,14 @@ public:
     [[nodiscard]] std::shared_ptr<Value> getValue() const {
         return value;
     }
+
+    template<typename T>
+    std::shared_ptr<T> as() {
+        std::shared_ptr<T> casted = std::dynamic_pointer_cast<T>(this->value);
+        if (casted != nullptr) return casted;
+        throw std::runtime_error("Error Casting hard casting");
+    }
+
 };
 
 

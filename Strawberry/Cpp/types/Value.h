@@ -21,7 +21,9 @@ public:
 
 public:
     virtual ~Value();
-};
+
+
+    };
 
 
 #endif //LIBANTLR4_VALUE_H
