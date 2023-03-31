@@ -7,18 +7,26 @@
 
 #include "tree/ParseTree.h"
 
-class Value {
+class Value: public std::enable_shared_from_this<Value> {
 public:
-    Value();
+    /* Interpreter Level Casting */
+    virtual bool isNull() const;
+    virtual bool toBool() const;
+    virtual double toDouble() const;
+    virtual std::string toString() const;
 
-    const std::string &getText() const;
+    [[nodiscard]] std::shared_ptr<Value> clone() const {
+        return std::make_shared<Value>(*this);
+    }
 
-    void setText(const std::string &text);
+public:
+    virtual ~Value();
 
-private:
-    std::string text;
+    template<typename T>
+    std::shared_ptr<T> as() {
+        return std::dynamic_pointer_cast<T>(shared_from_this());
+    }
 
 };
-
 
 #endif //LIBANTLR4_VALUE_H

@@ -6,9 +6,11 @@ Decl: 'let' ;
 If: 'if' ;
 Unless: 'unless' ;
 Else: 'else' ;
+Do: 'do' ;
 While: 'while' ;
 Until: 'until' ;
 For: 'for' ;
+Loop: 'loop' ;
 
 /* Keywords */
 Return: 'return' ;

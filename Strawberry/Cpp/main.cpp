@@ -16,9 +16,10 @@ int main(const int argc, const char* argv[]) {
         std::cout << "\t" << i << ": " << argv[i] << std::endl;
     std::cout << std::endl;
 
-    if (argv[1] == NULL)
+    /* DEBUG, if no target is given, default to test.sb */
+    if (argv[1] == nullptr)
     {
-        argv[1] = "C:\\Users\\Patrick\\Documents\\Code\\StrawberryParent\\Strawberry\\test.sb";
+        argv[1] = R"(C:\Users\Patrick\Documents\Code\ANTLR\StrawberryCpp\Strawberry\test.sb)";
         std::cout << "Replacing argv[1] with: " << argv[1] << std::endl << std::endl;
     }
 

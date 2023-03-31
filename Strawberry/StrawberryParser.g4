@@ -50,12 +50,17 @@ controlFlow
 | ifStatement
 ;
 
+// TODO: Add do-while and loop loops
+
 loop
 : loopScope
 | loopBody
+| doWhileLoop
 ;
 
-loopScope: loopKeywords expression scope ;
+loopScope
+: loopKeywords expression scope
+;
 
 loopBody: loopKeywords  Lpar  expression  Rpar  body ;
 
@@ -88,9 +93,16 @@ conditionalKeywords
 
 loopKeywords
 :  For  #forLoop
-|  While  #whileLoop
+|  Loop  #loopLoop
+| conditionalLoopKeywords #conditionalLoop
+;
+
+conditionalLoopKeywords
+:  While  #whileLoop
 |  Until  #untilLoop
 ;
+
+doWhileLoop:  Do  scope conditionalLoopKeywords expression  Semi  ;
 
 /* ================================================================================ */
 // FUNCTIONS ARGS PARAMETERS
@@ -109,7 +121,6 @@ args: (argument ( Com  argument)*)? ;
 argument
 : value #arg
 |  Dot3  value #argExpand
-| looseFnCall #looseFnCallArg
 ;
 
 /* ================================================================================ */
@@ -146,6 +157,8 @@ matchChars
 value
 : expression
 | lambda
+| idReference
+| pair
 ;
 
 expression
@@ -173,8 +186,11 @@ literal
 | String #dStringLit // TODO: add escape characters
 | StringLit #sStringLit
 |  Lbrack  args  Rbrack  #arrayLit
+|  Lbrace  (pair ( Com  pair)*  Com ?)?  Rbrace  #hashLit
 | Number #numLit
 ;
+
+pair: expression  Colon  value ;
 
 keywordLiteral
 :  True  #trueLit
@@ -208,6 +224,8 @@ identifyer
 | DefId #defaultAccess
 ;
 
+idReference: Fslash identifyer ;
+
 looseFnCall
 : identifyer argument ( Com  argument)*
 ;
@@ -217,7 +235,6 @@ looseFnCall
 
 prefix
 :  ExPoint  #negatePrefix
-|  Fslash  #refPrefix
 |  Min  #negativePrefix
 ;
 

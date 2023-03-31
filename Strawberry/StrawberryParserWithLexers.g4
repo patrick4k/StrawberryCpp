@@ -50,12 +50,17 @@ controlFlow
 | ifStatement
 ;
 
+// TODO: Add do-while and loop loops
+
 loop
 : loopScope
 | loopBody
+| doWhileLoop
 ;
 
-loopScope: loopKeywords expression scope ;
+loopScope
+: loopKeywords expression scope
+;
 
 loopBody: loopKeywords '(' expression ')' body ;
 
@@ -88,9 +93,16 @@ conditionalKeywords
 
 loopKeywords
 : 'for' #forLoop
-| 'while' #whileLoop
+| 'loop' #loopLoop
+| conditionalLoopKeywords #conditionalLoop
+;
+
+conditionalLoopKeywords
+: 'while' #whileLoop
 | 'until' #untilLoop
 ;
+
+doWhileLoop: 'do' scope conditionalLoopKeywords expression ';' ;
 
 /* ================================================================================ */
 // FUNCTIONS ARGS PARAMETERS
@@ -109,7 +121,6 @@ args: (argument (',' argument)*)? ;
 argument
 : value #arg
 | '...' value #argExpand
-| looseFnCall #looseFnCallArg
 ;
 
 /* ================================================================================ */
@@ -146,6 +157,8 @@ matchChars
 value
 : expression
 | lambda
+| idReference
+| pair
 ;
 
 expression
@@ -173,8 +186,11 @@ literal
 | String #dStringLit // TODO: add escape characters
 | StringLit #sStringLit
 | '[' args ']' #arrayLit
+| '{' (pair (',' pair)* ','?)? '}' #hashLit
 | Number #numLit
 ;
+
+pair: expression ':' value ;
 
 keywordLiteral
 : 'true' #trueLit
@@ -208,6 +224,8 @@ identifyer
 | DefId #defaultAccess
 ;
 
+idReference: Fslash identifyer ;
+
 looseFnCall
 : identifyer argument (',' argument)*
 ;
@@ -217,7 +235,6 @@ looseFnCall
 
 prefix
 : '!' #negatePrefix
-| '\\' #refPrefix
 | '-' #negativePrefix
 ;
 
