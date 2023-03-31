@@ -7,143 +7,143 @@ options {
 /* ================================================================================ */
 // STRUCTURE
 
-script
-: action+ EOF
+script_
+: action_+ EOF
 ;
 
-declaration
+declaration_
 : fnDeclaration
 ;
 
-action
-: statement  Semi 
-| scope
-| controlFlow
-| declaration
+action_
+: statement_  Semi 
+| scope_
+| controlFlow_
+| declaration_
 ;
 
-scope:  Lbrace  action*  Rbrace  ;
+scope_:  Lbrace  action_*  Rbrace  ;
 
-statement
-: keywordStatement
-| assign
-| expression
-| scope
+statement_
+: keywordStatement_
+| assign_
+| expression_
+| scope_
 ;
 
-keywordStatement
-: Return value? #returnStat
-| Once statement #onceStat
-| Next expression? #nextStat
+keywordStatement_
+: Return value_? #returnStat
+| Once statement_ #onceStat
+| Next expression_? #nextStat
 | Last #lastStat
 | Break #breakStat
 ;
 
-body: (scope | statement  Semi ) ;
+body_: (scope_ | statement_  Semi ) ;
 
 /* ================================================================================ */
 // CONTROL FLOW
 
-controlFlow
+controlFlow_
 : compoundStatement  Semi 
-| loop
-| ifStatement
+| loop_
+| ifStatement_
 ;
 
-// TODO: Add do-while and loop loops
-
-loop
+loop_
 : loopScope
 | loopBody
 | doWhileLoop
 ;
 
 loopScope
-: loopKeywords expression scope
+: loopKeywords_ expression_ scope_
 ;
 
-loopBody: loopKeywords  Lpar  expression  Rpar  body ;
+loopBody: loopKeywords_  Lpar  expression_  Rpar  body_ ;
 
-compoundStatement: compoundAction (loopKeywords (expression |  Lpar  args  Rpar ))* ;
+doWhileLoop:  Do  scope_ conditionalLoopKeywords_ expression_  Semi  ;
 
-compoundAction
-: compoundAction conditionalKeywords expression ( Else  compoundAction)? #ifCompound
+compoundStatement: compoundAction_ (loopKeywords_ (expression_ |  Lpar  args  Rpar ))* ;
+
+compoundAction_
+: compoundAction_ conditionalKeywords_ expression_ ( Else  compoundAction_)? #ifCompound
 | ifScope #ifScopeCompound
 | loopScope #loopScopeCompound
-| statement #statementCompound
+| statement_ #statementCompound
 ;
 
-ifStatement
+ifStatement_
 : ifScope
 | ifBody
 ;
 
 ifScope
-: conditionalKeywords expression scope ( Else  (body | ifStatement))? #exprIfScope
+: conditionalKeywords_ expression_ scope_ ( Else  (body_ | ifStatement_))?
 ;
 
 ifBody
-: conditionalKeywords  Lpar  expression  Rpar  body ( Else  (body | ifStatement))? #exprIfBody
+: conditionalKeywords_  Lpar  expression_  Rpar  body_ ( Else  (body_ | ifStatement_))?
 ;
 
-conditionalKeywords
+conditionalKeywords_
 :  If  #ifKeyword
 |  Unless  #unlessKeyword
 ;
 
-loopKeywords
+loopKeywords_
 :  For  #forLoop
 |  Loop  #loopLoop
-| conditionalLoopKeywords #conditionalLoop
+| conditionalLoopKeywords_ #conditionalLoop
 ;
 
-conditionalLoopKeywords
+conditionalLoopKeywords_
 :  While  #whileLoop
 |  Until  #untilLoop
 ;
 
-doWhileLoop:  Do  scope conditionalLoopKeywords expression  Semi  ;
-
 /* ================================================================================ */
 // FUNCTIONS ARGS PARAMETERS
 
-fnDeclaration:  Fn  Id  Lpar  parameters  Rpar  scope ;
+fnDeclaration:  Fn  Id  Lpar  parameters_  Rpar  scope_ ;
 
-lambda:  Lpar  parameters  Rpar   Sarrow  statement ;
+lambda:  Lpar  parameters_  Rpar   Sarrow  statement_ ;
 
-parameters
+parameters_
 : ((Id  Com )* Id)? #params
 | (Id  Com )* Id  Dot3  #paramsExpand
 ;
 
-args: (argument ( Com  argument)*)? ;
+args: (argument_ ( Com  argument_)*)? ;
 
-argument
-: value #arg
-|  Dot3  value #argExpand
+argument_
+: value_ #arg
+|  Dot3  value_ #argExpand
 ;
 
 /* ================================================================================ */
 // MATCH
 
+// TODO: Rework REGEX
+
 matchRegex
-:  Squig  ( Lbrace  matchOptions*  Rbrace )?  Bslash  matchContent+  Bslash 
+:  Squig  ( Lbrace  matchOptions_*  Rbrace )?  Bslash  matchContent_+  Bslash 
 ;
 
-matchOptions
-:  RegReturnAll 
+matchOptions_
+:  RegReturnAll  #returnAllMatchOption
 ;
 
-matchContent
-: matchContent  Plus  #onOrMore
-| matchContent  Star  #zeroOrMore
-| matchContent  Qmark  #zeroOrOne
-|  Lbrack  matchContent ( Bar  matchContent)* Rbrack  #orMatch
-|  Lpar  matchContent  Rpar  #collectMatch
-| matchChars+ #chars
+matchContent_
+: matchContent_  Plus  #onOrMore
+| matchContent_  Star  #zeroOrMore
+| matchContent_  Qmark  #zeroOrOne
+|  Lbrack  matchContent_ ( Bar  matchContent_)* Rbrack  #orMatch
+|  Lpar  matchContent_  Rpar  #collectMatch
+| matchChars_+ #chars
 ;
 
-matchChars
+matchChars_
 :  RegWord  #word
 |  RegNewline  #newline
 |  DefOr  #bslash
@@ -154,35 +154,35 @@ matchChars
 /* ================================================================================ */
 // VALUE AND EXPRESSIONS
 
-value
-: expression
+value_
+: expression_
 | lambda
 | idReference
 | pair
 ;
 
-expression
-: literal #litExpr
-|  Lpar  expression  Rpar  #parenExpr
-|  Lpar  assign  Rpar  #assignExpr
-| prefix expression #prefixExpr
-| highPrioritySuffix #defaultSuffixExpr
-| expression highPrioritySuffix #suffixExpr
-| expression op1 expression #opExpr
-| expression op2 expression #opExpr
-| expression op3 expression #opExpr
-| expression op4 expression #opExpr
-| expression op5 expression #opExpr
-| expression op6 expression #opExpr
-| lowPrioritySuffix #defaultSuffixExpr
-| expression lowPrioritySuffix #suffixExpr
-| identifyer #accessExpr
-| identifyer  Lpar  args  Rpar  #fnAccess
+expression_
+: literal_ #litExpr
+|  Lpar  expression_  Rpar  #parenExpr
+|  Lpar  assign_  Rpar  #assignExpr
+| prefix_ expression_ #prefixExpr
+| highPrioritySuffix_ #defaultSuffixExpr
+| expression_ highPrioritySuffix_ #suffixExpr
+| expression_ op1_ expression_ #opExpr
+| expression_ op2_ expression_ #opExpr
+| expression_ op3_ expression_ #opExpr
+| expression_ op4_ expression_ #opExpr
+| expression_ op5_ expression_ #opExpr
+| expression_ op6_ expression_ #opExpr
+| lowPrioritySuffix_ #defaultSuffixExpr
+| expression_ lowPrioritySuffix_ #suffixExpr
+| identifyer_ #accessExpr
+| identifyer_  Lpar  args  Rpar  #fnAccess
 | looseFnCall #looseFnCallExpr
 ;
 
-literal
-: keywordLiteral #keywordLit // TODO: figure out why keywords arent matching
+literal_
+: keywordLiteral_ #keywordLit // TODO: figure out why keywords arent matching
 | String #dStringLit // TODO: add escape characters
 | StringLit #sStringLit
 |  Lbrack  args  Rbrack  #arrayLit
@@ -190,79 +190,79 @@ literal
 | Number #numLit
 ;
 
-pair: expression  Colon  value ;
+pair: expression_  Colon  value_ ;
 
-keywordLiteral
+keywordLiteral_
 :  True  #trueLit
 |  False  #falseLit
 |  Null  #nullLit
 ;
 
-assign
-:  Decl  varDeclare ( Com  varDeclare)* #declareAssign
-| (identifyer  Eq )+ value #eqAssign
-|  Eq  value #defaultEqAssign
-| identifyer?  PowEq  expression #powAssign
-| identifyer?  MultEq  expression #multAssign
-| identifyer?  DivEq  expression #divAssign
-| identifyer?  ModEq  expression #modAssign
-| identifyer?  PlusEq  expression #addAssign
-| identifyer?  MinEq  expression #minAssign
-| identifyer?  Increm  #increm
-| identifyer?  Decrem  #decrem
+assign_
+:  Decl  varDeclare_ ( Com  varDeclare_)* #declareAssign
+| (identifyer_  Eq )+ value_ #eqAssign
+|  Eq  value_ #defaultEqAssign
+| identifyer_?  PowEq  expression_ #powAssign
+| identifyer_?  MultEq  expression_ #multAssign
+| identifyer_?  DivEq  expression_ #divAssign
+| identifyer_?  ModEq  expression_ #modAssign
+| identifyer_?  PlusEq  expression_ #addAssign
+| identifyer_?  MinEq  expression_ #minAssign
+| identifyer_?  Increm  #increm
+| identifyer_?  Decrem  #decrem
 ;
 
-varDeclare
-: Id
-| Id  Eq  value
+varDeclare_
+: Id #noInitVarDeclar
+| Id  Eq  value_ #initVarDeclar
 ;
 
-identifyer
-: identifyer  Dot  Id #dotAccess
-| identifyer  Lbrack  expression  Rbrack  #arrAccesss
+identifyer_
+: identifyer_  Dot  Id #dotAccess
+| identifyer_  Lbrack  expression_  Rbrack  #arrAccesss
 | Id #idAccess
 | DefId #defaultAccess
 ;
 
-idReference: Fslash identifyer ;
+idReference: Fslash identifyer_ ;
 
 looseFnCall
-: identifyer argument ( Com  argument)*
+: identifyer_ argument_ ( Com  argument_)*
 ;
 
 /* ================================================================================ */
 // OPERATORS
 
-prefix
+prefix_
 :  ExPoint  #negatePrefix
 |  Min  #negativePrefix
 ;
 
-highPrioritySuffix
+highPrioritySuffix_
 :  ExPoint  #excitedSuff // TODO: Find purpose for !
 ;
 
-op1
+op1_
 :  Pow  #powOp
 ;
 
-op2
+op2_
 :  Star  #multOp
 |  Bslash  #divOp
 |  Mod  #modOp
 ;
 
-op3
+op3_
 :  Plus  #plusOp
 |  Min  #minOp
 ;
 
-op4
+op4_
 :  DefOr  #definedOrOp
 |  Dot2  #rangeOp
 ;
 
-op5
+op5_
 :  BoolEq  #boolEqOp
 |  BoolNeq  #boolNeqOp
 | Gt #boolGtOp
@@ -271,13 +271,13 @@ op5
 | LtEq #boolLtEqOp
 ;
 
-op6
+op6_
 :  Or  #orOp
 |  Bar  #bitOrOp
 |  And  #andOp
 |  AndSign  #bitAndOp
 ;
 
-lowPrioritySuffix
+lowPrioritySuffix_
 : matchRegex #matchSuff
 ;

@@ -7,143 +7,143 @@ options {
 /* ================================================================================ */
 // STRUCTURE
 
-script
-: action+ EOF
+script_
+: action_+ EOF
 ;
 
-declaration
+declaration_
 : fnDeclaration
 ;
 
-action
-: statement ';'
-| scope
-| controlFlow
-| declaration
+action_
+: statement_ ';'
+| scope_
+| controlFlow_
+| declaration_
 ;
 
-scope: '{' action* '}' ;
+scope_: '{' action_* '}' ;
 
-statement
-: keywordStatement
-| assign
-| expression
-| scope
+statement_
+: keywordStatement_
+| assign_
+| expression_
+| scope_
 ;
 
-keywordStatement
-: Return value? #returnStat
-| Once statement #onceStat
-| Next expression? #nextStat
+keywordStatement_
+: Return value_? #returnStat
+| Once statement_ #onceStat
+| Next expression_? #nextStat
 | Last #lastStat
 | Break #breakStat
 ;
 
-body: (scope | statement ';') ;
+body_: (scope_ | statement_ ';') ;
 
 /* ================================================================================ */
 // CONTROL FLOW
 
-controlFlow
+controlFlow_
 : compoundStatement ';'
-| loop
-| ifStatement
+| loop_
+| ifStatement_
 ;
 
-// TODO: Add do-while and loop loops
-
-loop
+loop_
 : loopScope
 | loopBody
 | doWhileLoop
 ;
 
 loopScope
-: loopKeywords expression scope
+: loopKeywords_ expression_ scope_
 ;
 
-loopBody: loopKeywords '(' expression ')' body ;
+loopBody: loopKeywords_ '(' expression_ ')' body_ ;
 
-compoundStatement: compoundAction (loopKeywords (expression | '(' args ')'))* ;
+doWhileLoop: 'do' scope_ conditionalLoopKeywords_ expression_ ';' ;
 
-compoundAction
-: compoundAction conditionalKeywords expression ('else' compoundAction)? #ifCompound
+compoundStatement: compoundAction_ (loopKeywords_ (expression_ | '(' args ')'))* ;
+
+compoundAction_
+: compoundAction_ conditionalKeywords_ expression_ ('else' compoundAction_)? #ifCompound
 | ifScope #ifScopeCompound
 | loopScope #loopScopeCompound
-| statement #statementCompound
+| statement_ #statementCompound
 ;
 
-ifStatement
+ifStatement_
 : ifScope
 | ifBody
 ;
 
 ifScope
-: conditionalKeywords expression scope ('else' (body | ifStatement))? #exprIfScope
+: conditionalKeywords_ expression_ scope_ ('else' (body_ | ifStatement_))?
 ;
 
 ifBody
-: conditionalKeywords '(' expression ')' body ('else' (body | ifStatement))? #exprIfBody
+: conditionalKeywords_ '(' expression_ ')' body_ ('else' (body_ | ifStatement_))?
 ;
 
-conditionalKeywords
+conditionalKeywords_
 : 'if' #ifKeyword
 | 'unless' #unlessKeyword
 ;
 
-loopKeywords
+loopKeywords_
 : 'for' #forLoop
 | 'loop' #loopLoop
-| conditionalLoopKeywords #conditionalLoop
+| conditionalLoopKeywords_ #conditionalLoop
 ;
 
-conditionalLoopKeywords
+conditionalLoopKeywords_
 : 'while' #whileLoop
 | 'until' #untilLoop
 ;
 
-doWhileLoop: 'do' scope conditionalLoopKeywords expression ';' ;
-
 /* ================================================================================ */
 // FUNCTIONS ARGS PARAMETERS
 
-fnDeclaration: 'fn' Id '(' parameters ')' scope ;
+fnDeclaration: 'fn' Id '(' parameters_ ')' scope_ ;
 
-lambda: '(' parameters ')' '->' statement ;
+lambda: '(' parameters_ ')' '->' statement_ ;
 
-parameters
+parameters_
 : ((Id ',')* Id)? #params
 | (Id ',')* Id '...' #paramsExpand
 ;
 
-args: (argument (',' argument)*)? ;
+args: (argument_ (',' argument_)*)? ;
 
-argument
-: value #arg
-| '...' value #argExpand
+argument_
+: value_ #arg
+| '...' value_ #argExpand
 ;
 
 /* ================================================================================ */
 // MATCH
 
+// TODO: Rework REGEX
+
 matchRegex
-: '~' ('{' matchOptions* '}')? '/' matchContent+ '/'
+: '~' ('{' matchOptions_* '}')? '/' matchContent_+ '/'
 ;
 
-matchOptions
-: 'return all'
+matchOptions_
+: 'return all' #returnAllMatchOption
 ;
 
-matchContent
-: matchContent '+' #onOrMore
-| matchContent '*' #zeroOrMore
-| matchContent '?' #zeroOrOne
-| '[' matchContent ('|' matchContent)*']' #orMatch
-| '(' matchContent ')' #collectMatch
-| matchChars+ #chars
+matchContent_
+: matchContent_ '+' #onOrMore
+| matchContent_ '*' #zeroOrMore
+| matchContent_ '?' #zeroOrOne
+| '[' matchContent_ ('|' matchContent_)*']' #orMatch
+| '(' matchContent_ ')' #collectMatch
+| matchChars_+ #chars
 ;
 
-matchChars
+matchChars_
 : '\\w' #word
 | '\\n' #newline
 | '\\\\' #bslash
@@ -154,35 +154,35 @@ matchChars
 /* ================================================================================ */
 // VALUE AND EXPRESSIONS
 
-value
-: expression
+value_
+: expression_
 | lambda
 | idReference
 | pair
 ;
 
-expression
-: literal #litExpr
-| '(' expression ')' #parenExpr
-| '(' assign ')' #assignExpr
-| prefix expression #prefixExpr
-| highPrioritySuffix #defaultSuffixExpr
-| expression highPrioritySuffix #suffixExpr
-| expression op1 expression #opExpr
-| expression op2 expression #opExpr
-| expression op3 expression #opExpr
-| expression op4 expression #opExpr
-| expression op5 expression #opExpr
-| expression op6 expression #opExpr
-| lowPrioritySuffix #defaultSuffixExpr
-| expression lowPrioritySuffix #suffixExpr
-| identifyer #accessExpr
-| identifyer '(' args ')' #fnAccess
+expression_
+: literal_ #litExpr
+| '(' expression_ ')' #parenExpr
+| '(' assign_ ')' #assignExpr
+| prefix_ expression_ #prefixExpr
+| highPrioritySuffix_ #defaultSuffixExpr
+| expression_ highPrioritySuffix_ #suffixExpr
+| expression_ op1_ expression_ #opExpr
+| expression_ op2_ expression_ #opExpr
+| expression_ op3_ expression_ #opExpr
+| expression_ op4_ expression_ #opExpr
+| expression_ op5_ expression_ #opExpr
+| expression_ op6_ expression_ #opExpr
+| lowPrioritySuffix_ #defaultSuffixExpr
+| expression_ lowPrioritySuffix_ #suffixExpr
+| identifyer_ #accessExpr
+| identifyer_ '(' args ')' #fnAccess
 | looseFnCall #looseFnCallExpr
 ;
 
-literal
-: keywordLiteral #keywordLit // TODO: figure out why keywords arent matching
+literal_
+: keywordLiteral_ #keywordLit // TODO: figure out why keywords arent matching
 | String #dStringLit // TODO: add escape characters
 | StringLit #sStringLit
 | '[' args ']' #arrayLit
@@ -190,79 +190,79 @@ literal
 | Number #numLit
 ;
 
-pair: expression ':' value ;
+pair: expression_ ':' value_ ;
 
-keywordLiteral
+keywordLiteral_
 : 'true' #trueLit
 | 'false' #falseLit
 | 'null' #nullLit
 ;
 
-assign
-: 'let' varDeclare (',' varDeclare)* #declareAssign
-| (identifyer '=')+ value #eqAssign
-| '=' value #defaultEqAssign
-| identifyer? '^=' expression #powAssign
-| identifyer? '*=' expression #multAssign
-| identifyer? '/=' expression #divAssign
-| identifyer? '%=' expression #modAssign
-| identifyer? '+=' expression #addAssign
-| identifyer? '-=' expression #minAssign
-| identifyer? '++' #increm
-| identifyer? '--' #decrem
+assign_
+: 'let' varDeclare_ (',' varDeclare_)* #declareAssign
+| (identifyer_ '=')+ value_ #eqAssign
+| '=' value_ #defaultEqAssign
+| identifyer_? '^=' expression_ #powAssign
+| identifyer_? '*=' expression_ #multAssign
+| identifyer_? '/=' expression_ #divAssign
+| identifyer_? '%=' expression_ #modAssign
+| identifyer_? '+=' expression_ #addAssign
+| identifyer_? '-=' expression_ #minAssign
+| identifyer_? '++' #increm
+| identifyer_? '--' #decrem
 ;
 
-varDeclare
-: Id
-| Id '=' value
+varDeclare_
+: Id #noInitVarDeclar
+| Id '=' value_ #initVarDeclar
 ;
 
-identifyer
-: identifyer '.' Id #dotAccess
-| identifyer '[' expression ']' #arrAccesss
+identifyer_
+: identifyer_ '.' Id #dotAccess
+| identifyer_ '[' expression_ ']' #arrAccesss
 | Id #idAccess
 | DefId #defaultAccess
 ;
 
-idReference: Fslash identifyer ;
+idReference: Fslash identifyer_ ;
 
 looseFnCall
-: identifyer argument (',' argument)*
+: identifyer_ argument_ (',' argument_)*
 ;
 
 /* ================================================================================ */
 // OPERATORS
 
-prefix
+prefix_
 : '!' #negatePrefix
 | '-' #negativePrefix
 ;
 
-highPrioritySuffix
+highPrioritySuffix_
 : '!' #excitedSuff // TODO: Find purpose for !
 ;
 
-op1
+op1_
 : '^' #powOp
 ;
 
-op2
+op2_
 : '*' #multOp
 | '/' #divOp
 | '%' #modOp
 ;
 
-op3
+op3_
 : '+' #plusOp
 | '-' #minOp
 ;
 
-op4
+op4_
 : '\\\\' #definedOrOp
 | '..' #rangeOp
 ;
 
-op5
+op5_
 : '==' #boolEqOp
 | '!=' #boolNeqOp
 | Gt #boolGtOp
@@ -271,13 +271,13 @@ op5
 | LtEq #boolLtEqOp
 ;
 
-op6
+op6_
 : '||' #orOp
 | '|' #bitOrOp
 | '&&' #andOp
 | '&' #bitAndOp
 ;
 
-lowPrioritySuffix
+lowPrioritySuffix_
 : matchRegex #matchSuff
 ;
