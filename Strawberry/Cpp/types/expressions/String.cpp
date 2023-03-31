@@ -10,11 +10,11 @@ bool String::isNull() const {
     return false;
 }
 
-bool String::asBool() const {
+bool String::toBool() const {
     return true;
 }
 
-double String::asDouble() const {
+double String::toDouble() const {
     try {
         return std::stod(this->text);
     } catch (std::exception& e) {
@@ -22,12 +22,8 @@ double String::asDouble() const {
     }
 }
 
-std::string String::asString() const {
+std::string String::toString() const {
     return this->text;
-}
-
-std::shared_ptr<Value> String::clone() const {
-    return std::make_shared<String>(*this);
 }
 
 String::String(std::string value) : text(std::move(value)) {}

@@ -158,6 +158,7 @@ value
 : expression
 | lambda
 | idReference
+| pair
 ;
 
 expression
@@ -185,8 +186,11 @@ literal
 | String #dStringLit // TODO: add escape characters
 | StringLit #sStringLit
 | '[' args ']' #arrayLit
+| '{' (pair (',' pair)* ','?)? '}' #hashLit
 | Number #numLit
 ;
+
+pair: expression ':' value ;
 
 keywordLiteral
 : 'true' #trueLit

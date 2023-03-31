@@ -158,6 +158,7 @@ value
 : expression
 | lambda
 | idReference
+| pair
 ;
 
 expression
@@ -185,8 +186,11 @@ literal
 | String #dStringLit // TODO: add escape characters
 | StringLit #sStringLit
 |  Lbrack  args  Rbrack  #arrayLit
+|  Lbrace  (pair ( Com  pair)*  Com ?)?  Rbrace  #hashLit
 | Number #numLit
 ;
+
+pair: expression  Colon  value ;
 
 keywordLiteral
 :  True  #trueLit

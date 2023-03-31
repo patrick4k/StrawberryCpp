@@ -23,6 +23,14 @@ public:
 
     const std::shared_ptr<Reference> &getValue() const;
 
+    bool isNull() const override;
+
+    double toDouble() const override;
+
+    std::string toString() const override;
+
+    ~Pair() override;
+
 };
 
 #endif //LIBANTLR4_PAIR_H

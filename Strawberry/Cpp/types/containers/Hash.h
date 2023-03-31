@@ -20,13 +20,11 @@ public:
 
     bool isNull() const override;
 
-    bool asBool() const override;
+    bool toBool() const override;
 
-    double asDouble() const override;
+    double toDouble() const override;
 
-    std::string asString() const override;
-
-    std::shared_ptr<Value> clone() const override;
+    std::string toString() const override;
 
     ~Hash() override;
 };

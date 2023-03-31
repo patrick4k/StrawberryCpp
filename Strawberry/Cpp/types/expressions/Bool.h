@@ -8,7 +8,21 @@
 #include "../Value.h"
 
 class Bool: public Value {
+private:
+    bool boolValue = false;
+public:
+    explicit Bool(bool boolValue);
 
+public:
+    bool isNull() const override;
+
+    bool toBool() const override;
+
+    double toDouble() const override;
+
+    std::string toString() const override;
+
+    ~Bool() override;
 };
 
 

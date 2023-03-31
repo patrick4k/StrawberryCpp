@@ -8,13 +8,23 @@
 
 Pair::Pair(std::shared_ptr<Value> key, std::shared_ptr<Reference> value): key(std::move(key)), value(std::move(value)) {}
 
-void Pair::setKeyValue(std::shared_ptr<Value> key, std::shared_ptr<Reference> value) {
-
-}
-
 void Pair::setKey(std::shared_ptr<Value> newkey) {
     this->key = std::move(newkey);
 }
+
+bool Pair::isNull() const {
+    return false;
+}
+
+double Pair::toDouble() const {
+    throw std::runtime_error("Cannot use pair in number context");
+}
+
+std::string Pair::toString() const {
+    return "{" + this->key->toString() + " : " + this->value->toString() + "}";
+}
+
+Pair::~Pair() = default;
 
 void Pair::setValue(std::shared_ptr<Reference> newvalue) {
     this->value = std::move(newvalue);

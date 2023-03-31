@@ -13,15 +13,15 @@ bool Number::isNull() const {
     return false;
 }
 
-bool Number::asBool() const {
+bool Number::toBool() const {
     return false;
 }
 
-double Number::asDouble() const {
+double Number::toDouble() const {
     return number;
 }
 
-std::string Number::asString() const {
+std::string Number::toString() const {
     int asInt = (int) this->number;
     if (asInt == this->number)
         return std::to_string(asInt);

@@ -9,26 +9,22 @@ bool List::isNull() const {
     return false;
 }
 
-bool List::asBool() const {
+bool List::toBool() const {
     return !this->refs.empty();
 }
 
-double List::asDouble() const {
+double List::toDouble() const {
     return this->refs.size();
 }
 
-std::string List::asString() const {
+std::string List::toString() const {
     if (this->refs.size() == 1)
-        return "[" + this->refs[0]->asString() + "]";
+        return "[" + this->refs[0]->toString() + "]";
     std::stringstream ss;
     for (const auto & ref : this->refs) {
-        ss << ref->asString() << ", ";
+        ss << ref->toString() << ", ";
     }
     return "[" + ss.str() + "]";
-}
-
-std::shared_ptr<Value> List::clone() const {
-    return Value::clone();
 }
 
 std::shared_ptr<Reference> List::get(int i) {
@@ -54,11 +50,13 @@ std::shared_ptr<Reference> List::get(int i) {
 }
 
 std::shared_ptr<Reference> List::get(std::shared_ptr<Value> key) {
-    return this->get(key->asDouble());
+    return this->get(key->toDouble());
 }
 
 void List::append(const std::shared_ptr<Value> &val) {
-    auto ref = std::dynamic_pointer_cast<Reference>(val);
+
+    auto ref = val->as<Reference>();
+
     if (ref) {
         this->refs.push_back(std::make_shared<Reference>(ref));
         return;

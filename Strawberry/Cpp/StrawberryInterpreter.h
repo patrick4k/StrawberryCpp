@@ -80,6 +80,8 @@ namespace antlrcpptest {
         void testList();
         void moreListTesting();
         void pairHashTesting();
+        void castTesting();
+
     };
 
 

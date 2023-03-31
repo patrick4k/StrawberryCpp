@@ -5,18 +5,18 @@
 #include "Value.h"
 
 bool Value::isNull() const {
-    return false;
+    return true;
 }
 
-bool Value::asBool() const {
-    return false;
+bool Value::toBool() const {
+    return !this->isNull();
 }
 
-double Value::asDouble() const {
+double Value::toDouble() const {
     return 0;
 }
 
-std::string Value::asString() const {
+std::string Value::toString() const {
     return "null";
 }
 

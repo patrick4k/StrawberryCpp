@@ -14,10 +14,9 @@ private:
 
 public:
     bool isNull() const override;
-    bool asBool() const override;
-    double asDouble() const override;
-    std::string asString() const override;
-    std::shared_ptr<Value> clone() const override;
+    bool toBool() const override;
+    double toDouble() const override;
+    std::string toString() const override;
 
     std::shared_ptr<Reference> get(std::shared_ptr<Value> key) override;
     std::shared_ptr<Reference> get(int i);

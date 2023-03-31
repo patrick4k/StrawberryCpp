@@ -25,20 +25,16 @@ public:
         return this->referenceValue->isNull();
     }
 
-    bool asBool() const override {
-        return this->referenceValue->asBool();
+    bool toBool() const override {
+        return this->referenceValue->toBool();
     }
 
-    double asDouble() const override {
-        return this->referenceValue->asDouble();
+    double toDouble() const override {
+        return this->referenceValue->toDouble();
     }
 
-    std::string asString() const override {
-        return this->referenceValue->asString();;
-    }
-
-    std::shared_ptr<Value> clone() const override {
-        return std::make_shared<Reference>(*this);
+    std::string toString() const override {
+        return this->referenceValue->toString();;
     }
 
     std::shared_ptr<Value> copy_value() const {
@@ -50,20 +46,20 @@ public:
     }
 
     std::shared_ptr<Value> get_referenced_value() const {
-        auto ref = std::dynamic_pointer_cast<Reference>(this->referenceValue);
-        if (ref) {
-            return ref->get_referenced_value();
-        }
+        auto ref = this->referenceValue->as<Reference>();
+        if (ref) return ref->get_referenced_value();
         return this->referenceValue;
     }
 
-    ~Reference() override {
+    ~Reference() override = default;
 
+    std::shared_ptr<Value> deref() {
+        return this->referenceValue->as<Value>();
     }
 
     template<typename T>
-    std::shared_ptr<T> as() {
-        return std::dynamic_pointer_cast<T>(this->referenceValue);
+    std::shared_ptr<T> deref() {
+        return this->referenceValue->as<T>();
     }
 
 };

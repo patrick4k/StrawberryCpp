@@ -8,7 +8,7 @@
 Hash::Hash(): map() {}
 
 std::shared_ptr<Reference> Hash::get(std::shared_ptr<Value> key) {
-    auto key_str = key->asString();
+    auto key_str = key->toString();
     auto iter = map.find(key_str);
     if (iter == map.end()) {
         auto ref = std::make_shared<Reference>();
@@ -25,36 +25,32 @@ void Hash::append(const std::shared_ptr<Value> &val) {
         if (ref) pair = std::dynamic_pointer_cast<Pair>(ref->get_referenced_value());
         if (!pair) throw std::runtime_error("Cannot append non-pair values to hash");
     }
-    this->map.insert_or_assign(pair->getKey()->asString(), pair->getValue());
+    this->map.insert_or_assign(pair->getKey()->toString(), pair->getValue());
 }
 
 bool Hash::isNull() const {
     return false;
 }
 
-bool Hash::asBool() const {
+bool Hash::toBool() const {
     return !map.empty();
 }
 
-double Hash::asDouble() const {
+double Hash::toDouble() const {
     return map.size();
 }
 
-std::string Hash::asString() const {
+std::string Hash::toString() const {
     if (map.size() == 1)
-        return "{" + map.begin()->first + " : " + map.begin()->second->asString() + "}";
+        return "{" + map.begin()->first + " : " + map.begin()->second->toString() + "}";
     std::stringstream ss;
     ss << "{";
     for (auto item = map.begin(); item != map.end(); ++item) {
-        ss << item->first + " : " + item->second->asString();
+        ss << item->first + " : " + item->second->toString();
         if (!(std::next(item) == map.end())) ss << ", ";
     }
     ss << "}";
     return ss.str();
-}
-
-std::shared_ptr<Value> Hash::clone() const {
-    return Value::clone();
 }
 
 Hash::~Hash() {

@@ -15,16 +15,11 @@ public:
     explicit Number(const std::string& value);
 
     bool isNull() const override;
-    bool asBool() const override;
-    double asDouble() const override;
-    std::string asString() const override;
+    bool toBool() const override;
+    double toDouble() const override;
+    std::string toString() const override;
 
     ~Number() override = default;
-
-public:
-    std::shared_ptr<Value> clone() const override {
-        return std::make_shared<Number>(*this);
-    }
 
 };
 
