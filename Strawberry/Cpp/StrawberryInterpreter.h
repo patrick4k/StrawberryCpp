@@ -81,7 +81,6 @@ namespace antlrcpptest {
         std::any visitNextStat(StrawberryParser::NextStatContext *ctx) override;
         std::any visitLastStat(StrawberryParser::LastStatContext *ctx) override;
         std::any visitBreakStat(StrawberryParser::BreakStatContext *ctx) override;
-        std::any visitControlFlow_(StrawberryParser::ControlFlow_Context *ctx) override;
         std::any visitLoopScope(StrawberryParser::LoopScopeContext *ctx) override;
         std::any visitLoopBody(StrawberryParser::LoopBodyContext *ctx) override;
         std::any visitDoWhileLoop(StrawberryParser::DoWhileLoopContext *ctx) override;

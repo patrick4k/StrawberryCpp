@@ -97,6 +97,9 @@ namespace antlrcpptest {
 
     }
 
+/* ================================================ VISITOR OVERRIDES =============================================== */
+    /* -------------------------------------------------------------------------------------------------------------- */
+        /* Loop Keywords */
     std::any StrawberryInterpreter::visitReturnStat(StrawberryParser::ReturnStatContext *ctx) {
         return StrawberryParserBaseVisitor::visitReturnStat(ctx);
     }
@@ -117,10 +120,8 @@ namespace antlrcpptest {
         return StrawberryParserBaseVisitor::visitBreakStat(ctx);
     }
 
-    std::any StrawberryInterpreter::visitControlFlow_(StrawberryParser::ControlFlow_Context *ctx) {
-        return StrawberryParserBaseVisitor::visitControlFlow_(ctx);
-    }
-
+    /* -------------------------------------------------------------------------------------------------------------- */
+        /* Control Flow */
     std::any StrawberryInterpreter::visitLoopScope(StrawberryParser::LoopScopeContext *ctx) {
         return StrawberryParserBaseVisitor::visitLoopScope(ctx);
     }
@@ -189,6 +190,8 @@ namespace antlrcpptest {
         return StrawberryParserBaseVisitor::visitUntilLoop(ctx);
     }
 
+    /* -------------------------------------------------------------------------------------------------------------- */
+        /* Function Handlers */
     std::any StrawberryInterpreter::visitFnDeclaration(StrawberryParser::FnDeclarationContext *ctx) {
         return StrawberryParserBaseVisitor::visitFnDeclaration(ctx);
     }
@@ -217,6 +220,8 @@ namespace antlrcpptest {
         return StrawberryParserBaseVisitor::visitArgExpand(ctx);
     }
 
+    /* -------------------------------------------------------------------------------------------------------------- */
+        /* Regex */
     std::any StrawberryInterpreter::visitMatchRegex(StrawberryParser::MatchRegexContext *ctx) {
         return StrawberryParserBaseVisitor::visitMatchRegex(ctx);
     }
@@ -269,6 +274,8 @@ namespace antlrcpptest {
         return StrawberryParserBaseVisitor::visitOther(ctx);
     }
 
+    /* -------------------------------------------------------------------------------------------------------------- */
+        /* Expressions */
     std::any StrawberryInterpreter::visitLooseFnCallExpr(StrawberryParser::LooseFnCallExprContext *ctx) {
         return StrawberryParserBaseVisitor::visitLooseFnCallExpr(ctx);
     }
@@ -309,6 +316,8 @@ namespace antlrcpptest {
         return StrawberryParserBaseVisitor::visitAccessExpr(ctx);
     }
 
+    /* -------------------------------------------------------------------------------------------------------------- */
+        /* Literals */
     std::any StrawberryInterpreter::visitKeywordLit(StrawberryParser::KeywordLitContext *ctx) {
         return StrawberryParserBaseVisitor::visitKeywordLit(ctx);
     }
@@ -349,6 +358,8 @@ namespace antlrcpptest {
         return StrawberryParserBaseVisitor::visitNullLit(ctx);
     }
 
+    /* -------------------------------------------------------------------------------------------------------------- */
+        /* Memory Allocation */
     std::any StrawberryInterpreter::visitDeclareAssign(StrawberryParser::DeclareAssignContext *ctx) {
         return StrawberryParserBaseVisitor::visitDeclareAssign(ctx);
     }
@@ -401,6 +412,8 @@ namespace antlrcpptest {
         return StrawberryParserBaseVisitor::visitInitVarDeclar(ctx);
     }
 
+    /* -------------------------------------------------------------------------------------------------------------- */
+        /* Identifiers / Container Access */
     std::any StrawberryInterpreter::visitDotAccess(StrawberryParser::DotAccessContext *ctx) {
         return StrawberryParserBaseVisitor::visitDotAccess(ctx);
     }
@@ -425,6 +438,8 @@ namespace antlrcpptest {
         return StrawberryParserBaseVisitor::visitLooseFnCall(ctx);
     }
 
+    /* -------------------------------------------------------------------------------------------------------------- */
+        /* Operators */
     std::any StrawberryInterpreter::visitNegatePrefix(StrawberryParser::NegatePrefixContext *ctx) {
         return StrawberryParserBaseVisitor::visitNegatePrefix(ctx);
     }
