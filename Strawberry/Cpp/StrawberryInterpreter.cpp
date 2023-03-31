@@ -13,14 +13,6 @@
 
 namespace antlrcpptest {
 
-    std::any StrawberryInterpreter::visitScript_(StrawberryParser::Script_Context *ctx) {
-        this->scope_in();
-        StrawberryParserBaseVisitor::visitScript_(ctx);
-        this->castTesting();
-        this->scope_out();
-        return 0;
-    }
-
     void StrawberryInterpreter::testRef() {
 
         auto x = declare("x", std::make_shared<Number>(11)); // new
@@ -98,6 +90,14 @@ namespace antlrcpptest {
     }
 
 /* ================================================ VISITOR OVERRIDES =============================================== */
+    std::any StrawberryInterpreter::visitScript_(StrawberryParser::Script_Context *ctx) {
+        this->scope_in();
+        StrawberryParserBaseVisitor::visitScript_(ctx);
+        this->castTesting();
+        this->scope_out();
+        return 0;
+    }
+
     /* -------------------------------------------------------------------------------------------------------------- */
         /* Loop Keywords */
     std::any StrawberryInterpreter::visitReturnStat(StrawberryParser::ReturnStatContext *ctx) {
