@@ -72,6 +72,21 @@ namespace antlrcpptest {
             return value->second;
         }
 
+        void print_memory() {
+            auto scope = innerScope;
+            int i = 0;
+            do {
+                std::cout << "Scope " << i << ":" << std::endl;
+                for (auto item:scope->memory) {
+                    std::cout << "\t" << item.first << " -> " << item.second->toString() << std::endl;
+                }
+                if (!scope->outerScope) break;
+                std::cout << std::endl << std::endl;
+                ++i;
+                scope = scope->outerScope;
+            } while (true);
+        }
+
 /* ================================================================================================================== */
     /* Visitor Overrides */
     public:
