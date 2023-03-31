@@ -325,14 +325,20 @@ namespace antlrcpptest {
     // std::shared_ptr<Reference>
     std::any StrawberryInterpreter::visitDStringLit(StrawberryParser::DStringLitContext *ctx) {
         auto string = ctx->String()->getText();
+        // TODO: Add escape characters
         return std::make_shared<Reference>(std::make_shared<String>(string.substr(1, string.length() - 2)));
     }
 
     std::any StrawberryInterpreter::visitSStringLit(StrawberryParser::SStringLitContext *ctx) {
-        return StrawberryParserBaseVisitor::visitSStringLit(ctx);
+        auto string = ctx->StringLit()->getText();
+        return std::make_shared<Reference>(std::make_shared<String>(string.substr(1, string.length() - 2)));
     }
 
     std::any StrawberryInterpreter::visitArrayLit(StrawberryParser::ArrayLitContext *ctx) {
+        auto list = std::make_shared<List>();
+        for (auto arg: ctx->args()->argument_()) {
+            // TODO: visit each arg
+        }
         return StrawberryParserBaseVisitor::visitArrayLit(ctx);
     }
 
@@ -363,7 +369,7 @@ namespace antlrcpptest {
 
     /* -------------------------------------------------------------------------------------------------------------- */
         /* Memory Allocation */
-    // std::shared_ptr<Reference> || std::shared_ptr<List>
+    // std::shared_ptr<Reference>
     std::any StrawberryInterpreter::visitDeclareAssign(StrawberryParser::DeclareAssignContext *ctx) {
         if (ctx->varDeclare_().size() == 1) {
             return visit(ctx->varDeclare_(0));
@@ -371,7 +377,7 @@ namespace antlrcpptest {
         auto vars = std::shared_ptr<List>();
         for (auto item: ctx->varDeclare_())
             vars->append(std::any_cast<std::shared_ptr<Reference>>(visit(item)));
-        return vars;
+        return std::make_shared<Reference>(vars);
     }
 
     std::any StrawberryInterpreter::visitEqAssign(StrawberryParser::EqAssignContext *ctx) {
@@ -421,9 +427,7 @@ namespace antlrcpptest {
 
     // std::shared_ptr<Reference>
     std::any StrawberryInterpreter::visitInitVarDeclar(StrawberryParser::InitVarDeclarContext *ctx) {
-        auto rawval = visit(ctx->value_());
-        auto value = std::any_cast<std::shared_ptr<Reference>>(rawval);
-        return declare(ctx->Id()->getText(), value);
+        return declare(ctx->Id()->getText(), std::any_cast<std::shared_ptr<Reference>>(visit(ctx->value_())));
     }
 
     /* -------------------------------------------------------------------------------------------------------------- */

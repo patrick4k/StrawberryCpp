@@ -72,14 +72,22 @@ namespace antlrcpptest {
             return value->second;
         }
 
+        static void print_scope(const std::shared_ptr<Scope>& scope, const std::string& prelim) {
+            for (const auto& item:scope->memory) {
+                std::cout << prelim << item.first << " -> " << item.second->toString() << std::endl;
+            }
+        }
+
+        void print_inner_scope() {
+            print_scope(this->innerScope, "");
+        }
+
         void print_memory() {
             auto scope = innerScope;
             int i = 0;
             do {
                 std::cout << "Scope " << i << ":" << std::endl;
-                for (auto item:scope->memory) {
-                    std::cout << "\t" << item.first << " -> " << item.second->toString() << std::endl;
-                }
+                print_scope(scope, "\t");
                 if (!scope->outerScope) break;
                 std::cout << std::endl << std::endl;
                 ++i;
