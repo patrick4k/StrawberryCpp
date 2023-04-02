@@ -59,7 +59,7 @@ public:
     ~Reference() override = default;
 
     std::shared_ptr<Value> deref() {
-        return this->referenceValue->as<Value>();
+        return this->referenceValue;
     }
 
     template<typename T>

@@ -381,6 +381,10 @@ namespace antlrcpptest {
     }
 
     std::any StrawberryInterpreter::visitEqAssign(StrawberryParser::EqAssignContext *ctx) {
+        auto value = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->value_()));
+        for (auto id: ctx->identifyer_()) {
+            std::any_cast<std::shared_ptr<Reference>>(visit(id))->set(value->deref());
+        }
         return StrawberryParserBaseVisitor::visitEqAssign(ctx);
     }
 
@@ -441,6 +445,7 @@ namespace antlrcpptest {
     }
 
     std::any StrawberryInterpreter::visitIdAccess(StrawberryParser::IdAccessContext *ctx) {
+        return get_from_memory(ctx->Id()->getText());
         return StrawberryParserBaseVisitor::visitIdAccess(ctx);
     }
 
@@ -449,7 +454,9 @@ namespace antlrcpptest {
     }
 
     std::any StrawberryInterpreter::visitIdReference(StrawberryParser::IdReferenceContext *ctx) {
-        return StrawberryParserBaseVisitor::visitIdReference(ctx);
+        return std::make_shared<Reference>(
+                std::any_cast<std::shared_ptr<Reference>>(
+                        visit(ctx->identifyer_())));
     }
 
     std::any StrawberryInterpreter::visitLooseFnCall(StrawberryParser::LooseFnCallContext *ctx) {

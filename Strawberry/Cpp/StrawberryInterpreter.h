@@ -56,7 +56,8 @@ namespace antlrcpptest {
             return declare(id, std::make_shared<Value>());
         }
 
-            void assign(const std::string& id, std::shared_ptr<Value> val) const {
+        // TODO: Overload assign() to accept id context
+        void assign(const std::string& id, std::shared_ptr<Value> val) const {
             get_from_memory(id)->set(std::move(val));
         }
 
