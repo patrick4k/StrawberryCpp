@@ -190,7 +190,7 @@ literal_
 | Number #numLit
 ;
 
-pair: expression_ ':' value_ ;
+pair: (Id|Key=(String|StringLit)) ':' value_ ;
 
 keywordLiteral_
 : 'true' #trueLit

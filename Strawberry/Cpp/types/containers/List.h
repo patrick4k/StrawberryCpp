@@ -24,6 +24,12 @@ public:
     std::shared_ptr<Reference> get(int i);
 
     void append(const std::shared_ptr<Value> &val) override;
+
+    explicit List(const std::shared_ptr<Reference> &ref);
+
+    List();
+
+    int size() override;
 };
 
 #endif //LIBANTLR4_LIST_H

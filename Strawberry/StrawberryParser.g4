@@ -190,7 +190,7 @@ literal_
 | Number #numLit
 ;
 
-pair: expression_  Colon  value_ ;
+pair: (Id|Key=(String|StringLit))  Colon  value_ ;
 
 keywordLiteral_
 :  True  #trueLit

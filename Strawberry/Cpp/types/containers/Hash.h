@@ -20,6 +20,8 @@ public:
 
     void append(const std::shared_ptr<Value> &val) override;
 
+    int size() override;
+
     bool isNull() const override;
 
     bool toBool() const override;
