@@ -446,7 +446,6 @@ namespace antlrcpptest {
 
     std::any StrawberryInterpreter::visitIdAccess(StrawberryParser::IdAccessContext *ctx) {
         return get_from_memory(ctx->Id()->getText());
-        return StrawberryParserBaseVisitor::visitIdAccess(ctx);
     }
 
     std::any StrawberryInterpreter::visitDefaultAccess(StrawberryParser::DefaultAccessContext *ctx) {

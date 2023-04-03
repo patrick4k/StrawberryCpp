@@ -15,12 +15,7 @@ private:
     std::shared_ptr<Value> referenceValue;
 public:
     explicit Reference() : referenceValue(std::make_shared<Value>()) {}
-    explicit Reference(const std::shared_ptr<Value>& value) {
-        if (auto ref = std::dynamic_pointer_cast<Reference>(value))
-            this->referenceValue = ref->get_referenced_value();
-        else
-            this->referenceValue = value;
-    }
+    explicit Reference(std::shared_ptr<Value>  value) : referenceValue(std::move(value)) {}
 
     void set(std::shared_ptr<Value> val) {
         referenceValue = std::move(val);
