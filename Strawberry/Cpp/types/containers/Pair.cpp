@@ -6,6 +6,7 @@
 
 #include <utility>
 
+Pair::Pair(std::shared_ptr<Value> key, const std::shared_ptr<Value> &value) : key(std::move(key)), value(std::make_shared<Reference>(value)) {}
 Pair::Pair(std::shared_ptr<Value> key, std::shared_ptr<Reference> value): key(std::move(key)), value(std::move(value)) {}
 
 void Pair::setKey(std::shared_ptr<Value> newkey) {
@@ -41,3 +42,4 @@ const std::shared_ptr<Reference> &Pair::getValue() const {
 int Pair::operatorPriority() const {
     return 7;
 }
+
