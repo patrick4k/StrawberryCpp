@@ -201,6 +201,7 @@ keywordLiteral_
 assign_
 :  Decl  varDeclare_ ( Com  varDeclare_)* #declareAssign
 | (identifyer_  Eq )+ value_ #eqAssign
+| identifyer_  Sarrow  value_ #setAssign
 |  Eq  value_ #defaultEqAssign
 | identifyer_?  PowEq  expression_ #powAssign
 | identifyer_?  MultEq  expression_ #multAssign

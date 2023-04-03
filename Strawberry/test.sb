@@ -1,6 +1,5 @@
-let obj = {
-    real: 2,
-    i: 0
-};
+let l = [0,1,2,3];
 
-let r = obj.real;
+let ref = \l[0];
+
+ref -> 1;

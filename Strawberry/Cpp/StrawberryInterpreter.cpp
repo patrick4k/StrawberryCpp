@@ -476,7 +476,17 @@ namespace antlrcpptest {
         for (auto id: ctx->identifyer_()) {
             std::any_cast<std::shared_ptr<Reference>>(visit(id))->set(value->deref());
         }
-        return StrawberryParserBaseVisitor::visitEqAssign(ctx);
+        return value;
+    }
+
+    std::any StrawberryInterpreter::visitSetAssign(StrawberryParser::SetAssignContext *ctx) {
+        auto identifyer = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->identifyer_()));
+        auto value = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->value_()));
+        if (auto ref = identifyer->deref<Reference>()) {
+            ref->set(value->deref());
+            return ref;
+        }
+        throw std::runtime_error("Cannot set value of non-reference value");
     }
 
     std::any StrawberryInterpreter::visitDefaultEqAssign(StrawberryParser::DefaultEqAssignContext *ctx) {
@@ -660,5 +670,7 @@ namespace antlrcpptest {
     std::any StrawberryInterpreter::visitMatchSuff(StrawberryParser::MatchSuffContext *ctx) {
         return StrawberryParserBaseVisitor::visitMatchSuff(ctx);
     }
+
+
 
 } // antlrcpptest
