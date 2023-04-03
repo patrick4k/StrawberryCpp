@@ -13,6 +13,8 @@ private:
     std::vector<std::shared_ptr<Reference>> refs = std::vector<std::shared_ptr<Reference>>();
 
 public:
+    int operatorPriority() const override;
+
     bool isNull() const override;
     bool toBool() const override;
     double toDouble() const override;

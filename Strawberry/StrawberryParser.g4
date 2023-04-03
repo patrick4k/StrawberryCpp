@@ -168,12 +168,12 @@ expression_
 | prefix_ expression_ #prefixExpr
 | highPrioritySuffix_ #defaultSuffixExpr
 | expression_ highPrioritySuffix_ #suffixExpr
-| expression_ op1_ expression_ #opExpr
-| expression_ op2_ expression_ #opExpr
-| expression_ op3_ expression_ #opExpr
-| expression_ op4_ expression_ #opExpr
-| expression_ op5_ expression_ #opExpr
-| expression_ op6_ expression_ #opExpr
+| expression_ op1_ expression_ #opExpr1
+| expression_ op2_ expression_ #opExpr2
+| expression_ op3_ expression_ #opExpr3
+| expression_ op4_ expression_ #opExpr4
+| expression_ op5_ expression_ #opExpr5
+| expression_ op6_ expression_ #opExpr6
 | lowPrioritySuffix_ #defaultSuffixExpr
 | expression_ lowPrioritySuffix_ #suffixExpr
 | identifyer_ #accessExpr

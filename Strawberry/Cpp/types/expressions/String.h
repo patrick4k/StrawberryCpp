@@ -16,6 +16,8 @@ public:
     explicit String(std::string value);
 
 public:
+    int operatorPriority() const override;
+
     bool isNull() const override;
     bool toBool() const override;
     double toDouble() const override;
@@ -23,6 +25,7 @@ public:
 
     ~String() override = default;
 
+    std::shared_ptr<Value> add(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override;
 };
 
 #endif //LIBANTLR4_STRING_H

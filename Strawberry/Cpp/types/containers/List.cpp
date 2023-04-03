@@ -63,3 +63,7 @@ void List::append(const std::shared_ptr<Value> &val) {
     }
     this->refs.push_back(std::make_shared<Reference>(val));
 }
+
+int List::operatorPriority() const {
+    return 8;
+}

@@ -37,3 +37,7 @@ const std::shared_ptr<Value> &Pair::getKey() const {
 const std::shared_ptr<Reference> &Pair::getValue() const {
     return value;
 }
+
+int Pair::operatorPriority() const {
+    return 7;
+}

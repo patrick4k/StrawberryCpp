@@ -17,6 +17,14 @@ public:
     explicit Reference() : referenceValue(std::make_shared<Value>()) {}
     explicit Reference(std::shared_ptr<Value>  value) : referenceValue(std::move(value)) {}
 
+    int operatorPriority() const override {
+        return this->referenceValue->operatorPriority();
+    }
+
+    std::shared_ptr<Value> add(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override {
+        return this->referenceValue->add(val1,val2);
+    }
+
     void set(std::shared_ptr<Value> val) {
         referenceValue = std::move(val);
     }

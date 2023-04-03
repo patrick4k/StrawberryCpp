@@ -9,6 +9,7 @@
 
 class Value: public std::enable_shared_from_this<Value> {
 public:
+    virtual int operatorPriority() const;
     /* Interpreter Level Casting */
     virtual bool isNull() const;
     virtual bool toBool() const;
@@ -19,13 +20,15 @@ public:
         return std::make_shared<Value>(*this);
     }
 
-public:
     virtual ~Value();
 
     template<typename T>
     std::shared_ptr<T> as() {
         return std::dynamic_pointer_cast<T>(shared_from_this());
     }
+
+    /* Operations */
+    virtual std::shared_ptr<Value> add(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2);
 
 };
 

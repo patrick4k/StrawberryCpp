@@ -14,6 +14,8 @@ public:
     explicit Bool(bool boolValue);
 
 public:
+    int operatorPriority() const override;
+
     bool isNull() const override;
 
     bool toBool() const override;

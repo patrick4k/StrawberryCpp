@@ -15,6 +15,8 @@ private:
 public:
     Pair(std::shared_ptr<Value> key, std::shared_ptr<Reference> value);
 
+    int operatorPriority() const override;
+
     void setKeyValue(std::shared_ptr<Value> key, std::shared_ptr<Reference> value);
     void setKey(std::shared_ptr<Value> newkey);
     void setValue(std::shared_ptr<Reference> newvalue);

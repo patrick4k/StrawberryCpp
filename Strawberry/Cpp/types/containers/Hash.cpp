@@ -56,3 +56,7 @@ std::string Hash::toString() const {
 Hash::~Hash() {
 
 }
+
+int Hash::operatorPriority() const {
+    return 8;
+}

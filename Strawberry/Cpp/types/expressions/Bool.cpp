@@ -23,3 +23,7 @@ std::string Bool::toString() const {
 Bool::~Bool() = default;
 
 Bool::Bool(bool boolValue) : boolValue(boolValue) {}
+
+int Bool::operatorPriority() const {
+    return 0;
+}

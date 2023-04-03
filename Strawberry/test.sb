@@ -1,4 +1,3 @@
-let a = 120;
-let b = "some string text!";
-b = \a;
-a = "a is different";
+let x = 1;
+let y = 2;
+let z = x + y;

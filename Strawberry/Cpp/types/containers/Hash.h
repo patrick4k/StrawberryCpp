@@ -14,6 +14,8 @@ private:
 public:
     Hash();
 
+    int operatorPriority() const override;
+
     std::shared_ptr<Reference> get(std::shared_ptr<Value> key) override;
 
     void append(const std::shared_ptr<Value> &val) override;

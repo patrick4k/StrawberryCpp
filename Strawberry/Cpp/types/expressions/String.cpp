@@ -27,3 +27,11 @@ std::string String::toString() const {
 }
 
 String::String(std::string value) : text(std::move(value)) {}
+
+int String::operatorPriority() const {
+    return 10;
+}
+
+std::shared_ptr<Value> String::add(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) {
+    return std::make_shared<String>(val1->toString() + val2->toString());
+}

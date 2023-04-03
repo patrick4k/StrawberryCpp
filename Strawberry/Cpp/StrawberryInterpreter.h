@@ -145,7 +145,12 @@ namespace antlrcpptest {
         std::any visitLooseFnCallExpr(StrawberryParser::LooseFnCallExprContext *ctx) override;
         std::any visitPrefixExpr(StrawberryParser::PrefixExprContext *ctx) override;
         std::any visitDefaultSuffixExpr(StrawberryParser::DefaultSuffixExprContext *ctx) override;
-        std::any visitOpExpr(StrawberryParser::OpExprContext *ctx) override;
+        std::any visitOpExpr1(StrawberryParser::OpExpr1Context *ctx) override;
+        std::any visitOpExpr2(StrawberryParser::OpExpr2Context *ctx) override;
+        std::any visitOpExpr3(StrawberryParser::OpExpr3Context *ctx) override;
+        std::any visitOpExpr4(StrawberryParser::OpExpr4Context *ctx) override;
+        std::any visitOpExpr5(StrawberryParser::OpExpr5Context *ctx) override;
+        std::any visitOpExpr6(StrawberryParser::OpExpr6Context *ctx) override;
         std::any visitSuffixExpr(StrawberryParser::SuffixExprContext *ctx) override;
         std::any visitLitExpr(StrawberryParser::LitExprContext *ctx) override;
         std::any visitAssignExpr(StrawberryParser::AssignExprContext *ctx) override;
