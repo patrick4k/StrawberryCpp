@@ -473,9 +473,8 @@ namespace antlrcpptest {
 
     std::any StrawberryInterpreter::visitEqAssign(StrawberryParser::EqAssignContext *ctx) {
         auto value = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->value_()));
-        for (auto id: ctx->identifyer_()) {
+        for (auto id: ctx->identifyer_())
             std::any_cast<std::shared_ptr<Reference>>(visit(id))->set(value->deref());
-        }
         return value;
     }
 

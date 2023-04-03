@@ -1,5 +1,8 @@
-let l = [0,1,2,3];
 
-let ref = \l[0];
+let myself = {
+    name: "Patrick",
+    age: 20
+};
 
-ref -> 1;
+let you = myself;
+you.favNum = 7; // member favNum = 7 now in myself as well
