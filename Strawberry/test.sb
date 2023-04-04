@@ -1,1 +1,2 @@
-1 + 2.5 ;
+let a = 120;
+let b = "some string text!";

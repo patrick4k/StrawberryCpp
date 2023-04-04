@@ -32,9 +32,9 @@ int main(const int argc, const char* argv[]) {
 
     /* Create and Visit Script Tree */
     StrawberryParser parser(&tokens);
-    auto tree = parser.script();
+    auto tree = parser.script_();
     auto visitor = antlrcpptest::StrawberryInterpreter();
-    visitor.visitScript(tree);
+    visitor.visitScript_(tree);
 
     return 0;
 }
