@@ -46,7 +46,7 @@ public:
     }
 
     std::string typeName() const override {
-        return "reference of " + this->referenceValue->typeName();
+        return "ref of " + this->referenceValue->typeName();
     }
 
     std::shared_ptr<Value> copy_value() const {

@@ -201,7 +201,7 @@ keywordLiteral_
 assign_
 : 'let' varDeclare_ (',' varDeclare_)* #declareAssign
 | (identifyer_ '=')+ value_ #eqAssign
-| identifyer_ '->' value_ #setAssign
+| identifyer_ '<<' value_ #streamAssign
 | '=' value_ #defaultEqAssign
 | identifyer_? '^=' expression_ #powAssign
 | identifyer_? '*=' expression_ #multAssign

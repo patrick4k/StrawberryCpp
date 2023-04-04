@@ -169,7 +169,7 @@ namespace antlrcpptest {
         std::any visitNullLit(StrawberryParser::NullLitContext *ctx) override;
         std::any visitDeclareAssign(StrawberryParser::DeclareAssignContext *ctx) override;
         std::any visitEqAssign(StrawberryParser::EqAssignContext *ctx) override;
-        std::any visitSetAssign(StrawberryParser::SetAssignContext *ctx) override;
+        std::any visitStreamAssign(StrawberryParser::StreamAssignContext *ctx) override;
         std::any visitDefaultEqAssign(StrawberryParser::DefaultEqAssignContext *ctx) override;
         std::any visitPowAssign(StrawberryParser::PowAssignContext *ctx) override;
         std::any visitMultAssign(StrawberryParser::MultAssignContext *ctx) override;

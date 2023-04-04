@@ -478,7 +478,8 @@ namespace antlrcpptest {
         return value;
     }
 
-    std::any StrawberryInterpreter::visitSetAssign(StrawberryParser::SetAssignContext *ctx) {
+    // TODO: add
+    std::any StrawberryInterpreter::visitStreamAssign(StrawberryParser::StreamAssignContext *ctx) {
         auto identifyer = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->identifyer_()));
         auto value = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->value_()));
         if (auto ref = identifyer->deref<Reference>()) {
@@ -542,7 +543,7 @@ namespace antlrcpptest {
             auto key = std::make_shared<String>(ctx->Id()->getText());
             return hash->get(key);
         }
-        throw std::runtime_error("Cannot access non-hash type\n\t" + ctx->getText());
+        throw std::runtime_error("Cannot use dot access for " + identifyer->deref()->typeName() + "\n\t--->" + ctx->getText());
     }
 
     std::any StrawberryInterpreter::visitArrAccesss(StrawberryParser::ArrAccesssContext *ctx) {
@@ -551,7 +552,7 @@ namespace antlrcpptest {
             auto index = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_()));
             return container->get(index->deref());
         }
-        throw std::runtime_error("Cannot access non-container type\n\t" + ctx->getText());
+        throw std::runtime_error("Cannot access for " + identifyer->deref()->typeName() + " type\n\t--->" + ctx->getText());
     }
 
     std::any StrawberryInterpreter::visitIdAccess(StrawberryParser::IdAccessContext *ctx) {
@@ -669,7 +670,5 @@ namespace antlrcpptest {
     std::any StrawberryInterpreter::visitMatchSuff(StrawberryParser::MatchSuffContext *ctx) {
         return StrawberryParserBaseVisitor::visitMatchSuff(ctx);
     }
-
-
 
 } // antlrcpptest
