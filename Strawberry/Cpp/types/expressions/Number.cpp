@@ -28,14 +28,18 @@ std::string Number::toString() const {
     return std::to_string(number);
 }
 
+std::string Number::typeName() const {
+    return "number";
+}
+
 int Number::operatorPriority() const {
     return 9;
 }
 
-std::shared_ptr<Value> Number::add(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) {
+std::shared_ptr<Value> Number::plus(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) {
     return std::make_shared<Number>(val1->toDouble() + val2->toDouble());
 }
 
-std::string Number::typeName() const {
-    return "number";
+std::shared_ptr<Value> Number::min(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) {
+    return std::make_shared<Number>(val1->toDouble() - val2->toDouble());
 }

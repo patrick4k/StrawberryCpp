@@ -3,6 +3,7 @@
 //
 
 #include "String.h"
+#include "../../util/Warnings.h"
 
 #include <utility>
 
@@ -17,9 +18,9 @@ bool String::toBool() const {
 double String::toDouble() const {
     try {
         return std::stod(this->text);
-    } catch (std::exception& e) {
-        throw std::runtime_error("Cannot cast string: '" + text + "' to number");
-    }
+    } catch (std::exception& e) {}
+    Warnings::warn("Cannot cast string: " + this->toDisplay() + " to number --> returning 0");
+    return 0;
 }
 
 std::string String::toString() const {
@@ -32,7 +33,7 @@ int String::operatorPriority() const {
     return 10;
 }
 
-std::shared_ptr<Value> String::add(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) {
+std::shared_ptr<Value> String::plus(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) {
     return std::make_shared<String>(val1->toString() + val2->toString());
 }
 

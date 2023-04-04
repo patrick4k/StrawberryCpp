@@ -4,6 +4,7 @@
 #include "StrawberryLexer.h"
 #include "StrawberryParser.h"
 #include "StrawberryInterpreter.h"
+#include "util/Warnings.h"
 
 using namespace antlrcpptest;
 using namespace antlr4;
@@ -34,6 +35,7 @@ int main(const int argc, const char* argv[]) {
     StrawberryParser parser(&tokens);
     auto tree = parser.script_();
     auto visitor = antlrcpptest::StrawberryInterpreter();
+    Warnings::enable();
     visitor.visitScript_(tree);
 
     return 0;

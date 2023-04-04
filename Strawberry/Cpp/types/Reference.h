@@ -21,10 +21,6 @@ public:
         return this->referenceValue->operatorPriority();
     }
 
-    std::shared_ptr<Value> add(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override {
-        return this->referenceValue->add(val1,val2);
-    }
-
     void set(std::shared_ptr<Value> val) {
         referenceValue = std::move(val);
     }
@@ -74,7 +70,34 @@ public:
         return this->referenceValue->as<T>();
     }
 
-};
+    std::string toDisplay() const override {
+        return this->referenceValue->toDisplay();
+    }
 
+    std::shared_ptr<Value> pow(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override {
+        return this->referenceValue->pow(val1, val2);
+    }
+
+    std::shared_ptr<Value> mult(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override {
+        return this->referenceValue->mult(val1, val2);
+    }
+
+    std::shared_ptr<Value> div(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override {
+        return this->referenceValue->div(val1, val2);
+    }
+
+    std::shared_ptr<Value> mod(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override {
+        return this->referenceValue->mod(val1, val2);
+    }
+
+    std::shared_ptr<Value> plus(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override {
+        return this->referenceValue->plus(val1, val2);
+    }
+
+    std::shared_ptr<Value> min(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override {
+        return this->referenceValue->min(val1, val2);
+    }
+
+};
 
 #endif //LIBANTLR4_REFERENCE_H

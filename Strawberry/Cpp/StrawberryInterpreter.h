@@ -75,7 +75,7 @@ namespace antlrcpptest {
 
         static void print_scope(const std::shared_ptr<Scope>& scope, const std::string& prelim) {
             for (const auto& item:scope->memory) {
-                std::cout << prelim << item.first << ": " << item.second->deref()->typeName() << " = " << item.second->toString() << std::endl;
+                std::cout << prelim << item.first << ": " << item.second->deref()->typeName() << " = " << item.second->toDisplay() << std::endl;
             }
         }
 

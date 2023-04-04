@@ -1,1 +1,5 @@
 
+let x = 'some text';
+let y = 12;
+let z = x - y;
+
