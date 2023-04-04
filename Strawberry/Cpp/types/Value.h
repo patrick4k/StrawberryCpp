@@ -14,7 +14,7 @@ public:
     virtual bool isNull() const;
     virtual bool toBool() const;
     virtual double toDouble() const;
-    virtual std::string toString() const;
+    virtual std::string toString() const; // TODO: Add std::string toDisplay()
 
     [[nodiscard]] std::shared_ptr<Value> clone() const {
         return std::make_shared<Value>(*this);

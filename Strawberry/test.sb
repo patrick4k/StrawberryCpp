@@ -1,8 +1,9 @@
+let a = {b: 0, c:"see"};
 
-let myself = {
-    name: "Patrick",
-    age: 20
-};
+let ref1 = \a.b;
+let ref2 = \ref1;
 
-let you = myself;
-you.favNum = 7; // member favNum = 7 now in myself as well
+a.b = a.b + 1;
+ref1 -> 2;
+ref2 -> \a.c;
+ref1 -> 4;
