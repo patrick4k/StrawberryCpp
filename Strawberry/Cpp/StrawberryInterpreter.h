@@ -157,7 +157,6 @@ namespace antlrcpptest {
         std::any visitFnAccess(StrawberryParser::FnAccessContext *ctx) override;
         std::any visitParenExpr(StrawberryParser::ParenExprContext *ctx) override;
         std::any visitAccessExpr(StrawberryParser::AccessExprContext *ctx) override;
-        std::any visitKeywordLit(StrawberryParser::KeywordLitContext *ctx) override;
         std::any visitDStringLit(StrawberryParser::DStringLitContext *ctx) override;
         std::any visitSStringLit(StrawberryParser::SStringLitContext *ctx) override;
         std::any visitArrayLit(StrawberryParser::ArrayLitContext *ctx) override;

@@ -182,7 +182,7 @@ expression_
 ;
 
 literal_
-: keywordLiteral_ #keywordLit // TODO: figure out why keywords arent matching
+: keywordLiteral_ #keywordLit_
 | String #dStringLit // TODO: add escape characters
 | StringLit #sStringLit
 | '[' args ']' #arrayLit

@@ -10,6 +10,7 @@
 #include "types/expressions/String.h"
 #include "types/containers/Pair.h"
 #include "types/containers/Hash.h"
+#include "types/expressions/Bool.h"
 
 namespace antlrcpptest {
 
@@ -396,9 +397,6 @@ namespace antlrcpptest {
 
     /* -------------------------------------------------------------------------------------------------------------- */
         /* Literals */
-    std::any StrawberryInterpreter::visitKeywordLit(StrawberryParser::KeywordLitContext *ctx) {
-        return StrawberryParserBaseVisitor::visitKeywordLit(ctx);
-    }
 
     // std::shared_ptr<Reference>
     std::any StrawberryInterpreter::visitDStringLit(StrawberryParser::DStringLitContext *ctx) {
@@ -443,15 +441,17 @@ namespace antlrcpptest {
     }
 
     std::any StrawberryInterpreter::visitTrueLit(StrawberryParser::TrueLitContext *ctx) {
-        return StrawberryParserBaseVisitor::visitTrueLit(ctx);
+        auto trueBool = std::make_shared<Bool>(true);
+        return std::make_shared<Reference>(trueBool);
     }
 
     std::any StrawberryInterpreter::visitFalseLit(StrawberryParser::FalseLitContext *ctx) {
-        return StrawberryParserBaseVisitor::visitFalseLit(ctx);
+        auto trueBool = std::make_shared<Bool>(false);
+        return std::make_shared<Reference>(trueBool);
     }
 
     std::any StrawberryInterpreter::visitNullLit(StrawberryParser::NullLitContext *ctx) {
-        return StrawberryParserBaseVisitor::visitNullLit(ctx);
+        return std::make_shared<Reference>();
     }
 
     /* -------------------------------------------------------------------------------------------------------------- */

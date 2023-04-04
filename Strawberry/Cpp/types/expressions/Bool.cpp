@@ -27,3 +27,7 @@ Bool::Bool(bool boolValue) : boolValue(boolValue) {}
 int Bool::operatorPriority() const {
     return 0;
 }
+
+std::string Bool::typeName() const {
+    return "bool";
+}
