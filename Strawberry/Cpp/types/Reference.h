@@ -15,11 +15,10 @@ private:
     std::shared_ptr<Value> referenceValue;
 public:
     explicit Reference() : referenceValue(std::make_shared<Value>()) {}
-    explicit Reference(const std::shared_ptr<Value>& value) {
-        if (auto ref = std::dynamic_pointer_cast<Reference>(value))
-            this->referenceValue = ref->get_referenced_value();
-        else
-            this->referenceValue = value;
+    explicit Reference(std::shared_ptr<Value>  value) : referenceValue(std::move(value)) {}
+
+    int operatorPriority() const override {
+        return this->referenceValue->operatorPriority();
     }
 
     void set(std::shared_ptr<Value> val) {
@@ -42,6 +41,10 @@ public:
         return this->referenceValue->toString();;
     }
 
+    std::string typeName() const override {
+        return "ref of " + this->referenceValue->typeName();
+    }
+
     std::shared_ptr<Value> copy_value() const {
         return this->referenceValue->clone();
     }
@@ -59,7 +62,7 @@ public:
     ~Reference() override = default;
 
     std::shared_ptr<Value> deref() {
-        return this->referenceValue->as<Value>();
+        return this->referenceValue;
     }
 
     template<typename T>
@@ -67,7 +70,34 @@ public:
         return this->referenceValue->as<T>();
     }
 
-};
+    std::string toDisplay() const override {
+        return this->referenceValue->toDisplay();
+    }
 
+    std::shared_ptr<Value> pow(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override {
+        return this->referenceValue->pow(val1, val2);
+    }
+
+    std::shared_ptr<Value> mult(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override {
+        return this->referenceValue->mult(val1, val2);
+    }
+
+    std::shared_ptr<Value> div(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override {
+        return this->referenceValue->div(val1, val2);
+    }
+
+    std::shared_ptr<Value> mod(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override {
+        return this->referenceValue->mod(val1, val2);
+    }
+
+    std::shared_ptr<Value> plus(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override {
+        return this->referenceValue->plus(val1, val2);
+    }
+
+    std::shared_ptr<Value> min(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override {
+        return this->referenceValue->min(val1, val2);
+    }
+
+};
 
 #endif //LIBANTLR4_REFERENCE_H

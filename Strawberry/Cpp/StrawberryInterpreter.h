@@ -56,7 +56,8 @@ namespace antlrcpptest {
             return declare(id, std::make_shared<Value>());
         }
 
-            void assign(const std::string& id, std::shared_ptr<Value> val) const {
+        // TODO: Overload assign() to accept id context
+        void assign(const std::string& id, std::shared_ptr<Value> val) const {
             get_from_memory(id)->set(std::move(val));
         }
 
@@ -74,7 +75,7 @@ namespace antlrcpptest {
 
         static void print_scope(const std::shared_ptr<Scope>& scope, const std::string& prelim) {
             for (const auto& item:scope->memory) {
-                std::cout << prelim << item.first << " -> " << item.second->toString() << std::endl;
+                std::cout << prelim << item.first << ": " << item.second->deref()->typeName() << " = " << item.second->toDisplay() << std::endl;
             }
         }
 
@@ -144,14 +145,18 @@ namespace antlrcpptest {
         std::any visitLooseFnCallExpr(StrawberryParser::LooseFnCallExprContext *ctx) override;
         std::any visitPrefixExpr(StrawberryParser::PrefixExprContext *ctx) override;
         std::any visitDefaultSuffixExpr(StrawberryParser::DefaultSuffixExprContext *ctx) override;
-        std::any visitOpExpr(StrawberryParser::OpExprContext *ctx) override;
+        std::any visitOpExpr1(StrawberryParser::OpExpr1Context *ctx) override;
+        std::any visitOpExpr2(StrawberryParser::OpExpr2Context *ctx) override;
+        std::any visitOpExpr3(StrawberryParser::OpExpr3Context *ctx) override;
+        std::any visitOpExpr4(StrawberryParser::OpExpr4Context *ctx) override;
+        std::any visitOpExpr5(StrawberryParser::OpExpr5Context *ctx) override;
+        std::any visitOpExpr6(StrawberryParser::OpExpr6Context *ctx) override;
         std::any visitSuffixExpr(StrawberryParser::SuffixExprContext *ctx) override;
         std::any visitLitExpr(StrawberryParser::LitExprContext *ctx) override;
         std::any visitAssignExpr(StrawberryParser::AssignExprContext *ctx) override;
         std::any visitFnAccess(StrawberryParser::FnAccessContext *ctx) override;
         std::any visitParenExpr(StrawberryParser::ParenExprContext *ctx) override;
         std::any visitAccessExpr(StrawberryParser::AccessExprContext *ctx) override;
-        std::any visitKeywordLit(StrawberryParser::KeywordLitContext *ctx) override;
         std::any visitDStringLit(StrawberryParser::DStringLitContext *ctx) override;
         std::any visitSStringLit(StrawberryParser::SStringLitContext *ctx) override;
         std::any visitArrayLit(StrawberryParser::ArrayLitContext *ctx) override;
@@ -163,6 +168,7 @@ namespace antlrcpptest {
         std::any visitNullLit(StrawberryParser::NullLitContext *ctx) override;
         std::any visitDeclareAssign(StrawberryParser::DeclareAssignContext *ctx) override;
         std::any visitEqAssign(StrawberryParser::EqAssignContext *ctx) override;
+        std::any visitStreamAssign(StrawberryParser::StreamAssignContext *ctx) override;
         std::any visitDefaultEqAssign(StrawberryParser::DefaultEqAssignContext *ctx) override;
         std::any visitPowAssign(StrawberryParser::PowAssignContext *ctx) override;
         std::any visitMultAssign(StrawberryParser::MultAssignContext *ctx) override;

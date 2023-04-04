@@ -10,12 +10,15 @@
 
 class Pair: public Value {
 private:
+
     std::shared_ptr<Value> key;
     std::shared_ptr<Reference> value;
 public:
+    Pair(std::shared_ptr<Value> key, const std::shared_ptr<Value> &value);
     Pair(std::shared_ptr<Value> key, std::shared_ptr<Reference> value);
 
-    void setKeyValue(std::shared_ptr<Value> key, std::shared_ptr<Reference> value);
+    int operatorPriority() const override;
+
     void setKey(std::shared_ptr<Value> newkey);
     void setValue(std::shared_ptr<Reference> newvalue);
 

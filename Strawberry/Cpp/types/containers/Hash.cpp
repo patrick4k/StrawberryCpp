@@ -42,11 +42,11 @@ double Hash::toDouble() const {
 
 std::string Hash::toString() const {
     if (map.size() == 1)
-        return "{" + map.begin()->first + " : " + map.begin()->second->toString() + "}";
+        return "{" + map.begin()->first + ": " + map.begin()->second->toString() + "}";
     std::stringstream ss;
     ss << "{";
     for (auto item = map.begin(); item != map.end(); ++item) {
-        ss << item->first + " : " + item->second->toString();
+        ss << item->first + ": " + item->second->toString();
         if (!(std::next(item) == map.end())) ss << ", ";
     }
     ss << "}";
@@ -55,4 +55,16 @@ std::string Hash::toString() const {
 
 Hash::~Hash() {
 
+}
+
+int Hash::operatorPriority() const {
+    return 8;
+}
+
+int Hash::size() {
+    return this->map.size();
+}
+
+std::string Hash::typeName() const {
+    return "object";
 }

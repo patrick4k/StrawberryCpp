@@ -18,13 +18,16 @@ double List::toDouble() const {
 }
 
 std::string List::toString() const {
-    if (this->refs.size() == 1)
-        return "[" + this->refs[0]->toString() + "]";
+    const int len = refs.size();
     std::stringstream ss;
-    for (const auto & ref : this->refs) {
-        ss << ref->toString() << ", ";
+    std::string asString;
+    for (int i = 0; i < len; i++) {
+        asString += refs[i]->toString();
+        if (i != len - 1) {
+            asString += ", ";
+        }
     }
-    return "[" + ss.str() + "]";
+    return "[" + asString + "]";
 }
 
 std::shared_ptr<Reference> List::get(int i) {
@@ -55,11 +58,28 @@ std::shared_ptr<Reference> List::get(std::shared_ptr<Value> key) {
 
 void List::append(const std::shared_ptr<Value> &val) {
 
-    auto ref = val->as<Reference>();
-
-    if (ref) {
-        this->refs.push_back(std::make_shared<Reference>(ref));
+    if (auto ref = val->as<Reference>()) {
+        this->refs.push_back(ref);
         return;
     }
+
     this->refs.push_back(std::make_shared<Reference>(val));
+}
+
+int List::operatorPriority() const {
+    return 8;
+}
+
+int List::size() {
+    return this->refs.size();
+}
+
+List::List(const std::shared_ptr<Reference> &ref) {
+    this->append(ref);
+}
+
+List::List() {}
+
+std::string List::typeName() const {
+    return "list";
 }

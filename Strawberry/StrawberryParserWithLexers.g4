@@ -168,12 +168,12 @@ expression_
 | prefix_ expression_ #prefixExpr
 | highPrioritySuffix_ #defaultSuffixExpr
 | expression_ highPrioritySuffix_ #suffixExpr
-| expression_ op1_ expression_ #opExpr
-| expression_ op2_ expression_ #opExpr
-| expression_ op3_ expression_ #opExpr
-| expression_ op4_ expression_ #opExpr
-| expression_ op5_ expression_ #opExpr
-| expression_ op6_ expression_ #opExpr
+| expression_ op1_ expression_ #opExpr1
+| expression_ op2_ expression_ #opExpr2
+| expression_ op3_ expression_ #opExpr3
+| expression_ op4_ expression_ #opExpr4
+| expression_ op5_ expression_ #opExpr5
+| expression_ op6_ expression_ #opExpr6
 | lowPrioritySuffix_ #defaultSuffixExpr
 | expression_ lowPrioritySuffix_ #suffixExpr
 | identifyer_ #accessExpr
@@ -182,7 +182,7 @@ expression_
 ;
 
 literal_
-: keywordLiteral_ #keywordLit // TODO: figure out why keywords arent matching
+: keywordLiteral_ #keywordLit_
 | String #dStringLit // TODO: add escape characters
 | StringLit #sStringLit
 | '[' args ']' #arrayLit
@@ -190,7 +190,7 @@ literal_
 | Number #numLit
 ;
 
-pair: expression_ ':' value_ ;
+pair: (Id|Key=(String|StringLit)) ':' value_ ;
 
 keywordLiteral_
 : 'true' #trueLit
@@ -201,6 +201,7 @@ keywordLiteral_
 assign_
 : 'let' varDeclare_ (',' varDeclare_)* #declareAssign
 | (identifyer_ '=')+ value_ #eqAssign
+| identifyer_ '<<' value_ #streamAssign
 | '=' value_ #defaultEqAssign
 | identifyer_? '^=' expression_ #powAssign
 | identifyer_? '*=' expression_ #multAssign

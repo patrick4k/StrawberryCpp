@@ -14,6 +14,8 @@ public:
     explicit Bool(bool boolValue);
 
 public:
+    int operatorPriority() const override;
+
     bool isNull() const override;
 
     bool toBool() const override;
@@ -21,6 +23,8 @@ public:
     double toDouble() const override;
 
     std::string toString() const override;
+
+    std::string typeName() const override;
 
     ~Bool() override;
 };

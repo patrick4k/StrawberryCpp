@@ -19,6 +19,11 @@ Next: 'next' ;
 Last: 'last' ;
 Once: 'once' ;
 
+/* Literals */
+True: 'true' ;
+False: 'false' ;
+Null: 'null' ;
+
 /* Regex */
 MatchArrow: '~>' ;
 RegWord: '\\w' ;
@@ -29,7 +34,7 @@ RegFSlash: '\\/' ;
 RegReturnAll: 'return all' ;
 
 /* Util */
-Id: Word (Word | Digit | Uscore)*;
+Id: Word (Letter | Digit | Uscore)*;
 DefId: '_' Id?;
 Number: Digit+ ('.' Digit+)? | '.' Digit+ ;
 String: '"' .*? '"' ;
@@ -41,11 +46,6 @@ Letter: UcLetter | LcLetter ;
 UcLetter: [A-Z];
 LcLetter: [a-z];
 
-/* Literals */
-True: 'true' ;
-False: 'false' ;
-Null: 'null' ;
-
 /* Special */
 DefOr: '\\\\' ;
 Sarrow: '->' ;
@@ -55,7 +55,6 @@ RLarrow: '<<' ;
 Dot2: '..' ;
 Dot3: '...' ;
 As: 'as' ;
-
 
 /* Assignments */
 PlusEq: '+=' ;

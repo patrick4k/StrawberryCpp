@@ -14,9 +14,13 @@ private:
 public:
     Hash();
 
+    int operatorPriority() const override;
+
     std::shared_ptr<Reference> get(std::shared_ptr<Value> key) override;
 
     void append(const std::shared_ptr<Value> &val) override;
+
+    int size() override;
 
     bool isNull() const override;
 
@@ -25,6 +29,8 @@ public:
     double toDouble() const override;
 
     std::string toString() const override;
+
+    std::string typeName() const override;
 
     ~Hash() override;
 };
