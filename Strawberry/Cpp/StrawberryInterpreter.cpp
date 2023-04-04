@@ -513,14 +513,13 @@ namespace antlrcpptest {
         return StrawberryParserBaseVisitor::visitDecrem(ctx);
     }
 
-    // std::shared_ptr<Reference>
     std::any StrawberryInterpreter::visitNoInitVarDeclar(StrawberryParser::NoInitVarDeclarContext *ctx) {
         return declare(ctx->Id()->getText(), std::make_shared<Value>());
     }
 
-    // std::shared_ptr<Reference>
     std::any StrawberryInterpreter::visitInitVarDeclar(StrawberryParser::InitVarDeclarContext *ctx) {
-        return declare(ctx->Id()->getText(), std::any_cast<std::shared_ptr<Reference>>(visit(ctx->value_()))->deref());
+        auto ref = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->value_()));
+        return declare(ctx->Id()->getText(), ref->deref());
     }
 
     /* -------------------------------------------------------------------------------------------------------------- */
