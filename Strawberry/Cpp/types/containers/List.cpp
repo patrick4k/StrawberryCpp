@@ -79,3 +79,7 @@ List::List(const std::shared_ptr<Reference> &ref) {
 }
 
 List::List() {}
+
+std::string List::typeName() const {
+    return "list";
+}

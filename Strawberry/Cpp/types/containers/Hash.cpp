@@ -64,3 +64,7 @@ int Hash::operatorPriority() const {
 int Hash::size() {
     return this->map.size();
 }
+
+std::string Hash::typeName() const {
+    return "object";
+}

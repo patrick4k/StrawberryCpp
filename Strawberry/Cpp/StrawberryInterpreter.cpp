@@ -93,7 +93,7 @@ namespace antlrcpptest {
     std::any StrawberryInterpreter::visitScript_(StrawberryParser::Script_Context *ctx) {
         this->scope_in();
         StrawberryParserBaseVisitor::visitScript_(ctx);
-        print_memory();
+        print_inner_scope();
         this->scope_out();
         return 0;
     }

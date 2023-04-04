@@ -20,6 +20,8 @@ public:
     double toDouble() const override;
     std::string toString() const override;
 
+    std::string typeName() const override;
+
     std::shared_ptr<Reference> get(std::shared_ptr<Value> key) override;
     std::shared_ptr<Reference> get(int i);
 

@@ -30,6 +30,8 @@ public:
 
     std::string toString() const override;
 
+    std::string typeName() const override;
+
     ~Hash() override;
 };
 

@@ -23,6 +23,10 @@ public:
     double toDouble() const override;
     std::string toString() const override;
 
+    std::string toDisplay() const override;
+
+    std::string typeName() const override;
+
     ~String() override = default;
 
     std::shared_ptr<Value> add(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override;

@@ -35,3 +35,11 @@ int String::operatorPriority() const {
 std::shared_ptr<Value> String::add(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) {
     return std::make_shared<String>(val1->toString() + val2->toString());
 }
+
+std::string String::toDisplay() const {
+    return '"' + this->toString() + '"';
+}
+
+std::string String::typeName() const {
+    return "string";
+}

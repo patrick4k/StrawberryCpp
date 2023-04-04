@@ -28,4 +28,12 @@ std::shared_ptr<Value> Value::add(std::shared_ptr<Value> val1, std::shared_ptr<V
     throw std::runtime_error("Addition not implemented for this");
 }
 
+std::string Value::toDisplay() const {
+    return this->toString();
+}
+
+std::string Value::typeName() const {
+    return "undef";
+}
+
 Value::~Value() = default;
