@@ -721,23 +721,43 @@ namespace antlrcpptest {
     }
 
     std::any StrawberryInterpreter::visitBoolGtOp(StrawberryParser::BoolGtOpContext *ctx) {
-        return StrawberryParserBaseVisitor::visitBoolGtOp(ctx);
+        std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
+        operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
+            return std::make_shared<Reference>(std::make_shared<Bool>(ref1->toDouble() > ref2->toDouble()));
+        };
+        return operation;
     }
 
     std::any StrawberryInterpreter::visitBoolGtEqOp(StrawberryParser::BoolGtEqOpContext *ctx) {
-        return StrawberryParserBaseVisitor::visitBoolGtEqOp(ctx);
+        std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
+        operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
+            return std::make_shared<Reference>(std::make_shared<Bool>(ref1->toDouble() >= ref2->toDouble()));
+        };
+        return operation;
     }
 
     std::any StrawberryInterpreter::visitBoolLtOp(StrawberryParser::BoolLtOpContext *ctx) {
-        return StrawberryParserBaseVisitor::visitBoolLtOp(ctx);
+        std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
+        operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
+            return std::make_shared<Reference>(std::make_shared<Bool>(ref1->toDouble() < ref2->toDouble()));
+        };
+        return operation;
     }
 
     std::any StrawberryInterpreter::visitBoolLtEqOp(StrawberryParser::BoolLtEqOpContext *ctx) {
-        return StrawberryParserBaseVisitor::visitBoolLtEqOp(ctx);
+        std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
+        operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
+            return std::make_shared<Reference>(std::make_shared<Bool>(ref1->toDouble() <= ref2->toDouble()));
+        };
+        return operation;
     }
 
     std::any StrawberryInterpreter::visitOrOp(StrawberryParser::OrOpContext *ctx) {
-        return StrawberryParserBaseVisitor::visitOrOp(ctx);
+        std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
+        operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
+            return std::make_shared<Reference>(std::make_shared<Bool>(ref1->toBool() || ref2->toBool()));
+        };
+        return operation;
     }
 
     std::any StrawberryInterpreter::visitBitOrOp(StrawberryParser::BitOrOpContext *ctx) {
@@ -745,7 +765,11 @@ namespace antlrcpptest {
     }
 
     std::any StrawberryInterpreter::visitAndOp(StrawberryParser::AndOpContext *ctx) {
-        return StrawberryParserBaseVisitor::visitAndOp(ctx);
+        std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
+        operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
+            return std::make_shared<Reference>(std::make_shared<Bool>(ref1->toBool() && ref2->toBool()));
+        };
+        return operation;
     }
 
     std::any StrawberryInterpreter::visitBitAndOp(StrawberryParser::BitAndOpContext *ctx) {
