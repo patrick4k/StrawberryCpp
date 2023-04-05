@@ -42,7 +42,7 @@ Strawberry/StrawberryLexer.g4 and Strawberry/StrawberryParser.g4.
 - [ ] Visitor Overrides 0.2
     - [x] Visitors for declare() and assign()
     - [x] Basic Operator Functionality
-    - [ ] Advance Operator Functionality
+    - [x] Advance Operator Functionality
     - [x] Idenitfyer access
         - Id
         - Dot access
@@ -55,6 +55,10 @@ Strawberry/StrawberryLexer.g4 and Strawberry/StrawberryParser.g4.
 - [ ] Visitor Overrides 0.3
     - [ ] Store function declarations
     - [ ] Add lambda type definition
+    - [ ] Bitwise operations
+    - [ ] Operator rework
+      - Extract repeated code for binary math operations
+      - Better ==, !=, ===, !== operations
     - [ ] Default Variable Memory Management
     - [ ] Control Flow
         - for / loop / while / until loops
