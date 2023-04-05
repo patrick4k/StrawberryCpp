@@ -53,17 +53,14 @@ std::shared_ptr<Reference> List::get(int i) {
 }
 
 std::shared_ptr<Reference> List::get(std::shared_ptr<Value> key) {
-    return this->get(key->toDouble());
-}
-
-void List::append(const std::shared_ptr<Value> &val) {
-
-    if (auto ref = val->as<Reference>()) {
-        this->refs.push_back(ref);
-        return;
+    if (auto index_list = key->as<List>()) {
+        auto return_list = std::make_shared<List>();
+        for (int i = 0; i < index_list->size(); ++i) {
+            return_list->append(this->get(index_list->get(i)->toDouble()));
+        }
+        return std::make_shared<Reference>(return_list);
     }
-
-    this->refs.push_back(std::make_shared<Reference>(val));
+    return this->get(key->toDouble());
 }
 
 int List::operatorPriority() const {
@@ -82,4 +79,21 @@ List::List() {}
 
 std::string List::typeName() const {
     return "list";
+}
+
+void List::append(const std::shared_ptr<Value> &val) {
+
+    this->refs.push_back(std::make_shared<Reference>(val));
+}
+
+void List::shift(const std::shared_ptr<Value> &val) {
+    this->insert(0, val);
+}
+
+void List::insert(int i, const std::shared_ptr<Value> &val) {
+    if (auto ref = val->as<Reference>()) {
+        this->refs.emplace(this->refs.begin() + i, ref);
+        return;
+    }
+    this->refs.emplace(this->refs.begin() + i, std::make_shared<Reference>(val));
 }

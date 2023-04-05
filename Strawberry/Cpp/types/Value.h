@@ -37,6 +37,9 @@ public:
     virtual std::shared_ptr<Value> plus(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2);
     virtual std::shared_ptr<Value> min(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2);
 
+    /* Boolean operations */
+    virtual bool bool_equals(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2);
+
 };
 
 #endif //LIBANTLR4_VALUE_H

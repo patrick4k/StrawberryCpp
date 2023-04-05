@@ -119,6 +119,7 @@ args: (argument_ ( Com  argument_)*)? ;
 argument_
 : value_ #arg
 |  Dot3  value_ #argExpand
+| expression_  Dot2  expression_ #rangeArg
 ;
 
 /* ================================================================================ */
@@ -127,28 +128,11 @@ argument_
 // TODO: Rework REGEX
 
 matchRegex
-:  Squig  ( Lbrace  matchOptions_*  Rbrace )?  Bslash  matchContent_+  Bslash 
+:  Squig  ( Lbrace  matchOptions_*  Rbrace )?  Bslash  Bslash 
 ;
 
 matchOptions_
-:  RegReturnAll  #returnAllMatchOption
-;
-
-matchContent_
-: matchContent_  Plus  #onOrMore
-| matchContent_  Star  #zeroOrMore
-| matchContent_  Qmark  #zeroOrOne
-|  Lbrack  matchContent_ ( Bar  matchContent_)* Rbrack  #orMatch
-|  Lpar  matchContent_  Rpar  #collectMatch
-| matchChars_+ #chars
-;
-
-matchChars_
-:  RegWord  #word
-|  RegNewline  #newline
-|  DefOr  #bslash
-|  Dot  #wildCard
-| ~( Lpar | Rpar | Lbrack | Rbrack | Bar ) #other
+: Word #returnAllMatchOption
 ;
 
 /* ================================================================================ */
@@ -158,11 +142,10 @@ value_
 : expression_
 | lambda
 | idReference
-| pair
 ;
 
 expression_
-: literal_ #litExpr
+: literal_ #litExpr_
 |  Lpar  expression_  Rpar  #parenExpr
 |  Lpar  assign_  Rpar  #assignExpr
 | prefix_ expression_ #prefixExpr
@@ -176,6 +159,7 @@ expression_
 | expression_ op6_ expression_ #opExpr6
 | lowPrioritySuffix_ #defaultSuffixExpr
 | expression_ lowPrioritySuffix_ #suffixExpr
+|  Fslash  identifyer_ #derefExpr
 | identifyer_ #accessExpr
 | identifyer_  Lpar  args  Rpar  #fnAccess
 | looseFnCall #looseFnCallExpr
@@ -185,12 +169,15 @@ literal_
 : keywordLiteral_ #keywordLit_
 | String #dStringLit // TODO: add escape characters
 | StringLit #sStringLit
-|  Lbrack  args  Rbrack  #arrayLit
-|  Lbrace  (pair ( Com  pair)*  Com ?)?  Rbrace  #hashLit
+|  Lbrack  args ( Semi  args)*  Rbrack  #arrayLit
+|  Lbrace  (pair_ ( Com  pair_)*  Com ?)?  Rbrace  #hashLit
 | Number #numLit
 ;
 
-pair: (Id|Key=(String|StringLit))  Colon  value_ ;
+pair_
+: (Id|Key=(String|StringLit))  Colon  value_ #pairValue
+| (Id|Key=(String|StringLit))  Colon  args #pairArgs
+;
 
 keywordLiteral_
 :  True  #trueLit
@@ -201,7 +188,9 @@ keywordLiteral_
 assign_
 :  Decl  varDeclare_ ( Com  varDeclare_)* #declareAssign
 | (identifyer_  Eq )+ value_ #eqAssign
-| identifyer_  RLarrow  value_ #streamAssign
+| (identifyer_  Eq )+ args #eqAssignArgs
+| identifyer_  RLarrow  value_ #setRefAssign
+| identifyer_  RLarrow  args #setRefAssignArgs
 |  Eq  value_ #defaultEqAssign
 | identifyer_?  PowEq  expression_ #powAssign
 | identifyer_?  MultEq  expression_ #multAssign
@@ -216,16 +205,18 @@ assign_
 varDeclare_
 : Id #noInitVarDeclar
 | Id  Eq  value_ #initVarDeclar
+| Id  Eq  args #initVarDeclarArgs
 ;
 
 identifyer_
 : identifyer_  Dot  Id #dotAccess
-| identifyer_  Lbrack  expression_  Rbrack  #arrAccesss
+| identifyer_  Lbrack  expression_  Rbrack  #arrAccess
+| identifyer_  Lbrack  args  Rbrack  #arrAccessArgs
 | Id #idAccess
 | DefId #defaultAccess
 ;
 
-idReference: Fslash identifyer_ ;
+idReference:  AndSign  identifyer_ ;
 
 looseFnCall
 : identifyer_ argument_ ( Com  argument_)*
@@ -260,12 +251,13 @@ op3_
 
 op4_
 :  DefOr  #definedOrOp
-|  Dot2  #rangeOp
 ;
 
 op5_
 :  BoolEq  #boolEqOp
+|  BoolDeepEq  #boolDeepEqOp
 |  BoolNeq  #boolNeqOp
+|  BoolDeepNeq  #boolDeepNeqOp
 | Gt #boolGtOp
 | GtEq #boolGtEqOp
 | Lt #boolLtOp

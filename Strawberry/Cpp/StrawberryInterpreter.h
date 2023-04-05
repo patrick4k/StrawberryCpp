@@ -56,11 +56,6 @@ namespace antlrcpptest {
             return declare(id, std::make_shared<Value>());
         }
 
-        // TODO: Overload assign() to accept id context
-        void assign(const std::string& id, std::shared_ptr<Value> val) const {
-            get_from_memory(id)->set(std::move(val));
-        }
-
         [[nodiscard]] std::shared_ptr<Reference> get_from_memory(const std::string& id) const {
             auto scope = innerScope.get();
             auto value = innerScope->memory.find(id);
@@ -99,6 +94,14 @@ namespace antlrcpptest {
 /* ================================================================================================================== */
     /* Visitor Overrides */
     public:
+
+        std::any visitAction_(StrawberryParser::Action_Context *ctx) override {
+            std::cout << ">> " << ctx->getText() << std::endl;
+            print_scope(this->innerScope, "\t");
+            std::cout << std::endl << std::endl;
+            return StrawberryParserBaseVisitor::visitAction_(ctx);
+        }
+
         std::any visitScript_(StrawberryParser::Script_Context *ctx) override;
         std::any visitReturnStat(StrawberryParser::ReturnStatContext *ctx) override;
         std::any visitOnceStat(StrawberryParser::OnceStatContext *ctx) override;
@@ -129,19 +132,8 @@ namespace antlrcpptest {
         std::any visitArgs(StrawberryParser::ArgsContext *ctx) override;
         std::any visitArg(StrawberryParser::ArgContext *ctx) override;
         std::any visitArgExpand(StrawberryParser::ArgExpandContext *ctx) override;
+        std::any visitRangeArg(StrawberryParser::RangeArgContext *ctx) override;
         std::any visitMatchRegex(StrawberryParser::MatchRegexContext *ctx) override;
-        std::any visitReturnAllMatchOption(StrawberryParser::ReturnAllMatchOptionContext *ctx) override;
-        std::any visitZeroOrMore(StrawberryParser::ZeroOrMoreContext *ctx) override;
-        std::any visitOrMatch(StrawberryParser::OrMatchContext *ctx) override;
-        std::any visitCollectMatch(StrawberryParser::CollectMatchContext *ctx) override;
-        std::any visitZeroOrOne(StrawberryParser::ZeroOrOneContext *ctx) override;
-        std::any visitChars(StrawberryParser::CharsContext *ctx) override;
-        std::any visitOnOrMore(StrawberryParser::OnOrMoreContext *ctx) override;
-        std::any visitWord(StrawberryParser::WordContext *ctx) override;
-        std::any visitNewline(StrawberryParser::NewlineContext *ctx) override;
-        std::any visitBslash(StrawberryParser::BslashContext *ctx) override;
-        std::any visitWildCard(StrawberryParser::WildCardContext *ctx) override;
-        std::any visitOther(StrawberryParser::OtherContext *ctx) override;
         std::any visitLooseFnCallExpr(StrawberryParser::LooseFnCallExprContext *ctx) override;
         std::any visitPrefixExpr(StrawberryParser::PrefixExprContext *ctx) override;
         std::any visitDefaultSuffixExpr(StrawberryParser::DefaultSuffixExprContext *ctx) override;
@@ -152,7 +144,6 @@ namespace antlrcpptest {
         std::any visitOpExpr5(StrawberryParser::OpExpr5Context *ctx) override;
         std::any visitOpExpr6(StrawberryParser::OpExpr6Context *ctx) override;
         std::any visitSuffixExpr(StrawberryParser::SuffixExprContext *ctx) override;
-        std::any visitLitExpr(StrawberryParser::LitExprContext *ctx) override;
         std::any visitAssignExpr(StrawberryParser::AssignExprContext *ctx) override;
         std::any visitFnAccess(StrawberryParser::FnAccessContext *ctx) override;
         std::any visitParenExpr(StrawberryParser::ParenExprContext *ctx) override;
@@ -162,13 +153,16 @@ namespace antlrcpptest {
         std::any visitArrayLit(StrawberryParser::ArrayLitContext *ctx) override;
         std::any visitHashLit(StrawberryParser::HashLitContext *ctx) override;
         std::any visitNumLit(StrawberryParser::NumLitContext *ctx) override;
-        std::any visitPair(StrawberryParser::PairContext *ctx) override;
+        std::any visitPairValue(StrawberryParser::PairValueContext *ctx) override;
+        std::any visitPairArgs(StrawberryParser::PairArgsContext *ctx) override;
         std::any visitTrueLit(StrawberryParser::TrueLitContext *ctx) override;
         std::any visitFalseLit(StrawberryParser::FalseLitContext *ctx) override;
         std::any visitNullLit(StrawberryParser::NullLitContext *ctx) override;
         std::any visitDeclareAssign(StrawberryParser::DeclareAssignContext *ctx) override;
         std::any visitEqAssign(StrawberryParser::EqAssignContext *ctx) override;
-        std::any visitStreamAssign(StrawberryParser::StreamAssignContext *ctx) override;
+        std::any visitEqAssignArgs(StrawberryParser::EqAssignArgsContext *ctx) override;
+        std::any visitSetRefAssign(StrawberryParser::SetRefAssignContext *ctx) override;
+        std::any visitSetRefAssignArgs(StrawberryParser::SetRefAssignArgsContext *ctx) override;
         std::any visitDefaultEqAssign(StrawberryParser::DefaultEqAssignContext *ctx) override;
         std::any visitPowAssign(StrawberryParser::PowAssignContext *ctx) override;
         std::any visitMultAssign(StrawberryParser::MultAssignContext *ctx) override;
@@ -180,8 +174,11 @@ namespace antlrcpptest {
         std::any visitDecrem(StrawberryParser::DecremContext *ctx) override;
         std::any visitNoInitVarDeclar(StrawberryParser::NoInitVarDeclarContext *ctx) override;
         std::any visitInitVarDeclar(StrawberryParser::InitVarDeclarContext *ctx) override;
+        std::any visitInitVarDeclarArgs(StrawberryParser::InitVarDeclarArgsContext *ctx) override;
         std::any visitDotAccess(StrawberryParser::DotAccessContext *ctx) override;
-        std::any visitArrAccesss(StrawberryParser::ArrAccesssContext *ctx) override;
+        std::any visitArrAccess(StrawberryParser::ArrAccessContext *ctx) override;
+        std::any visitArrAccessArgs(StrawberryParser::ArrAccessArgsContext *ctx) override;
+        std::any visitDerefExpr(StrawberryParser::DerefExprContext *ctx) override;
         std::any visitIdAccess(StrawberryParser::IdAccessContext *ctx) override;
         std::any visitDefaultAccess(StrawberryParser::DefaultAccessContext *ctx) override;
         std::any visitIdReference(StrawberryParser::IdReferenceContext *ctx) override;
@@ -196,9 +193,10 @@ namespace antlrcpptest {
         std::any visitPlusOp(StrawberryParser::PlusOpContext *ctx) override;
         std::any visitMinOp(StrawberryParser::MinOpContext *ctx) override;
         std::any visitDefinedOrOp(StrawberryParser::DefinedOrOpContext *ctx) override;
-        std::any visitRangeOp(StrawberryParser::RangeOpContext *ctx) override;
         std::any visitBoolEqOp(StrawberryParser::BoolEqOpContext *ctx) override;
+        std::any visitBoolDeepEqOp(StrawberryParser::BoolDeepEqOpContext *ctx) override;
         std::any visitBoolNeqOp(StrawberryParser::BoolNeqOpContext *ctx) override;
+        std::any visitBoolDeepNeqOp(StrawberryParser::BoolDeepNeqOpContext *ctx) override;
         std::any visitBoolGtOp(StrawberryParser::BoolGtOpContext *ctx) override;
         std::any visitBoolGtEqOp(StrawberryParser::BoolGtEqOpContext *ctx) override;
         std::any visitBoolLtOp(StrawberryParser::BoolLtOpContext *ctx) override;
@@ -208,15 +206,6 @@ namespace antlrcpptest {
         std::any visitAndOp(StrawberryParser::AndOpContext *ctx) override;
         std::any visitBitAndOp(StrawberryParser::BitAndOpContext *ctx) override;
         std::any visitMatchSuff(StrawberryParser::MatchSuffContext *ctx) override;
-
-/* ================================================================================================================== */
-        /* Test Definition */
-    public:
-        void testRef();
-        void testList();
-        void moreListTesting();
-        void pairHashTesting();
-        void castTesting();
 
     };
 

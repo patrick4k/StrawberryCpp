@@ -26,8 +26,11 @@ public:
     ~Number() override = default;
 
     std::shared_ptr<Value> plus(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override;
-
     std::shared_ptr<Value> min(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override;
+    std::shared_ptr<Value> pow(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override;
+    std::shared_ptr<Value> mult(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override;
+    std::shared_ptr<Value> div(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override;
+    std::shared_ptr<Value> mod(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override;
 };
 
 #endif //LIBANTLR4_NUMBER_H

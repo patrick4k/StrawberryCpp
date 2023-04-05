@@ -119,6 +119,7 @@ args: (argument_ (',' argument_)*)? ;
 argument_
 : value_ #arg
 | '...' value_ #argExpand
+| expression_ '..' expression_ #rangeArg
 ;
 
 /* ================================================================================ */
@@ -127,28 +128,11 @@ argument_
 // TODO: Rework REGEX
 
 matchRegex
-: '~' ('{' matchOptions_* '}')? '/' matchContent_+ '/'
+: '~' ('{' matchOptions_* '}')? '/''/'
 ;
 
 matchOptions_
-: 'return all' #returnAllMatchOption
-;
-
-matchContent_
-: matchContent_ '+' #onOrMore
-| matchContent_ '*' #zeroOrMore
-| matchContent_ '?' #zeroOrOne
-| '[' matchContent_ ('|' matchContent_)*']' #orMatch
-| '(' matchContent_ ')' #collectMatch
-| matchChars_+ #chars
-;
-
-matchChars_
-: '\\w' #word
-| '\\n' #newline
-| '\\\\' #bslash
-| '.' #wildCard
-| ~('('|')'|'['|']'|'|') #other
+: Word #returnAllMatchOption
 ;
 
 /* ================================================================================ */
@@ -158,11 +142,10 @@ value_
 : expression_
 | lambda
 | idReference
-| pair
 ;
 
 expression_
-: literal_ #litExpr
+: literal_ #litExpr_
 | '(' expression_ ')' #parenExpr
 | '(' assign_ ')' #assignExpr
 | prefix_ expression_ #prefixExpr
@@ -176,6 +159,7 @@ expression_
 | expression_ op6_ expression_ #opExpr6
 | lowPrioritySuffix_ #defaultSuffixExpr
 | expression_ lowPrioritySuffix_ #suffixExpr
+| '\\' identifyer_ #derefExpr
 | identifyer_ #accessExpr
 | identifyer_ '(' args ')' #fnAccess
 | looseFnCall #looseFnCallExpr
@@ -185,12 +169,15 @@ literal_
 : keywordLiteral_ #keywordLit_
 | String #dStringLit // TODO: add escape characters
 | StringLit #sStringLit
-| '[' args ']' #arrayLit
-| '{' (pair (',' pair)* ','?)? '}' #hashLit
+| '[' args (';' args)* ']' #arrayLit
+| '{' (pair_ (',' pair_)* ','?)? '}' #hashLit
 | Number #numLit
 ;
 
-pair: (Id|Key=(String|StringLit)) ':' value_ ;
+pair_
+: (Id|Key=(String|StringLit)) ':' value_ #pairValue
+| (Id|Key=(String|StringLit)) ':' args #pairArgs
+;
 
 keywordLiteral_
 : 'true' #trueLit
@@ -201,7 +188,9 @@ keywordLiteral_
 assign_
 : 'let' varDeclare_ (',' varDeclare_)* #declareAssign
 | (identifyer_ '=')+ value_ #eqAssign
-| identifyer_ '<<' value_ #streamAssign
+| (identifyer_ '=')+ args #eqAssignArgs
+| identifyer_ '<<' value_ #setRefAssign
+| identifyer_ '<<' args #setRefAssignArgs
 | '=' value_ #defaultEqAssign
 | identifyer_? '^=' expression_ #powAssign
 | identifyer_? '*=' expression_ #multAssign
@@ -216,16 +205,18 @@ assign_
 varDeclare_
 : Id #noInitVarDeclar
 | Id '=' value_ #initVarDeclar
+| Id '=' args #initVarDeclarArgs
 ;
 
 identifyer_
 : identifyer_ '.' Id #dotAccess
-| identifyer_ '[' expression_ ']' #arrAccesss
+| identifyer_ '[' expression_ ']' #arrAccess
+| identifyer_ '[' args ']' #arrAccessArgs
 | Id #idAccess
 | DefId #defaultAccess
 ;
 
-idReference: Fslash identifyer_ ;
+idReference: '&' identifyer_ ;
 
 looseFnCall
 : identifyer_ argument_ (',' argument_)*
@@ -260,12 +251,13 @@ op3_
 
 op4_
 : '\\\\' #definedOrOp
-| '..' #rangeOp
 ;
 
 op5_
 : '==' #boolEqOp
+| '===' #boolDeepEqOp
 | '!=' #boolNeqOp
+| '!==' #boolDeepNeqOp
 | Gt #boolGtOp
 | GtEq #boolGtEqOp
 | Lt #boolLtOp
