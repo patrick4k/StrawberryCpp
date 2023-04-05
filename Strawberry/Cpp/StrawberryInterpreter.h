@@ -194,7 +194,9 @@ namespace antlrcpptest {
         std::any visitMinOp(StrawberryParser::MinOpContext *ctx) override;
         std::any visitDefinedOrOp(StrawberryParser::DefinedOrOpContext *ctx) override;
         std::any visitBoolEqOp(StrawberryParser::BoolEqOpContext *ctx) override;
+        std::any visitBoolDeepEqOp(StrawberryParser::BoolDeepEqOpContext *ctx) override;
         std::any visitBoolNeqOp(StrawberryParser::BoolNeqOpContext *ctx) override;
+        std::any visitBoolDeepNeqOp(StrawberryParser::BoolDeepNeqOpContext *ctx) override;
         std::any visitBoolGtOp(StrawberryParser::BoolGtOpContext *ctx) override;
         std::any visitBoolGtEqOp(StrawberryParser::BoolGtEqOpContext *ctx) override;
         std::any visitBoolLtOp(StrawberryParser::BoolLtOpContext *ctx) override;

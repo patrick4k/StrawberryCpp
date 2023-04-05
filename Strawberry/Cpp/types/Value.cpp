@@ -63,4 +63,9 @@ std::shared_ptr<Value> Value::min(std::shared_ptr<Value> val1, std::shared_ptr<V
     return nullptr;
 }
 
+bool Value::bool_equals(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) {
+    return val1->toString() == val2->toString();
+}
+
+
 Value::~Value() = default;

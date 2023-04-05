@@ -491,8 +491,6 @@ namespace antlrcpptest {
         throw std::runtime_error("Cannot access for " + identifyer->deref()->typeName() + " type\n\t--->" + ctx->getText());
     }
 
-
-
     std::any StrawberryInterpreter::visitIdAccess(StrawberryParser::IdAccessContext *ctx) {
         return get_from_memory(ctx->Id()->getText());
     }
@@ -661,12 +659,65 @@ namespace antlrcpptest {
         return operation;
     }
 
+    // TODO: Redefine bool equals
     std::any StrawberryInterpreter::visitBoolEqOp(StrawberryParser::BoolEqOpContext *ctx) {
-        return StrawberryParserBaseVisitor::visitBoolEqOp(ctx);
+        std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
+        operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
+            bool bool_result;
+            if (ref1->operatorPriority() > ref2->operatorPriority()) {
+                bool_result = ref1->bool_equals(ref1->deref(), ref2->deref());
+                return std::make_shared<Reference>(std::make_shared<Bool>(bool_result));
+            }
+            bool_result = ref2->bool_equals(ref1->deref(), ref2->deref());
+            return std::make_shared<Reference>(std::make_shared<Bool>(bool_result));
+        };
+        return operation;
+    }
+
+    std::any StrawberryInterpreter::visitBoolDeepEqOp(StrawberryParser::BoolDeepEqOpContext *ctx) {
+        std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
+        operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
+            if (ref1->get_referenced_value()->typeName() != ref2->get_referenced_value()->typeName())
+                return std::make_shared<Reference>(std::make_shared<Bool>(false));
+            bool bool_result;
+            if (ref1->operatorPriority() > ref2->operatorPriority()) {
+                bool_result = ref1->bool_equals(ref1->deref(), ref2->deref());
+                return std::make_shared<Reference>(std::make_shared<Bool>(bool_result));
+            }
+            bool_result = ref2->bool_equals(ref1->deref(), ref2->deref());
+            return std::make_shared<Reference>(std::make_shared<Bool>(bool_result));
+        };
+        return operation;
     }
 
     std::any StrawberryInterpreter::visitBoolNeqOp(StrawberryParser::BoolNeqOpContext *ctx) {
-        return StrawberryParserBaseVisitor::visitBoolNeqOp(ctx);
+        std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
+        operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
+            bool bool_result;
+            if (ref1->operatorPriority() > ref2->operatorPriority()) {
+                bool_result = !ref1->bool_equals(ref1->deref(), ref2->deref());
+                return std::make_shared<Reference>(std::make_shared<Bool>(bool_result));
+            }
+            bool_result = !ref2->bool_equals(ref1->deref(), ref2->deref());
+            return std::make_shared<Reference>(std::make_shared<Bool>(bool_result));
+        };
+        return operation;
+    }
+
+    std::any StrawberryInterpreter::visitBoolDeepNeqOp(StrawberryParser::BoolDeepNeqOpContext *ctx) {
+        std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
+        operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
+            if (ref1->get_referenced_value()->typeName() != ref2->get_referenced_value()->typeName())
+                return std::make_shared<Reference>(std::make_shared<Bool>(false));
+            bool bool_result;
+            if (ref1->operatorPriority() > ref2->operatorPriority()) {
+                bool_result = !ref1->bool_equals(ref1->deref(), ref2->deref());
+                return std::make_shared<Reference>(std::make_shared<Bool>(bool_result));
+            }
+            bool_result = !ref2->bool_equals(ref1->deref(), ref2->deref());
+            return std::make_shared<Reference>(std::make_shared<Bool>(bool_result));
+        };
+        return operation;
     }
 
     std::any StrawberryInterpreter::visitBoolGtOp(StrawberryParser::BoolGtOpContext *ctx) {

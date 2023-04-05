@@ -255,7 +255,9 @@ op4_
 
 op5_
 :  BoolEq  #boolEqOp
+|  BoolDeepEq  #boolDeepEqOp
 |  BoolNeq  #boolNeqOp
+|  BoolDeepNeq  #boolDeepNeqOp
 | Gt #boolGtOp
 | GtEq #boolGtEqOp
 | Lt #boolLtOp

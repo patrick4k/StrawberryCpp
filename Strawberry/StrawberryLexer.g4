@@ -76,7 +76,9 @@ Eq: '=' ;
 
 /* Bool Compare */
 BoolEq: '==' ;
+BoolDeepEq: '===' ;
 BoolNeq: '!=' ;
+BoolDeepNeq: '!==' ;
 Gt: '>' ;
 GtEq: '>=' ;
 Lt: '<' ;

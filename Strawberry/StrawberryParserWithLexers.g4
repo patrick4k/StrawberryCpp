@@ -255,7 +255,9 @@ op4_
 
 op5_
 : '==' #boolEqOp
+| '===' #boolDeepEqOp
 | '!=' #boolNeqOp
+| '!==' #boolDeepNeqOp
 | Gt #boolGtOp
 | GtEq #boolGtEqOp
 | Lt #boolLtOp
