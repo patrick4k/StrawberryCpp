@@ -39,7 +39,7 @@ Strawberry/StrawberryLexer.g4 and Strawberry/StrawberryParser.g4.
     - [x] Number and String literals
 
 
-- [ ] Visitor Overrides 0.2
+- [x] Visitor Overrides 0.2
     - [x] Visitors for declare() and assign()
     - [x] Basic Operator Functionality
     - [x] Advance Operator Functionality
