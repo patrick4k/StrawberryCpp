@@ -31,8 +31,20 @@ namespace antlrcpptest {
         };
 
     // -------------------------------------------------------------------------------------------------------------- //
+        // Default Linked List //
+        class Default {
+        public:
+            std::shared_ptr<Reference> default_ref;
+            std::shared_ptr<Default> outer_default;
+            explicit Default(std::shared_ptr<Reference> d,
+                              std::shared_ptr<Default> n = nullptr): default_ref(std::move(d)), outer_default(std::move(n)){}
+        };
+
+    // -------------------------------------------------------------------------------------------------------------- //
         // Memory Management Methods //
+        std::shared_ptr<Default> program_default;
         std::shared_ptr<Scope> innerScope;
+        std::shared_ptr<Scope> defaultScope;
 
         void scope_in() {
             auto clean_memory = std::unordered_map<std::string,std::shared_ptr<Reference>>();
@@ -41,6 +53,21 @@ namespace antlrcpptest {
 
         void scope_out() {
             innerScope = innerScope->outerScope;
+        }
+
+        void new_default(const std::shared_ptr<Value>& value) {
+            program_default = std::make_shared<Default>(std::make_shared<Reference>(value), std::move(program_default));
+        }
+
+        std::shared_ptr<Reference> get_default() {
+            return program_default->default_ref;
+        }
+
+        std::shared_ptr<Reference> pop_default() {
+            auto def = program_default->default_ref;
+            program_default = program_default->outer_default;
+            if (program_default == nullptr) throw std::runtime_error("POP DEFAULT INTO NULL");
+            return def;
         }
 
         std::shared_ptr<Reference> declare(const std::string& id, const std::shared_ptr<Value>& val) const {
@@ -74,6 +101,21 @@ namespace antlrcpptest {
             }
         }
 
+        void print_default() {
+            print_default("");
+        }
+        void print_default(std::string prelim) {
+            std::stringstream ss;
+            auto defaull_ref = this->program_default;
+            ss << prelim << "_ : " << defaull_ref->default_ref->deref()->typeName() << " = " << defaull_ref->default_ref->toString();
+            while (defaull_ref->outer_default != nullptr) {
+                defaull_ref = defaull_ref->outer_default;
+                ss << prelim << " -> " << defaull_ref->default_ref->deref()->typeName() << " = " << defaull_ref->default_ref->toString();
+            }
+            ss << std::endl;
+            std::cout << ss.str();
+        }
+
         void print_inner_scope() {
             print_scope(this->innerScope, "");
         }
@@ -83,13 +125,22 @@ namespace antlrcpptest {
             int i = 0;
             do {
                 std::cout << "Scope " << i << ":" << std::endl;
-                print_scope(scope, "\t");
+                print_scope(scope, "  --> ");
                 if (!scope->outerScope) break;
-                std::cout << std::endl << std::endl;
+//                std::cout << std::endl << std::endl;
                 ++i;
                 scope = scope->outerScope;
             } while (true);
         }
+/* ================================================================================================================== */
+    /* Visitor Helpers */
+//    private:
+//        template<typename T>
+//        std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
+//        binary_operation(StrawberryParser::Expression_Context* expr1, T op, StrawberryParser::Expression_Context* expr2) {
+//
+//        }
+
 
 /* ================================================================================================================== */
     /* Visitor Overrides */
@@ -97,12 +148,16 @@ namespace antlrcpptest {
 
         std::any visitAction_(StrawberryParser::Action_Context *ctx) override {
             std::cout << ">> " << ctx->getText() << std::endl;
-            print_scope(this->innerScope, "\t");
+            auto result =  StrawberryParserBaseVisitor::visitAction_(ctx);
+//            print_scope(this->innerScope, "  --> ");
+            print_memory();
+            print_default("  --> ");
             std::cout << std::endl << std::endl;
-            return StrawberryParserBaseVisitor::visitAction_(ctx);
+            return result;
         }
 
         std::any visitScript_(StrawberryParser::Script_Context *ctx) override;
+        std::any visitScope(StrawberryParser::ScopeContext *ctx) override;
         std::any visitReturnStat(StrawberryParser::ReturnStatContext *ctx) override;
         std::any visitOnceStat(StrawberryParser::OnceStatContext *ctx) override;
         std::any visitNextStat(StrawberryParser::NextStatContext *ctx) override;
@@ -185,6 +240,7 @@ namespace antlrcpptest {
         std::any visitLooseFnCall(StrawberryParser::LooseFnCallContext *ctx) override;
         std::any visitNegatePrefix(StrawberryParser::NegatePrefixContext *ctx) override;
         std::any visitNegativePrefix(StrawberryParser::NegativePrefixContext *ctx) override;
+        std::any visitSizePrefix(StrawberryParser::SizePrefixContext *ctx) override;
         std::any visitExcitedSuff(StrawberryParser::ExcitedSuffContext *ctx) override;
         std::any visitPowOp(StrawberryParser::PowOpContext *ctx) override;
         std::any visitMultOp(StrawberryParser::MultOpContext *ctx) override;

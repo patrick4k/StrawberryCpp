@@ -27,7 +27,7 @@ Null: 'null' ;
 /* Util */
 Id: Word (Letter | Digit | Uscore)*;
 DefId: '_' Id?;
-Number: Digit+ ('.' Digit+)? | '.' Digit+ ;
+Number: (Digit+ ('.' Digit+)? | '.' Digit+ ) ('e' '-'? Digit+)?;
 String: '"' .*? '"' ;
 StringLit: '\'' .*? '\'' ;
 

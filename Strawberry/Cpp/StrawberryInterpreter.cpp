@@ -16,10 +16,25 @@ namespace antlrcpptest {
 /* ================================================ VISITOR OVERRIDES =============================================== */
     std::any StrawberryInterpreter::visitScript_(StrawberryParser::Script_Context *ctx) {
         this->scope_in();
+        this->new_default(std::make_shared<Value>());
         StrawberryParserBaseVisitor::visitScript_(ctx);
+        std::cout << "Memory =============================================================" << std::endl;
         print_inner_scope();
+        std::cout << "Default =============================================================" << std::endl;
+        print_default();
         this->scope_out();
         return 0;
+    }
+
+    std::any StrawberryInterpreter::visitScope(StrawberryParser::ScopeContext *ctx) {
+        // TODO: Revise for keyword responses
+        std::any action_response;
+        this->scope_in();
+        for (auto action: ctx->action_()) {
+            action_response = visit(action);
+        }
+        this->scope_out();
+        return action_response;
     }
 
     /* -------------------------------------------------------------------------------------------------------------- */
@@ -496,7 +511,7 @@ namespace antlrcpptest {
     }
 
     std::any StrawberryInterpreter::visitDefaultAccess(StrawberryParser::DefaultAccessContext *ctx) {
-        return StrawberryParserBaseVisitor::visitDefaultAccess(ctx);
+        return this->get_default();
     }
 
     // Reference of reference
@@ -532,6 +547,17 @@ namespace antlrcpptest {
                 neg_val = neg_one->mult(neg_one, ref->deref());
             }
             return std::make_shared<Reference>(neg_val);
+        };
+        return operation;
+    }
+
+    std::any StrawberryInterpreter::visitSizePrefix(StrawberryParser::SizePrefixContext *ctx) {
+        std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>)>
+        operation = [](std::shared_ptr<Reference> ref)->std::shared_ptr<Reference> {
+            if (auto list = ref->deref<Container>()) {
+                return std::make_shared<Reference>(std::make_shared<Number>(list->size()));
+            }
+            throw std::runtime_error("Cannot get size from type " + ref->deref()->typeName());
         };
         return operation;
     }

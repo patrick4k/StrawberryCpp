@@ -17,18 +17,18 @@ declaration_
 
 action_
 : statement_  Semi 
-| scope_
+| scope
 | controlFlow_
 | declaration_
 ;
 
-scope_:  Lbrace  action_*  Rbrace  ;
+scope:  Lbrace  action_*  Rbrace  ;
 
 statement_
 : keywordStatement_
 | assign_
 | expression_
-| scope_
+| scope
 ;
 
 keywordStatement_
@@ -39,7 +39,7 @@ keywordStatement_
 | Break #breakStat
 ;
 
-body_: (scope_ | statement_  Semi ) ;
+body_: (scope | statement_  Semi ) ;
 
 /* ================================================================================ */
 // CONTROL FLOW
@@ -57,12 +57,12 @@ loop_
 ;
 
 loopScope
-: loopKeywords_ expression_ scope_
+: loopKeywords_ expression_ scope
 ;
 
 loopBody: loopKeywords_  Lpar  expression_  Rpar  body_ ;
 
-doWhileLoop:  Do  scope_ conditionalLoopKeywords_ expression_  Semi  ;
+doWhileLoop:  Do  scope conditionalLoopKeywords_ expression_  Semi  ;
 
 compoundStatement: compoundAction_ (loopKeywords_ (expression_ |  Lpar  args  Rpar ))* ;
 
@@ -79,7 +79,7 @@ ifStatement_
 ;
 
 ifScope
-: conditionalKeywords_ expression_ scope_ ( Else  (body_ | ifStatement_))?
+: conditionalKeywords_ expression_ scope ( Else  (body_ | ifStatement_))?
 ;
 
 ifBody
@@ -105,7 +105,7 @@ conditionalLoopKeywords_
 /* ================================================================================ */
 // FUNCTIONS ARGS PARAMETERS
 
-fnDeclaration:  Fn  Id  Lpar  parameters_  Rpar  scope_ ;
+fnDeclaration:  Fn  Id  Lpar  parameters_  Rpar  scope ;
 
 lambda:  Lpar  parameters_  Rpar   Sarrow  statement_ ;
 
@@ -169,8 +169,9 @@ literal_
 : keywordLiteral_ #keywordLit_
 | String #dStringLit // TODO: add escape characters
 | StringLit #sStringLit
-|  Lbrack  args ( Semi  args)*  Rbrack  #arrayLit
+|  Lbrack  args ( Semi  args)*  Semi ?  Rbrack  #arrayLit
 |  Lbrace  (pair_ ( Com  pair_)*  Com ?)?  Rbrace  #hashLit
+|  Lbrace  args ( Semi  args)*  Semi ?  Rbrace  #matrixLit // TODO: implement matrix type
 | Number #numLit
 ;
 
@@ -228,6 +229,7 @@ looseFnCall
 prefix_
 :  ExPoint  #negatePrefix
 |  Min  #negativePrefix
+|  Doll  #sizePrefix
 ;
 
 highPrioritySuffix_

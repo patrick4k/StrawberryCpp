@@ -17,18 +17,18 @@ declaration_
 
 action_
 : statement_ ';'
-| scope_
+| scope
 | controlFlow_
 | declaration_
 ;
 
-scope_: '{' action_* '}' ;
+scope: '{' action_* '}' ;
 
 statement_
 : keywordStatement_
 | assign_
 | expression_
-| scope_
+| scope
 ;
 
 keywordStatement_
@@ -39,7 +39,7 @@ keywordStatement_
 | Break #breakStat
 ;
 
-body_: (scope_ | statement_ ';') ;
+body_: (scope | statement_ ';') ;
 
 /* ================================================================================ */
 // CONTROL FLOW
@@ -57,12 +57,12 @@ loop_
 ;
 
 loopScope
-: loopKeywords_ expression_ scope_
+: loopKeywords_ expression_ scope
 ;
 
 loopBody: loopKeywords_ '(' expression_ ')' body_ ;
 
-doWhileLoop: 'do' scope_ conditionalLoopKeywords_ expression_ ';' ;
+doWhileLoop: 'do' scope conditionalLoopKeywords_ expression_ ';' ;
 
 compoundStatement: compoundAction_ (loopKeywords_ (expression_ | '(' args ')'))* ;
 
@@ -79,7 +79,7 @@ ifStatement_
 ;
 
 ifScope
-: conditionalKeywords_ expression_ scope_ ('else' (body_ | ifStatement_))?
+: conditionalKeywords_ expression_ scope ('else' (body_ | ifStatement_))?
 ;
 
 ifBody
@@ -105,7 +105,7 @@ conditionalLoopKeywords_
 /* ================================================================================ */
 // FUNCTIONS ARGS PARAMETERS
 
-fnDeclaration: 'fn' Id '(' parameters_ ')' scope_ ;
+fnDeclaration: 'fn' Id '(' parameters_ ')' scope ;
 
 lambda: '(' parameters_ ')' '->' statement_ ;
 
@@ -169,8 +169,9 @@ literal_
 : keywordLiteral_ #keywordLit_
 | String #dStringLit // TODO: add escape characters
 | StringLit #sStringLit
-| '[' args (';' args)* ']' #arrayLit
+| '[' args (';' args)* ';'? ']' #arrayLit
 | '{' (pair_ (',' pair_)* ','?)? '}' #hashLit
+| '{' args (';' args)* ';'? '}' #matrixLit // TODO: implement matrix type
 | Number #numLit
 ;
 
@@ -228,6 +229,7 @@ looseFnCall
 prefix_
 : '!' #negatePrefix
 | '-' #negativePrefix
+| '$' #sizePrefix
 ;
 
 highPrioritySuffix_
