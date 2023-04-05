@@ -26,6 +26,8 @@ public:
     std::shared_ptr<Reference> get(int i);
 
     void append(const std::shared_ptr<Value> &val) override;
+    void shift(const std::shared_ptr<Value> &val);
+    void insert(int i, const std::shared_ptr<Value> &val);
 
     explicit List(const std::shared_ptr<Reference> &ref);
 

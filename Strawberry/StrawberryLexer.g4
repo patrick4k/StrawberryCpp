@@ -24,15 +24,6 @@ True: 'true' ;
 False: 'false' ;
 Null: 'null' ;
 
-/* Regex */
-MatchArrow: '~>' ;
-RegWord: '\\w' ;
-RegDigit: '\\d' ;
-RegSpace: '\\s' ;
-RegNewline: '\\n' ;
-RegFSlash: '\\/' ;
-RegReturnAll: 'return all' ;
-
 /* Util */
 Id: Word (Letter | Digit | Uscore)*;
 DefId: '_' Id?;

@@ -13,83 +13,6 @@
 #include "types/expressions/Bool.h"
 
 namespace antlrcpptest {
-
-    void StrawberryInterpreter::testRef() {
-
-        auto x = declare("x", std::make_shared<Number>(11)); // new
-        auto y = declare("y", get_from_memory("x")->copy_value()); // copy
-        auto z = declare("z", get_from_memory("x")); // reference
-
-        assign("x", std::make_shared<Number>(22));
-
-        std::cout << "x = " << x->toString() << std::endl;
-        std::cout << "y = " << y->toString() << std::endl;
-        std::cout << "z = " << z->toString() << std::endl;
-    }
-
-    void StrawberryInterpreter::testList() {
-        auto lref = declare("l", std::make_shared<List>())->deref<List>();
-        lref->append(std::make_shared<Number>(1));
-        lref->append(std::make_shared<Number>(2));
-        lref->append(std::make_shared<Number>(3));
-
-        std::cout << get_from_memory("l")->deref<List>()->get(0)->toString() << std::endl;
-        std::cout << get_from_memory("l")->deref<List>()->get(1)->toString() << std::endl;
-        std::cout << get_from_memory("l")->deref<List>()->get(2)->toString() << std::endl << std::endl;
-
-        std::cout << get_from_memory("l")->deref<List>()->get(-0)->toString() << std::endl;
-        std::cout << get_from_memory("l")->deref<List>()->get(-1)->toString() << std::endl;
-        std::cout << get_from_memory("l")->deref<List>()->get(-2)->toString() << std::endl;
-        std::cout << get_from_memory("l")->deref<List>()->get(-3)->toString() << std::endl;
-        std::cout << get_from_memory("l")->deref<List>()->get(-4)->toString() << std::endl;
-    }
-
-    void StrawberryInterpreter::moreListTesting() {
-
-        auto x = declare("x", std::make_shared<Number>(12));
-        auto l = declare("l", std::make_shared<List>())->deref<List>();
-
-        l->append(x->copy_value());
-
-        std::cout << l->toString() << std::endl;
-
-        x->set(std::make_shared<Number>(1));
-
-        std::cout << l->toString();
-    }
-
-    void StrawberryInterpreter::pairHashTesting() {
-
-        auto s1 = declare("s1", std::make_shared<String>("key1"));
-        auto s2 = declare("s2", std::make_shared<String>("key2"));
-
-        auto n1 = declare("n1", std::make_shared<Number>(1));
-        auto n2 = declare("n2", std::make_shared<Number>(2));
-
-        auto p1 = declare("p1", std::make_shared<Pair>(s1,n1->copy_to_reference()));
-        auto p2 = declare("p2", std::make_shared<Pair>(s2,n1));
-
-        assign("n1", std::make_shared<Number>(2));
-        std::cout << "p = " << get_from_memory("p1")->toString() << std::endl;
-
-        auto hash = declare("hash", std::make_shared<Hash>());
-        hash->deref<Container>()->append(p1);
-        hash->deref<Container>()->append(p2);
-
-        std::cout << "hash = " << hash->toString();
-
-    }
-
-    void StrawberryInterpreter::castTesting() {
-
-        auto ptr = declare("x", std::make_shared<Number>(1));
-        auto castedCorrect = ptr->deref()->as<Number>();
-        auto castedBad = ptr->deref()->as<List>();
-
-        std::cout << std::endl << ptr->toString();
-
-    }
-
 /* ================================================ VISITOR OVERRIDES =============================================== */
     std::any StrawberryInterpreter::visitScript_(StrawberryParser::Script_Context *ctx) {
         this->scope_in();
@@ -212,7 +135,7 @@ namespace antlrcpptest {
     std::any StrawberryInterpreter::visitArgs(StrawberryParser::ArgsContext *ctx) {
         auto args = std::make_shared<List>();
         for (auto arg: ctx->argument_()) {
-            if (dynamic_cast<StrawberryParser::ArgExpandContext*>(arg)) {
+            if (dynamic_cast<StrawberryParser::ArgExpandContext*>(arg) || dynamic_cast<StrawberryParser::RangeArgContext*>(arg)) {
                 auto args2 = std::any_cast<std::shared_ptr<Reference>>(visit(arg))->deref()->as<List>();
                 for (int i = 0; i < args2->size(); ++i) {
                     args->append(args2->get(i)->deref());
@@ -237,58 +160,30 @@ namespace antlrcpptest {
         return std::make_shared<Reference>(std::make_shared<List>(ref));
     }
 
+    std::any StrawberryInterpreter::visitRangeArg(StrawberryParser::RangeArgContext *ctx) {
+        auto ref1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_()[0]));
+        auto ref2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_()[1]));
+        auto list = std::make_shared<List>();
+        int n1 = ref1->toDouble(), n2 = ref2->toDouble();
+        if (auto l1 = ref1->deref<List>()) {
+            n1 = l1->get(l1->size()-1)->toDouble();
+        }
+        if (auto l2 = ref2->deref<List>()) {
+            n2 = l2->get(0)->toDouble();
+        }
+        if (n2 >= n1)
+            for (int i = n1; i <= n2; ++i)
+                list->append(std::make_shared<Number>(i));
+        else
+            for (int i = n1; i >= n2; --i)
+                list->append(std::make_shared<Number>(i));
+        return std::make_shared<Reference>(list);
+    }
+
     /* -------------------------------------------------------------------------------------------------------------- */
-        /* Regex */
+        /* Regex */ // TODO: fix regex
     std::any StrawberryInterpreter::visitMatchRegex(StrawberryParser::MatchRegexContext *ctx) {
         return StrawberryParserBaseVisitor::visitMatchRegex(ctx);
-    }
-
-    std::any StrawberryInterpreter::visitReturnAllMatchOption(StrawberryParser::ReturnAllMatchOptionContext *ctx) {
-        return StrawberryParserBaseVisitor::visitReturnAllMatchOption(ctx);
-    }
-
-    std::any StrawberryInterpreter::visitZeroOrMore(StrawberryParser::ZeroOrMoreContext *ctx) {
-        return StrawberryParserBaseVisitor::visitZeroOrMore(ctx);
-    }
-
-    std::any StrawberryInterpreter::visitOrMatch(StrawberryParser::OrMatchContext *ctx) {
-        return StrawberryParserBaseVisitor::visitOrMatch(ctx);
-    }
-
-    std::any StrawberryInterpreter::visitCollectMatch(StrawberryParser::CollectMatchContext *ctx) {
-        return StrawberryParserBaseVisitor::visitCollectMatch(ctx);
-    }
-
-    std::any StrawberryInterpreter::visitZeroOrOne(StrawberryParser::ZeroOrOneContext *ctx) {
-        return StrawberryParserBaseVisitor::visitZeroOrOne(ctx);
-    }
-
-    std::any StrawberryInterpreter::visitChars(StrawberryParser::CharsContext *ctx) {
-        return StrawberryParserBaseVisitor::visitChars(ctx);
-    }
-
-    std::any StrawberryInterpreter::visitOnOrMore(StrawberryParser::OnOrMoreContext *ctx) {
-        return StrawberryParserBaseVisitor::visitOnOrMore(ctx);
-    }
-
-    std::any StrawberryInterpreter::visitWord(StrawberryParser::WordContext *ctx) {
-        return StrawberryParserBaseVisitor::visitWord(ctx);
-    }
-
-    std::any StrawberryInterpreter::visitNewline(StrawberryParser::NewlineContext *ctx) {
-        return StrawberryParserBaseVisitor::visitNewline(ctx);
-    }
-
-    std::any StrawberryInterpreter::visitBslash(StrawberryParser::BslashContext *ctx) {
-        return StrawberryParserBaseVisitor::visitBslash(ctx);
-    }
-
-    std::any StrawberryInterpreter::visitWildCard(StrawberryParser::WildCardContext *ctx) {
-        return StrawberryParserBaseVisitor::visitWildCard(ctx);
-    }
-
-    std::any StrawberryInterpreter::visitOther(StrawberryParser::OtherContext *ctx) {
-        return StrawberryParserBaseVisitor::visitOther(ctx);
     }
 
     /* -------------------------------------------------------------------------------------------------------------- */
@@ -298,7 +193,10 @@ namespace antlrcpptest {
     }
 
     std::any StrawberryInterpreter::visitPrefixExpr(StrawberryParser::PrefixExprContext *ctx) {
-        return StrawberryParserBaseVisitor::visitPrefixExpr(ctx);
+        auto operation = std::any_cast
+                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>)>>(visit(ctx->prefix_()));
+        auto expr = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_()));
+        return operation(expr);
     }
 
     std::any StrawberryInterpreter::visitDefaultSuffixExpr(StrawberryParser::DefaultSuffixExprContext *ctx) {
@@ -310,7 +208,7 @@ namespace antlrcpptest {
         auto val1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(0)));
         auto val2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(1)));
         auto operation = std::any_cast
-                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Value>, std::shared_ptr<Value>)>>
+                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>, std::shared_ptr<Reference>)>>
                 (visit(ctx->op1_()));
         return operation(val1, val2);
     }
@@ -319,7 +217,7 @@ namespace antlrcpptest {
         auto val1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(0)));
         auto val2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(1)));
         auto operation = std::any_cast
-                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Value>, std::shared_ptr<Value>)>>
+                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>, std::shared_ptr<Reference>)>>
                 (visit(ctx->op2_()));
         return operation(val1, val2);
     }
@@ -328,7 +226,7 @@ namespace antlrcpptest {
         auto val1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(0)));
         auto val2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(1)));
         auto operation = std::any_cast
-                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>, std::shared_ptr<Reference>)>>
+                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>>
                 (visit(ctx->op3_()));
         auto val3 = operation(val1, val2);
         return val3;
@@ -338,7 +236,7 @@ namespace antlrcpptest {
         auto val1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(0)));
         auto val2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(1)));
         auto operation = std::any_cast
-                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Value>, std::shared_ptr<Value>)>>
+                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>, std::shared_ptr<Reference>)>>
                 (visit(ctx->op4_()));
         return operation(val1, val2);
     }
@@ -347,7 +245,7 @@ namespace antlrcpptest {
         auto val1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(0)));
         auto val2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(1)));
         auto operation = std::any_cast
-                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Value>, std::shared_ptr<Value>)>>
+                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>, std::shared_ptr<Reference>)>>
                 (visit(ctx->op5_()));
         return operation(val1, val2);
     }
@@ -356,7 +254,7 @@ namespace antlrcpptest {
         auto val1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(0)));
         auto val2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(1)));
         auto operation = std::any_cast
-                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Value>, std::shared_ptr<Value>)>>
+                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>, std::shared_ptr<Reference>)>>
                 (visit(ctx->op6_()));
         return operation(val1, val2);
     }
@@ -365,8 +263,12 @@ namespace antlrcpptest {
         return StrawberryParserBaseVisitor::visitSuffixExpr(ctx);
     }
 
-    std::any StrawberryInterpreter::visitLitExpr(StrawberryParser::LitExprContext *ctx) {
-        return StrawberryParserBaseVisitor::visitLitExpr(ctx);
+    std::any StrawberryInterpreter::visitDerefExpr(StrawberryParser::DerefExprContext *ctx) {
+        auto ref = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->identifyer_()));
+        if (auto ref_ref = ref->deref<Reference>()) {
+            return ref_ref;
+        }
+        throw std::runtime_error("Cannot deref non-reference");
     }
 
     std::any StrawberryInterpreter::visitAssignExpr(StrawberryParser::AssignExprContext *ctx) {
@@ -378,7 +280,7 @@ namespace antlrcpptest {
     }
 
     std::any StrawberryInterpreter::visitParenExpr(StrawberryParser::ParenExprContext *ctx) {
-        return StrawberryParserBaseVisitor::visitParenExpr(ctx);
+        return visit(ctx->expression_());
     }
 
     std::any StrawberryInterpreter::visitAccessExpr(StrawberryParser::AccessExprContext *ctx) {
@@ -400,12 +302,17 @@ namespace antlrcpptest {
     }
 
     std::any StrawberryInterpreter::visitArrayLit(StrawberryParser::ArrayLitContext *ctx) {
-        return visit(ctx->args());
+        if (ctx->args().size() == 1) return visit(ctx->args(0));
+        auto list = std::make_shared<List>();
+        for (auto args: ctx->args()) {
+            list->append(std::any_cast<std::shared_ptr<Reference>>(visit(args))->deref());
+        }
+        return std::make_shared<Reference>(list);
     }
 
     std::any StrawberryInterpreter::visitHashLit(StrawberryParser::HashLitContext *ctx) {
         auto hash = std::make_shared<Hash>();
-        for (auto pair_ctx: ctx->pair()) {
+        for (auto pair_ctx: ctx->pair_()) {
             auto pair_ref = std::any_cast<std::shared_ptr<Reference>>(visit(pair_ctx));
             hash->append(pair_ref->deref());
         }
@@ -416,7 +323,7 @@ namespace antlrcpptest {
         return std::make_shared<Reference>(std::make_shared<Number>(ctx->Number()->getText()));
     }
 
-    std::any StrawberryInterpreter::visitPair(StrawberryParser::PairContext *ctx) {
+    std::any StrawberryInterpreter::visitPairValue(StrawberryParser::PairValueContext *ctx) {
         std::string key;
         if (ctx->Id()) key = ctx->Id()->getText();
         else {
@@ -424,6 +331,18 @@ namespace antlrcpptest {
             key = key.substr(1, key.length() - 2);
         }
         auto value = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->value_()));
+        auto pair = std::make_shared<Pair>(std::make_shared<String>(key), value->deref());
+        return std::make_shared<Reference>(pair);
+    }
+
+    std::any StrawberryInterpreter::visitPairArgs(StrawberryParser::PairArgsContext *ctx) {
+        std::string key;
+        if (ctx->Id()) key = ctx->Id()->getText();
+        else {
+            key = ctx->Key->getText();
+            key = key.substr(1, key.length() - 2);
+        }
+        auto value = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->args()));
         auto pair = std::make_shared<Pair>(std::make_shared<String>(key), value->deref());
         return std::make_shared<Reference>(pair);
     }
@@ -454,7 +373,7 @@ namespace antlrcpptest {
         auto vars = std::make_shared<List>();
         for (auto varDeclare: varDeclares) {
             auto ref = visit(varDeclare);
-            vars->append(std::make_shared<Reference>(std::any_cast<std::shared_ptr<Reference>>(ref)));
+            vars->append(std::make_shared<Reference>(std::any_cast<std::shared_ptr<Reference>>(ref)->deref()));
         }
         return std::make_shared<Reference>(vars);
     }
@@ -466,10 +385,26 @@ namespace antlrcpptest {
         return value;
     }
 
-    // TODO: add
-    std::any StrawberryInterpreter::visitStreamAssign(StrawberryParser::StreamAssignContext *ctx) {
+    std::any StrawberryInterpreter::visitEqAssignArgs(StrawberryParser::EqAssignArgsContext *ctx) {
+        auto value = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->args()));
+        for (auto id: ctx->identifyer_())
+            std::any_cast<std::shared_ptr<Reference>>(visit(id))->set(value->deref());
+        return value;
+    }
+
+    std::any StrawberryInterpreter::visitSetRefAssign(StrawberryParser::SetRefAssignContext *ctx) {
         auto identifyer = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->identifyer_()));
         auto value = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->value_()));
+        if (auto ref = identifyer->deref<Reference>()) {
+            ref->set(value->deref());
+            return ref;
+        }
+        throw std::runtime_error("Cannot set value of non-reference value");
+    }
+
+    std::any StrawberryInterpreter::visitSetRefAssignArgs(StrawberryParser::SetRefAssignArgsContext *ctx) {
+        auto identifyer = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->identifyer_()));
+        auto value = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->args()));
         if (auto ref = identifyer->deref<Reference>()) {
             ref->set(value->deref());
             return ref;
@@ -522,6 +457,11 @@ namespace antlrcpptest {
         return declare(ctx->Id()->getText(), ref->deref());
     }
 
+    std::any StrawberryInterpreter::visitInitVarDeclarArgs(StrawberryParser::InitVarDeclarArgsContext *ctx) {
+        auto ref = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->args()));
+        return declare(ctx->Id()->getText(), ref->deref());
+    }
+
     /* -------------------------------------------------------------------------------------------------------------- */
         /* Identifiers / Container Access */
     std::any StrawberryInterpreter::visitDotAccess(StrawberryParser::DotAccessContext *ctx) {
@@ -533,7 +473,7 @@ namespace antlrcpptest {
         throw std::runtime_error("Cannot use dot access for " + identifyer->deref()->typeName() + "\n\t--->" + ctx->getText());
     }
 
-    std::any StrawberryInterpreter::visitArrAccesss(StrawberryParser::ArrAccesssContext *ctx) {
+    std::any StrawberryInterpreter::visitArrAccess(StrawberryParser::ArrAccessContext *ctx) {
         auto identifyer = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->identifyer_()));
         if (auto container = identifyer->get_referenced_value()->as<Container>()) {
             auto index = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_()));
@@ -541,6 +481,17 @@ namespace antlrcpptest {
         }
         throw std::runtime_error("Cannot access for " + identifyer->deref()->typeName() + " type\n\t--->" + ctx->getText());
     }
+
+    std::any StrawberryInterpreter::visitArrAccessArgs(StrawberryParser::ArrAccessArgsContext *ctx) {
+        auto identifyer = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->identifyer_()));
+        if (auto container = identifyer->get_referenced_value()->as<Container>()) {
+            auto index = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->args()));
+            return container->get(index->deref());
+        }
+        throw std::runtime_error("Cannot access for " + identifyer->deref()->typeName() + " type\n\t--->" + ctx->getText());
+    }
+
+
 
     std::any StrawberryInterpreter::visitIdAccess(StrawberryParser::IdAccessContext *ctx) {
         return get_from_memory(ctx->Id()->getText());
@@ -565,13 +516,26 @@ namespace antlrcpptest {
         /* Operators */
 
     // -------------------------------------------------------------------------------------------------------------- //
-    // Unary Prefixes //
+    // Unary High Priority //
     std::any StrawberryInterpreter::visitNegatePrefix(StrawberryParser::NegatePrefixContext *ctx) {
-        return StrawberryParserBaseVisitor::visitNegatePrefix(ctx);
+        std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>)>
+        operation = [](std::shared_ptr<Reference> ref)->std::shared_ptr<Reference> {
+            return std::make_shared<Reference>(std::make_shared<Bool>(!ref->toBool()));
+        };
+        return operation;
     }
 
     std::any StrawberryInterpreter::visitNegativePrefix(StrawberryParser::NegativePrefixContext *ctx) {
-        return StrawberryParserBaseVisitor::visitNegativePrefix(ctx);
+        std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>)>
+        operation = [](std::shared_ptr<Reference> ref)->std::shared_ptr<Reference> {
+            auto neg_one = std::make_shared<Number>(-1);
+            auto neg_val = ref->mult(neg_one, ref->deref());
+            if (neg_val == nullptr) {
+                neg_val = neg_one->mult(neg_one, ref->deref());
+            }
+            return std::make_shared<Reference>(neg_val);
+        };
+        return operation;
     }
 
     std::any StrawberryInterpreter::visitExcitedSuff(StrawberryParser::ExcitedSuffContext *ctx) {
@@ -583,10 +547,17 @@ namespace antlrcpptest {
     // std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
     std::any StrawberryInterpreter::visitPowOp(StrawberryParser::PowOpContext *ctx) {
         std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
-                operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
-            if (ref2->operatorPriority() > ref1->operatorPriority())
-                return std::make_shared<Reference>(ref2->pow(ref1->deref(), ref2->deref()));
-            return std::make_shared<Reference>(ref1->pow(ref1->deref(), ref2->deref()));
+        operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
+            std::shared_ptr<Value> result;
+            if (ref1->operatorPriority() > ref2->operatorPriority()) {
+                result = ref1->pow(ref1->deref(),ref2->deref());
+                if (result) return std::make_shared<Reference>(result);
+            }
+            result = ref2->pow(ref1->deref(), ref2->deref());
+            if (result) return std::make_shared<Reference>(result);
+            throw std::runtime_error(
+                    "Cannot conduct operation for types "
+                    + ref1->deref()->typeName() + " + " + ref2->deref()->typeName());
         };
         return operation;
     }
@@ -594,10 +565,17 @@ namespace antlrcpptest {
     // std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
     std::any StrawberryInterpreter::visitMultOp(StrawberryParser::MultOpContext *ctx) {
         std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
-                operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
-            if (ref2->operatorPriority() > ref1->operatorPriority())
-                return std::make_shared<Reference>(ref2->mult(ref1->deref(), ref2->deref()));
-            return std::make_shared<Reference>(ref1->mult(ref1->deref(), ref2->deref()));
+        operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
+            std::shared_ptr<Value> result;
+            if (ref1->operatorPriority() > ref2->operatorPriority()) {
+                result = ref1->mult(ref1->deref(),ref2->deref());
+                if (result) return std::make_shared<Reference>(result);
+            }
+            result = ref2->mult(ref1->deref(), ref2->deref());
+            if (result) return std::make_shared<Reference>(result);
+            throw std::runtime_error(
+                    "Cannot conduct operation for types "
+                    + ref1->deref()->typeName() + " + " + ref2->deref()->typeName());
         };
         return operation;
     }
@@ -605,10 +583,17 @@ namespace antlrcpptest {
     // std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
     std::any StrawberryInterpreter::visitDivOp(StrawberryParser::DivOpContext *ctx) {
         std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
-                operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
-            if (ref2->operatorPriority() > ref1->operatorPriority())
-                return std::make_shared<Reference>(ref2->div(ref1->deref(), ref2->deref()));
-            return std::make_shared<Reference>(ref1->div(ref1->deref(), ref2->deref()));
+        operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
+            std::shared_ptr<Value> result;
+            if (ref1->operatorPriority() > ref2->operatorPriority()) {
+                result = ref1->div(ref1->deref(),ref2->deref());
+                if (result) return std::make_shared<Reference>(result);
+            }
+            result = ref2->div(ref1->deref(), ref2->deref());
+            if (result) return std::make_shared<Reference>(result);
+            throw std::runtime_error(
+                    "Cannot conduct operation for types "
+                    + ref1->deref()->typeName() + " + " + ref2->deref()->typeName());
         };
         return operation;
     }
@@ -616,10 +601,17 @@ namespace antlrcpptest {
     // std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
     std::any StrawberryInterpreter::visitModOp(StrawberryParser::ModOpContext *ctx) {
         std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
-                operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
-            if (ref2->operatorPriority() > ref1->operatorPriority())
-                return std::make_shared<Reference>(ref2->mod(ref1->deref(), ref2->deref()));
-            return std::make_shared<Reference>(ref1->mod(ref1->deref(), ref2->deref()));
+        operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
+            std::shared_ptr<Value> result;
+            if (ref1->operatorPriority() > ref2->operatorPriority()) {
+                result = ref1->mod(ref1->deref(),ref2->deref());
+                if (result) return std::make_shared<Reference>(result);
+            }
+            result = ref2->mod(ref1->deref(), ref2->deref());
+            if (result) return std::make_shared<Reference>(result);
+            throw std::runtime_error(
+                    "Cannot conduct operation for types "
+                    + ref1->deref()->typeName() + " + " + ref2->deref()->typeName());
         };
         return operation;
     }
@@ -628,16 +620,16 @@ namespace antlrcpptest {
     std::any StrawberryInterpreter::visitPlusOp(StrawberryParser::PlusOpContext *ctx) {
         std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
         operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
-        std::shared_ptr<Value> result;
-        if (ref1->operatorPriority() > ref2->operatorPriority()) {
-            result = ref1->plus(ref1->deref(),ref2->deref());
+            std::shared_ptr<Value> result;
+            if (ref1->operatorPriority() > ref2->operatorPriority()) {
+                result = ref1->plus(ref1->deref(),ref2->deref());
+                if (result) return std::make_shared<Reference>(result);
+            }
+            result = ref2->plus(ref1->deref(), ref2->deref());
             if (result) return std::make_shared<Reference>(result);
-        }
-        result = ref2->plus(ref1->deref(), ref2->deref());
-        if (result) return std::make_shared<Reference>(result);
-        throw std::runtime_error(
-                "Cannot conduct operation for types "
-                + ref1->deref()->typeName() + " + " + ref2->deref()->typeName());
+            throw std::runtime_error(
+                    "Cannot conduct operation for types "
+                    + ref1->deref()->typeName() + " + " + ref2->deref()->typeName());
         };
         return operation;
     }
@@ -646,26 +638,27 @@ namespace antlrcpptest {
     std::any StrawberryInterpreter::visitMinOp(StrawberryParser::MinOpContext *ctx) {
         std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
         operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
-        std::shared_ptr<Value> result;
-        if (ref1->operatorPriority() > ref2->operatorPriority()) {
-            result = ref1->min(ref1->deref(),ref2->deref());
+            std::shared_ptr<Value> result;
+            if (ref1->operatorPriority() > ref2->operatorPriority()) {
+                result = ref1->min(ref1->deref(),ref2->deref());
+                if (result) return std::make_shared<Reference>(result);
+            }
+            result = ref2->min(ref1->deref(), ref2->deref());
             if (result) return std::make_shared<Reference>(result);
-        }
-        result = ref2->min(ref1->deref(), ref2->deref());
-        if (result) return std::make_shared<Reference>(result);
-        throw std::runtime_error(
-                "Cannot conduct operation for types "
-                + ref1->deref()->typeName() + " + " + ref2->deref()->typeName());
+            throw std::runtime_error(
+                    "Cannot conduct operation for types "
+                    + ref1->deref()->typeName() + " + " + ref2->deref()->typeName());
         };
         return operation;
     }
 
     std::any StrawberryInterpreter::visitDefinedOrOp(StrawberryParser::DefinedOrOpContext *ctx) {
-        return StrawberryParserBaseVisitor::visitDefinedOrOp(ctx);
-    }
-
-    std::any StrawberryInterpreter::visitRangeOp(StrawberryParser::RangeOpContext *ctx) {
-        return StrawberryParserBaseVisitor::visitRangeOp(ctx);
+        std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
+        operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
+            if (!ref1->isNull()) return ref1;
+            return ref2;
+        };
+        return operation;
     }
 
     std::any StrawberryInterpreter::visitBoolEqOp(StrawberryParser::BoolEqOpContext *ctx) {

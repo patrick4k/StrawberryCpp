@@ -61,6 +61,12 @@ Strawberry/StrawberryLexer.g4 and Strawberry/StrawberryParser.g4.
         - if / unless
     - [ ] Compound Statements
 
+### Features
+- [ ] Linspace operator / join list operator
+  - [ ] Modify rangeOp
+  - [ ] Allow for matrix creation
+- [ ] Matrix operations
+  - Pull inspiration from matlab
 
 ### OOP
 - [ ] Add Class definition to grammar
