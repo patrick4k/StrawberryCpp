@@ -1,6 +1,9 @@
-
+let eep = 1;
 fn main() {
-    let eep = 0;
+    ++;
+    eep *= _;
 }
 
+main();
+main();
 main();

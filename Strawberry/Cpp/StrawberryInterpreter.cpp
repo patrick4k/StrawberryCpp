@@ -131,7 +131,7 @@ namespace antlrcpptest {
     /* -------------------------------------------------------------------------------------------------------------- */
         /* Function Handlers */
     std::any StrawberryInterpreter::visitFnDeclaration(StrawberryParser::FnDeclarationContext *ctx) {
-        auto fn = std::make_unique<FunctionHandle>(ctx);
+        auto fn = std::make_unique<FunctionHandle>(shared_from_this(), ctx);
         this->functionLibrary->add(ctx->Id()->getText(),std::move(fn));
         return nullptr;
     }
@@ -295,7 +295,7 @@ namespace antlrcpptest {
     std::any StrawberryInterpreter::visitFnAccess(StrawberryParser::FnAccessContext *ctx) {
         // TODO: Does not support object function calls
         auto &fn = this->functionLibrary->get(ctx->identifyer_()->getText());
-
+        fn->execute_function(std::make_shared<Reference>(std::make_shared<Value>()));
         return nullptr;
     }
 

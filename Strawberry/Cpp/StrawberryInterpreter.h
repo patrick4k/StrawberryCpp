@@ -16,7 +16,7 @@
 
 namespace antlrcpptest {
 
-    class StrawberryInterpreter: public StrawberryParserBaseVisitor {
+class StrawberryInterpreter: public StrawberryParserBaseVisitor, public std::enable_shared_from_this<StrawberryInterpreter>  {
 
 /* ================================================================================================================== */
     /* Memory Allocation */

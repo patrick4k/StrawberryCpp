@@ -34,9 +34,9 @@ int main(const int argc, const char* argv[]) {
     /* Create and Visit Script Tree */
     StrawberryParser parser(&tokens);
     auto tree = parser.script_();
-    auto visitor = antlrcpptest::StrawberryInterpreter();
+    auto visitor = std::make_shared<StrawberryInterpreter>();
     Warnings::enable();
-    visitor.visitScript_(tree);
+    visitor->visitScript_(tree);
 
     return 0;
 }

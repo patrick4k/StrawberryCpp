@@ -7,17 +7,22 @@
 
 #include "StrawberryParser.h"
 #include "../types/Reference.h"
+#include "StrawberryParserBaseVisitor.h"
 
 class FunctionHandle {
 private:
     antlrcpptest::StrawberryParser::FnDeclarationContext* fn_ctx = nullptr;
+    std::shared_ptr<antlrcpptest::StrawberryParserBaseVisitor> interpreter;
 
 public:
-    explicit FunctionHandle(antlrcpptest::StrawberryParser::FnDeclarationContext* ctx);
+    FunctionHandle(std::shared_ptr<antlrcpptest::StrawberryParserBaseVisitor> target_interpreter,
+                            antlrcpptest::StrawberryParser::FnDeclarationContext* ctx);
     virtual ~FunctionHandle();
 
     std::shared_ptr<Reference> execute_function(std::shared_ptr<Reference> args) {
-        // TODO: Execute function
+        for (auto action: this->fn_ctx->scope()->action_()) {
+            interpreter->visit(action);
+        }
     }
 
 };
