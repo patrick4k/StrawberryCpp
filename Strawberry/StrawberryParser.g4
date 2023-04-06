@@ -162,7 +162,7 @@ expression_
 | lowPrioritySuffix_ #defaultSuffixExpr
 | expression_ lowPrioritySuffix_ #suffixExpr
 |  Fslash  identifyer_ #derefExpr
-| identifyer_ #accessExpr
+| identifyer_ #accessExpr_
 | identifyer_  Lpar  args  Rpar  #fnAccess
 | Id  ColonColon  identifyer_  Lpar  args  Rpar  #fnWithTagAccess
 | looseFnCall_ #looseFnCallExpr

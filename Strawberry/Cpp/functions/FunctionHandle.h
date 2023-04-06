@@ -22,7 +22,9 @@ public:
     std::shared_ptr<Reference> execute_function(std::shared_ptr<Reference> args) {
         for (auto action: this->fn_ctx->scope()->action_()) {
             interpreter->visit(action);
+//            if (auto return_ref = this->interpreter)
         }
+        return std::make_shared<Reference>();
     }
 
 };

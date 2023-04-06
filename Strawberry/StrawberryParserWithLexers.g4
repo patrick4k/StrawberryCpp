@@ -162,7 +162,7 @@ expression_
 | lowPrioritySuffix_ #defaultSuffixExpr
 | expression_ lowPrioritySuffix_ #suffixExpr
 | '\\' identifyer_ #derefExpr
-| identifyer_ #accessExpr
+| identifyer_ #accessExpr_
 | identifyer_ '(' args ')' #fnAccess
 | Id '::' identifyer_ '(' args ')' #fnWithTagAccess
 | looseFnCall_ #looseFnCallExpr

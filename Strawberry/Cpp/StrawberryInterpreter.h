@@ -97,11 +97,14 @@ class StrawberryInterpreter: public StrawberryParserBaseVisitor, public std::ena
 
     // -------------------------------------------------------------------------------------------------------------- //
         // Memory Management Methods //
+    private:
         std::shared_ptr<Default> program_default;
         std::shared_ptr<Scope> innerScope;
         std::shared_ptr<Scope> defaultScope;
         std::shared_ptr<FunctionLibrary> functionLibrary = std::make_shared<FunctionLibrary>();
+        std::unique_ptr<Reference> fn_return_value = std::make_unique<Reference>();
 
+    public:
         void scope_in() {
             auto clean_memory = std::unordered_map<std::string,std::shared_ptr<Reference>>();
             innerScope = std::make_shared<Scope>(clean_memory, std::move(innerScope));
@@ -301,7 +304,6 @@ class StrawberryInterpreter: public StrawberryParserBaseVisitor, public std::ena
         std::any visitAssignExpr(StrawberryParser::AssignExprContext *ctx) override;
         std::any visitFnAccess(StrawberryParser::FnAccessContext *ctx) override;
         std::any visitParenExpr(StrawberryParser::ParenExprContext *ctx) override;
-        std::any visitAccessExpr(StrawberryParser::AccessExprContext *ctx) override;
         std::any visitDStringLit(StrawberryParser::DStringLitContext *ctx) override;
         std::any visitSStringLit(StrawberryParser::SStringLitContext *ctx) override;
         std::any visitArrayLit(StrawberryParser::ArrayLitContext *ctx) override;

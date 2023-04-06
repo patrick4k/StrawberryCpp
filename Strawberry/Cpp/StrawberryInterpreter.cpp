@@ -220,12 +220,11 @@ namespace antlrcpptest {
         return StrawberryParserBaseVisitor::visitDefaultSuffixExpr(ctx);
     }
 
-    // TODO: Fix repeated code?
     std::any StrawberryInterpreter::visitOpExpr1(StrawberryParser::OpExpr1Context *ctx) {
         auto val1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(0)));
         auto val2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(1)));
         auto operation = std::any_cast
-                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>, std::shared_ptr<Reference>)>>
+                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>>
                 (visit(ctx->op1_()));
         return operation(val1, val2);
     }
@@ -234,7 +233,7 @@ namespace antlrcpptest {
         auto val1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(0)));
         auto val2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(1)));
         auto operation = std::any_cast
-                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>, std::shared_ptr<Reference>)>>
+                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>>
                 (visit(ctx->op2_()));
         return operation(val1, val2);
     }
@@ -253,7 +252,7 @@ namespace antlrcpptest {
         auto val1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(0)));
         auto val2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(1)));
         auto operation = std::any_cast
-                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>, std::shared_ptr<Reference>)>>
+                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>>
                 (visit(ctx->op4_()));
         return operation(val1, val2);
     }
@@ -262,7 +261,7 @@ namespace antlrcpptest {
         auto val1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(0)));
         auto val2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(1)));
         auto operation = std::any_cast
-                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>, std::shared_ptr<Reference>)>>
+                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>>
                 (visit(ctx->op5_()));
         return operation(val1, val2);
     }
@@ -271,7 +270,7 @@ namespace antlrcpptest {
         auto val1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(0)));
         auto val2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(1)));
         auto operation = std::any_cast
-                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>, std::shared_ptr<Reference>)>>
+                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>>
                 (visit(ctx->op6_()));
         return operation(val1, val2);
     }
@@ -293,18 +292,14 @@ namespace antlrcpptest {
     }
 
     std::any StrawberryInterpreter::visitFnAccess(StrawberryParser::FnAccessContext *ctx) {
-        // TODO: Does not support object function calls
+        // TODO: Does not support object methods, only raw id calls
         auto &fn = this->functionLibrary->get(ctx->identifyer_()->getText());
-        fn->execute_function(std::make_shared<Reference>(std::make_shared<Value>()));
-        return nullptr;
+        auto args = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->args()));
+        return fn->execute_function(args);
     }
 
     std::any StrawberryInterpreter::visitParenExpr(StrawberryParser::ParenExprContext *ctx) {
         return visit(ctx->expression_());
-    }
-
-    std::any StrawberryInterpreter::visitAccessExpr(StrawberryParser::AccessExprContext *ctx) {
-        return StrawberryParserBaseVisitor::visitAccessExpr(ctx);
     }
 
     /* -------------------------------------------------------------------------------------------------------------- */
