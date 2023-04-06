@@ -11,10 +11,6 @@ bool String::isNull() const {
     return false;
 }
 
-bool String::toBool() const {
-    return true;
-}
-
 double String::toDouble() const {
     try {
         return std::stod(this->text);

@@ -432,35 +432,35 @@ namespace antlrcpptest {
     }
 
     std::any StrawberryInterpreter::visitPowAssign(StrawberryParser::PowAssignContext *ctx) {
-        return StrawberryParserBaseVisitor::visitPowAssign(ctx);
+        return do_binary_assign_operation(&Value::pow,ctx->identifyer_(),std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_())));
     }
 
     std::any StrawberryInterpreter::visitMultAssign(StrawberryParser::MultAssignContext *ctx) {
-        return StrawberryParserBaseVisitor::visitMultAssign(ctx);
+        return do_binary_assign_operation(&Value::mult,ctx->identifyer_(),std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_())));
     }
 
     std::any StrawberryInterpreter::visitDivAssign(StrawberryParser::DivAssignContext *ctx) {
-        return StrawberryParserBaseVisitor::visitDivAssign(ctx);
+        return do_binary_assign_operation(&Value::div,ctx->identifyer_(),std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_())));
     }
 
     std::any StrawberryInterpreter::visitModAssign(StrawberryParser::ModAssignContext *ctx) {
-        return StrawberryParserBaseVisitor::visitModAssign(ctx);
+        return do_binary_assign_operation(&Value::mod,ctx->identifyer_(),std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_())));
     }
 
     std::any StrawberryInterpreter::visitAddAssign(StrawberryParser::AddAssignContext *ctx) {
-        return StrawberryParserBaseVisitor::visitAddAssign(ctx);
+        return do_binary_assign_operation(&Value::plus,ctx->identifyer_(),std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_())));
     }
 
     std::any StrawberryInterpreter::visitMinAssign(StrawberryParser::MinAssignContext *ctx) {
-        return StrawberryParserBaseVisitor::visitMinAssign(ctx);
+        return do_binary_assign_operation(&Value::min,ctx->identifyer_(),std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_())));
     }
 
     std::any StrawberryInterpreter::visitIncrem(StrawberryParser::IncremContext *ctx) {
-        return StrawberryParserBaseVisitor::visitIncrem(ctx);
+        return do_binary_assign_operation(&Value::plus,ctx->identifyer_(),std::make_shared<Reference>(std::make_shared<Number>(1)));
     }
 
     std::any StrawberryInterpreter::visitDecrem(StrawberryParser::DecremContext *ctx) {
-        return StrawberryParserBaseVisitor::visitDecrem(ctx);
+        return do_binary_assign_operation(&Value::min,ctx->identifyer_(),std::make_shared<Reference>(std::make_shared<Number>(1)));
     }
 
     std::any StrawberryInterpreter::visitNoInitVarDeclar(StrawberryParser::NoInitVarDeclarContext *ctx) {
@@ -572,16 +572,7 @@ namespace antlrcpptest {
     std::any StrawberryInterpreter::visitPowOp(StrawberryParser::PowOpContext *ctx) {
         std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
         operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
-            std::shared_ptr<Value> result;
-            if (ref1->operatorPriority() > ref2->operatorPriority()) {
-                result = ref1->pow(ref1->deref(),ref2->deref());
-                if (result) return std::make_shared<Reference>(result);
-            }
-            result = ref2->pow(ref1->deref(), ref2->deref());
-            if (result) return std::make_shared<Reference>(result);
-            throw std::runtime_error(
-                    "Cannot conduct operation for types "
-                    + ref1->deref()->typeName() + " + " + ref2->deref()->typeName());
+            return do_binary_operation(&Value::pow, ref1, ref2);
         };
         return operation;
     }
@@ -590,16 +581,7 @@ namespace antlrcpptest {
     std::any StrawberryInterpreter::visitMultOp(StrawberryParser::MultOpContext *ctx) {
         std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
         operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
-            std::shared_ptr<Value> result;
-            if (ref1->operatorPriority() > ref2->operatorPriority()) {
-                result = ref1->mult(ref1->deref(),ref2->deref());
-                if (result) return std::make_shared<Reference>(result);
-            }
-            result = ref2->mult(ref1->deref(), ref2->deref());
-            if (result) return std::make_shared<Reference>(result);
-            throw std::runtime_error(
-                    "Cannot conduct operation for types "
-                    + ref1->deref()->typeName() + " + " + ref2->deref()->typeName());
+            return do_binary_operation(&Value::mult, ref1, ref2);
         };
         return operation;
     }
@@ -608,16 +590,7 @@ namespace antlrcpptest {
     std::any StrawberryInterpreter::visitDivOp(StrawberryParser::DivOpContext *ctx) {
         std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
         operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
-            std::shared_ptr<Value> result;
-            if (ref1->operatorPriority() > ref2->operatorPriority()) {
-                result = ref1->div(ref1->deref(),ref2->deref());
-                if (result) return std::make_shared<Reference>(result);
-            }
-            result = ref2->div(ref1->deref(), ref2->deref());
-            if (result) return std::make_shared<Reference>(result);
-            throw std::runtime_error(
-                    "Cannot conduct operation for types "
-                    + ref1->deref()->typeName() + " + " + ref2->deref()->typeName());
+            return do_binary_operation(&Value::div, ref1, ref2);
         };
         return operation;
     }
@@ -626,16 +599,7 @@ namespace antlrcpptest {
     std::any StrawberryInterpreter::visitModOp(StrawberryParser::ModOpContext *ctx) {
         std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
         operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
-            std::shared_ptr<Value> result;
-            if (ref1->operatorPriority() > ref2->operatorPriority()) {
-                result = ref1->mod(ref1->deref(),ref2->deref());
-                if (result) return std::make_shared<Reference>(result);
-            }
-            result = ref2->mod(ref1->deref(), ref2->deref());
-            if (result) return std::make_shared<Reference>(result);
-            throw std::runtime_error(
-                    "Cannot conduct operation for types "
-                    + ref1->deref()->typeName() + " + " + ref2->deref()->typeName());
+            return do_binary_operation(&Value::mod, ref1, ref2);
         };
         return operation;
     }
@@ -644,16 +608,7 @@ namespace antlrcpptest {
     std::any StrawberryInterpreter::visitPlusOp(StrawberryParser::PlusOpContext *ctx) {
         std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
         operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
-            std::shared_ptr<Value> result;
-            if (ref1->operatorPriority() > ref2->operatorPriority()) {
-                result = ref1->plus(ref1->deref(),ref2->deref());
-                if (result) return std::make_shared<Reference>(result);
-            }
-            result = ref2->plus(ref1->deref(), ref2->deref());
-            if (result) return std::make_shared<Reference>(result);
-            throw std::runtime_error(
-                    "Cannot conduct operation for types "
-                    + ref1->deref()->typeName() + " + " + ref2->deref()->typeName());
+            return do_binary_operation(&Value::plus, ref1, ref2);
         };
         return operation;
     }
@@ -662,16 +617,7 @@ namespace antlrcpptest {
     std::any StrawberryInterpreter::visitMinOp(StrawberryParser::MinOpContext *ctx) {
         std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
         operation = [](std::shared_ptr<Reference> ref1, std::shared_ptr<Reference> ref2)->std::shared_ptr<Reference> {
-            std::shared_ptr<Value> result;
-            if (ref1->operatorPriority() > ref2->operatorPriority()) {
-                result = ref1->min(ref1->deref(),ref2->deref());
-                if (result) return std::make_shared<Reference>(result);
-            }
-            result = ref2->min(ref1->deref(), ref2->deref());
-            if (result) return std::make_shared<Reference>(result);
-            throw std::runtime_error(
-                    "Cannot conduct operation for types "
-                    + ref1->deref()->typeName() + " + " + ref2->deref()->typeName());
+            return do_binary_operation(&Value::min, ref1, ref2);
         };
         return operation;
     }

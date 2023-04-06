@@ -17,7 +17,6 @@ public:
     explicit Number(const std::string& value);
 
     bool isNull() const override;
-    bool toBool() const override;
     double toDouble() const override;
     std::string toString() const override;
 

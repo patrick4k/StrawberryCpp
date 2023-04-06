@@ -104,6 +104,7 @@ namespace antlrcpptest {
         void print_default() {
             print_default("");
         }
+
         void print_default(std::string prelim) {
             std::stringstream ss;
             auto defaull_ref = this->program_default;
@@ -127,19 +128,58 @@ namespace antlrcpptest {
                 std::cout << "Scope " << i << ":" << std::endl;
                 print_scope(scope, "  --> ");
                 if (!scope->outerScope) break;
-//                std::cout << std::endl << std::endl;
                 ++i;
                 scope = scope->outerScope;
             } while (true);
         }
+
 /* ================================================================================================================== */
     /* Visitor Helpers */
-//    private:
-//        template<typename T>
-//        std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>,std::shared_ptr<Reference>)>
-//        binary_operation(StrawberryParser::Expression_Context* expr1, T op, StrawberryParser::Expression_Context* expr2) {
-//
-//        }
+
+        /**
+         * Performs binary operation on two references. If one references operator priority is greater than the other the
+         * execution of the greater is favored. A function of class Value is passed in for re-usability purposes across
+         * operators.
+         * @param func : binary function to be executed (ei. &Value::add)
+         * @param ref1 : first reference in operation
+         * @param ref2 : second reference in operation
+         * @return std::shared_ptr<Reference> of result of operation
+         */
+        static std::shared_ptr<Reference> do_binary_operation (
+                std::shared_ptr<Value> (Value::*func)(std::shared_ptr<Value>,std::shared_ptr<Value>), /* Binary operation */
+                const std::shared_ptr<Reference>& ref1, /* arg1 */
+                const std::shared_ptr<Reference>&ref2) /* arg2 */
+        {
+            std::shared_ptr<Value> result;
+
+            if (ref1->operatorPriority() >= ref2->operatorPriority()) {
+                result = (ref1.get()->*func)(ref1->deref(),ref2->deref());
+                if (result) return std::make_shared<Reference>(result);
+            }
+
+            result = (ref2.get()->*func)(ref1->deref(),ref2->deref());
+            if (result) return std::make_shared<Reference>(result);
+
+            result = (ref1.get()->*func)(ref1->deref(), ref2->deref());
+            if (result) return std::make_shared<Reference>(result);
+
+            throw std::runtime_error("Cannot conduct operation for types "
+                                     + ref1->deref()->typeName() + " and " + ref2->deref()->typeName());
+        }
+
+        std::shared_ptr<Reference> do_binary_assign_operation (
+                std::shared_ptr<Value> (Value::*func)(std::shared_ptr<Value>,std::shared_ptr<Value>),
+                StrawberryParser::Identifyer_Context* id_ctx,
+                const std::shared_ptr<Reference>& val_ref)
+        {
+            std::shared_ptr<Reference> target;
+            if (id_ctx)
+                target = std::any_cast<std::shared_ptr<Reference>>(visit(id_ctx));
+            else
+                target = this->get_default();
+            target->set(do_binary_operation(func, target, val_ref)->deref());
+            return target->to_new_reference();
+        }
 
 
 /* ================================================================================================================== */
@@ -149,7 +189,6 @@ namespace antlrcpptest {
         std::any visitAction_(StrawberryParser::Action_Context *ctx) override {
             std::cout << ">> " << ctx->getText() << std::endl;
             auto result =  StrawberryParserBaseVisitor::visitAction_(ctx);
-//            print_scope(this->innerScope, "  --> ");
             print_memory();
             print_default("  --> ");
             std::cout << std::endl << std::endl;
@@ -264,9 +303,6 @@ namespace antlrcpptest {
         std::any visitMatchSuff(StrawberryParser::MatchSuffContext *ctx) override;
 
     };
-
-
-
 
 } // antlrcpptest
 

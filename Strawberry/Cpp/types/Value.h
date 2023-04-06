@@ -40,6 +40,7 @@ public:
     /* Boolean operations */
     virtual bool bool_equals(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2);
 
+
 };
 
 #endif //LIBANTLR4_VALUE_H

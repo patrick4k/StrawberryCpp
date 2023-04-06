@@ -49,10 +49,6 @@ public:
         return this->referenceValue->clone();
     }
 
-    std::shared_ptr<Reference> copy_to_reference() const {
-        return std::make_shared<Reference>(*this);
-    }
-
     std::shared_ptr<Value> get_referenced_value() const {
         auto ref = this->referenceValue->as<Reference>();
         if (ref) return ref->get_referenced_value();
@@ -70,6 +66,10 @@ public:
         return this->referenceValue->as<T>();
     }
 
+    std::shared_ptr<Reference> to_new_reference() const {
+        return std::make_shared<Reference>(this->referenceValue);
+    }
+
     std::string toDisplay() const override {
         return this->referenceValue->toDisplay();
     }
@@ -77,23 +77,18 @@ public:
     std::shared_ptr<Value> pow(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override {
         return this->referenceValue->pow(val1, val2);
     }
-
     std::shared_ptr<Value> mult(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override {
         return this->referenceValue->mult(val1, val2);
     }
-
     std::shared_ptr<Value> div(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override {
         return this->referenceValue->div(val1, val2);
     }
-
     std::shared_ptr<Value> mod(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override {
         return this->referenceValue->mod(val1, val2);
     }
-
     std::shared_ptr<Value> plus(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override {
         return this->referenceValue->plus(val1, val2);
     }
-
     std::shared_ptr<Value> min(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override {
         return this->referenceValue->min(val1, val2);
     }

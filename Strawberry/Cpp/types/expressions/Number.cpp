@@ -13,10 +13,6 @@ bool Number::isNull() const {
     return false;
 }
 
-bool Number::toBool() const {
-    return this->number != 0;
-}
-
 double Number::toDouble() const {
     return number;
 }

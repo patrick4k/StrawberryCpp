@@ -1,8 +1,10 @@
 
-let x = 0..12;
+let obj = {
+    i: 0,
+    j: &_
+};
 
-{
-    let s = $x;
-    _ = 0..s;
-}
+obj.i++;
+obj.j << -(obj.i *= 12);
 
+let x = (--);

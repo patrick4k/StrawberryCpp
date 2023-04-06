@@ -57,25 +57,26 @@ Strawberry/StrawberryLexer.g4 and Strawberry/StrawberryParser.g4.
     - [ ] Add lambda type definition
     - [ ] Bitwise operations
     - [ ] Operator rework
-      - Extract repeated code for binary math operations
-      - Better ==, !=, ===, !== operations
-    - [ ] Default Variable Memory Management
+      - [x] Extract repeated code for binary math operations
+      - [ ] Better ==, !=, ===, !== operations
+    - [x] Default Variable Memory Management
     - [ ] Control Flow
         - for / loop / while / until loops
         - if / unless
     - [ ] Compound Statements
 
 ### Features
-- [ ] Linspace operator / join list operator
-  - [ ] Modify rangeOp
-  - [ ] Allow for matrix creation
+- [x] Linspace operator / join list operator
+  - [x] Modify rangeOp
+  - [x] Allow for matrix creation (could be better)
 - [ ] Matrix operations
   - Pull inspiration from matlab
+  - Needs more planning
 
 ### OOP
 - [ ] Add Class definition to grammar
 - [ ] Construct object type to handle methods
-
+- [ ] OOP vs FP? structs with traits instead?
 
 ### Other
 - [ ] Documentation

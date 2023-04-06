@@ -15,9 +15,9 @@ Loop: 'loop' ;
 /* Keywords */
 Return: 'return' ;
 Break: 'break' ;
-Next: 'next' ;
-Last: 'last' ;
-Once: 'once' ;
+Next: 'next!' ;
+Last: 'last!' ;
+Once: 'once!' ;
 
 /* Literals */
 True: 'true' ;
@@ -68,6 +68,7 @@ Rpar: ')' ;
 /* Math */
 Pow: '^' ;
 Star: '*' ;
+StarStar: '**' ;
 Bslash: '/' ;
 Mod: '%' ;
 Plus: '+' ;

@@ -19,14 +19,10 @@ public:
     int operatorPriority() const override;
 
     bool isNull() const override;
-    bool toBool() const override;
     double toDouble() const override;
     std::string toString() const override;
-
     std::string toDisplay() const override;
-
     std::string typeName() const override;
-
     ~String() override = default;
 
     std::shared_ptr<Value> plus(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) override;
