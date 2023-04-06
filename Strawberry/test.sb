@@ -1,9 +1,14 @@
-let eep = 1;
-fn main() {
-    ++;
-    eep *= _;
-    return 20;
-    eep = {};
-}
 
-let b = main();
+let hash = {
+    key1: 12123,
+    " this is a string key": {
+        something: 'somethin'
+    }
+};
+
+let
+a = hash.key1,
+b = hash["key1"],
+c = hash[' this is a string key'],
+d = a - b * 2e0 % hash.key1
+;

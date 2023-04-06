@@ -161,7 +161,7 @@ expression_
 | expression_ '.' op2_ expression_ #dotOpExpr2
 | lowPrioritySuffix_ #defaultSuffixExpr
 | expression_ lowPrioritySuffix_ #suffixExpr
-| '\\' identifyer_ #derefExpr
+| '\\' identifyer_ #derefExpr // TODO: Revisit deref operation
 | identifyer_ #accessExpr_
 | identifyer_ '(' args ')' #fnAccess
 | Id '::' identifyer_ '(' args ')' #fnWithTagAccess
