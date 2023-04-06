@@ -164,7 +164,8 @@ expression_
 | '\\' identifyer_ #derefExpr
 | identifyer_ #accessExpr
 | identifyer_ '(' args ')' #fnAccess
-| looseFnCall #looseFnCallExpr
+| Id '::' identifyer_ '(' args ')' #fnWithTagAccess
+| looseFnCall_ #looseFnCallExpr
 ;
 
 literal_
@@ -221,8 +222,9 @@ identifyer_
 
 idReference: '&' identifyer_ ;
 
-looseFnCall
-: identifyer_ argument_ (',' argument_)*
+looseFnCall_
+: identifyer_ args #looseFnCall
+| Id '::' identifyer_ args #looseFnWithTagCall
 ;
 
 /* ================================================================================ */

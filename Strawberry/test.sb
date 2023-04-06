@@ -1,10 +1,6 @@
 
-let obj = {
-    i: 0,
-    j: &_
-};
+fn main() {
+    let eep = 0;
+}
 
-obj.i++;
-obj.j << -(obj.i *= 12);
-
-let x = (--);
+main();

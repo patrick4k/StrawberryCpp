@@ -157,14 +157,15 @@ expression_
 | expression_ op4_ expression_ #opExpr4
 | expression_ op5_ expression_ #opExpr5
 | expression_ op6_ expression_ #opExpr6
-| expression_  Dot  op1_ expression_ #dotOpExpr1
+| expression_  Dot  op1_ expression_ #dotOpExpr1 // TODO: Implment matrix dot operations
 | expression_  Dot  op2_ expression_ #dotOpExpr2
 | lowPrioritySuffix_ #defaultSuffixExpr
 | expression_ lowPrioritySuffix_ #suffixExpr
 |  Fslash  identifyer_ #derefExpr
 | identifyer_ #accessExpr
 | identifyer_  Lpar  args  Rpar  #fnAccess
-| looseFnCall #looseFnCallExpr
+| Id  ColonColon  identifyer_  Lpar  args  Rpar  #fnWithTagAccess
+| looseFnCall_ #looseFnCallExpr
 ;
 
 literal_
@@ -221,8 +222,9 @@ identifyer_
 
 idReference:  AndSign  identifyer_ ;
 
-looseFnCall
-: identifyer_ argument_ ( Com  argument_)*
+looseFnCall_
+: identifyer_ args #looseFnCall
+| Id  ColonColon  identifyer_ args #looseFnWithTagCall
 ;
 
 /* ================================================================================ */
@@ -244,7 +246,7 @@ op1_
 
 op2_
 :  Star  #multOp
-| '**' #crossMultOp
+|  StarStar  #crossMultOp
 |  Bslash  #divOp
 |  Mod  #modOp
 ;

@@ -22,7 +22,6 @@ namespace antlrcpptest {
         print_inner_scope();
         std::cout << "Default =============================================================" << std::endl;
         print_default();
-        this->scope_out();
         return 0;
     }
 
@@ -132,9 +131,12 @@ namespace antlrcpptest {
     /* -------------------------------------------------------------------------------------------------------------- */
         /* Function Handlers */
     std::any StrawberryInterpreter::visitFnDeclaration(StrawberryParser::FnDeclarationContext *ctx) {
-        return StrawberryParserBaseVisitor::visitFnDeclaration(ctx);
+        auto fn = std::make_unique<FunctionHandle>(ctx);
+        this->functionLibrary->add(ctx->Id()->getText(),std::move(fn));
+        return nullptr;
     }
 
+//        this->functionLibrary->add(ctx->Id()->getText(), std::move(fn));
     std::any StrawberryInterpreter::visitLambda(StrawberryParser::LambdaContext *ctx) {
         return StrawberryParserBaseVisitor::visitLambda(ctx);
     }
@@ -291,7 +293,10 @@ namespace antlrcpptest {
     }
 
     std::any StrawberryInterpreter::visitFnAccess(StrawberryParser::FnAccessContext *ctx) {
-        return StrawberryParserBaseVisitor::visitFnAccess(ctx);
+        // TODO: Does not support object function calls
+        auto &fn = this->functionLibrary->get(ctx->identifyer_()->getText());
+
+        return nullptr;
     }
 
     std::any StrawberryInterpreter::visitParenExpr(StrawberryParser::ParenExprContext *ctx) {

@@ -12,6 +12,7 @@
 #include "types/Value.h"
 #include "types/expressions/Number.h"
 #include "types/Reference.h"
+#include "functions/FunctionHandle.h"
 
 namespace antlrcpptest {
 
@@ -41,10 +42,65 @@ namespace antlrcpptest {
         };
 
     // -------------------------------------------------------------------------------------------------------------- //
+        // Functions //
+        class FunctionLibrary {
+        private:
+            std::unique_ptr<std::unordered_map<std::string, std::unique_ptr<FunctionHandle>>> my_fns
+                        = std::make_unique<std::unordered_map<std::string, std::unique_ptr<FunctionHandle>>>();
+            std::unique_ptr<std::unordered_map<std::string,
+                        std::unordered_map<std::string, std::unique_ptr<FunctionHandle>>>> included
+                    = std::make_unique<std::unordered_map<std::string,
+                            std::unordered_map<std::string, std::unique_ptr<FunctionHandle>>>>();
+
+        public:
+
+            void add(const std::string& fn_name, std::unique_ptr<FunctionHandle> fn) {
+                this->my_fns->insert_or_assign(fn_name, std::move(fn));
+            }
+
+            std::unique_ptr<FunctionHandle>& get(const std::string& fn_name) {
+                auto fn_location = this->my_fns->find(fn_name);
+
+                if (fn_location != this->my_fns->end())
+                    return fn_location->second;
+
+                std::unique_ptr<FunctionHandle>* fn = nullptr;
+                for (auto& map : *this->included) {
+                    fn_location = map.second.find(fn_name);
+
+                    if (fn_location != map.second.end()) {
+                        if (fn)
+                            throw std::runtime_error("Cannot call included " + fn_name + "() with without tag");
+
+                        fn = &fn_location->second;
+                    }
+                }
+
+                if (!fn)
+                    throw std::runtime_error("Cannot find fn definition for " + fn_name);
+
+                return *fn;
+            }
+
+            std::unique_ptr<FunctionHandle>& get_with_tag(const std::string& tag, const std::string& fn_name) {
+                auto find_tag_fns = this->included->find(tag);
+                if (find_tag_fns == this->included->end())
+                    throw std::runtime_error("Cannot find included tag " + tag);
+
+                auto find_fn = find_tag_fns->second.find(fn_name);
+                if (find_fn == find_tag_fns->second.end())
+                    throw std::runtime_error("Cannot find fn definition " + tag + "::" + fn_name + "()");
+
+                return find_fn->second;
+            }
+        };
+
+    // -------------------------------------------------------------------------------------------------------------- //
         // Memory Management Methods //
         std::shared_ptr<Default> program_default;
         std::shared_ptr<Scope> innerScope;
         std::shared_ptr<Scope> defaultScope;
+        std::shared_ptr<FunctionLibrary> functionLibrary = std::make_shared<FunctionLibrary>();
 
         void scope_in() {
             auto clean_memory = std::unordered_map<std::string,std::shared_ptr<Reference>>();
@@ -52,7 +108,11 @@ namespace antlrcpptest {
         }
 
         void scope_out() {
-            innerScope = innerScope->outerScope;
+            if (auto outer = innerScope->outerScope) {
+                innerScope = outer;
+                return;
+            }
+            throw std::runtime_error("Stepped scope into NULL");
         }
 
         void new_default(const std::shared_ptr<Value>& value) {

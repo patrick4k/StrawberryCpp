@@ -97,6 +97,7 @@ At: '@' ;
 ExPoint: '!' ;
 Qmark: '?' ;
 Colon: ':' ;
+ColonColon: '::' ;
 Semi: ';' ;
 Fslash: '\\' ;
 Bar: '|' ;

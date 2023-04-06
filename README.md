@@ -53,9 +53,10 @@ Strawberry/StrawberryLexer.g4 and Strawberry/StrawberryParser.g4.
 
 
 - [ ] Visitor Overrides 0.3
-    - [ ] Store function declarations
+    - [x] Store function declarations
+    - [ ] Execute function declarations from non-visitor
     - [ ] Add lambda type definition
-    - [ ] Bitwise operations
+    - [ ] Bitwise operations ?
     - [ ] Operator rework
       - [x] Extract repeated code for binary math operations
       - [ ] Better ==, !=, ===, !== operations
