@@ -12,8 +12,15 @@ namespace antlrcpptest {
     class StrawberryPredicateParser: public StrawberryParser {
     public:
         explicit StrawberryPredicateParser(antlr4::TokenStream *input);
-        bool isWithinFnDeclare() const override;
-        bool isWithinLoop() const override;
+
+        template<typename TargetParent>
+        TargetParent getFirstParent(antlr4::ParserRuleContext* ctx);
+
+        template<typename TargetParent>
+        TargetParent getFirstParent();
+
+        bool isWithinFnDeclare() override;
+        bool isWithinLoop() override;
 
     };
 

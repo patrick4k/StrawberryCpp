@@ -74,6 +74,7 @@ Strawberry/StrawberryLexer.g4 and Strawberry/StrawberryParser.g4.
   - Pull inspiration from matlab
   - Needs more planning
 - [ ] Handle inf number values appropriately
+- [ ] Complex numbers
 - [ ] Regex vs ANTLR4
   - Replace match feature with ANTLR4 interpreter
     - Easier parsing

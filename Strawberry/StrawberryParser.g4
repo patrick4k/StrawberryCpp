@@ -1,8 +1,8 @@
 parser grammar StrawberryParser;
 
 @parser::members {
-virtual bool isWithinFnDeclare() const = 0;
-virtual bool isWithinLoop() const = 0;
+virtual bool isWithinFnDeclare() = 0;
+virtual bool isWithinLoop() = 0;
 }
 
 options {
@@ -114,12 +114,15 @@ conditionalLoopKeywords_
 /* ================================================================================ */
 // FUNCTIONS ARGS PARAMETERS
 
-fnDeclaration:  Fn  Id  Lpar  parameters_  Rpar  scope ;
+fnDeclaration:  Fn  Id  Lpar  parameters_?  Rpar  scope ;
 
-lambda:  Lpar  parameters_  Rpar   Sarrow  statement_ ;
+lambda
+: ( Lpar  parameters_?  Rpar )?  Sarrow  statement_
+|  Fn   Lpar  parameters_?  Rpar  statement_
+;
 
 parameters_
-: ((Id  Com )* Id)? #params
+: (Id  Com )* Id #params
 | (Id  Com )* Id  Dot3  #paramsExpand
 ;
 
@@ -150,7 +153,6 @@ matchOptions_
 value_
 : expression_
 | lambda
-| idReference
 ;
 
 expression_
@@ -172,7 +174,28 @@ expression_
 | expression_ lowPrioritySuffix_ #suffixExpr
 |  Fslash  identifyer_ #derefExpr // TODO: Revisit deref operation
 | identifyer_ #accessExpr_
-| fnCall #fnCall_
+| fnCall #fnCallExpr_
+;
+
+identifyer_
+: identifyer_ identifyerChain_ #chainAccess
+| literal_ identifyerChain_ #chainAccess
+| identifyer_  Lpar  args?  Rpar  identifyerChain_ #fnCallChainAccess
+| Id #idAccess
+| Id  ColonColon  identifyer_ #includeIdAccess
+| DefId #defaultAccess
+|  AndSign  identifyer_ #idReference
+;
+
+identifyerChain_
+:  Dot  Id #dotAccess
+|  Lbrack  expression_  Rbrack  #arrExprAccess
+|  Lbrack  args  Rbrack  #arrArgsAccess
+;
+
+fnCall
+: identifyer_ args
+| identifyer_  Lpar  args?  Rpar 
 ;
 
 literal_
@@ -218,26 +241,6 @@ varDeclare_
 | Id  Eq  value_ #initVarDeclar
 | Id  Eq  args #initVarDeclarArgs
 ;
-
-identifyer_
-: identifyer_  Dot  Id #dotAccess
-| identifyer_  Lpar  args?  Rpar   Dot  Id #dotAccessFromFn
-| identifyer_  Lbrack  expression_  Rbrack  #arrAccess
-| identifyer_  Lbrack  args  Rbrack  #arrAccessArgs
-| identifyer_  Lpar  args  Rpar   Lbrack  expression_  Rbrack  #arrAccessFromFn
-| identifyer_  Lpar  args  Rpar   Lbrack  args  Rbrack  #arrAccessArgsFromFn
-| Id #idAccess
-| DefId #defaultAccess
-;
-
-fnCall
-: identifyer_  Lpar  args?  Rpar  #fnAccess
-| identifyer_ args #fnAccess
-| Id  ColonColon  identifyer_  Lpar  args?  Rpar  #fnWithTagAccess
-| Id  ColonColon  identifyer_ args #fnWithTagAccess
-;
-
-idReference:  AndSign  identifyer_ ;
 
 /* ================================================================================ */
 // OPERATORS

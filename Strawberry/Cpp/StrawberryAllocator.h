@@ -107,6 +107,8 @@ protected:
                 StrawberryParser::Identifyer_Context* id_ctx, /* identifier */
                 const std::shared_ptr<Reference>& val_ref); /* value */
 
+        static std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>, std::shared_ptr<Reference>)>
+        binary_operation_reference(std::shared_ptr<Value> (Value::*func)(std::shared_ptr<Value>, std::shared_ptr<Value>));
 
 /* ================================================================================================================== */
         /* Debug Helpers */

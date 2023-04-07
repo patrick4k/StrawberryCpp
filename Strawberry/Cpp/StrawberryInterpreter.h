@@ -11,6 +11,10 @@ namespace antlrcpptest {
 
 class StrawberryInterpreter : public StrawberryAllocator, public std::enable_shared_from_this<StrawberryInterpreter> {
 
+private:
+    template<typename T>
+    std::shared_ptr<Reference> callFunction(T* ctx);
+
 public:
     std::any visitAction_(StrawberryParser::Action_Context *ctx) override;
     std::any visitScript_(StrawberryParser::Script_Context *ctx) override;
@@ -58,7 +62,6 @@ public:
     std::any visitOpExpr6(StrawberryParser::OpExpr6Context *ctx) override;
     std::any visitSuffixExpr(StrawberryParser::SuffixExprContext *ctx) override;
     std::any visitAssignExpr(StrawberryParser::AssignExprContext *ctx) override;
-    std::any visitFnAccess(StrawberryParser::FnAccessContext *ctx) override;
     std::any visitParenExpr(StrawberryParser::ParenExprContext *ctx) override;
     std::any visitDStringLit(StrawberryParser::DStringLitContext *ctx) override;
     std::any visitSStringLit(StrawberryParser::SStringLitContext *ctx) override;
@@ -87,9 +90,13 @@ public:
     std::any visitNoInitVarDeclar(StrawberryParser::NoInitVarDeclarContext *ctx) override;
     std::any visitInitVarDeclar(StrawberryParser::InitVarDeclarContext *ctx) override;
     std::any visitInitVarDeclarArgs(StrawberryParser::InitVarDeclarArgsContext *ctx) override;
+    std::any visitFnCallChainAccess(StrawberryParser::FnCallChainAccessContext *ctx) override;
+    std::any visitIncludeIdAccess(StrawberryParser::IncludeIdAccessContext *ctx) override;
+    std::any visitChainAccess(StrawberryParser::ChainAccessContext *ctx) override;
     std::any visitDotAccess(StrawberryParser::DotAccessContext *ctx) override;
-    std::any visitArrAccess(StrawberryParser::ArrAccessContext *ctx) override;
-    std::any visitArrAccessArgs(StrawberryParser::ArrAccessArgsContext *ctx) override;
+    std::any visitArrExprAccess(StrawberryParser::ArrExprAccessContext *ctx) override;
+    std::any visitArrArgsAccess(StrawberryParser::ArrArgsAccessContext *ctx) override;
+    std::any visitFnCall(StrawberryParser::FnCallContext *ctx) override;
     std::any visitDerefExpr(StrawberryParser::DerefExprContext *ctx) override;
     std::any visitIdAccess(StrawberryParser::IdAccessContext *ctx) override;
     std::any visitDefaultAccess(StrawberryParser::DefaultAccessContext *ctx) override;

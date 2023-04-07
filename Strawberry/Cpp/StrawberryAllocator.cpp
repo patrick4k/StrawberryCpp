@@ -13,7 +13,7 @@ namespace antlrcpptest {
 
 /* ================================================================================================================== */
     /* Functions */
-    
+
     /* -------------------------------------------------------------------------------------------------------------- */
         /* FunctionHandle */
     std::shared_ptr<Reference> StrawberryAllocator::FunctionHandle::execute_function(std::shared_ptr<Reference> args) {
@@ -159,6 +159,14 @@ namespace antlrcpptest {
             target = this->get_default();
         target->set(do_binary_operation(func, target, val_ref)->deref());
         return target->to_new_reference();
+    }
+
+    std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>, std::shared_ptr<Reference>)>
+            StrawberryAllocator::binary_operation_reference(
+                    std::shared_ptr<Value> (Value::*func)(std::shared_ptr<Value>,std::shared_ptr<Value>)) {
+        return [func](const std::shared_ptr<Reference>& ref1,const std::shared_ptr<Reference>& ref2) {
+            return do_binary_operation(func, ref1, ref2);
+        };
     }
 
 } // antlrcpptest

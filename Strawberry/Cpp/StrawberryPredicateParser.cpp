@@ -7,25 +7,30 @@
 namespace antlrcpptest {
     StrawberryPredicateParser::StrawberryPredicateParser(antlr4::TokenStream *input) : StrawberryParser(input) {}
 
-    bool StrawberryPredicateParser::isWithinFnDeclare() const {
-        auto parent = _ctx->parent;
+    template<typename TargetParent>
+    TargetParent StrawberryPredicateParser::getFirstParent(antlr4::ParserRuleContext* ctx) {
+        auto parent = ctx->parent;
         while (parent != nullptr) {
-            if (dynamic_cast<FnDeclarationContext*>(parent) != nullptr) {
-                return true;
+            if (auto target = dynamic_cast<TargetParent>(parent)) {
+                return target;
             }
             parent = parent->parent;
         }
+        return nullptr;
+    }
+
+    template<typename TargetParent>
+    TargetParent StrawberryPredicateParser::getFirstParent() {
+        return getFirstParent<TargetParent>(_ctx);
+    }
+
+    bool StrawberryPredicateParser::isWithinFnDeclare() {
+        if (getFirstParent<FnDeclarationContext *>()) return true;
         throw std::runtime_error("Cannot return from non-function");
     }
 
-    bool StrawberryPredicateParser::isWithinLoop() const {
-        auto parent = _ctx->parent;
-        while (parent != nullptr) {
-            if (dynamic_cast<Loop_Context*>(parent) != nullptr) {
-                return true;
-            }
-            parent = parent->parent;
-        }
+    bool StrawberryPredicateParser::isWithinLoop() {
+        if (getFirstParent<Loop_Context *>()) return true;
         throw std::runtime_error("Cannot call loop keyword from non-loop");
     }
 

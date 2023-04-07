@@ -1,8 +1,8 @@
 parser grammar StrawberryParserWithLexers;
 
 @parser::members {
-virtual bool isWithinFnDeclare() const = 0;
-virtual bool isWithinLoop() const = 0;
+virtual bool isWithinFnDeclare() = 0;
+virtual bool isWithinLoop() = 0;
 }
 
 options {
@@ -114,12 +114,15 @@ conditionalLoopKeywords_
 /* ================================================================================ */
 // FUNCTIONS ARGS PARAMETERS
 
-fnDeclaration: 'fn' Id '(' parameters_ ')' scope ;
+fnDeclaration: 'fn' Id '(' parameters_? ')' scope ;
 
-lambda: '(' parameters_ ')' '->' statement_ ;
+lambda
+: ('(' parameters_? ')')? '->' statement_
+| 'fn' '(' parameters_? ')' statement_
+;
 
 parameters_
-: ((Id ',')* Id)? #params
+: (Id ',')* Id #params
 | (Id ',')* Id '...' #paramsExpand
 ;
 
@@ -150,7 +153,6 @@ matchOptions_
 value_
 : expression_
 | lambda
-| idReference
 ;
 
 expression_
@@ -172,7 +174,28 @@ expression_
 | expression_ lowPrioritySuffix_ #suffixExpr
 | '\\' identifyer_ #derefExpr // TODO: Revisit deref operation
 | identifyer_ #accessExpr_
-| fnCall #fnCall_
+| fnCall #fnCallExpr_
+;
+
+identifyer_
+: identifyer_ identifyerChain_ #chainAccess
+| literal_ identifyerChain_ #chainAccess
+| identifyer_ '(' args? ')' identifyerChain_ #fnCallChainAccess
+| Id #idAccess
+| Id '::' identifyer_ #includeIdAccess
+| DefId #defaultAccess
+| '&' identifyer_ #idReference
+;
+
+identifyerChain_
+: '.' Id #dotAccess
+| '[' expression_ ']' #arrExprAccess
+| '[' args ']' #arrArgsAccess
+;
+
+fnCall
+: identifyer_ args
+| identifyer_ '(' args? ')'
 ;
 
 literal_
@@ -218,26 +241,6 @@ varDeclare_
 | Id '=' value_ #initVarDeclar
 | Id '=' args #initVarDeclarArgs
 ;
-
-identifyer_
-: identifyer_ '.' Id #dotAccess
-| identifyer_ '(' args? ')' '.' Id #dotAccessFromFn
-| identifyer_ '[' expression_ ']' #arrAccess
-| identifyer_ '[' args ']' #arrAccessArgs
-| identifyer_ '(' args? ')' '[' expression_ ']' #arrAccessFromFn
-| identifyer_ '(' args? ')' '[' args ']' #arrAccessArgsFromFn
-| Id #idAccess
-| DefId #defaultAccess
-;
-
-fnCall
-: identifyer_ '(' args? ')' #fnAccess
-| identifyer_ args #fnAccess
-| Id '::' identifyer_ '(' args? ')' #fnWithTagAccess
-| Id '::' identifyer_ args #fnWithTagAccess
-;
-
-idReference: '&' identifyer_ ;
 
 /* ================================================================================ */
 // OPERATORS

@@ -1,8 +1,4 @@
 
-let x = 0;
+let arr = [ 1, 2..5];
 
-let y = 12;
-
-let z = y/x;
-
-let zero = z - inf;
+let x = arr[4] - 12 - (-12);
