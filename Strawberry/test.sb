@@ -1,14 +1,5 @@
 
-let hash = {
-    key1: 12123,
-    " this is a string key": {
-        something: 'somethin'
-    }
-};
+let str = 'patrick';
 
-let
-a = hash.key1,
-b = hash["key1"],
-c = hash[' this is a string key'],
-d = a - b * 2e0 % hash.key1
-;
+let warn = str - 12; // trigger warning
+

@@ -21,13 +21,13 @@ public:
     }
 
     static void enable() {
-        warn_f = [](std::string msg){
+        warn_f = [](const std::string& msg){
             std::cout << "WARNING:\n" << msg << std::endl << std::endl;
         };
     }
 
     static void disable() {
-        warn_f = [](std::string msg){};
+        warn_f = [](const std::string& /*msg*/){};
     }
 };
 

@@ -4,4 +4,4 @@
 
 #include "Warnings.h"
 
-std::function<void(std::string)> Warnings::warn_f = [](std::string msg){};
+std::function<void(std::string)> Warnings::warn_f = [](const std::string& /*msg*/){};

@@ -12,7 +12,6 @@
 #include "types/Value.h"
 #include "types/expressions/Number.h"
 #include "types/Reference.h"
-#include "functions/FunctionHandle.h"
 
 namespace antlrcpptest {
 
@@ -43,21 +42,32 @@ class StrawberryAllocator: public StrawberryParserBaseVisitor {
 
     // -------------------------------------------------------------------------------------------------------------- //
         // Functions //
+
+        class FunctionHandle {
+        private:
+            antlrcpptest::StrawberryParser::FnDeclarationContext* fn_ctx = nullptr;
+
+        public:
+            explicit FunctionHandle(antlrcpptest::StrawberryParser::FnDeclarationContext *ctx): fn_ctx(ctx) {}
+
+            ~FunctionHandle() = default;
+
+            std::shared_ptr<Reference> execute_function(std::shared_ptr<Reference> args);
+
+        };
+
         class FunctionLibrary {
         protected:
             std::unique_ptr<std::unordered_map<std::string, std::unique_ptr<FunctionHandle>>> my_fns
                         = std::make_unique<std::unordered_map<std::string, std::unique_ptr<FunctionHandle>>>();
-            std::unique_ptr<std::unordered_map<std::string,
-                        std::unordered_map<std::string, std::unique_ptr<FunctionHandle>>>> included
-                    = std::make_unique<std::unordered_map<std::string,
+            std::unique_ptr<std::unordered_map<std::string,std::unordered_map<std::string,std::unique_ptr<FunctionHandle>>>> included
+                         = std::make_unique<std::unordered_map<std::string,
                             std::unordered_map<std::string, std::unique_ptr<FunctionHandle>>>>();
 
         public:
 
             void add(const std::string& fn_name, std::unique_ptr<FunctionHandle> fn);
-
             std::unique_ptr<FunctionHandle>& get(const std::string& fn_name);
-
             std::unique_ptr<FunctionHandle>& get_with_tag(const std::string& tag, const std::string& fn_name);
         };
 
@@ -68,46 +78,39 @@ class StrawberryAllocator: public StrawberryParserBaseVisitor {
         std::shared_ptr<Scope> innerScope;
         std::shared_ptr<Scope> defaultScope;
         std::shared_ptr<FunctionLibrary> functionLibrary = std::make_shared<FunctionLibrary>();
-        std::unique_ptr<Reference> fn_return_value = std::make_unique<Reference>();
 
     public:
         void scope_in();
-
         void scope_out();
 
         void new_default(const std::shared_ptr<Value>& value);
-
         std::shared_ptr<Reference> get_default();
-
         std::shared_ptr<Reference> pop_default();
 
         std::shared_ptr<Reference> declare(const std::string& id, const std::shared_ptr<Value>& val) const;
-
         std::shared_ptr<Reference> declare(const std::string& id) const;
-
         [[nodiscard]] std::shared_ptr<Reference> get_from_memory(const std::string& id) const;
 
-
-
 /* ================================================================================================================== */
-    /* Visitor Helpers */
-
+    /* Operation */
+    public:
         static std::shared_ptr<Reference> do_binary_operation (
                 std::shared_ptr<Value> (Value::*func)(std::shared_ptr<Value>,std::shared_ptr<Value>), /* Binary operation */
                 const std::shared_ptr<Reference>& ref1, /* arg1 */
-                const std::shared_ptr<Reference>&ref2);
+                const std::shared_ptr<Reference>&ref2); /* arg2 */
 
         std::shared_ptr<Reference> do_binary_assign_operation (
-                std::shared_ptr<Value> (Value::*func)(std::shared_ptr<Value>,std::shared_ptr<Value>),
-                StrawberryParser::Identifyer_Context* id_ctx,
-                const std::shared_ptr<Reference>& val_ref);
+                std::shared_ptr<Value> (Value::*func)(std::shared_ptr<Value>,std::shared_ptr<Value>), /* Binary operation */
+                StrawberryParser::Identifyer_Context* id_ctx, /* identifier */
+                const std::shared_ptr<Reference>& val_ref); /* value */
 
 
 /* ================================================================================================================== */
         /* Debug Helpers */
         static void print_scope(const std::shared_ptr<Scope>& scope, const std::string& prelim) {
             for (const auto& item:scope->memory) {
-                std::cout << prelim << item.first << ": " << item.second->deref()->typeName() << " = " << item.second->toDisplay() << std::endl;
+                std::cout << prelim << item.first << ": " << item.second->deref()->typeName()
+                                        << " = " << item.second->toDisplay() << std::endl;
             }
         }
 
@@ -118,10 +121,12 @@ class StrawberryAllocator: public StrawberryParserBaseVisitor {
         void print_default(std::string prelim) {
             std::stringstream ss;
             auto defaull_ref = this->program_default;
-            ss << prelim << "_ : " << defaull_ref->default_ref->deref()->typeName() << " = " << defaull_ref->default_ref->toString();
+            ss << prelim << "_ : " << defaull_ref->default_ref->deref()->typeName()
+                            << " = " << defaull_ref->default_ref->toString();
             while (defaull_ref->outer_default != nullptr) {
                 defaull_ref = defaull_ref->outer_default;
-                ss << prelim << " -> " << defaull_ref->default_ref->deref()->typeName() << " = " << defaull_ref->default_ref->toString();
+                ss << prelim << " -> " << defaull_ref->default_ref->deref()->typeName()
+                                << " = " << defaull_ref->default_ref->toString();
             }
             ss << std::endl;
             std::cout << ss.str();

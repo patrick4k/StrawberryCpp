@@ -7,12 +7,25 @@
 
 namespace antlrcpptest {
 
+/* ================================================================================================================== */
+    /* Functions */
+    
+    /* -------------------------------------------------------------------------------------------------------------- */
+        /* FunctionHandle */
+    std::shared_ptr<Reference> StrawberryAllocator::FunctionHandle::execute_function(std::shared_ptr<Reference> args) {
+        for (auto action: this->fn_ctx->scope()->action_()) {
 
+        }
+        return std::make_shared<Reference>();
+    }
+
+    /* -------------------------------------------------------------------------------------------------------------- */
+        /* FunctionLibrary */
     void StrawberryAllocator::FunctionLibrary::add(const std::string &fn_name, std::unique_ptr<FunctionHandle> fn) {
         this->my_fns->insert_or_assign(fn_name, std::move(fn));
     }
 
-    std::unique_ptr<FunctionHandle> &StrawberryAllocator::FunctionLibrary::get(const std::string &fn_name) {
+    std::unique_ptr<StrawberryAllocator::FunctionHandle> &StrawberryAllocator::FunctionLibrary::get(const std::string &fn_name) {
         auto fn_location = this->my_fns->find(fn_name);
 
         if (fn_location != this->my_fns->end())
@@ -23,9 +36,7 @@ namespace antlrcpptest {
             fn_location = map.second.find(fn_name);
 
             if (fn_location != map.second.end()) {
-                if (fn)
-                    throw std::runtime_error("Cannot call included " + fn_name + "() with without tag");
-
+                if (fn) throw std::runtime_error("Cannot call included " + fn_name + "() with without tag");
                 fn = &fn_location->second;
             }
         }
@@ -36,7 +47,7 @@ namespace antlrcpptest {
         return *fn;
     }
 
-    std::unique_ptr<FunctionHandle> &
+    std::unique_ptr<StrawberryAllocator::FunctionHandle> &
     StrawberryAllocator::FunctionLibrary::get_with_tag(const std::string &tag, const std::string &fn_name) {
         auto find_tag_fns = this->included->find(tag);
         if (find_tag_fns == this->included->end())
@@ -49,6 +60,8 @@ namespace antlrcpptest {
         return find_fn->second;
     }
 
+/* ================================================================================================================== */
+    /* Memory Allocation */
     void StrawberryAllocator::scope_in() {
         auto clean_memory = std::unordered_map<std::string,std::shared_ptr<Reference>>();
         innerScope = std::make_shared<Scope>(clean_memory, std::move(innerScope));
@@ -103,6 +116,8 @@ namespace antlrcpptest {
         return value->second;
     }
 
+    /* -------------------------------------------------------------------------------------------------------------- */
+        /* Operations */
     /**
      * Performs binary operation on two references. If one references operator priority is greater than the other the
      * execution of the greater is favored. A function of class Value is passed in for re-usability purposes across
