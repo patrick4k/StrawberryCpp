@@ -1,5 +1,5 @@
 
-let str = 'patrick';
-
-let warn = str - 12; // trigger warning
-
+while (2) {
+    once! let i = 0;
+    i++;
+}

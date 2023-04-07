@@ -73,12 +73,12 @@ namespace antlrcpptest {
 
 /* -------------------------------------------------------------------------------------------------------------- */
 /* Control Flow */
-    std::any StrawberryInterpreter::visitLoopScope(StrawberryParser::LoopScopeContext *ctx) {
-        return StrawberryParserBaseVisitor::visitLoopScope(ctx);
+    std::any StrawberryInterpreter::visitLoopOnScope(StrawberryParser::LoopOnScopeContext *ctx) {
+        return StrawberryParserBaseVisitor::visitLoopOnScope(ctx);
     }
 
-    std::any StrawberryInterpreter::visitLoopBody(StrawberryParser::LoopBodyContext *ctx) {
-        return StrawberryParserBaseVisitor::visitLoopBody(ctx);
+    std::any StrawberryInterpreter::visitLoopOnBody(StrawberryParser::LoopOnBodyContext *ctx) {
+        return StrawberryParserBaseVisitor::visitLoopOnBody(ctx);
     }
 
     std::any StrawberryInterpreter::visitDoWhileLoop(StrawberryParser::DoWhileLoopContext *ctx) {

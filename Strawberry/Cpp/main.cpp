@@ -5,6 +5,7 @@
 #include "StrawberryParser.h"
 #include "util/Warnings.h"
 #include "StrawberryInterpreter.h"
+#include "StrawberryPredicateParser.h"
 
 using namespace antlrcpptest;
 using namespace antlr4;
@@ -25,7 +26,7 @@ int main(const int argc, const char* argv[]) {
     tokens.fill();
 
     /* Create and Visit Script Tree */
-    StrawberryParser parser(&tokens);
+    StrawberryPredicateParser parser(&tokens);
     auto tree = parser.script_();
     auto visitor = std::make_shared<StrawberryInterpreter>();
     Warnings::enable();

@@ -1,5 +1,10 @@
 parser grammar StrawberryParserWithLexers;
 
+@parser::members {
+virtual bool isWithinFnDeclare() const = 0;
+virtual bool isWithinLoop() const = 0;
+}
+
 options {
 	tokenVocab = StrawberryLexer;
 }
@@ -32,11 +37,11 @@ statement_
 ;
 
 keywordStatement_
-: Return value_? #returnStat
-| Once statement_ #onceStat
-| Next expression_? #nextStat
-| Last #lastStat
-| Break #breakStat
+: Return value_? {isWithinFnDeclare()}? #returnStat
+| Once statement_ {isWithinLoop()}? #onceStat
+| Next expression_? {isWithinLoop()}? #nextStat
+| Last {isWithinLoop()}? #lastStat
+| Break {isWithinLoop()}? #breakStat
 ;
 
 body_: (scope | statement_ ';') ;
@@ -51,16 +56,16 @@ controlFlow_
 ;
 
 loop_
-: loopScope
-| loopBody
+: loopOnScope
+| loopOnBody
 | doWhileLoop
 ;
 
-loopScope
+loopOnScope
 : loopKeywords_ expression_ scope
 ;
 
-loopBody: loopKeywords_ '(' expression_ ')' body_ ;
+loopOnBody: loopKeywords_ '(' expression_ ')' body_ ;
 
 doWhileLoop: 'do' scope conditionalLoopKeywords_ expression_ ';' ;
 
@@ -69,7 +74,7 @@ compoundStatement: compoundAction_ (loopKeywords_ (expression_ | '(' args ')'))*
 compoundAction_
 : compoundAction_ conditionalKeywords_ expression_ ('else' compoundAction_)? #ifCompound
 | ifScope #ifScopeCompound
-| loopScope #loopScopeCompound
+| loopOnScope #loopScopeCompound
 | statement_ #statementCompound
 ;
 

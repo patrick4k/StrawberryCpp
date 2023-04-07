@@ -1,5 +1,10 @@
 parser grammar StrawberryParser;
 
+@parser::members {
+virtual bool isWithinFnDeclare() const = 0;
+virtual bool isWithinLoop() const = 0;
+}
+
 options {
 	tokenVocab = StrawberryLexer;
 }
@@ -32,11 +37,11 @@ statement_
 ;
 
 keywordStatement_
-: Return value_? #returnStat
-| Once statement_ #onceStat
-| Next expression_? #nextStat
-| Last #lastStat
-| Break #breakStat
+: Return value_? {isWithinFnDeclare()}? #returnStat
+| Once statement_ {isWithinLoop()}? #onceStat
+| Next expression_? {isWithinLoop()}? #nextStat
+| Last {isWithinLoop()}? #lastStat
+| Break {isWithinLoop()}? #breakStat
 ;
 
 body_: (scope | statement_  Semi ) ;
@@ -51,16 +56,16 @@ controlFlow_
 ;
 
 loop_
-: loopScope
-| loopBody
+: loopOnScope
+| loopOnBody
 | doWhileLoop
 ;
 
-loopScope
+loopOnScope
 : loopKeywords_ expression_ scope
 ;
 
-loopBody: loopKeywords_  Lpar  expression_  Rpar  body_ ;
+loopOnBody: loopKeywords_  Lpar  expression_  Rpar  body_ ;
 
 doWhileLoop:  Do  scope conditionalLoopKeywords_ expression_  Semi  ;
 
@@ -69,7 +74,7 @@ compoundStatement: compoundAction_ (loopKeywords_ (expression_ |  Lpar  args  Rp
 compoundAction_
 : compoundAction_ conditionalKeywords_ expression_ ( Else  compoundAction_)? #ifCompound
 | ifScope #ifScopeCompound
-| loopScope #loopScopeCompound
+| loopOnScope #loopScopeCompound
 | statement_ #statementCompound
 ;
 
@@ -161,7 +166,7 @@ expression_
 | expression_  Dot  op2_ expression_ #dotOpExpr2
 | lowPrioritySuffix_ #defaultSuffixExpr
 | expression_ lowPrioritySuffix_ #suffixExpr
-|  Fslash  identifyer_ #derefExpr
+|  Fslash  identifyer_ #derefExpr // TODO: Revisit deref operation
 | identifyer_ #accessExpr_
 | identifyer_  Lpar  args  Rpar  #fnAccess
 | Id  ColonColon  identifyer_  Lpar  args  Rpar  #fnWithTagAccess
