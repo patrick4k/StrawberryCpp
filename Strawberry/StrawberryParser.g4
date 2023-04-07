@@ -123,7 +123,7 @@ parameters_
 | (Id  Com )* Id  Dot3  #paramsExpand
 ;
 
-args: (argument_ ( Com  argument_)*)? ;
+args: argument_ ( Com  argument_)* ;
 
 argument_
 : value_ #arg
@@ -172,9 +172,7 @@ expression_
 | expression_ lowPrioritySuffix_ #suffixExpr
 |  Fslash  identifyer_ #derefExpr // TODO: Revisit deref operation
 | identifyer_ #accessExpr_
-| identifyer_  Lpar  args  Rpar  #fnAccess
-| Id  ColonColon  identifyer_  Lpar  args  Rpar  #fnWithTagAccess
-| looseFnCall_ #looseFnCallExpr
+| fnCall #fnCall_
 ;
 
 literal_
@@ -223,18 +221,23 @@ varDeclare_
 
 identifyer_
 : identifyer_  Dot  Id #dotAccess
+| identifyer_  Lpar  args?  Rpar   Dot  Id #dotAccessFromFn
 | identifyer_  Lbrack  expression_  Rbrack  #arrAccess
 | identifyer_  Lbrack  args  Rbrack  #arrAccessArgs
+| identifyer_  Lpar  args  Rpar   Lbrack  expression_  Rbrack  #arrAccessFromFn
+| identifyer_  Lpar  args  Rpar   Lbrack  args  Rbrack  #arrAccessArgsFromFn
 | Id #idAccess
 | DefId #defaultAccess
 ;
 
-idReference:  AndSign  identifyer_ ;
-
-looseFnCall_
-: identifyer_ args #looseFnCall
-| Id  ColonColon  identifyer_ args #looseFnWithTagCall
+fnCall
+: identifyer_  Lpar  args?  Rpar  #fnAccess
+| identifyer_ args #fnAccess
+| Id  ColonColon  identifyer_  Lpar  args?  Rpar  #fnWithTagAccess
+| Id  ColonColon  identifyer_ args #fnWithTagAccess
 ;
+
+idReference:  AndSign  identifyer_ ;
 
 /* ================================================================================ */
 // OPERATORS

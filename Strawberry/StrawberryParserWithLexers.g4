@@ -123,7 +123,7 @@ parameters_
 | (Id ',')* Id '...' #paramsExpand
 ;
 
-args: (argument_ (',' argument_)*)? ;
+args: argument_ (',' argument_)* ;
 
 argument_
 : value_ #arg
@@ -172,9 +172,7 @@ expression_
 | expression_ lowPrioritySuffix_ #suffixExpr
 | '\\' identifyer_ #derefExpr // TODO: Revisit deref operation
 | identifyer_ #accessExpr_
-| identifyer_ '(' args ')' #fnAccess
-| Id '::' identifyer_ '(' args ')' #fnWithTagAccess
-| looseFnCall_ #looseFnCallExpr
+| fnCall #fnCall_
 ;
 
 literal_
@@ -223,18 +221,23 @@ varDeclare_
 
 identifyer_
 : identifyer_ '.' Id #dotAccess
+| identifyer_ '(' args? ')' '.' Id #dotAccessFromFn
 | identifyer_ '[' expression_ ']' #arrAccess
 | identifyer_ '[' args ']' #arrAccessArgs
+| identifyer_ '(' args? ')' '[' expression_ ']' #arrAccessFromFn
+| identifyer_ '(' args? ')' '[' args ']' #arrAccessArgsFromFn
 | Id #idAccess
 | DefId #defaultAccess
 ;
 
-idReference: '&' identifyer_ ;
-
-looseFnCall_
-: identifyer_ args #looseFnCall
-| Id '::' identifyer_ args #looseFnWithTagCall
+fnCall
+: identifyer_ '(' args? ')' #fnAccess
+| identifyer_ args #fnAccess
+| Id '::' identifyer_ '(' args? ')' #fnWithTagAccess
+| Id '::' identifyer_ args #fnWithTagAccess
 ;
+
+idReference: '&' identifyer_ ;
 
 /* ================================================================================ */
 // OPERATORS

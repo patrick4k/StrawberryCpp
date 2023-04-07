@@ -48,7 +48,6 @@ public:
     std::any visitArgExpand(StrawberryParser::ArgExpandContext *ctx) override;
     std::any visitRangeArg(StrawberryParser::RangeArgContext *ctx) override;
     std::any visitMatchRegex(StrawberryParser::MatchRegexContext *ctx) override;
-    std::any visitLooseFnCallExpr(StrawberryParser::LooseFnCallExprContext *ctx) override;
     std::any visitPrefixExpr(StrawberryParser::PrefixExprContext *ctx) override;
     std::any visitDefaultSuffixExpr(StrawberryParser::DefaultSuffixExprContext *ctx) override;
     std::any visitOpExpr1(StrawberryParser::OpExpr1Context *ctx) override;
@@ -95,7 +94,6 @@ public:
     std::any visitIdAccess(StrawberryParser::IdAccessContext *ctx) override;
     std::any visitDefaultAccess(StrawberryParser::DefaultAccessContext *ctx) override;
     std::any visitIdReference(StrawberryParser::IdReferenceContext *ctx) override;
-    std::any visitLooseFnCall(StrawberryParser::LooseFnCallContext *ctx) override;
     std::any visitNegatePrefix(StrawberryParser::NegatePrefixContext *ctx) override;
     std::any visitNegativePrefix(StrawberryParser::NegativePrefixContext *ctx) override;
     std::any visitSizePrefix(StrawberryParser::SizePrefixContext *ctx) override;

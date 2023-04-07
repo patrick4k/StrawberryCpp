@@ -225,10 +225,6 @@ namespace antlrcpptest {
 
 /* -------------------------------------------------------------------------------------------------------------- */
 /* Expressions */
-    std::any StrawberryInterpreter::visitLooseFnCallExpr(StrawberryParser::LooseFnCallExprContext *ctx) {
-        return StrawberryParserBaseVisitor::visitLooseFnCallExpr(ctx);
-    }
-
     std::any StrawberryInterpreter::visitPrefixExpr(StrawberryParser::PrefixExprContext *ctx) {
         auto operation = std::any_cast
                 <std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>)>>(visit(ctx->prefix_()));
@@ -552,10 +548,6 @@ namespace antlrcpptest {
         return std::make_shared<Reference>(
                 std::any_cast<std::shared_ptr<Reference>>(
                         visit(ctx->identifyer_())));
-    }
-
-    std::any StrawberryInterpreter::visitLooseFnCall(StrawberryParser::LooseFnCallContext *ctx) {
-        return StrawberryParserBaseVisitor::visitLooseFnCall(ctx);
     }
 
 /* -------------------------------------------------------------------------------------------------------------- */

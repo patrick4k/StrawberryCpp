@@ -17,6 +17,9 @@ namespace antlrcpptest {
 
 class StrawberryAllocator: public StrawberryParserBaseVisitor {
 
+protected:
+    std::any defaultResult() override;
+
 /* ================================================================================================================== */
     /* Memory Allocation */
     protected:

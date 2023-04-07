@@ -7,6 +7,10 @@
 
 namespace antlrcpptest {
 
+    std::any StrawberryAllocator::defaultResult() {
+        return std::make_shared<Reference>();
+    }
+
 /* ================================================================================================================== */
     /* Functions */
     
