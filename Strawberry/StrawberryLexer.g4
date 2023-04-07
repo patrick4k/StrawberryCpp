@@ -16,9 +16,9 @@ Loop: 'loop' ;
 // TODO: Revise keywords
 Return: 'return' ;
 Break: 'break' ;
-Next: 'next!' ;
-Last: 'last!' ;
-Once: 'once!' ;
+Next: 'next' ;
+Last: 'last' ;
+Once: 'once' ;
 
 /* Literals */
 True: 'true' ;
@@ -26,9 +26,9 @@ False: 'false' ;
 Null: 'null' ;
 
 /* Util */
-Id: Word (Letter | Digit | Uscore)*;
 DefId: '_' Id?;
-Number: (Digit+ ('.' Digit+)? | '.' Digit+ ) ('e' '-'? Digit+)?;
+Number: 'inf' | (Digit+ ('.' Digit+)? | '.' Digit+ ) ('e' '-'? Digit+)?;
+Id: Word (Letter | Digit | Uscore)*;
 String: '"' .*? '"' ;
 StringLit: '\'' .*? '\'' ;
 

@@ -56,16 +56,20 @@ controlFlow_
 ;
 
 loop_
-: loopOnScope
-| loopOnBody
+: loopOnScope_
+| loopOnBody_
 | doWhileLoop
 ;
 
-loopOnScope
-: loopKeywords_ expression_ scope
+loopOnScope_
+: loopKeywords_ expression_ scope #loopOnScopeOnExpr
+| loopKeywords_ args scope #loopOnScopeOnArgs
 ;
 
-loopOnBody: loopKeywords_ '(' expression_ ')' body_ ;
+loopOnBody_
+: loopKeywords_ '(' expression_ ')' body_ #loopOnBodyOnExpr
+| loopKeywords_ '(' args ')' body_ #loopOnBodyOnArgs
+;
 
 doWhileLoop: 'do' scope conditionalLoopKeywords_ expression_ ';' ;
 
@@ -74,7 +78,7 @@ compoundStatement: compoundAction_ (loopKeywords_ (expression_ | '(' args ')'))*
 compoundAction_
 : compoundAction_ conditionalKeywords_ expression_ ('else' compoundAction_)? #ifCompound
 | ifScope #ifScopeCompound
-| loopOnScope #loopScopeCompound
+| loopOnScope_ #loopScopeCompound
 | statement_ #statementCompound
 ;
 

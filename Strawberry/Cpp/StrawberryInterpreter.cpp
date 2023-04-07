@@ -73,12 +73,20 @@ namespace antlrcpptest {
 
 /* -------------------------------------------------------------------------------------------------------------- */
 /* Control Flow */
-    std::any StrawberryInterpreter::visitLoopOnScope(StrawberryParser::LoopOnScopeContext *ctx) {
-        return StrawberryParserBaseVisitor::visitLoopOnScope(ctx);
+    std::any StrawberryInterpreter::visitLoopOnScopeOnExpr(StrawberryParser::LoopOnScopeOnExprContext *ctx) {
+        return StrawberryParserBaseVisitor::visitLoopOnScopeOnExpr(ctx);
     }
 
-    std::any StrawberryInterpreter::visitLoopOnBody(StrawberryParser::LoopOnBodyContext *ctx) {
-        return StrawberryParserBaseVisitor::visitLoopOnBody(ctx);
+    std::any StrawberryInterpreter::visitLoopOnScopeOnArgs(StrawberryParser::LoopOnScopeOnArgsContext *ctx) {
+        return StrawberryParserBaseVisitor::visitLoopOnScopeOnArgs(ctx);
+    }
+
+    std::any StrawberryInterpreter::visitLoopOnBodyOnExpr(StrawberryParser::LoopOnBodyOnExprContext *ctx) {
+        return StrawberryParserBaseVisitor::visitLoopOnBodyOnExpr(ctx);
+    }
+
+    std::any StrawberryInterpreter::visitLoopOnBodyOnArgs(StrawberryParser::LoopOnBodyOnArgsContext *ctx) {
+        return StrawberryParserBaseVisitor::visitLoopOnBodyOnArgs(ctx);
     }
 
     std::any StrawberryInterpreter::visitDoWhileLoop(StrawberryParser::DoWhileLoopContext *ctx) {
@@ -440,7 +448,9 @@ namespace antlrcpptest {
     }
 
     std::any StrawberryInterpreter::visitDefaultEqAssign(StrawberryParser::DefaultEqAssignContext *ctx) {
-        return StrawberryParserBaseVisitor::visitDefaultEqAssign(ctx);
+        auto value = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->value_()))->deref();
+        this->get_default()->set(value);
+        return value;
     }
 
     std::any StrawberryInterpreter::visitPowAssign(StrawberryParser::PowAssignContext *ctx) {

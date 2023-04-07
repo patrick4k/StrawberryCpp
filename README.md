@@ -73,6 +73,12 @@ Strawberry/StrawberryLexer.g4 and Strawberry/StrawberryParser.g4.
 - [ ] Matrix operations
   - Pull inspiration from matlab
   - Needs more planning
+- [ ] Handle inf number values appropriately
+- [ ] Regex vs ANTLR4
+  - Replace match feature with ANTLR4 interpreter
+    - Easier parsing
+    - Runtime already compiled in Strawberry
+    - https://github.com/antlr/antlr4/blob/master/doc/interpreters.md
 
 ### OOP
 - [ ] Add Class definition to grammar

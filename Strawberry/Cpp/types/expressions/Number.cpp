@@ -4,6 +4,7 @@
 
 #include <cmath>
 #include "Number.h"
+#include "../../util/Warnings.h"
 
 Number::Number(double value) : number(value) {}
 
@@ -50,7 +51,7 @@ std::shared_ptr<Value> Number::mult(std::shared_ptr<Value> val1, std::shared_ptr
 
 std::shared_ptr<Value> Number::div(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) {
     double d2 = val2->toDouble();
-    if (d2 == 0) throw std::runtime_error("Divide by 0\n\t-->" + std::to_string(val1->toDouble()) + " / " + "0");
+    if (d2 == 0) Warnings::warn("Divide by 0 at: " + std::to_string(val1->toDouble()) + " / " + "0 --> inf");
     return std::make_shared<Number>(val1->toDouble() / val2->toDouble());
 }
 

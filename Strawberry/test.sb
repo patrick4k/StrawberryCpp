@@ -1,5 +1,8 @@
 
-while (2) {
-    once! let i = 0;
-    i++;
-}
+let x = 0;
+
+let y = 12;
+
+let z = y/x;
+
+let zero = z - inf;

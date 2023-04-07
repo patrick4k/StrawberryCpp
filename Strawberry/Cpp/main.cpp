@@ -15,8 +15,7 @@ int main(const int argc, const char* argv[]) {
     /* Print Argument of Program */
     std::cout << "Args" << std::endl;
     for (int i = 0; i < argc; ++i)
-        std::cout << "\t" << i << ": " << argv[i] << std::endl;
-    std::cout << std::endl;
+        std::cout << "\t" << i << ": " << argv[i] << '\n' << std::endl;
 
     /* Read File and Create Token Stream */
     auto input = ANTLRFileStream();

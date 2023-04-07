@@ -20,8 +20,10 @@ public:
     std::any visitNextStat(StrawberryParser::NextStatContext *ctx) override;
     std::any visitLastStat(StrawberryParser::LastStatContext *ctx) override;
     std::any visitBreakStat(StrawberryParser::BreakStatContext *ctx) override;
-    std::any visitLoopOnScope(StrawberryParser::LoopOnScopeContext *ctx) override;
-    std::any visitLoopOnBody(StrawberryParser::LoopOnBodyContext *ctx) override;
+    std::any visitLoopOnScopeOnExpr(StrawberryParser::LoopOnScopeOnExprContext *ctx) override;
+    std::any visitLoopOnScopeOnArgs(StrawberryParser::LoopOnScopeOnArgsContext *ctx) override;
+    std::any visitLoopOnBodyOnExpr(StrawberryParser::LoopOnBodyOnExprContext *ctx) override;
+    std::any visitLoopOnBodyOnArgs(StrawberryParser::LoopOnBodyOnArgsContext *ctx) override;
     std::any visitDoWhileLoop(StrawberryParser::DoWhileLoopContext *ctx) override;
     std::any visitCompoundStatement(StrawberryParser::CompoundStatementContext *ctx) override;
     std::any visitStatementCompound(StrawberryParser::StatementCompoundContext *ctx) override;

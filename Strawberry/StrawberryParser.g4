@@ -56,16 +56,20 @@ controlFlow_
 ;
 
 loop_
-: loopOnScope
-| loopOnBody
+: loopOnScope_
+| loopOnBody_
 | doWhileLoop
 ;
 
-loopOnScope
-: loopKeywords_ expression_ scope
+loopOnScope_
+: loopKeywords_ expression_ scope #loopOnScopeOnExpr
+| loopKeywords_ args scope #loopOnScopeOnArgs
 ;
 
-loopOnBody: loopKeywords_  Lpar  expression_  Rpar  body_ ;
+loopOnBody_
+: loopKeywords_  Lpar  expression_  Rpar  body_ #loopOnBodyOnExpr
+| loopKeywords_  Lpar  args  Rpar  body_ #loopOnBodyOnArgs
+;
 
 doWhileLoop:  Do  scope conditionalLoopKeywords_ expression_  Semi  ;
 
@@ -74,7 +78,7 @@ compoundStatement: compoundAction_ (loopKeywords_ (expression_ |  Lpar  args  Rp
 compoundAction_
 : compoundAction_ conditionalKeywords_ expression_ ( Else  compoundAction_)? #ifCompound
 | ifScope #ifScopeCompound
-| loopOnScope #loopScopeCompound
+| loopOnScope_ #loopScopeCompound
 | statement_ #statementCompound
 ;
 
