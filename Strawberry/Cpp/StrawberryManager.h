@@ -2,8 +2,8 @@
 // Created by patrick on 3/10/23.
 //
 
-#ifndef LIBANTLR4_STRAWBERRYALLOCATOR_H
-#define LIBANTLR4_STRAWBERRYALLOCATOR_H
+#ifndef LIBANTLR4_STRAWBERRYMANAGER_H
+#define LIBANTLR4_STRAWBERRYMANAGER_H
 
 #include <memory>
 #include <utility>
@@ -13,9 +13,9 @@
 #include "types/expressions/Number.h"
 #include "types/Reference.h"
 
-namespace antlrcpptest {
+namespace strawberrycpp {
 
-class StrawberryAllocator: public StrawberryParserBaseVisitor {
+class StrawberryManager: public StrawberryParserBaseVisitor {
 
 protected:
     std::any defaultResult() override;
@@ -48,10 +48,10 @@ protected:
 
         class FunctionHandle {
         private:
-            antlrcpptest::StrawberryParser::FnDeclarationContext* fn_ctx = nullptr;
+            strawberrycpp::StrawberryParser::FnDeclarationContext* fn_ctx = nullptr;
 
         public:
-            explicit FunctionHandle(antlrcpptest::StrawberryParser::FnDeclarationContext *ctx): fn_ctx(ctx) {}
+            explicit FunctionHandle(strawberrycpp::StrawberryParser::FnDeclarationContext *ctx): fn_ctx(ctx) {}
 
             ~FunctionHandle() = default;
 
@@ -155,6 +155,6 @@ protected:
 
     };
 
-} // antlrcpptest
+} // strawberrycpp
 
-#endif //LIBANTLR4_STRAWBERRYALLOCATOR_H
+#endif //LIBANTLR4_STRAWBERRYMANAGER_H

@@ -66,6 +66,10 @@ Strawberry/StrawberryLexer.g4 and Strawberry/StrawberryParser.g4.
         - if / unless
     - [ ] Compound Statements
 
+### Clean Up
+- [ ] Convert std::shared_ptr to std::unique_ptr when applicable
+- [ ] Make general visit(ctx) calls more specific
+ 
 ### Features
 - [x] Linspace operator / join list operator
   - [x] Modify rangeOp

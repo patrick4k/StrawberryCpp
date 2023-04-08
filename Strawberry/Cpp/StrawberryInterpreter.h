@@ -5,11 +5,11 @@
 #ifndef LIBANTLR4_STRAWBERRYINTERPRETER_H
 #define LIBANTLR4_STRAWBERRYINTERPRETER_H
 
-#include "StrawberryAllocator.h"
+#include "StrawberryManager.h"
 
-namespace antlrcpptest {
+namespace strawberrycpp {
 
-class StrawberryInterpreter : public StrawberryAllocator, public std::enable_shared_from_this<StrawberryInterpreter> {
+class StrawberryInterpreter : public StrawberryManager, public std::enable_shared_from_this<StrawberryInterpreter> {
 
 private:
     template<typename T>

@@ -14,7 +14,7 @@
 #include "types/nonexpressions/Lambda.h"
 #include "util/Warnings.h"
 
-namespace antlrcpptest {
+namespace strawberrycpp {
 
     template<typename T>
     std::shared_ptr<Reference> StrawberryInterpreter::callFunction(T *ctx) {

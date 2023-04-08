@@ -27,7 +27,7 @@ add_custom_command(OUTPUT ${strawberry-GENERATED_SRC}
    COMMAND
    ${CMAKE_COMMAND} -E make_directory ${PROJECT_SOURCE_DIR}/Strawberry/generated/
    COMMAND
-   "${Java_JAVA_EXECUTABLE}" -jar ${ANTLR_JAR_LOCATION} -Werror -Dlanguage=Cpp -listener -visitor -o ${PROJECT_SOURCE_DIR}/Strawberry/generated/ -package antlrcpptest ${PROJECT_SOURCE_DIR}/Strawberry/StrawberryLexer.g4 ${PROJECT_SOURCE_DIR}/Strawberry/StrawberryParser.g4
+   "${Java_JAVA_EXECUTABLE}" -jar ${ANTLR_JAR_LOCATION} -Werror -Dlanguage=Cpp -listener -visitor -o ${PROJECT_SOURCE_DIR}/Strawberry/generated/ -package strawberrycpp ${PROJECT_SOURCE_DIR}/Strawberry/StrawberryLexer.g4 ${PROJECT_SOURCE_DIR}/Strawberry/StrawberryParser.g4
    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
    DEPENDS ${PROJECT_SOURCE_DIR}/Strawberry/StrawberryLexer.g4 ${PROJECT_SOURCE_DIR}/Strawberry/StrawberryParser.g4
 
@@ -53,7 +53,7 @@ set(strawberry_SRC Cpp/main.cpp
         ${strawberry-GENERATED_SRC}
         Cpp/types/Value.cpp Cpp/types/Value.h
 
-        Cpp/StrawberryAllocator.cpp Cpp/StrawberryAllocator.h Cpp/types/expressions/Bool.cpp Cpp/types/expressions/Bool.h Cpp/types/expressions/Number.cpp Cpp/types/expressions/Number.h Cpp/types/nonexpressions/Lambda.cpp Cpp/types/nonexpressions/Lambda.h Cpp/types/Reference.cpp Cpp/types/Reference.h Cpp/types/expressions/String.cpp Cpp/types/expressions/String.h Cpp/types/containers/List.cpp Cpp/types/containers/List.h Cpp/types/containers/Container.cpp Cpp/types/containers/Container.h Cpp/types/containers/Pair.cpp Cpp/types/containers/Pair.h Cpp/types/containers/Hash.cpp Cpp/types/containers/Hash.h Cpp/util/Warnings.cpp Cpp/util/Warnings.h Cpp/types/containers/Matrix.cpp Cpp/types/containers/Matrix.h Cpp/StrawberryInterpreter.cpp Cpp/StrawberryInterpreter.h Cpp/StrawberryPredicateParser.cpp Cpp/StrawberryPredicateParser.h)
+        Cpp/StrawberryManager.cpp Cpp/StrawberryManager.h Cpp/types/expressions/Bool.cpp Cpp/types/expressions/Bool.h Cpp/types/expressions/Number.cpp Cpp/types/expressions/Number.h Cpp/types/nonexpressions/Lambda.cpp Cpp/types/nonexpressions/Lambda.h Cpp/types/Reference.cpp Cpp/types/Reference.h Cpp/types/expressions/String.cpp Cpp/types/expressions/String.h Cpp/types/containers/List.cpp Cpp/types/containers/List.h Cpp/types/containers/Container.cpp Cpp/types/containers/Container.h Cpp/types/containers/Pair.cpp Cpp/types/containers/Pair.h Cpp/types/containers/Hash.cpp Cpp/types/containers/Hash.h Cpp/util/Warnings.cpp Cpp/util/Warnings.h Cpp/types/containers/Matrix.cpp Cpp/types/containers/Matrix.h Cpp/StrawberryInterpreter.cpp Cpp/StrawberryInterpreter.h Cpp/StrawberryPredicateParser.cpp Cpp/StrawberryPredicateParser.h)
 if(NOT CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
   set (flags_1 "-Wno-overloaded-virtual")
 else()

@@ -7,7 +7,7 @@
 #include "StrawberryInterpreter.h"
 #include "StrawberryPredicateParser.h"
 
-using namespace antlrcpptest;
+using namespace strawberrycpp;
 using namespace antlr4;
 
 int main(const int argc, const char* argv[]) {

@@ -1,4 +1,6 @@
 
-let arr = [ 1, 2..5];
-
-let x = arr[4] - 12 - (-12);
+let exe = -> {
+    let a = 10;
+    = a;
+    return 2*a;
+};

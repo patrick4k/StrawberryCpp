@@ -7,7 +7,7 @@
 
 #include "StrawberryParser.h"
 
-namespace antlrcpptest {
+namespace strawberrycpp {
 
     class StrawberryPredicateParser: public StrawberryParser {
     public:
@@ -19,11 +19,12 @@ namespace antlrcpptest {
         template<typename TargetParent>
         TargetParent getFirstParent();
 
-        bool isWithinFnDeclare() override;
+        bool isWithinFn() override;
+
         bool isWithinLoop() override;
 
     };
 
-} // antlrcpptest
+} // strawberrycpp
 
 #endif //LIBANTLR4_STRAWBERRYPREDICATEPARSER_H

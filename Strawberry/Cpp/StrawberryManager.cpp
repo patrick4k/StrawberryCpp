@@ -2,12 +2,12 @@
 // Created by patrick on 3/10/23.
 //
 
-#include "StrawberryAllocator.h"
+#include "StrawberryManager.h"
 
 
-namespace antlrcpptest {
+namespace strawberrycpp {
 
-    std::any StrawberryAllocator::defaultResult() {
+    std::any StrawberryManager::defaultResult() {
         return std::make_shared<Reference>();
     }
 
@@ -16,7 +16,7 @@ namespace antlrcpptest {
 
     /* -------------------------------------------------------------------------------------------------------------- */
         /* FunctionHandle */
-    std::shared_ptr<Reference> StrawberryAllocator::FunctionHandle::execute_function(std::shared_ptr<Reference> args) {
+    std::shared_ptr<Reference> StrawberryManager::FunctionHandle::execute_function(std::shared_ptr<Reference> args) {
         for (auto action: this->fn_ctx->scope()->action_()) {
 
         }
@@ -25,11 +25,11 @@ namespace antlrcpptest {
 
     /* -------------------------------------------------------------------------------------------------------------- */
         /* FunctionLibrary */
-    void StrawberryAllocator::FunctionLibrary::add(const std::string &fn_name, std::unique_ptr<FunctionHandle> fn) {
+    void StrawberryManager::FunctionLibrary::add(const std::string &fn_name, std::unique_ptr<FunctionHandle> fn) {
         this->my_fns->insert_or_assign(fn_name, std::move(fn));
     }
 
-    std::unique_ptr<StrawberryAllocator::FunctionHandle> &StrawberryAllocator::FunctionLibrary::get(const std::string &fn_name) {
+    std::unique_ptr<StrawberryManager::FunctionHandle> &StrawberryManager::FunctionLibrary::get(const std::string &fn_name) {
         auto fn_location = this->my_fns->find(fn_name);
 
         if (fn_location != this->my_fns->end())
@@ -51,8 +51,8 @@ namespace antlrcpptest {
         return *fn;
     }
 
-    std::unique_ptr<StrawberryAllocator::FunctionHandle> &
-    StrawberryAllocator::FunctionLibrary::get_with_tag(const std::string &tag, const std::string &fn_name) {
+    std::unique_ptr<StrawberryManager::FunctionHandle> &
+    StrawberryManager::FunctionLibrary::get_with_tag(const std::string &tag, const std::string &fn_name) {
         auto find_tag_fns = this->included->find(tag);
         if (find_tag_fns == this->included->end())
             throw std::runtime_error("Cannot find included tag " + tag);
@@ -66,12 +66,12 @@ namespace antlrcpptest {
 
 /* ================================================================================================================== */
     /* Memory Allocation */
-    void StrawberryAllocator::scope_in() {
+    void StrawberryManager::scope_in() {
         auto clean_memory = std::unordered_map<std::string,std::shared_ptr<Reference>>();
         innerScope = std::make_shared<Scope>(clean_memory, std::move(innerScope));
     }
 
-    void StrawberryAllocator::scope_out() {
+    void StrawberryManager::scope_out() {
         if (auto outer = innerScope->outerScope) {
             innerScope = outer;
             return;
@@ -79,15 +79,15 @@ namespace antlrcpptest {
         throw std::runtime_error("Stepped scope into NULL");
     }
 
-    void StrawberryAllocator::new_default(const std::shared_ptr<Value> &value) {
+    void StrawberryManager::new_default(const std::shared_ptr<Value> &value) {
         program_default = std::make_shared<Default>(std::make_shared<Reference>(value), std::move(program_default));
     }
 
-    std::shared_ptr<Reference> StrawberryAllocator::get_default() {
+    std::shared_ptr<Reference> StrawberryManager::get_default() {
         return program_default->default_ref;
     }
 
-    std::shared_ptr<Reference> StrawberryAllocator::pop_default() {
+    std::shared_ptr<Reference> StrawberryManager::pop_default() {
         auto def = program_default->default_ref;
         program_default = program_default->outer_default;
         if (program_default == nullptr) throw std::runtime_error("POP DEFAULT INTO NULL");
@@ -95,7 +95,7 @@ namespace antlrcpptest {
     }
 
     std::shared_ptr<Reference>
-    StrawberryAllocator::declare(const std::string &id, const std::shared_ptr<Value> &val) const {
+    StrawberryManager::declare(const std::string &id, const std::shared_ptr<Value> &val) const {
         if (innerScope->memory.find(id) == innerScope->memory.end()) {
             auto ref = std::make_shared<Reference>(val);
             innerScope->memory.insert_or_assign(id, ref);
@@ -104,11 +104,11 @@ namespace antlrcpptest {
         else throw std::runtime_error("'" + id + "' is already declared in scope");
     }
 
-    std::shared_ptr<Reference> StrawberryAllocator::declare(const std::string &id) const {
+    std::shared_ptr<Reference> StrawberryManager::declare(const std::string &id) const {
         return declare(id, std::make_shared<Value>());
     }
 
-    std::shared_ptr<Reference> StrawberryAllocator::get_from_memory(const std::string &id) const {
+    std::shared_ptr<Reference> StrawberryManager::get_from_memory(const std::string &id) const {
         auto scope = innerScope.get();
         auto value = innerScope->memory.find(id);
         while (value == scope->memory.end()) {
@@ -127,7 +127,7 @@ namespace antlrcpptest {
      * execution of the greater is favored. A function of class Value is passed in for re-usability purposes across
      * operators.
      */
-    std::shared_ptr<Reference> StrawberryAllocator::do_binary_operation(
+    std::shared_ptr<Reference> StrawberryManager::do_binary_operation(
             std::shared_ptr<Value> (Value::*func)(std::shared_ptr<Value>,std::shared_ptr<Value>),
             const std::shared_ptr<Reference> &ref1, const std::shared_ptr<Reference> &ref2) /* arg2 */
     {
@@ -148,7 +148,7 @@ namespace antlrcpptest {
                                  + ref1->deref()->typeName() + " and " + ref2->deref()->typeName());
     }
 
-    std::shared_ptr<Reference> StrawberryAllocator::do_binary_assign_operation(
+    std::shared_ptr<Reference> StrawberryManager::do_binary_assign_operation(
             std::shared_ptr<Value> (Value::*func)(std::shared_ptr<Value>,std::shared_ptr<Value>),
             StrawberryParser::Identifyer_Context* id_ctx,
             const std::shared_ptr<Reference>& val_ref) {
@@ -162,11 +162,11 @@ namespace antlrcpptest {
     }
 
     std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>, std::shared_ptr<Reference>)>
-            StrawberryAllocator::binary_operation_reference(
+            StrawberryManager::binary_operation_reference(
                     std::shared_ptr<Value> (Value::*func)(std::shared_ptr<Value>,std::shared_ptr<Value>)) {
         return [func](const std::shared_ptr<Reference>& ref1,const std::shared_ptr<Reference>& ref2) {
             return do_binary_operation(func, ref1, ref2);
         };
     }
 
-} // antlrcpptest
+} // strawberrycpp

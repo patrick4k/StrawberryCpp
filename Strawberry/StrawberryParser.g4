@@ -1,7 +1,7 @@
 parser grammar StrawberryParser;
 
 @parser::members {
-virtual bool isWithinFnDeclare() = 0;
+virtual bool isWithinFn() = 0;
 virtual bool isWithinLoop() = 0;
 }
 
@@ -37,7 +37,7 @@ statement_
 ;
 
 keywordStatement_
-: Return value_? {isWithinFnDeclare()}? #returnStat
+: Return value_? {isWithinFn()}? #returnStat
 | Once statement_ {isWithinLoop()}? #onceStat
 | Next expression_? {isWithinLoop()}? #nextStat
 | Last {isWithinLoop()}? #lastStat

@@ -4,7 +4,7 @@
 
 #include "StrawberryPredicateParser.h"
 
-namespace antlrcpptest {
+namespace strawberrycpp {
     StrawberryPredicateParser::StrawberryPredicateParser(antlr4::TokenStream *input) : StrawberryParser(input) {}
 
     template<typename TargetParent>
@@ -24,14 +24,15 @@ namespace antlrcpptest {
         return getFirstParent<TargetParent>(_ctx);
     }
 
-    bool StrawberryPredicateParser::isWithinFnDeclare() {
+    bool StrawberryPredicateParser::isWithinFn() {
         if (getFirstParent<FnDeclarationContext *>()) return true;
+        if (getFirstParent<LambdaContext*>()) return true;
         throw std::runtime_error("Cannot return from non-function");
     }
 
     bool StrawberryPredicateParser::isWithinLoop() {
-        if (getFirstParent<Loop_Context *>()) return true;
+        if (getFirstParent<Loop_Context*>()) return true;
         throw std::runtime_error("Cannot call loop keyword from non-loop");
     }
 
-} // antlrcpptest
+} // strawberrycpp
