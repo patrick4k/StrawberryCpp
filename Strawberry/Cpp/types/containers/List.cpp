@@ -64,7 +64,7 @@ std::shared_ptr<Reference> List::get(std::shared_ptr<Value> key) {
 }
 
 int List::operatorPriority() const {
-    return 8;
+    return 0;
 }
 
 int List::size() {
@@ -96,4 +96,8 @@ void List::insert(int i, const std::shared_ptr<Value> &val) {
         return;
     }
     this->refs.emplace(this->refs.begin() + i, std::make_shared<Reference>(val));
+}
+
+const std::vector<std::shared_ptr<Reference>> &List::getRefs() const {
+    return refs;
 }

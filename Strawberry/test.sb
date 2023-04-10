@@ -1,6 +1,5 @@
 
-let exe = -> {
-    let a = 10;
-    = a;
-    return 2*a;
-};
+let l1 = [0..5];
+let l2 = 5..10;
++= l1;
++= l2;

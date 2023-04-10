@@ -34,6 +34,8 @@ public:
     List();
 
     int size() override;
+
+    const std::vector<std::shared_ptr<Reference>> &getRefs() const;
 };
 
 #endif //LIBANTLR4_LIST_H

@@ -330,12 +330,14 @@ namespace strawberrycpp {
     std::any StrawberryInterpreter::visitDStringLit(StrawberryParser::DStringLitContext *ctx) {
         auto string = ctx->String()->getText();
         // TODO: Add escape characters
-        return std::make_shared<Reference>(std::make_shared<String>(string.substr(1, string.length() - 2)));
+        auto str = std::make_shared<String>(string.substr(1, string.length() - 2));
+        return std::make_shared<Reference>(str);
     }
 
     std::any StrawberryInterpreter::visitSStringLit(StrawberryParser::SStringLitContext *ctx) {
         auto string = ctx->StringLit()->getText();
-        return std::make_shared<Reference>(std::make_shared<String>(string.substr(1, string.length() - 2)));
+        auto str = std::make_shared<String>(string.substr(1, string.length() - 2));
+        return std::make_shared<Reference>(str);
     }
 
     std::any StrawberryInterpreter::visitArrayLit(StrawberryParser::ArrayLitContext *ctx) {
@@ -404,13 +406,13 @@ namespace strawberrycpp {
     std::any StrawberryInterpreter::visitDeclareAssign(StrawberryParser::DeclareAssignContext *ctx) {
         auto varDeclares = ctx->varDeclare_();
         if (varDeclares.size() == 1) {
-            std::any ref = visit(varDeclares[0]);
-            return std::make_shared<Reference>(std::any_cast<std::shared_ptr<Reference>>(ref));
+            auto ref = std::any_cast<std::shared_ptr<Reference>>(visit(varDeclares[0]));
+            return std::make_shared<Reference>(ref);
         }
         auto vars = std::make_shared<List>();
         for (auto varDeclare: varDeclares) {
-            auto ref = visit(varDeclare);
-            vars->append(std::make_shared<Reference>(std::any_cast<std::shared_ptr<Reference>>(ref)->deref()));
+            auto ref = std::any_cast<std::shared_ptr<Reference>>(visit(varDeclare));
+            vars->append(std::make_shared<Reference>(ref->deref()));
         }
         return std::make_shared<Reference>(vars);
     }
@@ -525,7 +527,8 @@ namespace strawberrycpp {
         auto identifyer = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->identifyer_()));
         if (auto container = identifyer->get_referenced_value()->as<Container>()) {
             auto index = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->identifyerChain_()));
-            return container->get(index->deref());
+            auto value = container->get(index->deref())->deref();
+            return std::make_shared<Reference>(value);
         }
         throw std::runtime_error(
                 "Cannot access for type " + identifyer->deref()->typeName() + " type\n\t--->" + ctx->getText());
