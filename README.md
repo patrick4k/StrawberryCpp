@@ -54,9 +54,7 @@ Strawberry/StrawberryLexer.g4 and Strawberry/StrawberryParser.g4.
 
 - [ ] Visitor Overrides 0.3
     - [x] Store function declarations
-    - [ ] Execute function declarations from non-visitor
-    - [ ] Add lambda type definition
-    - [ ] Bitwise operations ?
+    - [x] Bitwise operations ?
     - [ ] Operator rework
       - [x] Extract repeated code for binary math operations
       - [ ] Better ==, !=, ===, !== operations
@@ -65,6 +63,15 @@ Strawberry/StrawberryLexer.g4 and Strawberry/StrawberryParser.g4.
         - for / loop / while / until loops
         - if / unless
     - [ ] Compound Statements
+
+
+- [ ] Visitor Overrides 0.4
+  - [ ] Execute function declarations from non-visitor
+  - [ ] Add lambda type definition
+  - [ ] Error Handling
+    - [ ] try {} catch e {};
+    - [ ] Better debugging
+
 
 ### Clean Up
 - [ ] Convert std::shared_ptr to std::unique_ptr when applicable

@@ -1,4 +1,5 @@
 
-let l = [0..10]*2;
-=l*1.5;
-/=2;
+let a = 13.0012, b = true;
+
+let or = a | b;
+let and = a & b;

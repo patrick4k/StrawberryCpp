@@ -11,7 +11,6 @@
 #include "types/containers/Pair.h"
 #include "types/containers/Hash.h"
 #include "types/expressions/Bool.h"
-#include "types/nonexpressions/Lambda.h"
 #include "util/Warnings.h"
 
 namespace strawberrycpp {
@@ -762,7 +761,12 @@ namespace strawberrycpp {
     }
 
     std::any StrawberryInterpreter::visitBitOrOp(StrawberryParser::BitOrOpContext *ctx) {
-        return StrawberryParserBaseVisitor::visitBitOrOp(ctx);
+        std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>, std::shared_ptr<Reference>)>
+                operation = [](const std::shared_ptr<Reference>& ref1,
+                               const std::shared_ptr<Reference>& ref2) -> std::shared_ptr<Reference> {
+            return std::make_shared<Reference>(std::make_shared<Number>((int) ref1->toDouble() | (int) ref2->toDouble()));
+        };
+        return operation;
     }
 
     std::any StrawberryInterpreter::visitAndOp(StrawberryParser::AndOpContext *ctx) {
@@ -775,7 +779,12 @@ namespace strawberrycpp {
     }
 
     std::any StrawberryInterpreter::visitBitAndOp(StrawberryParser::BitAndOpContext *ctx) {
-        return StrawberryParserBaseVisitor::visitBitAndOp(ctx);
+        std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>, std::shared_ptr<Reference>)>
+                operation = [](const std::shared_ptr<Reference>& ref1,
+                               const std::shared_ptr<Reference>& ref2) -> std::shared_ptr<Reference> {
+            return std::make_shared<Reference>(std::make_shared<Number>((int) ref1->toDouble() & (int) ref2->toDouble()));
+        };
+        return operation;
     }
 
 // -------------------------------------------------------------------------------------------------------------- //

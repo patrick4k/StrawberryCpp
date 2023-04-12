@@ -264,6 +264,8 @@ op2_
 |  StarStar  #crossMultOp
 |  Bslash  #divOp
 |  Mod  #modOp
+|  Bar  #bitOrOp
+|  AndSign  #bitAndOp
 ;
 
 op3_
@@ -288,9 +290,7 @@ op5_
 
 op6_
 :  Or  #orOp
-|  Bar  #bitOrOp
 |  And  #andOp
-|  AndSign  #bitAndOp
 ;
 
 lowPrioritySuffix_

@@ -264,6 +264,8 @@ op2_
 | '**' #crossMultOp
 | '/' #divOp
 | '%' #modOp
+| '|' #bitOrOp
+| '&' #bitAndOp
 ;
 
 op3_
@@ -288,9 +290,7 @@ op5_
 
 op6_
 : '||' #orOp
-| '|' #bitOrOp
 | '&&' #andOp
-| '&' #bitAndOp
 ;
 
 lowPrioritySuffix_
