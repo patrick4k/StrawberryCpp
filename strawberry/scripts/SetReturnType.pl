@@ -24,7 +24,7 @@ sub main {
 
         if (/(#include .+)/ && !$haveAddedH) {
             $haveAddedH = 1;
-            $_ = "$1\n#include \"..\/Cpp\/types\/$replacement.h\"\n"
+            $_ = "$1\n#include \"..\/cpp\/types\/$replacement.h\"\n"
         }
 
         s/std::any/$replacement/;

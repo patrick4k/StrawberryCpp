@@ -4,7 +4,7 @@ set -o errexit
 # Created 2016, Mike Lischke (public domain)
 
 # This script is used to generate source files from the test grammars in the same folder. The generated files are placed
-# into a subfolder "generated" which the Strawberry project uses to compile a Strawberry binary.
+# into a subfolder "generated" which the strawberry project uses to compile a strawberry binary.
 
 # There are 2 ways of running the ANTLR generator here.
 
@@ -23,6 +23,6 @@ java -jar $LOCATION -Dlanguage=Cpp -listener -visitor -o generated/ -package ant
 #    antlr jar over and over again.
 #CLASSPATH=../../../tool/resources/:ST-4.0.8.jar:../../../tool/target/classes:../../../runtime/Java/target/classes:../../../../antlr3/runtime/Java/target/classes
 #
-#java -cp $CLASSPATH org.antlr.v4.Tool -Dlanguage=Cpp -listener -visitor -o generated/ -package antlrcpptest StrawberryLexer.g4 StrawberryParser.g4
+#java -cp $CLASSPATH org.antlr.v4.Tool -Dlanguage=cpp -listener -visitor -o generated/ -package antlrcpptest StrawberryLexer.g4 StrawberryParser.g4
 #java -cp $CLASSPATH org.antlr.v4.Tool -Dlanguage=StrawberryCpp -listener -visitor -o generated/ -package antlrcpptest -XdbgST StrawberryLexer.g4 StrawberryParser.g4
 #java -cp $CLASSPATH org.antlr.v4.Tool -Dlanguage=Java -listener -visitor -o generated/ StrawberryLexer.g4 StrawberryParser.g4
