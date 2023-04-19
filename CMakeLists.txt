@@ -6,7 +6,7 @@ project(LIBANTLR4)
 
 #[[ ATTRIBUTES ]]
 set(WITH_DEMO true) # TODO: remove flag
-set(ANTLR_JAR_LOCATION ${PROJECT_SOURCE_DIR}/Strawberry/antlr-4.12.0-complete.jar)
+set(ANTLR_JAR_LOCATION ${PROJECT_SOURCE_DIR}/strawberry/antlr-4.12.0-complete.jar)
 set(COMPILE4WIN false)
 
 if (COMPILE4WIN)
@@ -162,7 +162,7 @@ endif()
 
 add_subdirectory(runtime)
 if(WITH_DEMO)
- add_subdirectory(Strawberry)
+ add_subdirectory(strawberry)
 endif(WITH_DEMO)
 
 # Generate CMake Package Files only if install is active

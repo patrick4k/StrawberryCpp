@@ -53,29 +53,49 @@ Strawberry/StrawberryLexer.g4 and Strawberry/StrawberryParser.g4.
 
 
 - [ ] Visitor Overrides 0.3
-    - [ ] Store function declarations
-    - [ ] Add lambda type definition
-    - [ ] Bitwise operations
+    - [x] Store function declarations
+    - [x] Bitwise operations ?
     - [ ] Operator rework
-      - Extract repeated code for binary math operations
-      - Better ==, !=, ===, !== operations
-    - [ ] Default Variable Memory Management
+      - [x] Extract repeated code for binary math operations
+      - [ ] Better ==, !=, ===, !== operations
+    - [x] Default Variable Memory Management
     - [ ] Control Flow
         - for / loop / while / until loops
         - if / unless
     - [ ] Compound Statements
 
+
+- [ ] Visitor Overrides 0.4
+  - [ ] Execute function declarations from non-visitor
+  - [ ] Add lambda type definition
+  - [ ] Error Handling
+    - [ ] try {} catch e {};
+    - [ ] Better debugging
+
+
+### Clean Up
+- [ ] Convert std::shared_ptr to std::unique_ptr when applicable
+- [ ] Make general visit(ctx) calls more specific
+ 
 ### Features
-- [ ] Linspace operator / join list operator
-  - [ ] Modify rangeOp
-  - [ ] Allow for matrix creation
+- [x] Linspace operator / join list operator
+  - [x] Modify rangeOp
+  - [x] Allow for matrix creation (could be better)
 - [ ] Matrix operations
   - Pull inspiration from matlab
+  - Needs more planning
+- [ ] Handle inf number values appropriately
+- [ ] Complex numbers
+- [ ] Regex vs ANTLR4
+  - Replace match feature with ANTLR4 interpreter
+    - Easier parsing
+    - Runtime already compiled in Strawberry
+    - https://github.com/antlr/antlr4/blob/master/doc/interpreters.md
 
 ### OOP
 - [ ] Add Class definition to grammar
 - [ ] Construct object type to handle methods
-
+- [ ] OOP vs FP? structs with traits instead?
 
 ### Other
 - [ ] Documentation

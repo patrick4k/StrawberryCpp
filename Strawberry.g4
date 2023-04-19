@@ -19,10 +19,10 @@ statement
 ;
 
 functionDeclar
-: 'fn' ID '(' paras=parameters ')' ('{' lambdas=parameters '}')? block
+: 'fn' ID '(' paras=fn_ctx ')' ('{' lambdas=fn_ctx '}')? block
 ;
 
-parameters
+fn_ctx
 : (ID (',' ID)* (',' dynSize=ID '...')?)?
 | dynSize=ID '...'
 ;
@@ -142,7 +142,7 @@ literal
 ;
 
 lambda
-: '(' parameters ')' '->' block
+: '(' fn_ctx ')' '->' block
 ;
 
 arrayLiteral
