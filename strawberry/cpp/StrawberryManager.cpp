@@ -131,30 +131,29 @@ namespace strawberrycpp {
      */
     std::shared_ptr<Reference> StrawberryManager::do_binary_operation(
             std::shared_ptr<Value> (Value::*func)(std::shared_ptr<Value>,std::shared_ptr<Value>),
-            const std::shared_ptr<Reference> &ref1, const std::shared_ptr<Reference> &ref2) /* arg2 */
-    {
+            const std::shared_ptr<Reference> &ref1, const std::shared_ptr<Reference> &ref2) {
 
-        std::shared_ptr<Reference> in[2] = {ref1, ref2};
+        std::shared_ptr<Reference> refs[2] = {ref1, ref2};
 
         // Check if list
         for (int i = 0; i < 2; ++i) {
-            if (auto list1 = in[i]->get_referenced_value()->as<List>()) {
+            if (auto list1 = refs[i]->get_referenced_value()->as<List>()) {
                 auto out_list = std::make_shared<List>();
 
                 /* If both refs are list */
-                if (auto list2 = in[-(i - 1)]->get_referenced_value()->as<List>()) {
+                if (auto list2 = refs[-(i - 1)]->get_referenced_value()->as<List>()) {
                     // Do operation and append
                     int max_len = (list1->size() >= list2->size()) ? list1->size() : list2->size();
                     for (int j = 0; j < max_len; ++j)
                         out_list->append(do_binary_operation(func, list1->get(j), list2->get(j))->deref());
                 }
 
-                /* If one ref is out_list */
+                /* If one ref is list */
                 else {
                     // Append operations on new out_list
                     for (int j = 0; j < list1->size(); ++j) {
-                        in[i] = list1->get(j);
-                        out_list->append(do_binary_operation(func, in[0], in[1])->deref());
+                        refs[i] = list1->get(j);
+                        out_list->append(do_binary_operation(func, refs[0], refs[1])->deref());
                     }
                 }
                 return std::make_shared<Reference>(out_list);

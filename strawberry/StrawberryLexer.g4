@@ -13,7 +13,6 @@ For: 'for' ;
 Loop: 'loop' ;
 
 /* Keywords */
-// TODO: Revise keywords
 Return: 'return' ;
 Break: 'break' ;
 Next: 'next' ;

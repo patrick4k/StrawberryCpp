@@ -103,7 +103,6 @@ public:
     std::any visitIdReference(StrawberryParser::IdReferenceContext *ctx) override;
     std::any visitNegatePrefix(StrawberryParser::NegatePrefixContext *ctx) override;
     std::any visitNegativePrefix(StrawberryParser::NegativePrefixContext *ctx) override;
-    std::any visitSizePrefix(StrawberryParser::SizePrefixContext *ctx) override;
     std::any visitExcitedSuff(StrawberryParser::ExcitedSuffContext *ctx) override;
     std::any visitPowOp(StrawberryParser::PowOpContext *ctx) override;
     std::any visitMultOp(StrawberryParser::MultOpContext *ctx) override;

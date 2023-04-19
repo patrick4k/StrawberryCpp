@@ -1,5 +1,8 @@
 
-let a = 13.0012, b = true;
+let x = 12;
 
-let or = a | b;
-let and = a & b;
+let a  = 0..x;
+
+let b = (a - x) ^ 2;
+
+let c = b ^ 0.5;

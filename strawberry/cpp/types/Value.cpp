@@ -67,5 +67,10 @@ bool Value::bool_equals(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2
     return val1->toString() == val2->toString();
 }
 
+std::shared_ptr<Value> Value::definedOr(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2) {
+    if (!val1->isNull()) return val1;
+    return val2;
+}
+
 
 Value::~Value() = default;

@@ -168,8 +168,6 @@ expression_
 | expression_ op4_ expression_ #opExpr4
 | expression_ op5_ expression_ #opExpr5
 | expression_ op6_ expression_ #opExpr6
-| expression_  Dot  op1_ expression_ #dotOpExpr1 // TODO: Implment matrix dot operations
-| expression_  Dot  op2_ expression_ #dotOpExpr2
 | lowPrioritySuffix_ #defaultSuffixExpr
 | expression_ lowPrioritySuffix_ #suffixExpr
 |  Fslash  identifyer_ #derefExpr // TODO: Revisit deref operation
@@ -248,7 +246,6 @@ varDeclare_
 prefix_
 :  ExPoint  #negatePrefix
 |  Min  #negativePrefix
-|  Doll  #sizePrefix
 ;
 
 highPrioritySuffix_
