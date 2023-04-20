@@ -103,3 +103,8 @@ Strawberry/StrawberryLexer.g4 and Strawberry/StrawberryParser.g4.
     - [ ] How to Build
     - [ ] Methodology
     - [ ] Syntax
+
+### JIT
+- Take inspiration from https://strlen.com/lobster/
+- Statically typed or dynamically?
+- Reference counter for memory management
