@@ -5,7 +5,7 @@
 #include "StrawberryInterpreter.h"
 
 #include <memory>
-#include "types/expressions/Number.h"
+#include "types/expressions/numbers/Number.h"
 #include "types/containers/List.h"
 #include "types/expressions/String.h"
 #include "types/containers/Pair.h"
@@ -38,11 +38,11 @@ namespace strawberrycpp {
     }
 
     std::any StrawberryInterpreter::visitAction_(StrawberryParser::Action_Context *ctx) {
-        std::cout << ">> " << ctx->getText() << std::endl;
+//        std::cout << ">> " << ctx->getText() << std::endl;
         auto result =  StrawberryParserBaseVisitor::visitAction_(ctx);
-        print_memory();
-        print_default("  --> ");
-        std::cout << std::endl << std::endl;
+//        print_memory();
+//        print_default("  --> ");
+//        std::cout << std::endl << std::endl;
         return result;
     }
 
@@ -165,7 +165,7 @@ namespace strawberrycpp {
     std::any StrawberryInterpreter::visitFnDeclaration(StrawberryParser::FnDeclarationContext *ctx) {
         auto fn = std::make_unique<FunctionHandle>(ctx);
         this->functionLibrary->add(ctx->Id()->getText(), std::move(fn));
-        return nullptr;
+        return nullptr; // TODO: Return reference of lambda
     }
 
     std::any StrawberryInterpreter::visitLambda(StrawberryParser::LambdaContext *ctx) {
@@ -210,22 +210,22 @@ namespace strawberrycpp {
     }
 
     std::any StrawberryInterpreter::visitRangeArg(StrawberryParser::RangeArgContext *ctx) {
-        auto ref1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_()[0]));
-        auto ref2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_()[1]));
-        auto list = std::make_shared<List>();
-        int n1 = ref1->toDouble(), n2 = ref2->toDouble();
-        if (auto l1 = ref1->deref<List>()) {
-            n1 = l1->get(l1->size() - 1)->toDouble();
-        }
-        if (auto l2 = ref2->deref<List>()) {
-            n2 = l2->get(0)->toDouble();
-        }
+        const auto ref1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_()[0]));
+        const auto ref2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_()[1]));
+
+        const int n1 = ref1->toDouble(), n2 = ref2->toDouble();
+        auto temp = std::vector<std::shared_ptr<Reference>>(abs(n2-n1)+1);
+        int count = 0;
+
         if (n2 >= n1)
             for (int i = n1; i <= n2; ++i)
-                list->append(std::make_shared<Number>(i));
+                temp[count++] = std::make_shared<Reference>(std::make_shared<Number>(i));
+
         else
             for (int i = n1; i >= n2; --i)
-                list->append(std::make_shared<Number>(i));
+                temp[count++] = std::make_shared<Reference>(std::make_shared<Number>(i));
+
+        const auto list = std::make_shared<List>(temp);
         return std::make_shared<Reference>(list);
     }
 
@@ -245,7 +245,10 @@ namespace strawberrycpp {
     }
 
     std::any StrawberryInterpreter::visitDefaultSuffixExpr(StrawberryParser::DefaultSuffixExprContext *ctx) {
-        return StrawberryParserBaseVisitor::visitDefaultSuffixExpr(ctx);
+        // TODO: Remove time implementation
+        // TODO: Add support for high def time (benchmark against other languages)
+        auto t = std::chrono::high_resolution_clock::now();
+        return std::make_shared<Reference>(std::make_shared<Number>(std::chrono::duration_cast<std::chrono::milliseconds>(t.time_since_epoch()).count()));
     }
 
     std::any StrawberryInterpreter::visitOpExpr1(StrawberryParser::OpExpr1Context *ctx) {

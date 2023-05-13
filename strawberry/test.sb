@@ -1,8 +1,2 @@
 
-let x = 12;
-
-let a  = 0..x;
-
-let b = (a - x) ^ 2;
-
-let c = b ^ 0.5;
+let l1 = 0..5;

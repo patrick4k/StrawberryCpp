@@ -10,9 +10,14 @@
 
 class List: public Container {
 private:
-    std::vector<std::shared_ptr<Reference>> refs = std::vector<std::shared_ptr<Reference>>();
+    std::vector<std::shared_ptr<Reference>> refs;
 
 public:
+    List();
+    explicit List(const std::shared_ptr<Reference> &ref);
+    explicit List(std::vector<std::shared_ptr<Reference>> refs);
+
+
     int operatorPriority() const override;
 
     bool isNull() const override;
@@ -28,10 +33,6 @@ public:
     void append(const std::shared_ptr<Value> &val) override;
     void shift(const std::shared_ptr<Value> &val);
     void insert(int i, const std::shared_ptr<Value> &val);
-
-    explicit List(const std::shared_ptr<Reference> &ref);
-
-    List();
 
     int size() override;
 

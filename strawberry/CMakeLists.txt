@@ -53,7 +53,18 @@ set(strawberry_SRC cpp/main.cpp
         ${strawberry-GENERATED_SRC}
         cpp/types/Value.cpp cpp/types/Value.h
 
-        cpp/StrawberryManager.cpp cpp/StrawberryManager.h cpp/types/expressions/Bool.cpp cpp/types/expressions/Bool.h cpp/types/expressions/Number.cpp cpp/types/expressions/Number.h cpp/types/nonexpressions/Lambda.cpp cpp/types/nonexpressions/Lambda.h cpp/types/Reference.cpp cpp/types/Reference.h cpp/types/expressions/String.cpp cpp/types/expressions/String.h cpp/types/containers/List.cpp cpp/types/containers/List.h cpp/types/containers/Container.cpp cpp/types/containers/Container.h cpp/types/containers/Pair.cpp cpp/types/containers/Pair.h cpp/types/containers/Hash.cpp cpp/types/containers/Hash.h cpp/util/Warnings.cpp cpp/util/Warnings.h cpp/types/containers/Matrix.cpp cpp/types/containers/Matrix.h cpp/StrawberryInterpreter.cpp cpp/StrawberryInterpreter.h cpp/StrawberryPredicateParser.cpp cpp/StrawberryPredicateParser.h)
+        cpp/StrawberryManager.cpp cpp/StrawberryManager.h cpp/types/expressions/Bool.cpp
+        cpp/types/expressions/Bool.h cpp/types/expressions/numbers/Number.cpp
+        cpp/types/expressions/numbers/Number.h cpp/types/nonexpressions/Lambda.cpp
+        cpp/types/nonexpressions/Lambda.h cpp/types/Reference.cpp cpp/types/Reference.h
+        cpp/types/expressions/String.cpp cpp/types/expressions/String.h cpp/types/containers/List.cpp
+        cpp/types/containers/List.h cpp/types/containers/Container.cpp cpp/types/containers/Container.h
+        cpp/types/containers/Pair.cpp cpp/types/containers/Pair.h cpp/types/containers/Hash.cpp
+        cpp/types/containers/Hash.h cpp/util/Warnings.cpp cpp/util/Warnings.h cpp/types/containers/Matrix.cpp
+        cpp/types/containers/Matrix.h cpp/StrawberryInterpreter.cpp cpp/StrawberryInterpreter.h
+        cpp/StrawberryPredicateParser.cpp cpp/StrawberryPredicateParser.h
+)
+
 if(NOT CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
   set (flags_1 "-Wno-overloaded-virtual")
 else()

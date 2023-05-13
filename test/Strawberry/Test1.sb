@@ -1,0 +1,11 @@
+
+let t1 = !; // start benchmark
+
+// Do Test
+{
+    let l = 0..100000;
+}
+
+let t2 = !; // end benchmark
+
+= t2 - t1 + ' ms'; // set default as benchmark

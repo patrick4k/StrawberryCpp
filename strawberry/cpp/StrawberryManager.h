@@ -10,7 +10,7 @@
 
 #include "StrawberryParserBaseVisitor.h"
 #include "types/Value.h"
-#include "types/expressions/Number.h"
+#include "types/expressions/numbers/Number.h"
 #include "types/Reference.h"
 
 namespace strawberrycpp {
@@ -71,11 +71,20 @@ protected:
 
             void add(const std::string& fn_name, std::unique_ptr<FunctionHandle> fn);
             std::unique_ptr<FunctionHandle>& get(const std::string& fn_name);
-            std::unique_ptr<FunctionHandle>& get_with_tag(const std::string& tag, const std::string& fn_name);
+            std::unique_ptr<FunctionHandle>& get(const std::string& tag, const std::string& fn_name);
+
         };
 
     // -------------------------------------------------------------------------------------------------------------- //
+        // Function Call Management //
+
+    protected:
+        std::shared_ptr<Reference> call_function(const std::string& fn_name, std::shared_ptr<Reference> args);
+        std::shared_ptr<Reference> call_function(const std::string& tag, const std::string& fn_name, std::shared_ptr<Reference> args);
+
+    // -------------------------------------------------------------------------------------------------------------- //
         // Memory Management Methods //
+    // TODO: Rework into vector of scopes
     protected:
         std::shared_ptr<Default> program_default;
         std::shared_ptr<Scope> innerScope;
@@ -152,7 +161,6 @@ protected:
                 scope = scope->outerScope;
             } while (true);
         }
-
     };
 
 } // strawberrycpp

@@ -4,6 +4,18 @@
 
 #include "List.h"
 
+#include <utility>
+
+List::List() {
+    this->refs = std::vector<std::shared_ptr<Reference>>();
+}
+
+List::List(const std::shared_ptr<Reference> &ref) {
+    this->refs = std::vector<std::shared_ptr<Reference>>();
+    this->append(ref);
+}
+
+List::List(std::vector<std::shared_ptr<Reference>> refs) : refs(std::move(refs)) {}
 
 bool List::isNull() const {
     return false;
@@ -71,18 +83,11 @@ int List::size() {
     return this->refs.size();
 }
 
-List::List(const std::shared_ptr<Reference> &ref) {
-    this->append(ref);
-}
-
-List::List() {}
-
 std::string List::typeName() const {
     return "list";
 }
 
 void List::append(const std::shared_ptr<Value> &val) {
-
     this->refs.push_back(std::make_shared<Reference>(val));
 }
 

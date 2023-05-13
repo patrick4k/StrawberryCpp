@@ -3,6 +3,8 @@
 //
 
 #include "StrawberryManager.h"
+
+#include <utility>
 #include "types/containers/List.h"
 #include "util/Warnings.h"
 
@@ -54,7 +56,7 @@ namespace strawberrycpp {
     }
 
     std::unique_ptr<StrawberryManager::FunctionHandle> &
-    StrawberryManager::FunctionLibrary::get_with_tag(const std::string &tag, const std::string &fn_name) {
+    StrawberryManager::FunctionLibrary::get(const std::string &tag, const std::string &fn_name) {
         auto find_tag_fns = this->included->find(tag);
         if (find_tag_fns == this->included->end())
             throw std::runtime_error("Cannot find included tag " + tag);
@@ -114,8 +116,10 @@ namespace strawberrycpp {
         auto scope = innerScope.get();
         auto value = innerScope->memory.find(id);
         while (value == scope->memory.end()) {
-            if (!scope->outerScope)
+            if (!scope->outerScope) {
                 throw std::runtime_error("No variable '" + id + "' in memory\n");
+                // TODO: Check functions, return lambda
+            }
             scope = scope->outerScope.get();
             value = scope->memory.find(id);
         }
@@ -147,9 +151,7 @@ namespace strawberrycpp {
                     for (int j = 0; j < max_len; ++j)
                         out_list->append(do_binary_operation(func, list1->get(j), list2->get(j))->deref());
                 }
-
-                /* If one ref is list */
-                else {
+                else { /* If one ref is list */
                     // Append operations on new out_list
                     for (int j = 0; j < list1->size(); ++j) {
                         refs[i] = list1->get(j);
@@ -204,5 +206,25 @@ namespace strawberrycpp {
             return do_binary_operation(func, ref1, ref2);
         };
     }
+
+    /* -------------------------------------------------------------------------------------------------------------- */
+    /* Function Call Management */
+
+    std::shared_ptr<Reference>
+    StrawberryManager::call_function(const std::string &fn_name, std::shared_ptr<Reference> args) {
+        if (auto& fn = this->functionLibrary->get(fn_name)) {
+            return fn->execute_function(std::move(args));
+        }
+        throw std::runtime_error("Function '" + fn_name + "' not found");
+    }
+
+    std::shared_ptr<Reference> StrawberryManager::call_function(const std::string &tag, const std::string &fn_name,
+                                                                std::shared_ptr<Reference> args) {
+        if (auto& fn = this->functionLibrary->get(tag, fn_name)) {
+            return fn->execute_function(std::move(args));
+        }
+        throw std::runtime_error("Function '" + tag + "::" + fn_name + "' not found");
+    }
+
 
 } // strawberrycpp
