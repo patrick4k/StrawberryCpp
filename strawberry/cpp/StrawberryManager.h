@@ -10,7 +10,7 @@
 
 #include "StrawberryParserBaseVisitor.h"
 #include "types/Value.h"
-#include "types/expressions/numbers/Number.h"
+#include "types/expressions/Number.h"
 #include "types/Reference.h"
 
 namespace strawberrycpp {

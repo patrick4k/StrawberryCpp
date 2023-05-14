@@ -10,6 +10,8 @@
 #include <iostream>
 #include <functional>
 
+// TODO: Add to namespace SbUtil
+
 class Warnings {
 
 private:
@@ -27,7 +29,7 @@ public:
     }
 
     static void disable() {
-        warn_f = [](const std::string& /*msg*/){};
+        warn_f = [](const std::string&) {  };
     }
 };
 

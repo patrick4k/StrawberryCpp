@@ -3,7 +3,7 @@ let t1 = !; // start benchmark
 
 // Do Test
 {
-    let l = 0..100000;
+    let l = 0..1000000;
 }
 
 let t2 = !; // end benchmark

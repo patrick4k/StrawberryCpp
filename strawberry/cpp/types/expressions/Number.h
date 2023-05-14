@@ -5,7 +5,7 @@
 #ifndef LIBANTLR4_NUMBER_H
 #define LIBANTLR4_NUMBER_H
 
-#include "../../Value.h"
+#include "../Value.h"
 
 class Number: public Value {
 private:

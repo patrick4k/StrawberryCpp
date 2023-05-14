@@ -5,7 +5,9 @@
 #ifndef LIBANTLR4_VALUE_H
 #define LIBANTLR4_VALUE_H
 
-#include "tree/ParseTree.h"
+#include "support/Any.h"
+
+// TODO: Add all types to namespace SbTypes
 
 class Value: public std::enable_shared_from_this<Value> {
 public:

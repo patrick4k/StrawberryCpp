@@ -5,13 +5,14 @@
 #include "StrawberryInterpreter.h"
 
 #include <memory>
-#include "types/expressions/numbers/Number.h"
+#include "types/expressions/Number.h"
 #include "types/containers/List.h"
 #include "types/expressions/String.h"
 #include "types/containers/Pair.h"
 #include "types/containers/Hash.h"
 #include "types/expressions/Bool.h"
 #include "util/Warnings.h"
+#include "types/StrawberryTypes.h"
 
 namespace strawberrycpp {
 
@@ -209,23 +210,42 @@ namespace strawberrycpp {
         return std::make_shared<Reference>(std::make_shared<List>(ref));
     }
 
+//    std::any StrawberryInterpreter::visitRangeArg(StrawberryParser::RangeArgContext *ctx) {
+//        const auto ref1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_()[0]));
+//        const auto ref2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_()[1]));
+//
+//        const int n1 = ref1->toDouble(), n2 = ref2->toDouble();
+//        auto temp = std::vector<std::shared_ptr<Reference>>(abs(n2-n1)+1);
+//        int count = 0;
+//
+//        if (n2 >= n1)
+//            for (int i = n1; i <= n2; ++i)
+//                temp[count++] = std::make_shared<Reference>(std::make_shared<Number>(i));
+//
+//        else
+//            for (int i = n1; i >= n2; --i)
+//                temp[count++] = std::make_shared<Reference>(std::make_shared<Number>(i));
+//
+//        const auto list = std::make_shared<List>(temp);
+//        return std::make_shared<Reference>(list);
+//    }
+
     std::any StrawberryInterpreter::visitRangeArg(StrawberryParser::RangeArgContext *ctx) {
         const auto ref1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_()[0]));
         const auto ref2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_()[1]));
 
         const int n1 = ref1->toDouble(), n2 = ref2->toDouble();
-        auto temp = std::vector<std::shared_ptr<Reference>>(abs(n2-n1)+1);
-        int count = 0;
 
-        if (n2 >= n1)
-            for (int i = n1; i <= n2; ++i)
-                temp[count++] = std::make_shared<Reference>(std::make_shared<Number>(i));
+        const int length = std::abs(n2 - n1) + 1;
+        std::vector<std::shared_ptr<Reference>> numbers;
+        numbers.reserve(length);
 
-        else
-            for (int i = n1; i >= n2; --i)
-                temp[count++] = std::make_shared<Reference>(std::make_shared<Number>(i));
+        int i = (n2-n1)/abs(n2-n1); // 1 or -1
+        std::generate_n(std::back_inserter(numbers), length, [n = n1 - i, &i]() mutable {
+            return SbTypes::createRef(n += i);
+        });
 
-        const auto list = std::make_shared<List>(temp);
+        const auto list = std::make_shared<List>(numbers);
         return std::make_shared<Reference>(list);
     }
 
