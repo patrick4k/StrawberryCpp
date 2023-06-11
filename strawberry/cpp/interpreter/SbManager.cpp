@@ -2,16 +2,15 @@
 // Created by patrick on 3/10/23.
 //
 
-#include "StrawberryManager.h"
+#include "SbManager.h"
 
 #include <utility>
-#include "types/containers/List.h"
-#include "util/Warnings.h"
-
+#include "../types/containers/List.h"
+#include "../util/Warnings.h"
 
 namespace strawberrycpp {
 
-    std::any StrawberryManager::defaultResult() {
+    std::any SbManager::defaultResult() {
         return std::make_shared<Reference>();
     }
 
@@ -20,7 +19,7 @@ namespace strawberrycpp {
 
     /* -------------------------------------------------------------------------------------------------------------- */
         /* FunctionHandle */
-    std::shared_ptr<Reference> StrawberryManager::FunctionHandle::execute_function(std::shared_ptr<Reference> args) {
+    std::shared_ptr<Reference> SbManager::FunctionHandle::execute_function(std::shared_ptr<Reference> args) {
         for (auto action: this->fn_ctx->scope()->action_()) {
 
         }
@@ -29,11 +28,11 @@ namespace strawberrycpp {
 
     /* -------------------------------------------------------------------------------------------------------------- */
         /* FunctionLibrary */
-    void StrawberryManager::FunctionLibrary::add(const std::string &fn_name, std::unique_ptr<FunctionHandle> fn) {
+    void SbManager::FunctionLibrary::add(const std::string &fn_name, std::unique_ptr<FunctionHandle> fn) {
         this->my_fns->insert_or_assign(fn_name, std::move(fn));
     }
 
-    std::unique_ptr<StrawberryManager::FunctionHandle> &StrawberryManager::FunctionLibrary::get(const std::string &fn_name) {
+    std::unique_ptr<SbManager::FunctionHandle> &SbManager::FunctionLibrary::get(const std::string &fn_name) {
         auto fn_location = this->my_fns->find(fn_name);
 
         if (fn_location != this->my_fns->end())
@@ -55,8 +54,8 @@ namespace strawberrycpp {
         return *fn;
     }
 
-    std::unique_ptr<StrawberryManager::FunctionHandle> &
-    StrawberryManager::FunctionLibrary::get(const std::string &tag, const std::string &fn_name) {
+    std::unique_ptr<SbManager::FunctionHandle> &
+    SbManager::FunctionLibrary::get(const std::string &tag, const std::string &fn_name) {
         auto find_tag_fns = this->included->find(tag);
         if (find_tag_fns == this->included->end())
             throw std::runtime_error("Cannot find included tag " + tag);
@@ -70,12 +69,12 @@ namespace strawberrycpp {
 
 /* ================================================================================================================== */
     /* Memory Allocation */
-    void StrawberryManager::scope_in() {
+    void SbManager::scope_in() {
         auto clean_memory = std::unordered_map<std::string,std::shared_ptr<Reference>>();
         innerScope = std::make_shared<Scope>(clean_memory, std::move(innerScope));
     }
 
-    void StrawberryManager::scope_out() {
+    void SbManager::scope_out() {
         if (auto outer = innerScope->outerScope) {
             innerScope = outer;
             return;
@@ -83,15 +82,15 @@ namespace strawberrycpp {
         throw std::runtime_error("Stepped scope into NULL");
     }
 
-    void StrawberryManager::new_default(const std::shared_ptr<Value> &value) {
+    void SbManager::new_default(const std::shared_ptr<Value> &value) {
         program_default = std::make_shared<Default>(std::make_shared<Reference>(value), std::move(program_default));
     }
 
-    std::shared_ptr<Reference> StrawberryManager::get_default() {
+    std::shared_ptr<Reference> SbManager::get_default() {
         return program_default->default_ref;
     }
 
-    std::shared_ptr<Reference> StrawberryManager::pop_default() {
+    std::shared_ptr<Reference> SbManager::pop_default() {
         auto def = program_default->default_ref;
         program_default = program_default->outer_default;
         if (program_default == nullptr) throw std::runtime_error("POP DEFAULT INTO NULL");
@@ -99,7 +98,7 @@ namespace strawberrycpp {
     }
 
     std::shared_ptr<Reference>
-    StrawberryManager::declare(const std::string &id, const std::shared_ptr<Value> &val) const {
+    SbManager::declare(const std::string &id, const std::shared_ptr<Value> &val) const {
         if (innerScope->memory.find(id) == innerScope->memory.end()) {
             auto ref = std::make_shared<Reference>(val);
             innerScope->memory.insert_or_assign(id, ref);
@@ -108,11 +107,11 @@ namespace strawberrycpp {
         else throw std::runtime_error("'" + id + "' is already declared in scope");
     }
 
-    std::shared_ptr<Reference> StrawberryManager::declare(const std::string &id) const {
+    std::shared_ptr<Reference> SbManager::declare(const std::string &id) const {
         return declare(id, std::make_shared<Value>());
     }
 
-    std::shared_ptr<Reference> StrawberryManager::get_from_memory(const std::string &id) const {
+    std::shared_ptr<Reference> SbManager::get_from_memory(const std::string &id) const {
         auto scope = innerScope.get();
         auto value = innerScope->memory.find(id);
         while (value == scope->memory.end()) {
@@ -133,7 +132,7 @@ namespace strawberrycpp {
      * execution of the greater is favored. A function of class Value is passed in for re-usability purposes across
      * operators.
      */
-    std::shared_ptr<Reference> StrawberryManager::do_binary_operation(
+    std::shared_ptr<Reference> SbManager::do_binary_operation(
             std::shared_ptr<Value> (Value::*func)(std::shared_ptr<Value>,std::shared_ptr<Value>),
             const std::shared_ptr<Reference> &ref1, const std::shared_ptr<Reference> &ref2) {
 
@@ -183,7 +182,7 @@ namespace strawberrycpp {
     /**
      * Does a binary operation func(identifier, value) and sets identifier to returned value.
      */
-    std::shared_ptr<Reference> StrawberryManager::do_binary_assign_operation(
+    std::shared_ptr<Reference> SbManager::do_binary_assign_operation(
             std::shared_ptr<Value> (Value::*func)(std::shared_ptr<Value>,std::shared_ptr<Value>),
             StrawberryParser::Identifyer_Context* id_ctx,
             const std::shared_ptr<Reference>& val_ref) {
@@ -200,7 +199,7 @@ namespace strawberrycpp {
      * Returns a lambda to a binary operation between two references and a supplied function.
      */
     std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>, std::shared_ptr<Reference>)>
-            StrawberryManager::binary_operation_reference(
+            SbManager::binary_operation_reference(
                     std::shared_ptr<Value> (Value::*func)(std::shared_ptr<Value>,std::shared_ptr<Value>)) {
         return [func](const std::shared_ptr<Reference>& ref1,const std::shared_ptr<Reference>& ref2) {
             return do_binary_operation(func, ref1, ref2);
@@ -211,20 +210,19 @@ namespace strawberrycpp {
     /* Function Call Management */
 
     std::shared_ptr<Reference>
-    StrawberryManager::call_function(const std::string &fn_name, std::shared_ptr<Reference> args) {
+    SbManager::call_function(const std::string &fn_name, std::shared_ptr<Reference> args) {
         if (auto& fn = this->functionLibrary->get(fn_name)) {
             return fn->execute_function(std::move(args));
         }
         throw std::runtime_error("Function '" + fn_name + "' not found");
     }
 
-    std::shared_ptr<Reference> StrawberryManager::call_function(const std::string &tag, const std::string &fn_name,
+    std::shared_ptr<Reference> SbManager::call_function(const std::string &tag, const std::string &fn_name,
                                                                 std::shared_ptr<Reference> args) {
         if (auto& fn = this->functionLibrary->get(tag, fn_name)) {
             return fn->execute_function(std::move(args));
         }
         throw std::runtime_error("Function '" + tag + "::" + fn_name + "' not found");
     }
-
 
 } // strawberrycpp

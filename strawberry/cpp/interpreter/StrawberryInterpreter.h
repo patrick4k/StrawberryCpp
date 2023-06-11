@@ -5,15 +5,20 @@
 #ifndef LIBANTLR4_STRAWBERRYINTERPRETER_H
 #define LIBANTLR4_STRAWBERRYINTERPRETER_H
 
-#include "StrawberryManager.h"
+#include "SbManager.h"
 
 namespace strawberrycpp {
 
-class StrawberryInterpreter : public StrawberryManager, public std::enable_shared_from_this<StrawberryInterpreter> {
+class StrawberryInterpreter : public SbManager, public std::enable_shared_from_this<StrawberryInterpreter> {
+
+    using Tree = antlr4::tree::ParseTree;
+    using ExprCtx = StrawberryParser::Expression_Context;
 
 private:
     template<typename T>
     std::shared_ptr<Reference> callFunction(T* ctx);
+
+    std::shared_ptr<Reference> visitOpExpr(ExprCtx *expr1, ExprCtx *expr2, Tree *op);
 
 public:
     std::any visitAction_(StrawberryParser::Action_Context *ctx) override;

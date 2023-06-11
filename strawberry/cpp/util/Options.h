@@ -7,7 +7,7 @@
 
 #include <memory>
 #include "Warnings.h"
-#include "../StrawberryInterpreter.h"
+#include "../interpreter/StrawberryInterpreter.h"
 
 namespace SbUtil {
     void ProcessArgs(std::shared_ptr<strawberrycpp::StrawberryInterpreter> visitor, int argc, const char* argv[]);

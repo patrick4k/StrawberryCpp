@@ -33,7 +33,7 @@ namespace SbTypes {
 
     /* String */
     template<>
-    std::shared_ptr<Value> create<std::string>(std::string val) {
+    std::shared_ptr<Value> create<const std::string&>(const std::string& val) {
         return std::make_shared<String>(val);
     }
 

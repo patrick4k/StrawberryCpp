@@ -52,7 +52,12 @@ include_directories(
 set(strawberry_SRC cpp/main.cpp
         ${strawberry-GENERATED_SRC}
         cpp/types/Value.cpp cpp/types/Value.h
-        cpp/StrawberryManager.cpp cpp/StrawberryManager.h
+        cpp/interpreter/SbManager.cpp cpp/interpreter/SbManager.h
+        cpp/interpreter/StrawberryInterpreter.cpp cpp/interpreter/StrawberryInterpreter.h
+        cpp/StrawberryPredicateParser.cpp cpp/StrawberryPredicateParser.h
+        cpp/util/Options.cpp cpp/util/Options.h
+        cpp/util/Warnings.cpp cpp/util/Warnings.h
+        cpp/types/StrawberryTypes.cpp cpp/types/StrawberryTypes.h
         cpp/types/expressions/Bool.cpp cpp/types/expressions/Bool.h
         cpp/types/expressions/Number.cpp cpp/types/expressions/Number.h
         cpp/types/nonexpressions/Lambda.cpp cpp/types/nonexpressions/Lambda.h
@@ -62,12 +67,10 @@ set(strawberry_SRC cpp/main.cpp
         cpp/types/containers/Container.cpp cpp/types/containers/Container.h
         cpp/types/containers/Pair.cpp cpp/types/containers/Pair.h
         cpp/types/containers/Hash.cpp cpp/types/containers/Hash.h
-        cpp/util/Warnings.cpp cpp/util/Warnings.h
         cpp/types/containers/Matrix.cpp cpp/types/containers/Matrix.h
-        cpp/StrawberryInterpreter.cpp cpp/StrawberryInterpreter.h
-        cpp/StrawberryPredicateParser.cpp cpp/StrawberryPredicateParser.h
-        cpp/types/StrawberryTypes.cpp cpp/types/StrawberryTypes.h
-        cpp/util/Options.cpp cpp/util/Options.h)
+        cpp/types/expressions/numbers/AbstractNumber.cpp cpp/types/expressions/numbers/AbstractNumber.h
+        cpp/types/expressions/numbers/Int.cpp cpp/types/expressions/numbers/Int.h
+        )
 
 
 if(NOT CMAKE_CXX_COMPILER_ID MATCHES "MSVC")

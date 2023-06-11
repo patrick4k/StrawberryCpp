@@ -2,7 +2,7 @@
 
 #include "antlr4-runtime.h"
 #include "StrawberryLexer.h"
-#include "StrawberryInterpreter.h"
+#include "interpreter/StrawberryInterpreter.h"
 #include "StrawberryPredicateParser.h"
 #include "util/Options.h"
 

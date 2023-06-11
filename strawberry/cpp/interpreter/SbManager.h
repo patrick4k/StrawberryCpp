@@ -2,22 +2,28 @@
 // Created by patrick on 3/10/23.
 //
 
-#ifndef LIBANTLR4_STRAWBERRYMANAGER_H
-#define LIBANTLR4_STRAWBERRYMANAGER_H
+/* SbManager
+ * Responsible for the memory allocation and function declaration and execution
+ * - memory allocation done via a linked list of scopes // TODO: change to a vector of scopes
+ * - function declaration and execution is done through a map of functions
+ */
+
+#ifndef LIBANTLR4_SBMANAGER_H
+#define LIBANTLR4_SBMANAGER_H
 
 #include <memory>
 #include <utility>
 
 #include "StrawberryParserBaseVisitor.h"
-#include "types/Value.h"
-#include "types/expressions/Number.h"
-#include "types/Reference.h"
+#include "../types/Value.h"
+#include "../types/expressions/Number.h"
+#include "../types/Reference.h"
 
 namespace strawberrycpp {
 
-class StrawberryManager: public StrawberryParserBaseVisitor {
+class SbManager: public StrawberryParserBaseVisitor {
 
-protected:
+    protected:
     std::any defaultResult() override;
 
 /* ================================================================================================================== */
@@ -84,7 +90,6 @@ protected:
 
     // -------------------------------------------------------------------------------------------------------------- //
         // Memory Management Methods //
-    // TODO: Rework into vector of scopes
     protected:
         std::shared_ptr<Default> program_default;
         std::shared_ptr<Scope> innerScope;
@@ -161,8 +166,8 @@ protected:
                 scope = scope->outerScope;
             } while (true);
         }
-    };
+};
 
 } // strawberrycpp
 
-#endif //LIBANTLR4_STRAWBERRYMANAGER_H
+#endif //LIBANTLR4_SBMANAGER_H

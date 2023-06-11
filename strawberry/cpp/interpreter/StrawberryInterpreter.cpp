@@ -5,14 +5,14 @@
 #include "StrawberryInterpreter.h"
 
 #include <memory>
-#include "types/expressions/Number.h"
-#include "types/containers/List.h"
-#include "types/expressions/String.h"
-#include "types/containers/Pair.h"
-#include "types/containers/Hash.h"
-#include "types/expressions/Bool.h"
-#include "util/Warnings.h"
-#include "types/StrawberryTypes.h"
+#include "../types/expressions/Number.h"
+#include "../types/containers/List.h"
+#include "../types/expressions/String.h"
+#include "../types/containers/Pair.h"
+#include "../types/containers/Hash.h"
+#include "../types/expressions/Bool.h"
+#include "../util/Warnings.h"
+#include "../types/StrawberryTypes.h"
 
 namespace strawberrycpp {
 
@@ -210,26 +210,6 @@ namespace strawberrycpp {
         return std::make_shared<Reference>(std::make_shared<List>(ref));
     }
 
-//    std::any StrawberryInterpreter::visitRangeArg(StrawberryParser::RangeArgContext *ctx) {
-//        const auto ref1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_()[0]));
-//        const auto ref2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_()[1]));
-//
-//        const int n1 = ref1->toDouble(), n2 = ref2->toDouble();
-//        auto temp = std::vector<std::shared_ptr<Reference>>(abs(n2-n1)+1);
-//        int count = 0;
-//
-//        if (n2 >= n1)
-//            for (int i = n1; i <= n2; ++i)
-//                temp[count++] = std::make_shared<Reference>(std::make_shared<Number>(i));
-//
-//        else
-//            for (int i = n1; i >= n2; --i)
-//                temp[count++] = std::make_shared<Reference>(std::make_shared<Number>(i));
-//
-//        const auto list = std::make_shared<List>(temp);
-//        return std::make_shared<Reference>(list);
-//    }
-
     std::any StrawberryInterpreter::visitRangeArg(StrawberryParser::RangeArgContext *ctx) {
         const auto ref1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_()[0]));
         const auto ref2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_()[1]));
@@ -271,54 +251,36 @@ namespace strawberrycpp {
         return std::make_shared<Reference>(std::make_shared<Number>(std::chrono::duration_cast<std::chrono::milliseconds>(t.time_since_epoch()).count()));
     }
 
-    std::any StrawberryInterpreter::visitOpExpr1(StrawberryParser::OpExpr1Context *ctx) {
-        auto val1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(0)));
-        auto val2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(1)));
+    std::shared_ptr<Reference> StrawberryInterpreter::visitOpExpr(ExprCtx *expr1, ExprCtx *expr2, Tree *op) {
+        auto val1 = std::any_cast<std::shared_ptr<Reference>>(visit(expr1));
+        auto val2 = std::any_cast<std::shared_ptr<Reference>>(visit(expr2));
         auto func = std::any_cast<std::shared_ptr<Value>
-                (Value::*)(std::shared_ptr<Value>, std::shared_ptr<Value>)>(visit(ctx->op1_()));
+        (Value::*)(std::shared_ptr<Value>, std::shared_ptr<Value>)>(visit(op));
         return do_binary_operation(func, val1, val2);
+    }
+
+    std::any StrawberryInterpreter::visitOpExpr1(StrawberryParser::OpExpr1Context *ctx) {
+        return visitOpExpr(ctx->expression_(0), ctx->expression_(1), ctx->op1_());
     }
 
     std::any StrawberryInterpreter::visitOpExpr2(StrawberryParser::OpExpr2Context *ctx) {
-        auto val1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(0)));
-        auto val2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(1)));
-        auto func = std::any_cast<std::shared_ptr<Value>
-        (Value::*)(std::shared_ptr<Value>, std::shared_ptr<Value>)>(visit(ctx->op2_()));
-        return do_binary_operation(func, val1, val2);
+        return visitOpExpr(ctx->expression_(0), ctx->expression_(1), ctx->op2_());
     }
 
     std::any StrawberryInterpreter::visitOpExpr3(StrawberryParser::OpExpr3Context *ctx) {
-        auto val1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(0)));
-        auto val2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(1)));
-        auto func = std::any_cast<std::shared_ptr<Value>
-        (Value::*)(std::shared_ptr<Value>, std::shared_ptr<Value>)>(visit(ctx->op3_()));
-        return do_binary_operation(func, val1, val2);
+        return visitOpExpr(ctx->expression_(0), ctx->expression_(1), ctx->op3_());
     }
 
     std::any StrawberryInterpreter::visitOpExpr4(StrawberryParser::OpExpr4Context *ctx) {
-        auto val1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(0)));
-        auto val2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(1)));
-        auto func = std::any_cast<std::shared_ptr<Value>
-        (Value::*)(std::shared_ptr<Value>, std::shared_ptr<Value>)>(visit(ctx->op4_()));
-        return do_binary_operation(func, val1, val2);
+        return visitOpExpr(ctx->expression_(0), ctx->expression_(1), ctx->op4_());
     }
 
     std::any StrawberryInterpreter::visitOpExpr5(StrawberryParser::OpExpr5Context *ctx) {
-        auto val1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(0)));
-        auto val2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(1)));
-        auto operation = std::any_cast
-                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>, std::shared_ptr<Reference>)>>
-                (visit(ctx->op5_()));
-        return operation(val1, val2);
+        return visitOpExpr(ctx->expression_(0), ctx->expression_(1), ctx->op5_());
     }
 
     std::any StrawberryInterpreter::visitOpExpr6(StrawberryParser::OpExpr6Context *ctx) {
-        auto val1 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(0)));
-        auto val2 = std::any_cast<std::shared_ptr<Reference>>(visit(ctx->expression_(1)));
-        auto operation = std::any_cast
-                <std::function<std::shared_ptr<Reference>(std::shared_ptr<Reference>, std::shared_ptr<Reference>)>>
-                (visit(ctx->op6_()));
-        return operation(val1, val2);
+        return visitOpExpr(ctx->expression_(0), ctx->expression_(1), ctx->op6_());
     }
 
     std::any StrawberryInterpreter::visitSuffixExpr(StrawberryParser::SuffixExprContext *ctx) {

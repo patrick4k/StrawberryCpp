@@ -60,3 +60,7 @@ std::shared_ptr<Value> Number::mod(std::shared_ptr<Value> val1, std::shared_ptr<
     if (d2 == 0) throw std::runtime_error("Mod by 0\n\t-->" + std::to_string(val1->toDouble()) + " / " + "0");
     return std::make_shared<Number>(std::fmod(val1->toDouble(), d2));
 }
+
+std::shared_ptr<Value> Number::plus(std::shared_ptr<Number> val1, std::shared_ptr<Number> val2) {
+    throw std::runtime_error("Not implemented");
+}

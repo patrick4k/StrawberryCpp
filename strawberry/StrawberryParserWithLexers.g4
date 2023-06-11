@@ -31,7 +31,6 @@ scope: '{' action_* '}' ;
 
 statement_
 : keywordStatement_
-| assign_
 | expression_
 | scope
 ;
@@ -118,7 +117,7 @@ fnDeclaration: 'fn' Id '(' parameters_? ')' scope ;
 
 lambda
 : ('(' parameters_? ')')? '->' statement_
-| 'fn' '(' parameters_? ')' statement_
+| '@' ('(' parameters_? ')')? statement_
 ;
 
 parameters_
@@ -159,7 +158,8 @@ value_
 expression_
 : literal_ #litExpr_
 | '(' expression_ ')' #parenExpr
-| '(' assign_ ')' #assignExpr
+| expression_ ':' expression_ ':' expression_ #nonDeterminedListExpr
+| assign_ #assignExpr
 | prefix_ expression_ #prefixExpr
 | highPrioritySuffix_ #defaultSuffixExpr
 | expression_ highPrioritySuffix_ #suffixExpr

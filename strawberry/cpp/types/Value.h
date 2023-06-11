@@ -12,11 +12,12 @@
 class Value: public std::enable_shared_from_this<Value> {
 public:
     virtual int operatorPriority() const;
+
     /* Interpreter Level Casting */
     virtual bool isNull() const;
     virtual bool toBool() const;
     virtual double toDouble() const;
-    virtual std::string toString() const; // TODO: Add std::string toDisplay()
+    virtual std::string toString() const;
     virtual std::string toDisplay() const;
     virtual std::string typeName() const;
 
@@ -42,7 +43,6 @@ public:
 
     /* Boolean operations */
     virtual bool bool_equals(std::shared_ptr<Value> val1, std::shared_ptr<Value> val2);
-
 
 };
 
